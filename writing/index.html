@@ -1,0 +1,28 @@
+---
+layout: base
+title: Writing
+description: Field notes on HPC benchmarking, GPU cluster engineering, parallel storage and the infrastructure underneath AI workloads.
+---
+<section class="sec" style="border-bottom:0"><div class="wrap">
+  <div class="sh-split">
+    <div><span class="eyebrow">Writing</span>
+      <h2>Field notes on benchmarking and cluster engineering.</h2></div>
+    <p>Mostly about measurement: which numbers a benchmark actually reports, which of them mean anything about your workload, and the configuration mistakes that quietly cost you a large fraction of a machine you already paid for.</p>
+  </div>
+  <div class="plist">
+    {%- for post in site.posts %}
+    <article class="pitem" data-rv>
+      <div>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <p>{{ post.summary | default: post.excerpt | strip_html | truncate: 190 }}</p>
+      </div>
+      <div class="pm">
+        <b>{{ post.category | default: 'Notes' }}</b>
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b %Y" }}</time>
+      </div>
+    </article>
+    {%- endfor %}
+  </div>
+  {%- if site.posts.size == 0 %}<p class="muted" style="padding:28px 0">No articles yet.</p>{% endif %}
+  <p style="margin-top:32px" class="small muted">Subscribe by <a href="{{ '/feed.xml' | relative_url }}">RSS</a>.</p>
+</div></section>

@@ -1,0 +1,33 @@
+title: Wirewalk Advisory
+tagline: Independent security audits
+description: >-
+  Independent security audits, IT and infrastructure work, HPC engineering,
+  and the technical side of AI. Evidence-backed findings, ranked by severity,
+  with a named owner and a date on every line.
+author: Wirewalk Advisory
+
+# Change both of these together if the repository is renamed.
+url: https://wirewalktech.github.io
+baseurl: /wirewalk
+
+permalink: /writing/:title/
+timezone: America/New_York
+
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+defaults:
+  - scope: { path: "", type: "posts" }
+    values: { layout: post }
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

@@ -1,0 +1,37 @@
+{%- assign home = '/' | relative_url -%}
+{%- assign writing = '/writing/' | relative_url -%}
+<header id="hd"><div class="wrap nav">
+  <div class="nav-l">
+    <a href="{% if page.is_home %}#top{% else %}{{ home }}{% endif %}" class="brand"><span class="mark"><i></i><i></i><i></i><i></i></span>
+      <span class="bn"><span>Wirewalk<s>Advisory</s></span></span></a>
+  </div>
+  <div class="nav-c">
+    <nav class="lk" id="lk">
+    {%- if page.is_home %}
+      <span id="pill"></span>
+      <button class="dd" data-menu="audits" aria-expanded="false" aria-controls="mega" data-sec="audits">Audits<svg class="caret" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <a href="#findings" data-sec="findings">What we find</a>
+      <button class="dd" data-menu="method" aria-expanded="false" aria-controls="mega" data-sec="method">How it works<svg class="caret" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="dd" data-menu="deliverables" aria-expanded="false" aria-controls="mega" data-sec="deliverables">Deliverables<svg class="caret" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <a href="#severity" data-sec="severity">Severity</a>
+    {%- else %}
+      <a href="{{ home }}#audits">Audits</a>
+      <a href="{{ home }}#findings">What we find</a>
+      <a href="{{ home }}#method">How it works</a>
+      <a href="{{ home }}#deliverables">Deliverables</a>
+      <a href="{{ home }}#severity">Severity</a>
+    {%- endif %}
+      <a class="m-cta" href="{% if page.is_home %}#contact{% else %}{{ home }}#contact{% endif %}">Request a scoping call</a>
+    </nav>
+  </div>
+  <div class="nav-r">
+    <a href="{{ writing }}" class="navlink">Writing</a>
+    <a href="{% if page.is_home %}#contact{% else %}{{ home }}#contact{% endif %}" class="btn btn-p btn-sm">Request a scoping call</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="lk"><i></i><i></i><i></i></button>
+</div>
+  <span id="prog"></span>
+{%- if page.is_home %}
+  <div id="mega" role="region" aria-label="Audit scopes"><div class="mega-in" id="megain"></div></div>
+{%- endif %}
+</header>

@@ -1,0 +1,126 @@
+---
+layout: home
+is_home: true
+title: null
+---
+<section class="hero" id="top"><div class="wrap hgd">
+  <div>
+    <span class="eyebrow hro">Independent security audit</span>
+    <h1 class="hro">Security audits that tell you what is actually exposed.</h1>
+    <p class="lead hro">We examine identity and access, cloud and infrastructure configuration, applications, data protection, vendor access, logging and incident readiness. You receive a findings register ranked by severity, each with the evidence behind it, a named owner and a remediation date.</p>
+    <div class="acts hro">
+      <a href="#contact" class="btn btn-p">Request a scoping call<svg viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="#audits" class="btn btn-g">See what an audit covers</a>
+    </div>
+    <div class="proof hro">
+      <div><b>Six weeks</b><span class="muted">Scoping to report, single scope</span></div>
+      <div><b>Evidence-backed</b><span class="muted">Every finding, reproducible</span></div>
+      <div><b>Day 90 re-test</b><span class="muted">Included in every engagement</span></div>
+    </div>
+  </div>
+  <div class="scopes">
+    <div class="hd"><span>Nine audit scopes</span><span class="muted">Run singly or as a program</span></div>
+    <div id="scopelist"></div>
+  </div>
+</div></section>
+
+<div class="band"><div class="wrap">
+  <b>Findings map to</b>
+  <ul id="bandlist"></ul>
+</div></div>
+
+<section class="sec" id="findings"><div class="wrap">
+  <div class="sh-split">
+    <div><span class="eyebrow">What we find</span>
+      <h2>The same eight findings, in organization after organization.</h2></div>
+    <p>None are exotic. They are what accumulates when a business grows faster than the controls around it, and none of them show up in a vulnerability scan. Each is detectable within a defined number of days, and each one has been the root cause of a public breach somewhere.</p>
+  </div>
+  <div class="rows" id="finds"></div>
+</div></section>
+
+<section class="sec tint" id="audits"><div class="wrap">
+  <div class="sh"><span class="eyebrow">Audits</span>
+    <h2>Nine scopes. Run one, or run them as a program.</h2>
+    <p>Each is scoped independently, with its own testing plan, evidence requirements and findings register. Most clients begin with identity and cloud, then extend. Every finding carries the control reference for whichever frameworks apply to you, so the register drops into work you already report on.</p></div>
+  <div class="aud">
+    <div class="rail" id="rail" role="tablist"></div>
+    <div id="panes"></div>
+  </div>
+</div></section>
+
+<section class="sec" id="method"><div class="wrap">
+  <div class="sh-split">
+    <div><span class="eyebrow">How it works</span>
+      <h2>Five stages. Nothing in the report surprises you.</h2></div>
+    <p>Findings are walked through with the engineer or administrator who owns the system while testing is still open, so what reaches your desk has already survived contact with the people who run it. Anything that does not survive that conversation is withdrawn, and the report says so.</p>
+  </div>
+  <div class="viz tl" id="tl" data-rv>
+    <div class="viz-hd">
+      <h4>Where the six weeks go</h4>
+      <span class="cap">Typical single-scope engagement. Testing varies 2&ndash;4 weeks with the size of the estate; shown at three.</span>
+    </div>
+    <div class="tl-plot"><div class="tl-track" id="tltrack"></div><div class="tl-axis" id="tlaxis"></div></div>
+    <div class="tl-keys" id="tlkeys"></div>
+    <div class="tl-after"><i></i><span><b>Day 90</b> &mdash; we return and re-test what was supposed to close.</span></div>
+  </div>
+  <div class="steps" data-rv>
+    <div><span class="k">Stage 1</span><h4>Scope</h4><p>Half a day with the person accountable for security, the engineering lead and whoever owns the budget, to agree what is in scope, what is out, and what testing is authorized in writing.</p><div class="d">Half a day</div></div>
+    <div><span class="k">Stage 2</span><h4>Testing</h4><p>Configuration review, access and log analysis, and hands-on testing against the agreed scope, run from read-only accounts wherever a read-only account can answer the question.</p><div class="d">2&ndash;4 weeks</div></div>
+    <div><span class="k">Stage 3</span><h4>Validation</h4><p>Every finding is reproduced and walked through with the system owner, so the register reflects the environment rather than our first read of it.</p><div class="d">1 week</div></div>
+    <div><span class="k">Stage 4</span><h4>Report</h4><p>A findings register ranked by severity, each with reproduction steps, evidence, an owner, a remediation step and a date, plus a two-page summary.</p><div class="d">1 week</div></div>
+    <div><span class="k">Stage 5</span><h4>Re-test</h4><p>We return at ninety days and test what was supposed to close. An audit nobody re-tests is a document rather than a control.</p><div class="d">Day 90</div></div>
+  </div>
+</div></section>
+
+<section class="sec tint" id="severity"><div class="wrap">
+  <div class="sh-split">
+    <div><span class="eyebrow">Severity</span>
+      <h2>Every finding arrives with a clock attached.</h2></div>
+    <p>Severity reflects exposure and exploitability, not how hard something is to fix. The window below is what we agree with you at scoping, and it is what the day-90 re-test measures against. A finding with no date is a finding nobody owns.</p>
+  </div>
+  <div class="viz" id="sev" data-rv>
+    <div class="viz-hd">
+      <h4>Remediation window by severity</h4>
+      <span class="cap">Our default engagement terms. Adjusted at scoping to fit your change process.</span>
+    </div>
+    <div class="bars" id="sevlist"></div>
+  </div>
+</div></section>
+
+<section class="sec" id="deliverables"><div class="wrap">
+  <div class="sh"><span class="eyebrow">Deliverables</span>
+    <h2>What lands on your desk.</h2>
+    <p>Written so an executive can act on it in an hour and an engineer can reproduce it without calling us.</p></div>
+  <div class="g3" id="delivs"></div>
+</div></section>
+
+<section class="sec tint"><div class="wrap">
+  <div class="sh"><span class="eyebrow">How we work</span>
+    <h2>Five commitments, and one thing we will not do.</h2></div>
+  <div class="g3" id="how"></div>
+</div></section>
+
+<section class="sec" id="faq"><div class="wrap">
+  <div class="sh"><span class="eyebrow">Questions</span><h2>What clients ask before they engage.</h2></div>
+  <div class="acc" id="acc"></div>
+</div></section>
+
+<section class="sec" id="contact" style="border-bottom:0"><div class="wrap"><div class="cta">
+  <div class="cta-in">
+   <div>
+    <span class="eyebrow">Get started</span>
+    <h2>A scoping call, then a written scope. No obligation on either.</h2>
+   </div>
+   <div class="cta-b">
+    <p>Tell us what you run and what is prompting the question &mdash; a customer questionnaire, a board request, an incident, or an upcoming certification. We will tell you which of the nine scopes applies, roughly how long it takes, and what access we would need. If the answer is that you do not need an audit yet, we will say so.</p>
+   </div>
+   <div class="cta-c">
+    <form class="frm" novalidate="false">
+      <input type="text" placeholder="Name and organization" required>
+      <input type="email" placeholder="Work email" required>
+      <button class="btn btn-p" type="submit">Request call</button>
+    </form>
+    <p class="small muted" style="margin-top:16px">We do not share contact details with vendors or partners, and we do not operate a mailing list.</p>
+   </div>
+  </div>
+</div></div></section>

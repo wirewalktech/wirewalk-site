@@ -1,0 +1,61 @@
+---
+layout: base
+---
+{%- assign words = content | number_of_words -%}
+{%- assign mins = words | divided_by: 220 | plus: 1 -%}
+<article class="art"><div class="wrap">
+  <header class="art-hd" data-rv>
+    <span class="eyebrow">{{ page.category | default: 'Notes' }}</span>
+    <h1>{{ page.title }}</h1>
+    {%- if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
+    <div class="art-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time>
+      <span>{{ mins }} min read</span>
+      {%- for t in page.tags %}<span class="tag">{{ t }}</span>{% endfor %}
+    </div>
+  </header>
+
+  <div class="art-body">
+    <div class="prose">
+      {{ content }}
+    </div>
+    <aside class="toc" id="toc" hidden><b>Contents</b><nav></nav></aside>
+  </div>
+
+  {%- if page.previous or page.next %}
+  <nav class="pnav" aria-label="More articles">
+    {%- if page.next %}
+    <a href="{{ page.next.url | relative_url }}"><span>Newer</span><b>{{ page.next.title }}</b></a>
+    {%- else %}<span></span>{% endif %}
+    {%- if page.previous %}
+    <a href="{{ page.previous.url | relative_url }}" class="r"><span>Older</span><b>{{ page.previous.title }}</b></a>
+    {%- else %}<span></span>{% endif %}
+  </nav>
+  {%- endif %}
+
+  <p style="margin-top:40px"><a href="{{ '/writing/' | relative_url }}" class="btn btn-g">All articles</a></p>
+</div></article>
+
+<script>
+/* contents rail, built from the article's own h2s so nothing has to be
+   maintained by hand in the markdown */
+(function(){
+  const box=document.getElementById('toc'); if(!box)return;
+  const hs=[...document.querySelectorAll('.prose h2')].filter(h=>h.id);
+  if(hs.length<3)return;                      /* not worth a rail */
+  const nav=box.querySelector('nav');
+  nav.innerHTML=hs.map(h=>'<a href="#'+h.id+'">'+h.textContent+'</a>').join('');
+  box.hidden=false;
+  const links=[...nav.querySelectorAll('a')];
+  const live=new Set();
+  const mark=()=>{
+    const i=hs.findIndex(h=>live.has(h.id));
+    links.forEach((a,k)=>a.classList.toggle('on',k===i));
+  };
+  const spy=new IntersectionObserver(es=>{
+    for(const e of es) e.isIntersecting?live.add(e.target.id):live.delete(e.target.id);
+    mark();
+  },{rootMargin:'-90px 0px -70% 0px',threshold:0});
+  hs.forEach(h=>spy.observe(h));
+})();
+</script>

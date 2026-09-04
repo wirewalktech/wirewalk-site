@@ -1,0 +1,28 @@
+{%- assign home = '/' | relative_url -%}
+{%- assign writing = '/writing/' | relative_url -%}
+<footer><div class="wrap">
+  <div class="fg">
+    <div>
+      <a href="{{ home }}" class="brand" style="margin-bottom:12px"><span class="mark"><i></i><i></i><i></i><i></i></span>
+        <span class="bn"><span>Wirewalk<s>Advisory</s></span></span></a>
+      <p class="small" style="max-width:36ch">Independent security audits. Evidence-backed findings, ranked by severity, with a named owner and a date on every line.</p>
+    </div>
+    <div><h5>Audits</h5>{% if page.is_home %}<div id="fn1"></div>{% else %}
+      <a href="{{ home }}#audits">Identity and access</a><a href="{{ home }}#audits">Cloud configuration</a>
+      <a href="{{ home }}#audits">Application security</a><a href="{{ home }}#audits">Data protection</a>
+      <a href="{{ home }}#audits">All nine scopes</a>{% endif %}</div>
+    <div><h5>Firm</h5>
+      <a href="{{ home }}#method">How it works</a><a href="{{ home }}#severity">Severity model</a>
+      <a href="{{ home }}#deliverables">Deliverables</a><a href="{{ home }}#faq">FAQ</a>
+      <a href="{{ home }}#contact">Contact</a></div>
+    <div><h5>Writing</h5>
+      <a href="{{ writing }}">All articles</a>
+      <a href="{{ '/feed.xml' | relative_url }}">RSS feed</a>
+      <h5 style="margin-top:22px">Also from Wirewalk</h5>
+      <a href="https://wirewalktech.github.io/AI-Extension/">Wirewalk AI &mdash; The Operating Review</a></div>
+  </div>
+  <div class="fb">
+    <span>&copy; {{ 'now' | date: "%Y" }} Wirewalk Advisory.</span>
+    <span>Nothing on this site is legal advice. All testing is performed under written authorization and a mutual non-disclosure agreement.</span>
+  </div>
+</div></footer>
