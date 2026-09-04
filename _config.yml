@@ -8,7 +8,7 @@ author: Wirewalk Advisory
 
 # Change both of these together if the repository is renamed.
 url: https://wirewalktech.github.io
-baseurl: /wirewalk
+baseurl: /wirewalk-site
 
 permalink: /writing/:title/
 timezone: America/New_York
