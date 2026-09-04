@@ -1,176 +1,11 @@
 <script>
-const FINDS=[
- ['Access that outlived the person or the role','Accounts belonging to leavers, contractors and old integrations keep working because deprovisioning runs on a manual checklist rather than off the identity provider. The audit reconciles every account in every system against the current HR roster and flags what has no owner.','Identity and access'],
- ['Multi-factor on the front door, not on the side doors','MFA is enforced at the SSO login and quietly bypassed by legacy authentication, service accounts, API tokens, break-glass accounts and the VPN. Attackers do not use the front door.','Identity and access'],
- ['Cloud roles far wider than the workload needs','Permissions granted during an incident or a migration and never narrowed. Wildcard actions, admin on a service principal, a CI runner that can read every bucket. We diff granted permissions against permissions actually used.','Cloud configuration'],
- ['Secrets in places nobody thinks of as storage','Credentials in source history, CI variables, container images, infrastructure code, ticket comments and shared drives. Rotation is usually the harder half of the finding, so the register covers both.','Data protection'],
- ['Backups that have never been restored','Backups run, alerts are green, and nobody has performed a restore under time pressure. Until a restore is tested end to end with the data verified, backup is an assumption rather than a control.','Resilience'],
- ['Logging without alerting, or retention shorter than dwell time','Logs are collected but nothing fires on them, or they roll off before an investigation would reach back that far. Both mean the same thing in practice: the event is not detected and cannot be reconstructed.','Detection'],
- ['A flat internal network behind a hard perimeter','Once inside, everything reaches everything. Segmentation exists on the diagram but not in the routing tables or the security groups, so one compromised endpoint reaches the database tier.','Infrastructure'],
- ['Vendor access nobody reviews','Third parties hold standing credentials, network access or delegated admin granted at onboarding and never revisited. We inventory it, test what the access can actually reach, and check it against the contract.','Third-party risk']];
-
-const AUDITS=[
- {k:'Identity and access',h:'Identity and access audit',
-  p:'Who can reach what, how that access was granted, and whether it is still justified. This is where most engagements start, because it is where most real exposure lives.',
-  c:['Every account in every system reconciled against the current employee and contractor roster','Multi-factor coverage including legacy protocols, service accounts, API tokens and break-glass paths','Privileged access: who holds it, how it is requested, and whether use is logged and reviewed','Joiner, mover and leaver processes tested against actual deprovisioning timestamps','Single sign-on coverage, and what still authenticates outside it','Password and session policy as configured, not as documented'],
-  d:[['Register','Findings by severity with the account, system and evidence for each'],['Roster','Every identity, its access, its owner and its last use'],['Orphans','Accounts with no current owner, ranked by what they can reach'],['Runbook','A deprovisioning process you can hand to whoever runs onboarding']]},
- {k:'Cloud configuration',h:'Cloud configuration audit',
-  p:'Your cloud estate measured against its own intent. Granted permissions compared with used permissions, public exposure enumerated, and the controls that were configured once and never revisited.',
-  c:['Role and policy review with granted-versus-used permission analysis','Publicly reachable storage, databases, endpoints and management interfaces','Network controls: security groups, peering, egress and administrative access paths','Encryption at rest and in transit, and where keys are held and rotated','Logging and audit-trail coverage across accounts, subscriptions or projects','Infrastructure-as-code drift against what is actually deployed'],
-  d:[['Register','Findings by account and resource, with reproduction steps'],['Permissions','Granted-versus-used analysis with a proposed least-privilege target'],['Exposure','Everything reachable from the internet, with a verdict on each'],['Baseline','A configuration standard you can enforce going forward']]},
- {k:'Application security',h:'Application security audit',
-  p:'The applications you build or heavily configure, reviewed against how they actually handle authentication, authorization and data. Testing is authorized in writing and run against a non-production environment wherever one exists.',
-  c:['Authentication and session handling, including reset, recovery and lockout flows','Authorization tested per role, with a specific focus on object-level access between tenants and users','Input handling and injection paths across the surfaces that reach a data store','Dependency and supply-chain review, including build pipeline integrity','Secrets handling in code, configuration, images and CI','Security-relevant logging: what an investigator would have to work with'],
-  d:[['Register','Findings with reproduction steps an engineer can follow unaided'],['Coverage','What was tested, what was not, and why'],['Pipeline','Build and deployment findings, separated from application findings'],['Retest','Verification of each fix at day 90']]},
- {k:'Data protection',h:'Data protection audit',
-  p:'What sensitive data you hold, where it has spread, who can reach it, and what happens to it at the end of its life.',
-  c:['Data inventory and classification against where the data actually sits, including copies in analytics, backups and test environments','Access paths to each store, and whether they are reviewed','Encryption at rest and in transit, key custody and rotation','Retention and deletion, tested rather than assumed','Data leaving the organization: exports, integrations, endpoints and shared drives','Secrets and credential handling across the estate'],
-  d:[['Register','Findings by data store and classification'],['Map','Where each class of data lives, including the copies'],['Access','Who can reach each store, and through which path'],['Retention','Configured retention against stated policy, with the gaps named']]},
- {k:'Detection and response',h:'Detection and incident response audit',
-  p:'Whether you would see an incident, how quickly, and what you would be able to reconstruct afterward. Tested with scenarios rather than reviewed on paper.',
-  c:['Log coverage by source, and retention measured against realistic dwell time','Alerting: what actually fires, to whom, and what the response time has been','Detection tested against scenarios agreed at scoping','Incident response plan walked through with the people named in it','Escalation paths, on-call reality and out-of-hours coverage','Evidence handling and the ability to reconstruct a timeline'],
-  d:[['Register','Detection and response gaps by scenario'],['Coverage','Log sources against an agreed control set, with blind spots named'],['Tabletop','A written walkthrough of each scenario and where it stalled'],['Plan','Gaps in the incident response plan, with owners']]},
- {k:'Infrastructure',h:'Network and infrastructure audit',
-  p:'Segmentation as it exists in routing tables and security groups rather than on the architecture diagram, plus the endpoint and patching posture underneath it.',
-  c:['Segmentation tested by path, not read from a diagram','Remote access: VPN, bastions, jump hosts and their authentication','Endpoint controls, coverage gaps and the devices nobody is managing','Patch and vulnerability management measured by time-to-remediate, not by scan count','Administrative interfaces and where they are reachable from','Physical and network access for offices and on-premises equipment'],
-  d:[['Register','Findings by segment and system'],['Paths','What can actually reach what, tested'],['Coverage','Managed-versus-unmanaged devices and systems'],['Remediation','Sequenced by dependency, since segmentation changes cascade']]},
- {k:'Third-party risk',h:'Third-party and vendor access audit',
-  p:'Every external party holding credentials, network access or delegated administration, what that access can reach, and whether it matches the contract.',
-  c:['Inventory of vendors, integrations and service accounts with standing access','What each holds and what it can actually reach, tested rather than asserted','Access reviewed against the contract and the stated purpose','Onboarding and offboarding of vendors, tested against real dates','Vendor security assessments: what was asked, what was verified','Concentration and dependency risk on critical providers'],
-  d:[['Register','Findings by vendor and access path'],['Inventory','Every third party with access, and what it reaches'],['Contracts','Access granted against access contracted'],['Offboarding','A tested process for removing vendor access']]},
- {k:'Resilience',h:'Backup, recovery and continuity audit',
-  p:'Whether you can actually come back. Restores are performed, not attested, and recovery objectives are measured against what the test showed rather than what the policy states.',
-  c:['Backup coverage against the systems the business actually needs to operate','Restore tested end to end, with the restored data verified','Recovery time and recovery point objectives measured against the test result','Backup immutability and isolation from production credentials','Continuity plan walked through with the people named in it','Dependencies on single providers, single regions and single people'],
-  d:[['Register','Findings by system and recovery objective'],['Restore','Test results with measured times against stated objectives'],['Gaps','Systems with no viable restore path'],['Plan','Continuity findings with owners and dates']]},
- {k:'Program and governance',h:'Security program and governance audit',
-  p:'Whether the program has the authority, the ownership and the evidence to hold up — to a customer questionnaire, a certification body, an insurer, or an incident.',
-  c:['Policy set against practice, with the gaps between them named','Ownership: who is accountable for each control, and whether they know it','Risk register: whether it is maintained and whether decisions reference it','Access reviews, change management and exception handling as they actually run','Evidence: what could be produced today for a certification or a customer','Security awareness and phishing resilience measured by result'],
-  d:[['Register','Governance findings by control area'],['Mapping','Findings mapped to the frameworks that apply to you'],['Evidence','What exists, what does not, and what to build first'],['Roadmap','Sequenced by dependency, with owners and dates']]}];
-
-const SEV=[
- ['Critical',1,'Exploitable now, with direct access to sensitive data or administrative control. We contact you during the engagement rather than waiting for the report.','24 hours'],
- ['High',7,'Exploitable with modest effort, or a control failure that removes a layer you rely on. Fixed within the current sprint.','7 days'],
- ['Medium',30,'Real exposure that requires a precondition — an existing foothold, a specific role, or a chained step.','30 days'],
- ['Low',90,'Hardening and hygiene. Worth doing, and safe to schedule into normal work.','90 days']];
-
-const DELIVS=[
- ['Findings register','Each finding carries a severity, reproduction steps, the evidence we relied on, the control reference, a named owner and a due date. Built to be worked from, and to be maintained after we leave.'],
- ['Two-page summary','What an executive or a board needs: the three things that matter, what they expose the organization to, and what happens next. No appendices required to understand it.'],
- ['Evidence pack','Screenshots, command output, log excerpts and configuration exports, indexed to the finding each supports. Assembled during testing rather than reconstructed afterward.'],
- ['Remediation plan','Sequenced by dependency rather than by severity, because some fixes cannot start until others land. Each step has an owner, a date and a test that decides whether it closed.'],
- ['Framework mapping','Every finding carries its control reference for the frameworks that apply to you, so the register drops into work you are already reporting on.'],
- ['Ninety-day re-test','We return and test what was supposed to close. You receive a short second report showing what held, what did not, and what needs escalation.']];
-
-const FW=['SOC 2 Trust Services Criteria','ISO/IEC 27001:2022 Annex A','NIST Cybersecurity Framework 2.0','NIST SP 800-53','CIS Critical Security Controls v8','PCI DSS 4.0','HIPAA Security Rule','OWASP ASVS','MITRE ATT&CK'];
-
-const HOW=[
- ['We show our evidence','Every finding carries reproduction steps and the output we relied on. An engineer should be able to confirm it without calling us, and disagree with it on the facts if we got it wrong.'],
- ['We flag what we could not test','Audits that report only what was reachable read cleaner and help less. Ours carry an explicit list of what was out of scope, what access we lacked, and what that leaves unknown.'],
- ['We test rather than ask','A questionnaire records what someone believes is true. We check the configuration, the logs and the access paths, and where the two disagree we say so plainly.'],
- ['We rank by consequence','A missing header and a service account with standing admin are not the same finding. Severity reflects exposure and exploitability, not how easy something is to write up.'],
- ['We re-test at ninety days','We return and test what closed. Remediation that was never verified is an assertion rather than a control.'],
- ['We do not sell you the fix','We take no fee, referral or commission from any security vendor or managed service provider, and we do not implement what we audit. An auditor who also sells remediation has a reason to find work.']];
-
-const FAQ=[
- ['Is this a penetration test?','It overlaps but is not the same thing. A penetration test asks how far an attacker can get along one path. An audit asks what is exposed across the whole scope and why, including things no exploit chain would surface — an unreviewed vendor account, a backup that has never been restored, retention shorter than dwell time. Where hands-on testing is the right way to answer a question we do it, under written authorization and within the agreed scope.'],
- ['Will you break something?','No. Testing is scoped and authorized in writing before anything starts, destructive techniques are excluded by default, and we work from read-only access wherever a read-only account can answer the question. Anything with a risk of disruption is agreed explicitly, scheduled with your team, and run with someone from your side on the call.'],
- ['What access do you need?','Less than most people expect. Read-only access to the identity provider, the cloud accounts, the logging platform and the relevant repositories covers most scopes. Where a scope needs more, we name exactly what and why during scoping, and it goes in the written authorization rather than being requested ad hoc later.'],
- ['How long does it take?','Scoping is half a day. Testing runs two to four weeks depending on the size of the estate. Validation and reporting take about two weeks after that. A single scope typically closes in six weeks; a full program across all nine runs three to four months.'],
- ['Do you implement what you find?','No, and this is deliberate. We take no fee, referral or commission from security vendors or managed service providers, and we do not sell remediation. An auditor who also sells the fix has a financial reason to find work. We will describe what credible remediation looks like and help you evaluate whoever performs it.'],
- ['Can the report go to a customer or an insurer?','Yes. The two-page summary is written to be shared, and findings carry their framework control references so the register lines up with what you already report against. We will also produce a redacted version on request — full detail stays internal, the posture summary goes out.'],
- ['What if you find nothing serious?','Then the report says so, and it is short. We have no incentive to inflate severity because we do not sell the remediation. A clean audit with a documented evidence pack is a useful asset in a customer review, a diligence process or an insurance renewal.']];
-
-
-$('#scopelist').innerHTML=AUDITS.map((a,i)=>
- `<a href="#audits" data-jump="${i}">${a.k}<span>${String(i+1).padStart(2,'0')}</span></a>`).join('');
-$('#finds').innerHTML=FINDS.map(f=>
- `<div class="row" data-rv><div><h4>${f[0]}</h4><p>${f[1]}</p></div><div class="tag">${f[2]}</div></div>`).join('');
-$('#delivs').innerHTML=DELIVS.map((d,i)=>
- `<div data-rv><span class="n">${String(i+1).padStart(2,'0')}</span><h4>${d[0]}</h4><p>${d[1]}</p></div>`).join('');
-$('#how').innerHTML=HOW.map((d,i)=>
- `<div data-rv><span class="n">${String(i+1).padStart(2,'0')}</span><h4>${d[0]}</h4><p>${d[1]}</p></div>`).join('');
-$('#bandlist').innerHTML=FW.map(f=>`<li>${f}</li>`).join('');
-$('#rail').innerHTML=AUDITS.map((a,i)=>
- `<button role="tab" aria-selected="${i===0}" data-i="${i}">${a.k}</button>`).join('');
-$('#panes').innerHTML=AUDITS.map((a,i)=>
- `<div class="pane ${i===0?'on':''}" data-i="${i}">
-   <h3>${a.h}</h3><p>${a.p}</p>
-   <div class="pcols">
-     <div><span class="ttl">What we examine</span>${a.c.map(c=>`<div class="chk">${c}</div>`).join('')}</div>
-     <div><span class="ttl">What you receive</span>${a.d.map(d=>`<div class="kv"><b>${d[0]}</b><span>${d[1]}</span></div>`).join('')}</div>
-   </div></div>`).join('');
-function pick(i){
-  $$('#rail button').forEach(b=>b.setAttribute('aria-selected',b.dataset.i===String(i)));
-  $$('.pane').forEach(p=>p.classList.toggle('on',p.dataset.i===String(i)));
-}
-$('#rail').addEventListener('click',e=>{const b=e.target.closest('button');if(b)pick(b.dataset.i);});
-$('#scopelist').addEventListener('click',e=>{const a=e.target.closest('[data-jump]');if(a)pick(a.dataset.jump);});
-$('#acc').innerHTML=FAQ.map(f=>`<div class="ai"><button class="aq">${f[0]}</button><div class="aa"><div>${f[1]}</div></div></div>`).join('');
-$('#acc').addEventListener('click',e=>{const q=e.target.closest('.aq');if(!q)return;
- const it=q.parentElement,open=it.classList.contains('open');
- $$('.ai').forEach(x=>{x.classList.remove('open');$('.aa',x).style.maxHeight=null;});
- if(!open){it.classList.add('open');const a=$('.aa',it);a.style.maxHeight=a.scrollHeight+'px';}});
-$('#fn1').innerHTML=AUDITS.slice(0,5).map(a=>`<a href="#audits">${a.k}</a>`).join('');
-
-/* ── charts ─────────────────────────────────────────────────────────── */
-const STAGES=[
- {n:'Scope',w:0.1,d:'Half a day',c:'var(--s1)',t:'Agreeing what is in scope, what is out, and what testing is authorized in writing.'},
- {n:'Testing',w:3,d:'2–4 weeks',c:'var(--s2)',t:'Configuration review, access and log analysis, and hands-on testing against the agreed scope.'},
- {n:'Validation',w:1,d:'1 week',c:'var(--s3)',t:'Every finding reproduced and walked through with the system owner before it is written up.'},
- {n:'Report',w:1,d:'1 week',c:'var(--s4)',t:'Findings register with reproduction steps, evidence, owners and dates, plus a two-page summary.'}];
-const WEEKS=6;
-
-const tip=document.createElement('div');tip.className='viz-tip';document.body.appendChild(tip);
-function showTip(e,title,body){
-  tip.textContent='';
-  const b=document.createElement('b');b.textContent=title;
-  const sp=document.createElement('span');sp.textContent=body;
-  tip.append(b,sp);tip.classList.add('on');
-  const r=tip.getBoundingClientRect();
-  let x=e.clientX-r.width/2,y=e.clientY-r.height-12;
-  x=Math.max(10,Math.min(x,innerWidth-r.width-10)); if(y<10)y=e.clientY+18;
-  tip.style.left=x+'px';tip.style.top=y+'px';
-}
-const hideTip=()=>tip.classList.remove('on');
-function wire(el,fn){
-  el.addEventListener('pointermove',e=>showTip(e,...fn()));
-  el.addEventListener('pointerleave',hideTip);
-  el.addEventListener('focus',()=>{const r=el.getBoundingClientRect();
-    showTip({clientX:r.left+r.width/2,clientY:r.top},...fn());});
-  el.addEventListener('blur',hideTip);
-}
-const track=$('#tltrack');
-STAGES.forEach(st=>{
-  const d=document.createElement('div');
-  d.className='tl-seg';d.style.background=st.c;d.style.setProperty('--w',(st.w/WEEKS*100)+'%');d.tabIndex=0;
-  wire(d,()=>[st.n+' — '+st.d, st.t]); track.appendChild(d);
-});
-$('#tlaxis').innerHTML=Array.from({length:WEEKS+1},(_,i)=>
- `<div class="tl-tick ${i===0?'e0':i===WEEKS?'eN':''}" style="left:${i/WEEKS*100}%"><span>${i===0?'start':'week '+i}</span></div>`).join('');
-$('#tlkeys').innerHTML=STAGES.map(s=>
- `<span class="tl-key"><i style="background:${s.c}"></i><b>${s.n}</b> ${s.d}</span>`).join('');
-
-const MAXD=90;
-$('#sevlist').innerHTML=SEV.map(([k,days,,label])=>
- `<div class="bar-row"><div class="lab">${k}</div>
-   <div class="bar-wrap"><span class="bar-base"></span>
-     <div class="bar" style="--w:${Math.max(days/MAXD*100,2.2)}%" tabindex="0" data-k="${k}"></div>
-     <span class="bar-val">${label}</span></div></div>`).join('');
-$$('#sevlist .bar').forEach((b,i)=>wire(b,()=>[SEV[i][0]+' — '+SEV[i][3], SEV[i][2]]));
-addEventListener('scroll',hideTip,{passive:true});
-
-const vio=new IntersectionObserver((es,o)=>{for(const e of es){if(!e.isIntersecting)continue;
- e.target.classList.add('in');o.unobserve(e.target);}},{threshold:.3});
-vio.observe($('#tl')); vio.observe($('#sevlist'));
-
-/* ── header: sliding pill, scrollspy, dropdown panels ──────────────── */
+/* ── header: sliding pill + scrollspy ─────────────────────────────────
+   One shared background glides between nav items on hover and settles
+   back onto whichever section is actually in view. */
 (function(){
-  const lk=$('#lk'), pill=$('#pill'), items=$$('#lk a,#lk button'),
-        dds=$$('#lk .dd'), mega=$('#mega'), inner=$('#megain'),
-        RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let current=null, hoverT=null, openBtn=null;
-
-  /* one shared background that glides between items */
+  const lk=$('#lk'), pill=$('#pill'), items=$$('#lk a,#lk button');
+  if(!lk||!pill)return;
+  let current=null;
   function place(el,show){
     if(!el){pill.classList.remove('show');return;}
     pill.style.width=el.offsetWidth+'px';
@@ -178,81 +13,26 @@ vio.observe($('#tl')); vio.observe($('#sevlist'));
     pill.style.transform='translateX('+el.offsetLeft+'px)';
     if(show)pill.classList.add('show');
   }
-  const settle=()=>{ openBtn?place(openBtn,true):(current?place(current,true):pill.classList.remove('show')); };
+  const settle=()=>{ current?place(current,true):pill.classList.remove('show'); };
   items.forEach(el=>{
     el.addEventListener('pointerenter',()=>place(el,true));
     el.addEventListener('focus',()=>place(el,true));
   });
-  lk.addEventListener('pointerleave',()=>{ if(!openBtn)settle(); });
+  lk.addEventListener('pointerleave',settle);
   lk.addEventListener('focusout',e=>{ if(!lk.contains(e.relatedTarget))settle(); });
   addEventListener('resize',()=>{pill.style.transition='none';settle();
     requestAnimationFrame(()=>pill.style.transition='');},{passive:true});
 
-  /* the nav marks where you are, not just where you have hovered */
+  const IDS=['hpc','expertise','scale','audits','writing'], live=new Set();
   const spy=new IntersectionObserver(es=>{
-    for(const e of es){
-      if(!e.isIntersecting)continue;
-      const hit=items.find(i=>i.dataset.sec===e.target.id);
-      items.forEach(i=>i.classList.remove('cur'));
-      current=hit||null; if(hit)hit.classList.add('cur');
-      if(!lk.matches(':hover')&&!openBtn)settle();
-    }
+    for(const e of es) e.isIntersecting?live.add(e.target.id):live.delete(e.target.id);
+    const id=IDS.find(x=>live.has(x));
+    const hit=id?items.find(i=>i.dataset.sec===id):null;
+    if(hit===current)return;
+    items.forEach(i=>i.classList.remove('cur'));
+    current=hit||null; if(hit)hit.classList.add('cur');
+    if(!lk.matches(':hover'))settle();
   },{rootMargin:'-64px 0px -55% 0px',threshold:0});
-  ['findings','audits','method','severity','deliverables'].forEach(id=>{
-    const el=document.getElementById(id); if(el)spy.observe(el);
-  });
-
-  /* panel content, one menu per dropdown */
-  const esc=t=>{const d=document.createElement('div');d.textContent=t;return d.innerHTML;};
-  const card=(n,t,d,jump)=>
-    `<a class="m"${jump!==undefined?` data-jump="${jump}"`:''} href="${jump!==undefined?'#audits':d.href||'#'+d.sec}">`+
-    `<b>${n?`<i>${n}</i>`:''}${esc(t)}</b><span>${esc(d.text)}</span></a>`;
-  const MENUS={
-    audits:{
-      title:'Nine audit scopes', note:'Run singly or as a program · six weeks each', cols:3,
-      body:()=>AUDITS.map((a,i)=>card(String(i+1).padStart(2,'0'),a.k,{text:a.p.split('.')[0]+'.',sec:'audits'},i)).join('')
-    },
-    method:{
-      title:'How an engagement runs', note:'Scoping to report in six weeks · re-tested at day 90', cols:3,
-      body:()=>STAGES.map((st,i)=>card('Stage '+(i+1),st.n,{text:st.t,sec:'method'})).join('')+
-        card('Stage 5','Re-test',{text:'We return at ninety days and test what was supposed to close.',sec:'method'})+
-        card('','Severity model',{text:'Every finding arrives with a remediation window attached, agreed at scoping.',sec:'severity'})
-    },
-    deliverables:{
-      title:'What lands on your desk', note:'Written to be worked from, and to be maintained after we leave', cols:3,
-      body:()=>DELIVS.map((d,i)=>card(String(i+1).padStart(2,'0'),d[0],{text:d[1],sec:'deliverables'})).join('')
-    }
-  };
-  function fill(key){
-    const m=MENUS[key];
-    inner.style.gridTemplateColumns='repeat('+m.cols+',1fr)';
-    inner.innerHTML='<div class="mega-hd"><b>'+m.title+'</b><span>'+m.note+'</span></div>'+m.body();
-  }
-
-  function open(btn){
-    if(openBtn===btn)return;
-    openBtn=btn;
-    dds.forEach(b=>{b.classList.toggle('on',b===btn);b.setAttribute('aria-expanded',b===btn);});
-    if(btn){fill(btn.dataset.menu);mega.classList.add('open');place(btn,true);}
-    else {mega.classList.remove('open');settle();}
-  }
-  dds.forEach(b=>{
-    b.addEventListener('click',e=>{e.preventDefault();open(openBtn===b?null:b);});
-    b.addEventListener('pointerenter',()=>{clearTimeout(hoverT);if(!RM)open(b);});
-    b.addEventListener('focus',()=>{if(!RM)open(b);});
-    b.addEventListener('pointerleave',()=>{hoverT=setTimeout(()=>open(null),170);});
-  });
-  mega.addEventListener('pointerenter',()=>clearTimeout(hoverT));
-  mega.addEventListener('pointerleave',()=>{hoverT=setTimeout(()=>open(null),170);});
-  mega.addEventListener('click',e=>{
-    const a=e.target.closest('a.m'); if(!a)return;
-    if(a.dataset.jump!==undefined)pick(a.dataset.jump);
-    open(null);
-  });
-  addEventListener('keydown',e=>{if(e.key==='Escape'&&openBtn){const b=openBtn;open(null);b.focus();}});
-  document.addEventListener('click',e=>{
-    if(openBtn&&!mega.contains(e.target)&&!e.target.closest('.dd'))open(null);
-  });
+  IDS.forEach(id=>{const el=document.getElementById(id); if(el)spy.observe(el);});
 })();
-
 </script>

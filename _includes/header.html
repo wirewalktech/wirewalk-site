@@ -9,29 +9,26 @@
     <nav class="lk" id="lk">
     {%- if page.is_home %}
       <span id="pill"></span>
-      <button class="dd" data-menu="audits" aria-expanded="false" aria-controls="mega" data-sec="audits">Audits<svg class="caret" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <a href="#findings" data-sec="findings">What we find</a>
-      <button class="dd" data-menu="method" aria-expanded="false" aria-controls="mega" data-sec="method">How it works<svg class="caret" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button class="dd" data-menu="deliverables" aria-expanded="false" aria-controls="mega" data-sec="deliverables">Deliverables<svg class="caret" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <a href="#severity" data-sec="severity">Severity</a>
+      <a href="#hpc" data-sec="hpc">HPC and AI</a>
+      <a href="#expertise" data-sec="expertise">Expertise</a>
+      <a href="#scale" data-sec="scale">Track record</a>
+      <a href="#audits" data-sec="audits">Audits</a>
+      <a href="#writing" data-sec="writing">Writing</a>
     {%- else %}
+      <a href="{{ home }}#hpc">HPC and AI</a>
+      <a href="{{ home }}#expertise">Expertise</a>
+      <a href="{{ home }}#scale">Track record</a>
       <a href="{{ home }}#audits">Audits</a>
-      <a href="{{ home }}#findings">What we find</a>
-      <a href="{{ home }}#method">How it works</a>
-      <a href="{{ home }}#deliverables">Deliverables</a>
-      <a href="{{ home }}#severity">Severity</a>
+      <a href="{{ writing }}">Writing</a>
     {%- endif %}
-      <a class="m-cta" href="{% if page.is_home %}#contact{% else %}{{ home }}#contact{% endif %}">Request a scoping call</a>
+      <a class="m-cta" href="{% if page.is_home %}#contact{% else %}{{ home }}#contact{% endif %}">Get in touch</a>
     </nav>
   </div>
   <div class="nav-r">
-    <a href="{{ writing }}" class="navlink">Writing</a>
-    <a href="{% if page.is_home %}#contact{% else %}{{ home }}#contact{% endif %}" class="btn btn-p btn-sm">Request a scoping call</a>
+    <a href="{{ writing }}" class="navlink">Articles</a>
+    <a href="{% if page.is_home %}#contact{% else %}{{ home }}#contact{% endif %}" class="btn btn-p btn-sm">Get in touch</a>
   </div>
   <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="lk"><i></i><i></i><i></i></button>
 </div>
   <span id="prog"></span>
-{%- if page.is_home %}
-  <div id="mega" role="region" aria-label="Audit scopes"><div class="mega-in" id="megain"></div></div>
-{%- endif %}
 </header>

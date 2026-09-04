@@ -1,9 +1,9 @@
 title: Wirewalk Advisory
-tagline: Independent security audits
+tagline: HPC and AI infrastructure
 description: >-
-  Independent security audits, IT and infrastructure work, HPC engineering,
-  and the technical side of AI. Evidence-backed findings, ranked by severity,
-  with a named owner and a date on every line.
+  HPC and AI infrastructure engineering and architecture. Cluster design and
+  build-out, InfiniBand fabric, parallel storage, GPU and AI stacks, schedulers,
+  and the enterprise IT around them.
 author: Wirewalk Advisory
 
 # Change both of these together if the repository is renamed.
