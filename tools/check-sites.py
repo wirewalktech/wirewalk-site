@@ -26,6 +26,7 @@ Two mistakes this script exists to prevent, both of which shipped to production:
 Requires: python3 (stdlib only) and, for the Pages checks, `gh` authenticated.
 """
 import json
+import os
 import re
 import ssl
 import subprocess
@@ -40,7 +41,10 @@ import urllib.request
 # per-site rather than a single global expectation.
 SITES = {
     "www":    {"domain": "www.wirewalk.com",    "repo": "wirewalk-site",
-               "form": True, "phone": "917-217-7975"},
+               "form": True, "phone": "917-217-7975",
+               "posts_dir": os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                         "..", "_posts"),
+               "post_url": "/writing/{slug}/"},
     "ai":     {"domain": "ai.wirewalk.com",     "repo": "AI-Extension",
                "form": True, "phone": "516-269-1517"},
     "print":  {"domain": "print.wirewalk.com",  "repo": "print-wirewalk",
@@ -100,12 +104,42 @@ def fetch(url, follow=True):
         return 0, "", f"{type(e).__name__}: {e}"[:80]
 
 
+# Homebrew's bin is not on the default PATH in a non-login zsh here, so a
+# bare `gh` returns 127 and the Pages checks silently report "not enabled".
+# A checker that raises a false alarm gets ignored, which is worse than one
+# that does not run at all.
+_ENV = dict(os.environ)
+_ENV["PATH"] = os.pathsep.join([
+    "/opt/homebrew/bin", os.path.expanduser("~/bin"), _ENV.get("PATH", "")])
+
+
 def sh(cmd):
     try:
-        p = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=45)
+        p = subprocess.run(cmd, shell=True, capture_output=True, text=True,
+                           timeout=45, env=_ENV)
         return p.stdout.strip()
     except Exception:
         return ""
+
+
+def have_gh():
+    return bool(sh("command -v gh"))
+
+
+RESOURCE_HINT = re.compile(
+    r'<link\b[^>]*\brel="(?:preconnect|dns-prefetch|preload|prefetch|prerender|modulepreload)"[^>]*>',
+    re.I)
+
+
+def navigable(body):
+    """Drop resource-hint <link> tags before harvesting hrefs.
+
+    A rel="preconnect" href is an ORIGIN to warm a connection to, not a
+    document: https://fonts.gstatic.com correctly answers 404 to a GET, and
+    treating it as a broken link is a false positive. Same for dns-prefetch
+    and the preload family.
+    """
+    return RESOURCE_HINT.sub("", body)
 
 
 def is_real_link(href):
@@ -129,7 +163,7 @@ def crawl(root):
         pages[url] = (status, body)
         if status != 200 or "<html" not in body.lower():
             continue
-        for href in re.findall(r'href="([^"]+)"', body):
+        for href in re.findall(r'href="([^"]+)"', navigable(body)):
             if not is_real_link(href) or href.startswith(("mailto:", "tel:", "#", "javascript:")):
                 continue
             full = urllib.parse.urljoin(url, href).split("?")[0].split("#")[0]
@@ -154,9 +188,15 @@ def check_site(key, cfg):
         return
 
     # 2. Pages configuration
-    raw = sh(f"gh api repos/wirewalktech/{repo}/pages 2>/dev/null")
-    if not raw:
+    if not have_gh():
+        note("gh not available - skipping Pages configuration checks")
+        raw = ""
+    else:
+        raw = sh(f"gh api repos/wirewalktech/{repo}/pages 2>/dev/null")
+    if not raw and have_gh():
         bad(key, "GitHub Pages is not enabled on the repo")
+    elif not raw:
+        pass
     else:
         try:
             p = json.loads(raw)
@@ -213,7 +253,7 @@ def check_site(key, cfg):
         if status != 200:
             continue
         ids = set(re.findall(r'id="([^"]+)"', body))
-        for href in sorted(set(re.findall(r'href="([^"]+)"', body))):
+        for href in sorted(set(re.findall(r'href="([^"]+)"', navigable(body)))):
             if not is_real_link(href) or href.startswith(("mailto:", "tel:", "javascript:")):
                 continue
             n_links += 1
@@ -237,7 +277,37 @@ def check_site(key, cfg):
     else:
         ok(f"{n_links} links checked, {len(checked)} distinct targets, 0 broken")
 
-    # 7. contact form
+    # 7. every post in _posts actually rendered
+    #
+    # A post Jekyll declined to build -- a future date is the usual cause --
+    # produces NO broken link, because nothing links to a page that was never
+    # generated. Every other check passes and the article is simply absent.
+    # This is the only check that can see that.
+    pdir = cfg.get("posts_dir")
+    if pdir and os.path.isdir(pdir):
+        import datetime
+        missing, future = [], []
+        today = datetime.date.today()
+        names = [f for f in os.listdir(pdir) if f.endswith((".md", ".markdown", ".html"))]
+        for fn in sorted(names):
+            m = re.match(r"(\d{4})-(\d{2})-(\d{2})-(.+?)\.(md|markdown|html)$", fn)
+            if not m:
+                continue
+            y, mo, d, slug = int(m.group(1)), int(m.group(2)), int(m.group(3)), m.group(4)
+            expected = urllib.parse.urljoin(root, cfg["post_url"].format(slug=slug))
+            st, _, _ = fetch(expected)
+            if st != 200:
+                (future if datetime.date(y, mo, d) > today else missing).append((fn, st, expected))
+        if future:
+            for fn, st, u in future:
+                bad(key, f"post dated in the FUTURE so Jekyll skipped it: {fn} -> {st}")
+        if missing:
+            for fn, st, u in missing:
+                bad(key, f"post did not render: {fn} -> {st} at {u}")
+        if not missing and not future:
+            ok(f"all {len(names)} posts rendered and reachable")
+
+    # 8. contact form
     if cfg.get("form"):
         home = pages.get(root, (0, ""))[1]
         forms = re.findall(r"<form\b.*?</form>", home, re.S)
