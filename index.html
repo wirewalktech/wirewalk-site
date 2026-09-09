@@ -172,12 +172,17 @@ description: >-
     <p>Whether that is a cluster to design, a fabric that is not delivering what it should, a migration nobody wants to own, or a second opinion on someone else's architecture. If the honest answer is that you do not need outside help, I will say so.</p>
    </div>
    <div class="cta-c">
-    <form class="frm" novalidate="false">
-      <input type="text" placeholder="Name and organization" required>
-      <input type="email" placeholder="Work email" required>
+    <form class="frm" action="https://formsubmit.co/sales@wirewalk.com" method="POST" novalidate="false">
+      <input type="hidden" name="_subject" value="Wirewalk — scoping call request">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="{{ '/thanks/' | absolute_url }}">
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+      <input type="text" name="name" placeholder="Name and organization" required>
+      <input type="email" name="email" placeholder="Work email" required>
       <button class="btn btn-p" type="submit">Send</button>
     </form>
-    <p class="small muted" style="margin-top:16px">Details are used to reply to your enquiry. No mailing list, and nothing shared with vendors or partners.</p>
+    <p class="small muted" style="margin-top:16px">Prefer to call? <a href="tel:+19172177975">917-217-7975</a>. Details are used to reply to your enquiry. No mailing list, and nothing shared with vendors or partners.</p>
    </div>
   </div>
 </div></div></section>

@@ -7,8 +7,11 @@ description: >-
 author: Wirewalk Advisory
 
 # Change both of these together if the repository is renamed.
-url: https://wirewalktech.github.io
-baseurl: /wirewalk-site
+url: https://www.wirewalk.com
+# Served at the root of www.wirewalk.com (see CNAME). GitHub 301-redirects
+# the old wirewalktech.github.io/wirewalk-site/ URL here, so baseurl must be
+# empty -- a non-empty baseurl makes every internal link 404 on the live domain.
+baseurl: ""
 
 permalink: /writing/:title/
 timezone: America/New_York

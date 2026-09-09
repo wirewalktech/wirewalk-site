@@ -169,36 +169,37 @@ addEventListener('keydown',e=>{if(e.key==='Escape'&&lk.classList.contains('open'
 
 /* ── contact routing ───────────────────────────────────────────────────
    The destination lives here only, and is never rendered into the page.
-   Point ENDPOINT at a form handler (Formspree, Web3Forms, a Cloudflare
-   Worker, your own /api/contact) and submissions POST to it as JSON.
-   Note that anything in this file is readable in view-source: to keep the
-   address genuinely private, hold it in the handler's config and drop the
-   `to` field below. */
-const CONTACT={to:'sales@wirewalk.com',endpoint:''};
+   Delivery goes through FormSubmit, which forwards to the address below.
+   The form also carries a plain action=/method=POST so it still delivers if
+   this script fails to load. If the endpoint is ever cleared, submission
+   FAILS LOUDLY -- it must never report success without having sent. */
+const CONTACT={to:'sales@wirewalk.com',
+               endpoint:'https://formsubmit.co/ajax/sales@wirewalk.com'};
 const frm=$('.frm');
 if(frm){
   frm.addEventListener('submit',async e=>{
     e.preventDefault();
     const btn=frm.querySelector('.btn');
     if(btn.dataset.busy)return;
-    const name=frm.querySelector('input[type=text]').value.trim();
-    const mail=frm.querySelector('input[type=email]').value.trim();
+    const name=frm.querySelector('input[name=name]').value.trim();
+    const mail=frm.querySelector('input[name=email]').value.trim();
     btn.dataset.busy='1'; frm.classList.add('sending'); btn.textContent='Sending';
-    const body={to:CONTACT.to,subject:'Scoping call request',name:name,email:mail,page:location.href};
+    const body={_subject:'Wirewalk \u2014 scoping call request',_template:'table',
+               name:name,email:mail,page:location.href};
     try{
-      if(!CONTACT.endpoint){
-        console.warn('[contact] no endpoint configured — set CONTACT.endpoint to deliver to '+CONTACT.to);
-        await new Promise(r=>setTimeout(r,550));
-      }else{
-        const r=await fetch(CONTACT.endpoint,{method:'POST',
-          headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-        if(!r.ok)throw new Error('HTTP '+r.status);
-      }
+      /* An unconfigured endpoint must throw, never fall through to the
+         success message below. It used to do exactly that: every enquiry
+         was discarded while the sender read "we will be in touch". */
+      if(!CONTACT.endpoint)throw new Error('no contact endpoint configured');
+      const r=await fetch(CONTACT.endpoint,{method:'POST',
+        headers:{'Content-Type':'application/json',Accept:'application/json'},
+        body:JSON.stringify(body)});
+      if(!r.ok)throw new Error('HTTP '+r.status);
       frm.classList.remove('sending'); frm.classList.add('sent');
       btn.textContent='Thank you — we will be in touch';
     }catch(err){
       frm.classList.remove('sending'); btn.dataset.busy='';
-      btn.textContent='Could not send — try again';
+      btn.textContent='Could not send — please call 917-217-7975';
       console.error('[contact]',err);
     }
   });
