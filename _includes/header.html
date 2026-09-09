@@ -15,13 +15,16 @@
       <a href="#scale" data-sec="scale">Track record</a>
       <a href="#audits" data-sec="audits">Audits</a>
       <a href="#writing" data-sec="writing">Writing</a>
+      <a href="{{ '/order/' | relative_url }}">Ordering</a>
     {%- else %}
       <a href="{{ home }}#hpc">HPC and AI</a>
       <a href="{{ home }}#expertise">Expertise</a>
       <a href="{{ home }}#scale">Track record</a>
       <a href="{{ home }}#audits">Audits</a>
       <a href="{{ writing }}">Writing</a>
+      <a href="{{ '/order/' | relative_url }}">Ordering</a>
     {%- endif %}
+      <a class="m-cta" href="{{ '/order/' | relative_url }}">See rates and order</a>
       <a class="m-cta" href="{% if page.is_home %}#contact{% else %}{{ home }}#contact{% endif %}">Get in touch</a>
     </nav>
   </div>
