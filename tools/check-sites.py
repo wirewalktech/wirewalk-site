@@ -248,7 +248,22 @@ def check_site(key, cfg):
         ok("no stale baseurl paths in any link or asset")
 
     # 6. links and fragments
-    checked, broken, n_links = {}, [], 0
+    #
+    # A THIRD-PARTY HOST REFUSING A SCRIPT IS NOT A BROKEN LINK. The credits
+    # page carries an attribution link for every licensed photograph, and
+    # stocksnap.io, rawpixel.com and openverse.org all answer 403 to anything
+    # that is not a real browser -- they block on TLS fingerprint, so a
+    # browser User-Agent does not help either. Reporting ~120 of those as
+    # failures buries the one that matters and trains everyone to ignore the
+    # checker, which is the exact failure this file was written to prevent.
+    #
+    # So: 403/405/429 from an EXTERNAL host is reported as unverifiable, with
+    # a count. 404, 410 and 5xx stay failures wherever they come from -- a
+    # licence link that 404s leaves a reader unable to check what they may do
+    # with the file, and one of those did ship. Anything on this site's own
+    # domain is still held to 200, refusal included.
+    BLOCKED = {401, 403, 405, 429}
+    checked, broken, refused, n_links = {}, [], [], 0
     for page_url, (status, body) in sorted(pages.items()):
         if status != 200:
             continue
@@ -267,15 +282,26 @@ def check_site(key, cfg):
                 checked[base] = fetch(base)
                 time.sleep(0.03)
             st, tbody, _ = checked[base]
-            if st != 200:
+            external = not base.startswith(root)
+            if st == 200:
+                if frag and tbody and f'id="{frag}"' not in tbody:
+                    broken.append((page_url, href, "fragment missing on target page"))
+            elif external and st in BLOCKED:
+                refused.append((urllib.parse.urlsplit(base).netloc, st))
+            else:
                 broken.append((page_url, href, f"HTTP {st}"))
-            elif frag and tbody and f'id="{frag}"' not in tbody:
-                broken.append((page_url, href, "fragment missing on target page"))
     if broken:
         for page_url, href, why in broken:
             bad(key, f"{href} — {why}  (on {page_url})")
     else:
         ok(f"{n_links} links checked, {len(checked)} distinct targets, 0 broken")
+    if refused:
+        hosts = {}
+        for host, st in refused:
+            hosts.setdefault(f"{host} ({st})", 0)
+            hosts[f"{host} ({st})"] += 1
+        note("could not verify from a script (host refuses non-browser requests): "
+             + ", ".join(f"{h} x{n}" for h, n in sorted(hosts.items())))
 
     # 7. every post in _posts actually rendered
     #
