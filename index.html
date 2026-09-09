@@ -83,7 +83,7 @@ description: >-
 
     <div class="row"><div>
       <h4>Security, compliance and audit</h4>
-      <p>HIPAA, GxP and PCI compliance in regulated research and clinical environments. SELinux and RBAC, vulnerability management, access and filesystem auditing, threat management across cloud and on-premises. NACI Public Trust clearance. Security officer responsibility on a federal modelling platform.
+      <p>Building and running research and clinical computing under the regimes that govern it: CUI handling to NIST SP 800-171, NIH controlled-access genomic data, HIPAA, GxP and PCI. SELinux and RBAC, vulnerability management, access and filesystem auditing, threat management across cloud and on-premises. NACI Public Trust clearance. Security officer responsibility on a federal modelling platform.
       <br><br><b>Where AI changes it:</b> evidence gathering. Most audit effort goes into collecting and correlating what a control actually did, not into judgement. Automating that collection leaves more room for the part that needs a person.</p>
     </div><div class="tag">Compliance</div></div>
 
@@ -98,6 +98,24 @@ description: >-
       <p>Group lead and IT director roles: hiring and technical screening, mentorship, team structure, vendor and contract management, budgeting and expansion planning. Running engineering, development and support functions together rather than as separate silos.
       <br><br><b>Where AI changes it:</b> mostly in what a small team can now cover. The practical question is which work it removes and which work it quietly creates, and that is worth answering before rather than after a reorganization.</p>
     </div><div class="tag">Leadership</div></div>
+  </div>
+</div></section>
+
+<section class="sec tint" id="compliance"><div class="wrap">
+  <div class="sh-split">
+    <div><span class="eyebrow">Regulated environments</span>
+      <h2>The rules the cluster has to live inside.</h2></div>
+    <p>Research computing is rarely unregulated. Genomic data arrives with a data use agreement attached, a DoD subcontract brings CUI obligations onto your storage, and the moment a foreign national gets a login on a machine holding controlled technology you are in export control whether anyone planned for it or not. These are the frameworks the work has been delivered under &mdash; described as engagements, not as badges.</p>
+  </div>
+  <div class="g3" data-rv>
+    <div><span class="n">CUI</span><h4>Federal and controlled unclassified information</h4><p>NIST SP 800-171 across storage, scheduler and identity, with the system security plan and POA&amp;M that go with it. NIST SP 800-53 on federal systems, FISMA responsibility as a named security officer, and CMMC readiness for defence subcontracts. DISA STIG and CIS Benchmark hardening on compute at scale. NIST SP 800-88 media sanitisation on decommission. FIPS 140 validated cryptography where it is required, and the exemption argument where a validated module does not exist for the hardware.</p></div>
+    <div><span class="n">NIH</span><h4>Controlled-access research data</h4><p>The NIH Genomic Data Sharing Policy and the dbGaP security best practices as they actually apply to a shared cluster: where controlled-access data may live, who may reach it, how access is logged, and how it is destroyed at the end of the approved period. NIH Data Management and Sharing plans, data use agreements and honest broker arrangements, IRB-driven access boundaries, and the awkward part &mdash; enforcing per-study separation on a filesystem several hundred other users also mount.</p></div>
+    <div><span class="n">Export</span><h4>Import, export and sanctions</h4><p>EAR and ECCN classification of HPC hardware, GPUs and the software stack, and ITAR where it applies. <b>Deemed export</b> is the one that catches universities: giving a foreign national an account on a machine holding controlled technology is an export, and shared clusters are built to do exactly that. Technology control plans, restricted party and OFAC screening, Entity List constraints on accelerator procurement, and where the fundamental research exclusion genuinely applies rather than where people wish it did.</p></div>
+  </div>
+  <div class="g3" data-rv style="margin-top:1px">
+    <div><span class="n">Health</span><h4>Clinical and pharmaceutical</h4><p>HIPAA Security Rule on estates that are simultaneously research and clinical, GxP and 21 CFR Part 11 for electronic records and signatures, PCI DSS, and GDPR where a collaboration crosses into the EU. Audit evidence that can be produced on demand rather than reconstructed the week before an assessment.</p></div>
+    <div><span class="n">ISO</span><h4>Standards and control frameworks</h4><p>Systems designed and operated to ISO/IEC 27001 information security controls, ISO/IEC 27017 and 27018 for cloud and personal data in cloud, ISO/IEC 20000 service management practice, and SOC 2 control objectives. Where an organisation is pursuing certification, the work is the control implementation and the evidence that survives the audit.</p></div>
+    <div><span class="n">In practice</span><h4>What this looks like on a cluster</h4><p>Compliance fails on shared HPC in predictable places: a scratch filesystem nobody scoped, an epilog that never deletes, a scheduler prolog that leaks a path, home directories mounted everywhere by default, node images drifting apart, and audit logging that stops at the login node. The useful work is closing those, then proving they are closed &mdash; not producing a policy document that describes a system nobody has actually configured.</p></div>
   </div>
 </div></section>
 
