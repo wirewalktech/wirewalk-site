@@ -1,5 +1,4 @@
 ---
-layout: null
 ---
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -7,17 +6,18 @@ layout: null
   <subtitle>{{ site.description | strip_newlines }}</subtitle>
   <link href="{{ '/feed.xml' | absolute_url }}" rel="self"/>
   <link href="{{ '/' | absolute_url }}"/>
-  <updated>{% if site.posts.first %}{{ site.posts.first.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}</updated>
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
   <id>{{ '/' | absolute_url }}</id>
   <author><name>{{ site.author }}</name></author>
-  {%- for post in site.posts limit: 30 %}
+  {%- for post in site.posts %}
   <entry>
     <title>{{ post.title | xml_escape }}</title>
     <link href="{{ post.url | absolute_url }}"/>
-    <updated>{{ post.date | date_to_xmlschema }}</updated>
+    <published>{{ post.published_on | default: post.date | date_to_xmlschema }}</published>
+    <updated>{{ post.last_reviewed | default: post.date | date_to_xmlschema }}</updated>
     <id>{{ post.url | absolute_url }}</id>
     <summary>{{ post.summary | default: post.excerpt | strip_html | xml_escape }}</summary>
-    <content type="html">{{ post.content | xml_escape }}</content>
+    <content type="html">{% if post.archive_date %}{{ 'Editorial archive date; first published and reviewed 9 September 2026. Examples are proposed checks, not measured customer results. ' | xml_escape }}{% endif %}{{ post.content | xml_escape }}</content>
   </entry>
   {%- endfor %}
 </feed>

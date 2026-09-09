@@ -167,9 +167,10 @@ description: >-
 <section class="sec" id="writing"><div class="wrap">
   <div class="sh-split">
     <div><span class="eyebrow">Writing</span>
-      <h2>Field notes on benchmarking and cluster engineering.</h2></div>
-    <p>Working notes on the things that are hard to get right and easy to get wrong: what a benchmark actually reports, how firmware and fabric configuration quietly cost you throughput, and which numbers mean anything about your workload.</p>
+      <h2>Security, infrastructure, and cluster engineering.</h2></div>
+    <p>Practical writing on enterprise security, storage protection, identity, detection, and recovery, alongside our HPC benchmarking and fabric guides. Concrete checks, documented limits, and evidence you can reproduce.</p>
   </div>
+  <p style="margin:0 0 24px"><a href="{{ '/writing/#topic-storage-security' | relative_url }}">Storage security</a> · <a href="{{ '/writing/#topic-detection' | relative_url }}">IDS, IPS and detection</a> · <a href="{{ '/writing/#topic-identity' | relative_url }}">Identity</a> · <a href="{{ '/writing/#topic-recovery' | relative_url }}">Recovery</a> · <a href="{{ '/writing/#topic-enterprise-it' | relative_url }}">Enterprise IT</a></p>
   <div class="plist" data-rv>
     {%- for post in site.posts limit: 4 %}
     <article class="pitem">
