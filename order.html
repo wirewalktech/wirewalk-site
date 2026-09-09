@@ -1,0 +1,435 @@
+---
+layout: null
+permalink: /order/
+title: Order an engagement
+description: >-
+  Order a Wirewalk engagement by purchase order, invoice, deposit or prepayment.
+  Purchase orders are the primary route; prepayment earns a 10% discount.
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Order an engagement — Wirewalk</title>
+<meta name="description" content="{{ page.description }}">
+<link rel="canonical" href="{{ '/order/' | absolute_url }}">
+<style>
+:root{
+  --bg:#FAF9F5; --alt:#F3F1EA; --ln:#E4E0D5; --ln2:#CFC9B9;
+  --tx:#1F1E1D; --tx2:#57554F; --tx3:#87847D;
+  --ac:#D97757; --ac2:#C2603F; --acs:#FBEEE8;
+  --ok:#1E7A4B; --bad:#A32B1C;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,'Helvetica Neue',Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17181A; --alt:#1F2024; --ln:#2D2F34; --ln2:#3E4249;
+  --tx:#ECEAE4; --tx2:#A8A59D; --tx3:#7B7871;
+  --ac:#E08A6B; --ac2:#F0A488; --acs:#31211B;
+  --ok:#4FBF83; --bad:#E0705F;
+}}
+:root[data-theme="dark"]{
+  --bg:#17181A; --alt:#1F2024; --ln:#2D2F34; --ln2:#3E4249;
+  --tx:#ECEAE4; --tx2:#A8A59D; --tx3:#7B7871;
+  --ac:#E08A6B; --ac2:#F0A488; --acs:#31211B;
+  --ok:#4FBF83; --bad:#E0705F;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+     font-size:16.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:0 clamp(20px,5vw,32px)}
+header.top{border-bottom:1px solid var(--ln);padding:20px 0;margin-bottom:46px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--tx);font-weight:600}
+.mark{width:22px;height:22px;flex:0 0 22px;display:grid;grid-template:repeat(2,1fr)/repeat(2,1fr);gap:2.5px}
+.mark i{background:var(--ac);border-radius:1.5px}
+.mark i:nth-child(2),.mark i:nth-child(3){opacity:.55}
+.mark i:nth-child(4){opacity:.28}
+.back{float:right;font-size:14px;color:var(--tx2);text-decoration:none}
+.back:hover{color:var(--ac)}
+.eyebrow{display:block;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+         color:var(--ac);font-weight:700;margin-bottom:10px}
+h1{font-size:clamp(29px,5.2vw,40px);line-height:1.13;letter-spacing:-.022em;margin:0 0 14px;
+   text-wrap:balance}
+h2{font-size:clamp(21px,3vw,26px);letter-spacing:-.014em;margin:52px 0 6px}
+h3{font-size:17px;margin:26px 0 8px}
+.lede{color:var(--tx2);font-size:18px;max-width:62ch;margin:0 0 8px}
+.sub{color:var(--tx3);font-size:15px;max-width:66ch;margin:0 0 22px}
+.grp{margin:26px 0 0}
+.grp>p{color:var(--tx3);font-size:14.5px;margin:0 0 12px}
+table.cat{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 6px;
+          display:block;overflow-x:auto}
+table.cat th{text-align:left;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;
+             color:var(--tx3);font-weight:700;padding:0 12px 8px 0;border-bottom:1px solid var(--ln)}
+table.cat td{padding:13px 12px 13px 0;border-bottom:1px solid var(--ln);vertical-align:top}
+table.cat td.n{font-weight:600}
+table.cat td.n span{display:block;font-weight:400;color:var(--tx2);font-size:13.5px;
+                    margin-top:3px;max-width:52ch}
+table.cat td.p{white-space:nowrap;font-variant-numeric:tabular-nums;text-align:right}
+.save{color:var(--ok);font-size:12.5px;display:block}
+.poa{color:var(--tx3);font-style:italic;font-size:14px}
+.routes{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:18px 0 0}
+.route{border:1px solid var(--ln);border-radius:11px;padding:18px;background:var(--alt)}
+.route.primary{border-color:var(--ac);background:var(--acs)}
+.route b{display:block;font-size:15.5px;margin-bottom:5px}
+.route .tagp{display:inline-block;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+             font-weight:700;color:#fff;background:var(--ac);border-radius:20px;
+             padding:2px 9px;margin-bottom:8px}
+.route p{margin:0;font-size:14px;color:var(--tx2)}
+form{margin:16px 0 0}
+fieldset{border:1px solid var(--ln);border-radius:11px;padding:18px;margin:0 0 16px}
+legend{font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+       color:var(--tx3);padding:0 8px}
+.row{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.fld{margin:0 0 14px}
+label{display:block;font-weight:600;font-size:13.5px;margin:0 0 5px}
+label .h{font-weight:400;color:var(--tx3)}
+input[type=text],input[type=email],input[type=tel],input[type=date],select,textarea{
+  width:100%;padding:10px 12px;font:inherit;font-size:15px;color:var(--tx);
+  background:var(--bg);border:1px solid var(--ln2);border-radius:8px}
+textarea{min-height:80px;resize:vertical}
+input[type=file]{font-size:14px;width:100%}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{
+  outline:2px solid var(--ac);outline-offset:2px}
+.cb{display:flex;gap:9px;align-items:flex-start;font-weight:400;font-size:14.5px}
+.cb input{margin-top:3px;accent-color:var(--ac);flex:0 0 auto}
+.btn{display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:15.5px;font-weight:600;
+     padding:12px 22px;border-radius:9px;border:1px solid transparent;background:var(--ac);
+     color:#fff;cursor:pointer}
+.btn:hover{background:var(--ac2)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.g{background:transparent;color:var(--tx);border-color:var(--ln2)}
+.btn.g:hover{border-color:var(--ac);color:var(--ac)}
+.note{font-size:14.5px;color:var(--tx2);border-left:2px solid var(--ac);padding-left:15px;margin:20px 0}
+.msg{margin-top:14px;font-size:14.5px}
+.msg.ok{color:var(--ok)}.msg.bad{color:var(--bad)}
+details{border-top:1px solid var(--ln);padding:14px 0}
+summary{cursor:pointer;font-weight:600;font-size:15px}
+details p,details li{color:var(--tx2);font-size:14.5px}
+footer.end{margin:54px 0 42px;padding-top:24px;border-top:1px solid var(--ln);
+           color:var(--tx3);font-size:14px}
+footer.end a{color:var(--ac2)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="{{ '/' | relative_url }}">
+    <span class="mark"><i></i><i></i><i></i><i></i></span><span>Wirewalk</span></a>
+  <a class="back" href="{{ '/' | relative_url }}">Back to the site</a>
+</div></header>
+
+<div class="wrap">
+  <span class="eyebrow">Ordering</span>
+  <h1>Order an engagement.</h1>
+  <p class="lede">Four ways to place an order. Purchase order is the usual route for
+  universities, hospitals and agencies, and is the one most procurement offices are
+  set up for.</p>
+  <p class="sub">Prices below are for a defined engagement. Anything larger, or anything
+  that does not fit a description here, is scoped and quoted &mdash; and if the honest
+  answer is that you do not need outside help, I will say so before taking an order.</p>
+
+  <h2>What can be ordered</h2>
+  <div id="catalog"><p class="sub">Loading current pricing&hellip;</p></div>
+  <p class="sub" style="margin-top:14px">Prices exclude any applicable sales or use tax.
+  Paying in full in advance earns <b>10%</b> and reserves the dates on receipt of funds;
+  the discount does not apply to deposits or invoiced balances.</p>
+
+  <h2>How to order</h2>
+  <div class="routes">
+    <div class="route primary">
+      <span class="tagp">Primary route</span>
+      <b>Purchase order</b>
+      <p>Raise a PO against the engagement and we invoice against it on net 30 terms.
+      What most institutional buyers need, and the only route that fits many
+      procurement systems.</p>
+    </div>
+    <div class="route">
+      <b>Request an invoice</b>
+      <p>No PO in your process? Ask for an invoice and pay it by card, ACH or bank
+      transfer. Same net 30 terms.</p>
+    </div>
+    <div class="route">
+      <b>Prepay and reserve &mdash; 10% off</b>
+      <p>Pay in full up front, take 10% off, and the dates are held on receipt of funds.
+      Card or ACH.</p>
+    </div>
+    <div class="route">
+      <b>Deposit</b>
+      <p>Pay a deposit to book the engagement; the balance is invoiced on delivery.</p>
+    </div>
+  </div>
+
+  <!-- ============================ PURCHASE ORDER ======================== -->
+  <h2 id="po">Submit a purchase order</h2>
+  <p class="sub">Attach the PO if you have it. If your procurement office needs a
+  quotation, W-9, insurance certificate or supplier registration before a PO can be
+  raised, say so below and those come back the same day.</p>
+
+  <form class="frm" action="https://formsubmit.co/sales@wirewalk.com" method="POST"
+        enctype="multipart/form-data">
+    <input type="hidden" name="_subject" value="Wirewalk — Purchase order submission">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="{{ '/order/received/' | absolute_url }}">
+    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true"
+           style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+
+    <fieldset>
+      <legend>Organisation</legend>
+      <div class="row">
+        <div class="fld"><label for="po-org">Organisation</label>
+          <input id="po-org" type="text" name="Organisation" required></div>
+        <div class="fld"><label for="po-dept">Department or unit <span class="h">&mdash; optional</span></label>
+          <input id="po-dept" type="text" name="Department"></div>
+      </div>
+      <div class="row">
+        <div class="fld"><label for="po-name">Your name</label>
+          <input id="po-name" type="text" name="Contact name" required></div>
+        <div class="fld"><label for="po-email">Your email</label>
+          <input id="po-email" type="email" name="Contact email" required></div>
+      </div>
+      <div class="row">
+        <div class="fld"><label for="po-phone">Phone <span class="h">&mdash; optional</span></label>
+          <input id="po-phone" type="tel" name="Phone"></div>
+        <div class="fld"><label for="po-ap">Accounts payable email <span class="h">&mdash; where the invoice goes</span></label>
+          <input id="po-ap" type="email" name="Accounts payable email"></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>The engagement</legend>
+      <div class="row">
+        <div class="fld"><label for="po-svc">Service</label>
+          <select id="po-svc" name="Service" required>
+            <option value="">Select an engagement</option>
+          </select></div>
+        <div class="fld"><label for="po-start">Preferred start <span class="h">&mdash; optional</span></label>
+          <input id="po-start" type="date" name="Preferred start"></div>
+      </div>
+      <div class="fld"><label for="po-scope">Scope notes <span class="h">&mdash; what the work needs to cover</span></label>
+        <textarea id="po-scope" name="Scope notes" placeholder="Systems in scope, the framework that applies, deadlines you are working to, anything already known to be wrong."></textarea></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Purchase order</legend>
+      <div class="row">
+        <div class="fld"><label for="po-num">PO number <span class="h">&mdash; if raised</span></label>
+          <input id="po-num" type="text" name="PO number"></div>
+        <div class="fld"><label for="po-terms">Payment terms <span class="h">&mdash; if not net 30</span></label>
+          <input id="po-terms" type="text" name="Payment terms" placeholder="Net 30"></div>
+      </div>
+      <div class="fld"><label for="po-file">Attach the purchase order <span class="h">&mdash; PDF or Word, 10 MB limit across all attachments</span></label>
+        <input id="po-file" type="file" name="purchase_order" accept=".pdf,.doc,.docx"></div>
+      <div class="fld"><label for="po-nda">Attach your NDA <span class="h">&mdash; optional; happy to sign yours before anything is exchanged</span></label>
+        <input id="po-nda" type="file" name="nda" accept=".pdf,.doc,.docx"></div>
+      <div class="fld"><label class="cb" for="po-docs">
+        <input id="po-docs" type="checkbox" name="Needs supplier documents" value="Yes">
+        My procurement office needs a quotation, W-9, certificate of insurance or
+        supplier registration before a PO can be raised</label></div>
+      <div class="fld"><label class="cb" for="po-tax">
+        <input id="po-tax" type="checkbox" name="Tax exempt" value="Yes">
+        We are tax exempt and will supply the certificate</label></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Terms</legend>
+      <p class="sub" style="margin:0 0 12px">A purchase order is an <b>offer to purchase</b>.
+      It becomes a binding contract only when Wirewalk issues written acceptance naming the
+      scope, fee and start date &mdash; so a PO raised against an old quotation cannot bind
+      either side to figures that no longer apply. Where a PO's pre-printed terms conflict
+      with that acceptance, the acceptance governs.</p>
+      <div class="fld"><label class="cb" for="po-agree">
+        <input id="po-agree" type="checkbox" name="Accepted ordering terms" value="Yes" required>
+        I have read the <a href="{{ '/terms/' | relative_url }}">ordering terms</a> and am
+        authorised to submit this order on behalf of the organisation named above</label></div>
+    </fieldset>
+
+    <button class="btn" type="submit">Submit purchase order</button>
+    <p class="sub" style="margin-top:12px">Prefer to talk first? Call
+    <a href="tel:+19172177975">917-217-7975</a> or email
+    <a href="mailto:sales@wirewalk.com">sales@wirewalk.com</a>.</p>
+  </form>
+
+  <!-- ============================ PAY NOW ============================== -->
+  <h2 id="pay">Prepay, or pay a deposit</h2>
+  <p class="sub">Card or ACH, handled by Stripe. Card details never touch this site.
+  Paying in full applies the 10% discount automatically.</p>
+
+  <div id="payblock">
+    <div class="row">
+      <div class="fld"><label for="pay-svc">Engagement</label>
+        <select id="pay-svc"><option value="">Select an engagement</option></select></div>
+      <div class="fld"><label for="pay-mode">How much now</label>
+        <select id="pay-mode">
+          <option value="full">Pay in full &mdash; 10% off</option>
+          <option value="deposit">Deposit only</option>
+        </select></div>
+    </div>
+    <div class="row">
+      <div class="fld"><label for="pay-email">Email for the receipt</label>
+        <input id="pay-email" type="email" autocomplete="email" required></div>
+      <div class="fld"><label for="pay-org">Organisation <span class="h">&mdash; optional</span></label>
+        <input id="pay-org" type="text"></div>
+    </div>
+    <div class="note" id="paysum" hidden></div>
+    <div id="ts" style="margin:14px 0"></div>
+    <button class="btn" id="paygo" disabled>Continue to payment</button>
+    <div class="msg" id="paymsg" role="status" aria-live="polite"></div>
+  </div>
+
+  <h2>Questions that come up</h2>
+  <details><summary>Can you invoice without a purchase order?</summary>
+    <p>Yes. Ask for an invoice using the form above and leave the PO number blank.
+    Payment is by card, ACH or bank transfer on the same net 30 terms.</p></details>
+  <details><summary>Do you accept government purchase cards?</summary>
+    <p>Yes, through the card route. For amounts above a cardholder's single-purchase
+    limit, a purchase order and invoice is usually the cleaner path.</p></details>
+  <details><summary>What if the scope changes once work starts?</summary>
+    <p>Work beyond the accepted scope is quoted and accepted separately before it begins.
+    Neither of us should be absorbing it silently.</p></details>
+  <details><summary>What happens if I need to reschedule?</summary>
+    <p>More than 14 days' notice, once, at no charge, subject to availability. Cancellation
+    charges are set out in the <a href="{{ '/terms/' | relative_url }}">ordering terms</a>
+    and reflect time reserved that cannot be resold at short notice.</p></details>
+  <details><summary>Can you work under our NDA?</summary>
+    <p>Yes. Attach it with the order and it is signed before any material is exchanged.
+    Where an engagement touches CUI, controlled-access research data, PHI or
+    export-controlled technology, the handling obligations are agreed in writing before
+    work begins rather than assumed.</p></details>
+
+  <footer class="end">
+    <a href="{{ '/terms/' | relative_url }}">Ordering terms</a> &middot;
+    <a href="{{ '/' | relative_url }}">wirewalk.com</a> &middot;
+    <a href="mailto:sales@wirewalk.com">sales@wirewalk.com</a> &middot;
+    <a href="tel:+19172177975">917-217-7975</a>
+  </footer>
+</div>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<script>
+const ORDERS   = "https://wirewalk-orders.wirewalk-upload.workers.dev";
+const SITE_KEY = "0x4AAAAAAEuBwz8OpbI3bmtE";
+
+const $ = s => document.querySelector(s);
+let ITEMS = [], widgetId = null;
+
+/* The catalogue is fetched rather than hard-coded so the page and the charge
+   can never disagree about a figure, and a monthly special appears here the
+   moment it is live without touching this file. */
+fetch(ORDERS + "/catalog?practice=wirewalk")
+  .then(r => r.json())
+  .then(d => { ITEMS = d.items || []; renderCatalog(); fillSelects(); })
+  .catch(() => {
+    $("#catalog").innerHTML =
+      '<p class="sub">Pricing could not be loaded just now. Email ' +
+      '<a href="mailto:sales@wirewalk.com">sales@wirewalk.com</a> and it will be sent over.</p>';
+  });
+
+const GROUPS = [
+  ["focused",    "Focused engagements", "Short, bounded work. Most problems worth an outside opinion are this size."],
+  ["diagnostic", "Diagnostics",         "One system, measured properly, with the evidence written down."],
+  ["assessment", "Assessments",         "Formal review against a framework, with the artefacts an auditor expects."],
+  ["programme",  "Programmes",          "Delivery work spanning weeks or months."],
+];
+
+function renderCatalog(){
+  const esc = t => String(t).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  let html = "";
+  for (const [id, label, note] of GROUPS){
+    const rows = ITEMS.filter(i => i.group === id);
+    if (!rows.length) continue;
+    html += `<div class="grp"><h3>${label}</h3><p>${note}</p>
+      <table class="cat"><thead><tr>
+        <th>Engagement</th><th style="text-align:right">List</th>
+        <th style="text-align:right">Prepay</th><th style="text-align:right">Deposit</th>
+      </tr></thead><tbody>`;
+    for (const i of rows){
+      if (i.priceOnApplication){
+        html += `<tr><td class="n">${esc(i.name)}<span>${esc(i.blurb)}</span></td>
+                 <td class="p poa" colspan="3">Quoted per engagement</td></tr>`;
+        continue;
+      }
+      const sp = i.special ? `<span class="save">${esc(i.special.label)}</span>` : "";
+      html += `<tr>
+        <td class="n">${esc(i.name)}<span>${esc(i.blurb)}</span></td>
+        <td class="p">${i.listFormatted}</td>
+        <td class="p">${i.prepay.formatted}<span class="save">save ${i.prepay.savingFormatted}</span>${sp}</td>
+        <td class="p">${i.deposit.formatted}</td></tr>`;
+    }
+    html += "</tbody></table></div>";
+  }
+  $("#catalog").innerHTML = html;
+}
+
+function fillSelects(){
+  for (const sel of [$("#po-svc"), $("#pay-svc")]){
+    const payOnly = sel.id === "pay-svc";
+    for (const i of ITEMS){
+      if (payOnly && i.priceOnApplication) continue;
+      const o = document.createElement("option");
+      o.value = i.sku;
+      o.textContent = i.priceOnApplication
+        ? `${i.name} — quoted per engagement`
+        : `${i.name} — ${i.listFormatted}`;
+      sel.appendChild(o);
+    }
+  }
+  if (!ITEMS.some(i => !i.priceOnApplication)) return;
+  $("#pay-svc").addEventListener("change", summarise);
+  $("#pay-mode").addEventListener("change", summarise);
+}
+
+function summarise(){
+  const i = ITEMS.find(x => x.sku === $("#pay-svc").value);
+  const box = $("#paysum"), btn = $("#paygo");
+  if (!i || i.priceOnApplication){ box.hidden = true; btn.disabled = true; return; }
+  const dep = $("#pay-mode").value === "deposit";
+  box.hidden = false;
+  box.innerHTML = dep
+    ? `<b>${i.deposit.formatted} due now.</b> Deposit against ${i.listFormatted}.
+       The balance of ${i.deposit.balanceFormatted} is invoiced on delivery.
+       The prepay discount does not apply to a deposit.`
+    : `<b>${i.prepay.formatted} due now.</b> ${i.name} paid in full,
+       saving ${i.prepay.savingFormatted} against the ${i.listFormatted} list price.
+       Dates are reserved on receipt of funds.`;
+  btn.disabled = false;
+}
+
+function token(){
+  return new Promise((resolve, reject) => {
+    if (!window.turnstile) return reject(new Error("verification did not load"));
+    const opts = { sitekey: SITE_KEY, callback: resolve,
+                   "error-callback": () => reject(new Error("verification failed")) };
+    if (widgetId === null) widgetId = turnstile.render("#ts", opts);
+    else { turnstile.reset(widgetId); turnstile.execute(widgetId, opts); }
+  });
+}
+
+$("#paygo").addEventListener("click", async () => {
+  const btn = $("#paygo"), msg = $("#paymsg");
+  const email = $("#pay-email").value.trim();
+  if (!email || !$("#pay-email").checkValidity()){
+    msg.className = "msg bad"; msg.textContent = "Please enter an email address for the receipt.";
+    $("#pay-email").focus(); return;
+  }
+  btn.disabled = true; msg.className = "msg"; msg.textContent = "Verifying…";
+  try {
+    const t = await token();
+    msg.textContent = "Opening secure payment…";
+    const r = await fetch(ORDERS + "/checkout", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        sku: $("#pay-svc").value, mode: $("#pay-mode").value, email,
+        organisation: $("#pay-org").value.trim(), token: t }),
+    });
+    const d = await r.json();
+    if (!r.ok || !d.url) throw new Error(d.error || "could not start payment");
+    window.location = d.url;      /* Stripe hosts the card form, not this page */
+  } catch (err){
+    btn.disabled = false;
+    msg.className = "msg bad";
+    msg.textContent = (err.message || "Could not start payment") +
+                      " — please email sales@wirewalk.com or call 917-217-7975.";
+  }
+});
+</script>
+</body></html>

@@ -1,0 +1,76 @@
+---
+layout: null
+permalink: /order/received/
+title: Purchase order received
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Purchase order received &mdash; Wirewalk</title>
+<meta name="description" content="Your purchase order has been received.">
+<meta name="robots" content="noindex">
+<style>
+:root{--bg:#FAF9F5;--alt:#F3F1EA;--ln:#E4E0D5;--tx:#1F1E1D;--tx2:#57554F;--tx3:#87847D;
+--ac:#D97757;--ac2:#C2603F;--ok:#1E7A4B;
+--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,'Helvetica Neue',Arial,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17181A;--alt:#1F2024;
+--ln:#2D2F34;--tx:#ECEAE4;--tx2:#A8A59D;--tx3:#7B7871;--ac:#E08A6B;--ac2:#F0A488;--ok:#4FBF83}}
+:root[data-theme="dark"]{--bg:#17181A;--alt:#1F2024;--ln:#2D2F34;--tx:#ECEAE4;--tx2:#A8A59D;
+--tx3:#7B7871;--ac:#E08A6B;--ac2:#F0A488;--ok:#4FBF83}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:16.5px;
+line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 clamp(20px,5vw,32px)}
+header.top{border-bottom:1px solid var(--ln);padding:20px 0;margin-bottom:44px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--tx);font-weight:600}
+.mark{width:22px;height:22px;flex:0 0 22px;display:grid;grid-template:repeat(2,1fr)/repeat(2,1fr);gap:2.5px}
+.mark i{background:var(--ac);border-radius:1.5px}
+.mark i:nth-child(2),.mark i:nth-child(3){opacity:.55}.mark i:nth-child(4){opacity:.28}
+.back{float:right;font-size:14px;color:var(--tx2);text-decoration:none}.back:hover{color:var(--ac)}
+.eyebrow{display:block;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+color:var(--ac);font-weight:700;margin-bottom:10px}
+h1{font-size:clamp(27px,5vw,37px);line-height:1.14;letter-spacing:-.021em;margin:0 0 14px;text-wrap:balance}
+h2{font-size:20px;letter-spacing:-.012em;margin:38px 0 8px}
+p,li{color:var(--tx2);max-width:70ch}
+p.lead{font-size:17.5px}
+a{color:var(--ac2);text-underline-offset:2px}
+table{width:100%;border-collapse:collapse;font-size:15px;margin:14px 0;display:block;overflow-x:auto}
+th{text-align:left;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--tx3);
+padding:0 12px 8px 0;border-bottom:1px solid var(--ln)}
+td{padding:11px 12px 11px 0;border-bottom:1px solid var(--ln);vertical-align:top;color:var(--tx2)}
+hr{border:0;border-top:1px solid var(--ln);margin:26px 0}
+.ok{color:var(--ok);font-weight:600}
+.steps{counter-reset:s;list-style:none;padding:0;margin:18px 0}
+.steps li{counter-increment:s;position:relative;padding-left:38px;margin:0 0 14px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:24px;height:24px;
+border-radius:50%;background:var(--alt);border:1px solid var(--ln);color:var(--ac);
+font-weight:700;font-size:13px;display:grid;place-items:center}
+footer.end{margin:52px 0 40px;padding-top:22px;border-top:1px solid var(--ln);color:var(--tx3);font-size:14px}
+</style></head><body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="/"><span class="mark"><i></i><i></i><i></i><i></i></span><span>Wirewalk</span></a>
+  <a class="back" href="/order/">Ordering</a>
+</div></header>
+<div class="wrap">
+  <span class="eyebrow">Ordering</span>
+  <h1>Purchase order received.</h1>
+  <p class="lead">Thank you &mdash; it has come through, along with anything you attached.</p>
+  <h2>What happens next</h2>
+  <ol class="steps">
+    <li><b>Same working day:</b> confirmation that it arrived, and any supplier documents
+    you asked for &mdash; quotation, W-9, certificate of insurance, registration forms.</li>
+    <li><b>Written acceptance</b> naming the scope, the fee and the start date. Your order
+    becomes binding at that point and not before, so read it and tell me if anything is
+    wrong.</li>
+    <li><b>Invoice</b> against your PO number on net 30 terms, sent to the accounts payable
+    address you gave.</li>
+  </ol>
+  <p>If you attached an NDA it is signed and returned before any material is exchanged.</p>
+  <hr>
+  <p style="font-size:14.5px">Anything urgent, or something you need to correct on the
+  order: <a href="mailto:sales@wirewalk.com">sales@wirewalk.com</a> or
+  <a href="tel:+19172177975">917-217-7975</a>.</p>
+  <footer class="end"><a href="/order/">Ordering</a> &middot; <a href="/">wirewalk.com</a>
+  &middot; <a href="mailto:sales@wirewalk.com">sales@wirewalk.com</a>
+  &middot; <a href="tel:+19172177975">917-217-7975</a></footer>
+</div></body></html>
