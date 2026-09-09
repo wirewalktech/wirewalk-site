@@ -45,6 +45,13 @@ If `mlx5_1` did not move, you have a single-rail cluster with a spare adapter in
 it. That is a two-minute check and it settles the question that the rest of the
 work depends on.
 
+<div class="note" markdown="1">
+Do this check before any tuning conversation. A node whose second adapter has
+never transmitted a byte is not a multi-rail tuning problem, and the discussion
+about striping thresholds and rendezvous rails that usually follows is entirely
+beside the point. The counter delta settles it in two minutes.
+</div>
+
 The second method is to ask UCX what it selected:
 
 ```bash

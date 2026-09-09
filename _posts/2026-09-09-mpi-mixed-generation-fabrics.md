@@ -56,6 +56,14 @@ On a mixed fabric this is worse, because `4X 106.25 Gbps` (NDR400) and
 `4X 25.78125 Gbps` (EDR100) look superficially similar in a long scan and the
 distinguishing digits are in the middle of the field.
 
+<div class="note" markdown="1">
+The rule that keeps this straight: `ibstat` and `ibstatus` report the link, and
+`iblinkinfo` reports a lane. Whenever you quote a number from `iblinkinfo`,
+quote the width with it. A capacity claim sourced from that field without the
+`4X` attached is wrong by a factor of four, and it is wrong in the direction
+that makes people buy hardware.
+</div>
+
 ## The width trap
 
 Width is the field that silently costs you three quarters of a link.
