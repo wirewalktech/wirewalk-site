@@ -167,41 +167,23 @@ lk.addEventListener('click',e=>{
 });
 addEventListener('keydown',e=>{if(e.key==='Escape'&&lk.classList.contains('open'))setMenu(false);});
 
-/* ── contact routing ───────────────────────────────────────────────────
-   The destination lives here only, and is never rendered into the page.
-   Delivery goes through FormSubmit, which forwards to the address below.
-   The form also carries a plain action=/method=POST so it still delivers if
-   this script fails to load. If the endpoint is ever cleared, submission
-   FAILS LOUDLY -- it must never report success without having sent. */
-const CONTACT={to:'sales@wirewalk.com',
-               endpoint:'https://formsubmit.co/ajax/sales@wirewalk.com'};
+/* ── contact form ──────────────────────────────────────────────────────
+   The form does a normal POST to FormSubmit and lands on /thanks/. That is
+   deliberate: FormSubmit's /ajax/ endpoint sits behind a Cloudflare bot
+   challenge which can 403 an XHR, and a contact form that silently fails is
+   worse than one that navigates. So there is NO fetch() here and nothing
+   calls preventDefault -- the browser submits the form itself.
+
+   Previously this block intercepted submit, saw an empty endpoint, waited
+   550ms and displayed "Thank you - we will be in touch" without sending
+   anything. Never reintroduce a success message that is not tied to a
+   confirmed delivery. */
 const frm=$('.frm');
 if(frm){
-  frm.addEventListener('submit',async e=>{
-    e.preventDefault();
+  frm.addEventListener('submit',()=>{
     const btn=frm.querySelector('.btn');
-    if(btn.dataset.busy)return;
-    const name=frm.querySelector('input[name=name]').value.trim();
-    const mail=frm.querySelector('input[name=email]').value.trim();
-    btn.dataset.busy='1'; frm.classList.add('sending'); btn.textContent='Sending';
-    const body={_subject:'Wirewalk \u2014 scoping call request',_template:'table',
-               name:name,email:mail,page:location.href};
-    try{
-      /* An unconfigured endpoint must throw, never fall through to the
-         success message below. It used to do exactly that: every enquiry
-         was discarded while the sender read "we will be in touch". */
-      if(!CONTACT.endpoint)throw new Error('no contact endpoint configured');
-      const r=await fetch(CONTACT.endpoint,{method:'POST',
-        headers:{'Content-Type':'application/json',Accept:'application/json'},
-        body:JSON.stringify(body)});
-      if(!r.ok)throw new Error('HTTP '+r.status);
-      frm.classList.remove('sending'); frm.classList.add('sent');
-      btn.textContent='Thank you — we will be in touch';
-    }catch(err){
-      frm.classList.remove('sending'); btn.dataset.busy='';
-      btn.textContent='Could not send — please call 917-217-7975';
-      console.error('[contact]',err);
-    }
+    if(btn){btn.textContent='Sending'; btn.disabled=true;}
+    frm.classList.add('sending');
   });
 }
 </script>
