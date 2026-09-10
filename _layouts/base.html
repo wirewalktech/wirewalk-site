@@ -11,7 +11,13 @@
 <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
 <meta property="og:description" content="{{ page.description | default: page.summary | default: site.description | strip_newlines | truncate: 300 | escape }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:site_name" content="{{ site.title }}">
+<!-- summary_large_image without an image renders as nothing at all. -->
+<meta property="og:image" content="{{ '/assets/og.png' | absolute_url }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ '/assets/og.png' | absolute_url }}">
 {% include site-style.html %}
 {% include prose.html %}
 </head>

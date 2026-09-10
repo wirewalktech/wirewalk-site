@@ -34,3 +34,8 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
+
+# Generates /sitemap.xml at build time. On the GitHub Pages allowlist,
+# so no Gemfile change and no build mode change is needed.
+plugins:
+  - jekyll-sitemap
