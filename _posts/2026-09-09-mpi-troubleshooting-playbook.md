@@ -25,7 +25,7 @@ are trivial with that information and genuinely difficult without it.
 | Hangs at first collective | QP setup, memlock, one unreachable node | `srun -N all bash -c 'ulimit -l'` |
 | Runs, but ~10x slow | Silent TCP fallback | `UCX_TLS=rc_x,sm,self` |
 | Fails only above N ranks | RC queue-pair exhaustion, registration memory | `UCX_TLS=dc_x,sm,self` |
-| One rank always late | Degraded link, throttled node, stray daemon | Pairwise `ib_write_bw` sweep |
+| One rank always late | Degraded link, throttled node, stray daemon | Pairwize `ib_write_bw` sweep |
 | Timings vary run to run | Allocation varies, shared ISLs, jitter | Record and compare node lists |
 | Bandwidth exactly half | Width negotiation, PCIe width, single rail | `iblinkinfo`, `lspci -vv` |
 | `Retry exceeded` errors | Fabric drops, RoCE PFC/ECN, dead peer | Port counters, `ethtool -S` |
@@ -244,7 +244,7 @@ setup and memory registration. Every benchmark here has a warmup flag; use it.
 Where filesystem I/O is in the loop, a repeat run served from page cache is not a
 measurement of anything.
 
-**OS jitter.** Unpinned ranks, an unsynchronised housekeeping daemon, a
+**OS jitter.** Unpinned ranks, an unsynchronized housekeeping daemon, a
 monitoring agent that wakes every thirty seconds. Collectives amplify jitter
 because every rank waits for the one that was interrupted. `--bind-to core` and
 `--report-bindings` first; if variance persists with clean binding, look at what
@@ -330,7 +330,7 @@ ucx_info -f -c > /var/tmp/ucx-$(date +%F).conf
 diff /var/tmp/ucx-<previous>.conf /var/tmp/ucx-$(date +%F).conf
 ```
 
-## Error messages worth recognising
+## Error messages worth recognizing
 
 **`IBV_WC_RETRY_EXC_ERR` / "Retry exceeded".** The sender gave up after
 retransmitting. On InfiniBand, this usually means the peer died or a link went

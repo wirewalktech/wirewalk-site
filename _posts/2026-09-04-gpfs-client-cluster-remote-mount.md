@@ -48,8 +48,8 @@ mmcrcluster -N clientnodes -r /usr/bin/ssh -R /usr/bin/scp -C compute-cluster
 mmchlicense client --accept -N all
 ```
 
-Note the licence designation. Nodes that only mount a filesystem take a **client**
-licence; nodes that serve NSDs take a server licence. Getting this wrong is a
+Note the license designation. Nodes that only mount a filesystem take a **client**
+license; nodes that serve NSDs take a server license. Getting this wrong is a
 compliance problem rather than a technical one, but it is easier to set correctly
 than to correct in an audit.
 
@@ -233,13 +233,13 @@ shared mount, a different module tree, an export that was never extended to the
 control plane. A configuration checked only on the head node is a configuration
 checked on the one machine that is least representative of where jobs run.
 
-## Day-2 failures worth recognising
+## Day-2 failures worth recognizing
 
 **A node that mounts but performs badly.** Check `verbsPorts` and RDMA state first;
 silent TCP fallback is the most common cause and the least visible.
 
 **A node that will not mount after rejoining.** Per-node configuration —
-`verbsPorts`, `pagepool`, licence designation — is not inherited by `mmaddnode`.
+`verbsPorts`, `pagepool`, license designation — is not inherited by `mmaddnode`.
 Compare a working node against the new one line by line.
 
 **Automount not mounting.** `-A yes` mounts at daemon start. If the daemon started

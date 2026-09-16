@@ -67,7 +67,7 @@ report an error. The link will come up at its full InfiniBand rate. The host bus
 will cap you at roughly a quarter of what the card can do, and every measurement
 above this layer will be consistent, reproducible and wrong.
 
-The arithmetic is worth internalising because it recurs across generations. A
+The arithmetic is worth internalizing because it recurs across generations. A
 PCIe Gen3 x16 slot delivers usefully under 13 GB/s after encoding and protocol
 overhead, which is approximately one HDR100 link. Put an HDR200 adapter in one
 and you have bought an HDR100 adapter. Gen4 x16 is roughly the right size for
@@ -224,7 +224,7 @@ several means MPI is not using the transport you think it is, and the single
 most common reason is a silent fall back to TCP over IPoIB.
 
 `osu_bibw` runs traffic in both directions at once and is the test that finds
-half-duplex-like behaviour and PCIe bottlenecks, because it is the first test
+half-duplex-like behavior and PCIe bottlenecks, because it is the first test
 that asks the host bus for full bandwidth in both directions simultaneously. A
 machine that does well on `osu_bw` and poorly on `osu_bibw` is usually telling
 you about its slot, not its fabric.
@@ -262,7 +262,7 @@ mpirun -np 512 -map-by ppr:8:node --bind-to core ./osu_barrier
 A collective that degrades while layers one through three stayed clean is
 telling you about routing distribution, congestion, or jitter — never about the
 link. That distinction is the whole reason to have run the lower layers first.
-Fan-out behaviour and how to read the knee in the scaling curve is a large
+Fan-out behavior and how to read the knee in the scaling curve is a large
 enough topic that it has its own article in this series.
 
 ## Layer 5: the application

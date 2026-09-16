@@ -41,8 +41,8 @@ That file holds one spine switch GUID per line. Getting it right is the
 difference between up/down performing acceptably and performing badly, and it is
 the most common thing left undone.
 
-**`ftree`** is optimised for fat trees, and on a fabric that genuinely is one it
-produces materially better link utilisation than up/down. It also has strict
+**`ftree`** is optimized for fat trees, and on a fabric that genuinely is one it
+produces materially better link utilization than up/down. It also has strict
 requirements about what counts as a fat tree: the topology must be regular,
 constant bisectional bandwidth, with the compute nodes at the leaves and a
 consistent number of links between tiers.
@@ -129,7 +129,7 @@ is genuinely hard to diagnose if you have forgotten the standby exists.
 
 ## Measuring whether it helped
 
-The point of changing engines is link utilisation, so measure that rather than a
+The point of changing engines is link utilization, so measure that rather than a
 single pair's bandwidth.
 
 Point-to-point between one pair of nodes is usually indifferent to the routing

@@ -64,7 +64,7 @@ problem, not the syntax.
 
 Priority Flow Control sends a PAUSE frame for a specific traffic class when a
 port's ingress buffer for that class fills. It is hop-by-hop: the upstream
-device stops sending that class until the pause expires or is cancelled.
+device stops sending that class until the pause expires or is canceled.
 
 Two properties make it treacherous.
 
@@ -207,7 +207,7 @@ being non-zero means CNPs are arriving for queue pairs that no longer exist or
 in a state where they cannot be acted on, and a large value is worth
 investigating.
 
-The failure signature to recognise: marking is happening, CNPs are being sent,
+The failure signature to recognize: marking is happening, CNPs are being sent,
 and `rp_cnp_handled` is zero or near it. The sending side is not reacting — the
 reaction point is disabled, or the CNPs are being lost or misclassified on the
 return path. CNPs themselves are typically marked with a different DSCP and
@@ -285,7 +285,7 @@ credit-based flow control makes the fabric lossless without configuration, and a
 congested fabric slows down. On Ethernet, an incorrectly configured fabric drops,
 and RoCE recovery from drops is expensive enough that the performance cliff is
 steep rather than gradual. That difference — gradual degradation versus a cliff —
-is the single most important thing to internalise when moving MPI workloads from
+is the single most important thing to internalize when moving MPI workloads from
 one to the other.
 
 ## A minimum acceptance check on the Ethernet side

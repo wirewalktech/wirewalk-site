@@ -41,7 +41,7 @@ Then verify that the recovery role can retrieve the intended historical version 
 
 ## Preserve the other dependencies
 
-Object retention does not preserve an application's encryption keys, restore catalogue, account access, or business knowledge about which point is clean. Keep those in the recovery design. A backup system should also document its required permissions and supported bucket configuration before retention is enforced.
+Object retention does not preserve an application's encryption keys, restore catalog, account access, or business knowledge about which point is clean. Keep those in the recovery design. A backup system should also document its required permissions and supported bucket configuration before retention is enforced.
 
 Monitor failed writes, cleanup failures, and capacity growth after rollout. Protection that interferes with a backup product's lifecycle can create a different outage while appearing to improve security.
 

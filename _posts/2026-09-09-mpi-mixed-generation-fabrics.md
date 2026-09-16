@@ -6,7 +6,7 @@ tags: [InfiniBand, EDR, HDR, NDR, XDR, mlxlink]
 summary: >-
   Different tools report link speed in different units, half the field is
   per-lane, and a link that negotiated two lanes instead of four is Active and
-  silent. On a synchronised collective, one such link sets the speed of the
+  silent. On a synchronized collective, one such link sets the speed of the
   entire job.
 ---
 
@@ -136,7 +136,7 @@ is the information the failure message does not give you.
 This is the expensive lesson, and it is the reason the width scan belongs on a
 schedule rather than in a runbook.
 
-A synchronised collective — allreduce, alltoall, a barrier before a timing
+A synchronized collective — allreduce, alltoall, a barrier before a timing
 region — completes when its slowest participant completes. The whole job
 proceeds at the rate of its worst link. One node at 2X in a 32-node NDR
 allocation does not cost you one thirty-second of the throughput. Depending on
@@ -162,7 +162,7 @@ result, the correlation is visible in an afternoon. If you do not, it is not
 visible at all, which is why the earlier articles in this series keep insisting
 on recording the node list.
 
-The other tell is arithmetic. If a synchronised benchmark comes in at close to a
+The other tell is arithmetic. If a synchronized benchmark comes in at close to a
 clean fraction of expectation — half, a quarter — suspect a width negotiation
 before suspecting anything subtle. Fabrics rarely degrade by exactly 50 percent
 for interesting reasons.
@@ -172,7 +172,7 @@ for interesting reasons.
 Several things happen that are worth anticipating.
 
 **Links negotiate down to the lower common generation.** An NDR adapter into an
-HDR switch port gives HDR, with the appropriate cable. That is correct behaviour
+HDR switch port gives HDR, with the appropriate cable. That is correct behavior
 and it is only a problem when nobody recorded the intent, and a year later
 somebody is trying to work out why a node is at 200 when the inventory says 400.
 
@@ -207,7 +207,7 @@ covers the arithmetic.
 ## Firmware skew across a mixed fleet
 
 Mixed generations mean multiple firmware trains, and mixed firmware within a
-single model is where the odd behaviour lives.
+single model is where the odd behavior lives.
 
 ```bash
 pdsh -w node[001-256] 'ibv_devinfo | grep -E "hca_id|fw_ver|board_id"' | dshbak -c

@@ -11,7 +11,7 @@ description: >-
   <div>
     <span class="eyebrow hro">HPC and AI infrastructure</span>
     <h1 class="hro">Clusters, fabric and storage, built to hold up under real work.</h1>
-    <p class="lead hro">Two decades designing, building and running high performance computing and AI infrastructure. On-premises and cloud clusters, InfiniBand and low latency fabric, parallel filesystems, GPU and machine learning stacks, and the schedulers and operational discipline that keep them usable. The work has been done in semiconductor manufacturing, aerospace, automotive, weather modelling, pharmaceutical research and academic medicine.</p>
+    <p class="lead hro">Two decades designing, building and running high performance computing and AI infrastructure. On-premises and cloud clusters, InfiniBand and low latency fabric, parallel filesystems, GPU and machine learning stacks, and the schedulers and operational discipline that keep them usable. The work has been done in semiconductor manufacturing, aerospace, automotive, weather modeling, pharmaceutical research and academic medicine.</p>
     <div class="acts hro">
       <a href="#contact" class="btn btn-p">Start a conversation<svg viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a href="{{ '/order/' | relative_url }}" class="btn btn-g">Rates and ordering</a>
@@ -58,7 +58,7 @@ description: >-
     <div><span class="n">02</span><h4>InfiniBand and low latency fabric</h4><p>Fabric design and management from EDR through HDR and NDR, fat tree and dragonfly topologies, OpenSM routing engines, NVIDIA UFM, RoCE and RDMA. Switch and adapter firmware, port configuration, and the diagnostics that separate a fabric problem from an application problem.</p></div>
     <div><span class="n">03</span><h4>Parallel and scale-out storage</h4><p>GPFS and IBM Storage Scale, Lustre, WekaFS, VAST, Pure, Isilon, DDN, BeeGFS and CEPH. Tiering and policy, erasure coding, data movement, and benchmarking that measures the workload rather than the page cache.</p></div>
     <div><span class="n">04</span><h4>GPU, CUDA and AI stacks</h4><p>A100, H100, DGX systems, NVLink, DCGM, Intel Max and AMD Instinct. CUDA and ROCm, NCCL collective tuning, PyTorch and TensorFlow environments, containerized delivery through Apptainer and Kubernetes.</p></div>
-    <div><span class="n">05</span><h4>Schedulers and workload management</h4><p>Slurm, PBS Pro, LSF, Grid Engine and Univa. Partition and QoS design, GPU and licence-aware scheduling, fair share, accounting, and the migrations between schedulers that organizations put off for years.</p></div>
+    <div><span class="n">05</span><h4>Schedulers and workload management</h4><p>Slurm, PBS Pro, LSF, Grid Engine and Univa. Partition and QoS design, GPU and license-aware scheduling, fair share, accounting, and the migrations between schedulers that organizations put off for years.</p></div>
     <div><span class="n">06</span><h4>Cloud and hybrid HPC</h4><p>AWS ParallelCluster, SOCA and IDEA, FSx for Lustre, EFA and the surrounding services. Azure HPC across regions. Lift and shift from on-premises, and the more common case where the honest answer is that only part of the workload should move.</p></div>
   </div>
 </div></section>
@@ -84,8 +84,8 @@ description: >-
 
     <div class="row"><div>
       <h4>Security, compliance and audit</h4>
-      <p>Building and running research and clinical computing under the regimes that govern it: CUI handling to NIST SP 800-171, NIH controlled-access genomic data, HIPAA, GxP and PCI. SELinux and RBAC, vulnerability management, access and filesystem auditing, threat management across cloud and on-premises. NACI Public Trust clearance. Security officer responsibility on a federal modelling platform.
-      <br><br><b>Where AI changes it:</b> evidence gathering. Most audit effort goes into collecting and correlating what a control actually did, not into judgement. Automating that collection leaves more room for the part that needs a person.</p>
+      <p>Building and running research and clinical computing under the regimes that govern it: CUI handling to NIST SP 800-171, NIH controlled-access genomic data, HIPAA, GxP and PCI. SELinux and RBAC, vulnerability management, access and filesystem auditing, threat management across cloud and on-premises. NACI Public Trust clearance. Security officer responsibility on a federal modeling platform.
+      <br><br><b>Where AI changes it:</b> evidence gathering. Most audit effort goes into collecting and correlating what a control actually did, not into judgment. Automating that collection leaves more room for the part that needs a person.</p>
     </div><div class="tag">Compliance</div></div>
 
     <div class="row"><div>
@@ -109,13 +109,13 @@ description: >-
     <p>Research computing is rarely unregulated. Genomic data arrives with a data use agreement attached, a DoD subcontract brings CUI obligations onto your storage, and the moment a foreign national gets a login on a machine holding controlled technology you are in export control whether anyone planned for it or not. These are the frameworks the work has been delivered under &mdash; described as engagements, not as badges.</p>
   </div>
   <div class="g3" data-rv>
-    <div><span class="n">CUI</span><h4>Federal and controlled unclassified information</h4><p>NIST SP 800-171 across storage, scheduler and identity, with the system security plan and POA&amp;M that go with it. NIST SP 800-53 on federal systems, FISMA responsibility as a named security officer, and CMMC readiness for defence subcontracts. DISA STIG and CIS Benchmark hardening on compute at scale. NIST SP 800-88 media sanitisation on decommission. FIPS 140 validated cryptography where it is required, and the exemption argument where a validated module does not exist for the hardware.</p></div>
+    <div><span class="n">CUI</span><h4>Federal and controlled unclassified information</h4><p>NIST SP 800-171 across storage, scheduler and identity, with the system security plan and POA&amp;M that go with it. NIST SP 800-53 on federal systems, FISMA responsibility as a named security officer, and CMMC readiness for defense subcontracts. DISA STIG and CIS Benchmark hardening on compute at scale. NIST SP 800-88 media sanitization on decommission. FIPS 140 validated cryptography where it is required, and the exemption argument where a validated module does not exist for the hardware.</p></div>
     <div><span class="n">NIH</span><h4>Controlled-access research data</h4><p>The NIH Genomic Data Sharing Policy and the dbGaP security best practices as they actually apply to a shared cluster: where controlled-access data may live, who may reach it, how access is logged, and how it is destroyed at the end of the approved period. NIH Data Management and Sharing plans, data use agreements and honest broker arrangements, IRB-driven access boundaries, and the awkward part &mdash; enforcing per-study separation on a filesystem several hundred other users also mount.</p></div>
     <div><span class="n">Export</span><h4>Import, export and sanctions</h4><p>EAR and ECCN classification of HPC hardware, GPUs and the software stack, and ITAR where it applies. <b>Deemed export</b> is the one that catches universities: giving a foreign national an account on a machine holding controlled technology is an export, and shared clusters are built to do exactly that. Technology control plans, restricted party and OFAC screening, Entity List constraints on accelerator procurement, and where the fundamental research exclusion genuinely applies rather than where people wish it did.</p></div>
   </div>
   <div class="g3" data-rv style="margin-top:1px">
     <div><span class="n">Health</span><h4>Clinical and pharmaceutical</h4><p>HIPAA Security Rule on estates that are simultaneously research and clinical, GxP and 21 CFR Part 11 for electronic records and signatures, PCI DSS, and GDPR where a collaboration crosses into the EU. Audit evidence that can be produced on demand rather than reconstructed the week before an assessment.</p></div>
-    <div><span class="n">ISO</span><h4>Standards and control frameworks</h4><p>Systems designed and operated to ISO/IEC 27001 information security controls, ISO/IEC 27017 and 27018 for cloud and personal data in cloud, ISO/IEC 20000 service management practice, and SOC 2 control objectives. Where an organisation is pursuing certification, the work is the control implementation and the evidence that survives the audit.</p></div>
+    <div><span class="n">ISO</span><h4>Standards and control frameworks</h4><p>Systems designed and operated to ISO/IEC 27001 information security controls, ISO/IEC 27017 and 27018 for cloud and personal data in cloud, ISO/IEC 20000 service management practice, and SOC 2 control objectives. Where an organization is pursuing certification, the work is the control implementation and the evidence that survives the audit.</p></div>
     <div><span class="n">In practice</span><h4>What this looks like on a cluster</h4><p>Compliance fails on shared HPC in predictable places: a scratch filesystem nobody scoped, an epilog that never deletes, a scheduler prolog that leaks a path, home directories mounted everywhere by default, node images drifting apart, and audit logging that stops at the login node. The useful work is closing those, then proving they are closed &mdash; not producing a policy document that describes a system nobody has actually configured.</p></div>
   </div>
 </div></section>
@@ -126,18 +126,18 @@ description: >-
     <p>Roles as HPC architect, engineer, group lead and IT director, in environments where the machines are expensive and the deadlines are external.</p></div>
   <div class="stats" data-rv>
     <div><div class="n">8</div><p>NVIDIA AI factory environments, GPU fabric, scheduler and parallel storage integration</p><div class="src">HPC and AI infrastructure architect</div></div>
-    <div><div class="n">5,000</div><p>Node liquid-cooled Cray and HPE clusters, federal weather modelling</p><div class="src">Senior HPC architect and security officer</div></div>
+    <div><div class="n">5,000</div><p>Node liquid-cooled Cray and HPE clusters, federal weather modeling</p><div class="src">Senior HPC architect and security officer</div></div>
     <div><div class="n">1,680</div><p>Nodes across three sites in two continents, semiconductor manufacturing</p><div class="src">Group lead, EDR to HDR fabric upgrade</div></div>
     <div><div class="n">520</div><p>Nodes migrated from on-premises Linux and HP-UX to cloud, automotive</p><div class="src">HPC architect, scheduler and MPI migration</div></div>
     <div><div class="n">12,000</div><p>Users on a mixed research and clinical estate, academic medicine</p><div class="src">UNIX, network and SAN systems manager</div></div>
-    <div><div class="n">4+</div><p>High-throughput HPC estates in academic medicine, clinical research and defence postgraduate education</p><div class="src">Cluster architecture, GPFS and scheduler design</div></div>
+    <div><div class="n">4+</div><p>High-throughput HPC estates in academic medicine, clinical research and defense postgraduate education</p><div class="src">Cluster architecture, GPFS and scheduler design</div></div>
   </div>
   <div class="sh" style="margin-top:34px"><span class="eyebrow">Right-sizing</span>
     <h2>Most of this work starts a lot smaller than that.</h2>
     <p>Those numbers are where the work has led. They are not the price of admission, and they are not the minimum engagement. A single GPU server that is not delivering the throughput it should, a storage mount that keeps dropping under load, a scheduler nobody has retuned since the day it was installed, a benchmark that disagrees with the vendor's datasheet &mdash; these are the same problems as the large ones with fewer zeros on the end, and most of them are an afternoon or a week rather than a project. If that is all you need, that is what I will quote, and if you do not need outside help at all I will tell you that instead.</p></div>
 
   <div class="sh" style="margin-top:34px"><span class="eyebrow">Worked with</span>
-    <h2>Organisations and environments.</h2>
+    <h2>Organizations and environments.</h2>
     <p>Work delivered in these environments, as an employee, contractor or through partners and vendors. Listed as engagements worked on, not as clients of this practice.</p></div>
   <div class="g3" data-rv>
     <div><span class="n">AI factories</span><h4>GPU cloud and AI infrastructure</h4><p>Alembic, IREN, Deutsche Telekom, Microsoft, Anthropic, NScale, CoreWeave, BoostRun and Novartis.</p></div>
@@ -145,7 +145,7 @@ description: >-
     <div><span class="n">Federal</span><h4>Agencies and national laboratory</h4><p>NOAA, NASA, Brookhaven National Laboratory and the Naval Postgraduate School.</p></div>
   </div>
   <div class="g3" data-rv style="margin-top:1px">
-    <div><span class="n">Sectors</span><h4>Regulated and demanding</h4><p>AI factory and GPU cloud build-outs, semiconductor equipment, aerospace and aviation, automotive engineering, federal weather modelling, pharmaceutical research, academic medicine, clinical research computing, clinical pathology, defence postgraduate education, and a national laboratory.</p></div>
+    <div><span class="n">Sectors</span><h4>Regulated and demanding</h4><p>AI factory and GPU cloud build-outs, semiconductor equipment, aerospace and aviation, automotive engineering, federal weather modeling, pharmaceutical research, academic medicine, clinical research computing, clinical pathology, defense postgraduate education, and a national laboratory.</p></div>
     <div><span class="n">Certifications</span><h4>Held and current</h4><p>Red Hat Certified Engineer across RHEL 3, 5 and 7. Sun Certified Systems Administrator. FreeBSD Certified Associate. Juniper JNCIS-SEC and JNCIS-ENT. Cisco CCNA. Microsoft MCSE and MCSA. NACI Public Trust clearance.</p></div>
     <div><span class="n">Education</span><h4>Computer science</h4><p>Master's degree in computer science. Two decades of practice since, most of it hands on, across every layer from the cabling to the application stack.</p></div>
   </div>
@@ -197,7 +197,7 @@ description: >-
   <div class="g3" data-rv>
     <div><span class="n">From $2,200</span><h4>Focused engagements</h4><p>One problem, a day or a week, written up. A benchmark that disagrees with the datasheet, a mount that drops under load, a second opinion before a purchase order goes out.</p></div>
     <div><span class="n">From $3,500</span><h4>Diagnostics</h4><p>Fabric and interconnect, parallel storage, scheduler and workload, or independent acceptance testing of a cluster against what was actually sold.</p></div>
-    <div><span class="n">From $2,500</span><h4>Assessments and programmes</h4><p>Compliance readiness and full assessment against the framework that applies, and the remediation programme that follows if you want the controls implemented rather than just listed.</p></div>
+    <div><span class="n">From $2,500</span><h4>Assessments and programs</h4><p>Compliance readiness and full assessment against the framework that applies, and the remediation program that follows if you want the controls implemented rather than just listed.</p></div>
   </div>
   <div class="cta-row" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:30px">
     <a href="{{ '/order/' | relative_url }}" class="btn btn-p">See rates and order<svg viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>

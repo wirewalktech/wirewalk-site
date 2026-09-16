@@ -174,10 +174,10 @@ footer.end a{color:var(--ac2)}
            style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
 
     <fieldset>
-      <legend>Organisation</legend>
+      <legend>Organization</legend>
       <div class="row">
-        <div class="fld"><label for="po-org">Organisation</label>
-          <input id="po-org" type="text" name="Organisation" required></div>
+        <div class="fld"><label for="po-org">Organization</label>
+          <input id="po-org" type="text" name="Organization" required></div>
         <div class="fld"><label for="po-dept">Department or unit <span class="h">&mdash; optional</span></label>
           <input id="po-dept" type="text" name="Department"></div>
       </div>
@@ -240,7 +240,7 @@ footer.end a{color:var(--ac2)}
       <div class="fld"><label class="cb" for="po-agree">
         <input id="po-agree" type="checkbox" name="Accepted ordering terms" value="Yes" required>
         I have read the <a href="{{ '/terms/' | relative_url }}">ordering terms</a> and am
-        authorised to submit this order on behalf of the organisation named above</label></div>
+        authorized to submit this order on behalf of the organization named above</label></div>
     </fieldset>
 
     <button class="btn" type="submit">Submit purchase order</button>
@@ -267,7 +267,7 @@ footer.end a{color:var(--ac2)}
     <div class="row">
       <div class="fld"><label for="pay-email">Email for the receipt</label>
         <input id="pay-email" type="email" autocomplete="email" required></div>
-      <div class="fld"><label for="pay-org">Organisation <span class="h">&mdash; optional</span></label>
+      <div class="fld"><label for="pay-org">Organization <span class="h">&mdash; optional</span></label>
         <input id="pay-org" type="text"></div>
     </div>
     <div class="note" id="paysum" hidden></div>
@@ -312,7 +312,7 @@ const SITE_KEY = "0x4AAAAAAEuBwz8OpbI3bmtE";
 const $ = s => document.querySelector(s);
 let ITEMS = [], widgetId = null;
 
-/* The catalogue is fetched rather than hard-coded so the page and the charge
+/* The catalog is fetched rather than hard-coded so the page and the charge
    can never disagree about a figure, and a monthly special appears here the
    moment it is live without touching this file. */
 fetch(ORDERS + "/catalog?practice=wirewalk")
@@ -328,7 +328,7 @@ const GROUPS = [
   ["focused",    "Focused engagements", "Short, bounded work. Most problems worth an outside opinion are this size."],
   ["diagnostic", "Diagnostics",         "One system, measured properly, with the evidence written down."],
   ["assessment", "Assessments",         "Formal review against a framework, with the artefacts an auditor expects."],
-  ["programme",  "Programmes",          "Delivery work spanning weeks or months."],
+  ["program",  "Programs",          "Delivery work spanning weeks or months."],
 ];
 
 function renderCatalog(){
@@ -374,11 +374,11 @@ function fillSelects(){
     }
   }
   if (!ITEMS.some(i => !i.priceOnApplication)) return;
-  $("#pay-svc").addEventListener("change", summarise);
-  $("#pay-mode").addEventListener("change", summarise);
+  $("#pay-svc").addEventListener("change", summarize);
+  $("#pay-mode").addEventListener("change", summarize);
 }
 
-function summarise(){
+function summarize(){
   const i = ITEMS.find(x => x.sku === $("#pay-svc").value);
   const box = $("#paysum"), btn = $("#paygo");
   if (!i || i.priceOnApplication){ box.hidden = true; btn.disabled = true; return; }
@@ -419,7 +419,7 @@ $("#paygo").addEventListener("click", async () => {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         sku: $("#pay-svc").value, mode: $("#pay-mode").value, email,
-        organisation: $("#pay-org").value.trim(), token: t }),
+        organization: $("#pay-org").value.trim(), token: t }),
     });
     const d = await r.json();
     if (!r.ok || !d.url) throw new Error(d.error || "could not start payment");

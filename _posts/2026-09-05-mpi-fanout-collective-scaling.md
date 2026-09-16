@@ -88,7 +88,7 @@ somewhere else entirely.
 ## Where fan-out exposes the fabric
 
 Here is the mechanism, because it is the part that is worth understanding rather
-than memorising.
+than memorizing.
 
 Under static routing, the subnet manager assigns each destination LID an output
 port on every switch. Every flow to a given destination therefore leaves a given
@@ -224,7 +224,7 @@ The bisection method finds it quickly. Split the node set in half, run both
 halves, keep the slow half, repeat. Six rounds covers 64 nodes. It is crude and
 it is faster than reasoning about it.
 
-The systematic alternative is a pairwise sweep — every node against a fixed
+The systematic alternative is a pairwize sweep — every node against a fixed
 reference node, using `ib_write_bw` rather than MPI so you are testing one layer
 at a time:
 
@@ -238,7 +238,7 @@ done | sort -k2 -n | head
 The bottom of that sorted list is your answer, and it is usually one node with a
 narrow link, a downtrained slot, or a transceiver on its way out. It is worth
 running this on a schedule rather than during an incident: a node that
-degrades quietly poisons every synchronised job it touches, and the cost of
+degrades quietly poisons every synchronized job it touches, and the cost of
 finding out late is measured in withdrawn results, not in wasted cycles.
 
 ## What to keep

@@ -133,7 +133,7 @@ parameters and load microcode from the firmware instead.
 
 ## Create the cluster
 
-Install `gpfs.base`, `gpfs.gpl`, `gpfs.ece` and the licence packages, then build the
+Install `gpfs.base`, `gpfs.gpl`, `gpfs.ece` and the license packages, then build the
 portability layer with `mmbuildgpl`. Do this on every node before creating the
 cluster, not as part of it.
 
@@ -171,7 +171,7 @@ Three failure modes, all of which present as "it works, but slowly":
 not pick up a per-node `verbsPorts` setting. It falls back to the cluster default,
 and if that default names a device the new node does not have, GPFS quietly uses
 TCP over IPoIB instead. Throughput drops by a factor you will notice; nothing logs
-an error. Check `verbsPorts`, `pagepool` and the licence designation after **every**
+an error. Check `verbsPorts`, `pagepool` and the license designation after **every**
 node addition or rejoin.
 
 **Pointing at the wrong port type.** A dual-port adapter may present one InfiniBand
@@ -181,7 +181,7 @@ Check `link_layer` in sysfs before trusting a device name.
 
 **The negotiated rate is not what you ordered.** `iblinkinfo` reports the per-lane
 rate, not the link rate. `4X 106.25 Gbps` is NDR400; `4X 53.125 Gbps` is HDR200;
-`2X 53.125 Gbps` is a half-width HDR100 link that will gate every synchronised
+`2X 53.125 Gbps` is a half-width HDR100 link that will gate every synchronized
 operation across the cluster. The authoritative per-host view is
 `/sys/class/infiniband/<dev>/ports/1/rate`. Check every node, not a sample — one
 degraded link is enough to make an entire benchmark meaningless, and it will be
@@ -230,8 +230,8 @@ subblock size you expect.
 
 **`mmvdisk vdiskset list` prints per-vdisk size, not set totals.** A set of sixteen
 vdisks showing "81 TiB" is 1.27 PiB. Misreading that column is a straightforward way
-to conclude a filesystem is nearly full when it is under ten per cent used.
-Allocation is not utilisation: a declustered array can be 99% *allocated* to vdisk
+to conclude a filesystem is nearly full when it is under ten percent used.
+Allocation is not utilization: a declustered array can be 99% *allocated* to vdisk
 sets while the filesystem on top is nearly empty.
 
 ## Tune, and verify each change actually applied
@@ -291,7 +291,7 @@ Three details decide whether this works:
 
 - **Match every device name the filesystem is known by.** If the filesystem is ever
   renamed, `%fsName` changes and a guard written against the old name exits
-  silently. Accept both, and log any name you do not recognise, so the next rename
+  silently. Accept both, and log any name you do not recognize, so the next rename
   leaves evidence instead of a silent outage.
 - **Make the script idempotent and fast.** A slow callback delays the mount for
   every node.
@@ -357,7 +357,7 @@ master failover at the start.
 Run it detached — `setsid nohup ... &`. An administrator's dropped SSH session
 should not be able to leave a storage node down with no orchestration.
 
-## The failures worth recognising on sight
+## The failures worth recognizing on sight
 
 **"Node appears to already belong to a cluster."** Usually a stale `mmsdrserv`
 process on the node from a previous attempt. Kill it and retry; reinstalling the

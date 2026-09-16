@@ -253,10 +253,10 @@ launched process, which can differ. Check it from inside a job:
 srun -N 2 bash -c 'echo $(hostname) $(ulimit -l)'
 ```
 
-## Rail-optimised topologies
+## Rail-optimized topologies
 
 On AI clusters the multi-rail arrangement is often not "two rails to the same
-fabric" but a rail-optimised design: each GPU has an adapter, and adapter `k` on
+fabric" but a rail-optimized design: each GPU has an adapter, and adapter `k` on
 every node connects to switch `k`. Same-index GPUs across nodes then communicate
 within a single switch, which is what makes large all-reduces efficient.
 

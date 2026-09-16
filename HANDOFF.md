@@ -136,8 +136,8 @@ All at `https://www.wirewalk.com/writing/<slug>/`.
 | 2026-08-12 | `osu-micro-benchmarks` | OSU Micro-Benchmarks: measuring the fabric before you blame the application |
 
 **Provenance, and it matters.** These were written from documented tool and
-protocol behaviour, not from engagement notes — no site, cluster, host,
-organisation or person is named or inferable in any of them. They are accurate
+protocol behavior, not from engagement notes — no site, cluster, host,
+organization or person is named or inferable in any of them. They are accurate
 and useful as reference material, but they do not contain specific findings from
 any particular piece of work. Anything that would make them distinctive still
 needs to be added.
@@ -204,14 +204,14 @@ infrastructure. Every figure traces to a line in the CV
 
 | Figure | Source |
 |---|---|
-| 5,000 nodes, liquid-cooled Cray/HPE, federal weather modelling | 2,500 + 2,500 node clusters |
+| 5,000 nodes, liquid-cooled Cray/HPE, federal weather modeling | 2,500 + 2,500 node clusters |
 | 1,680 nodes, three sites, two continents, semiconductor | 1,200 + 480 nodes |
 | 520 nodes migrated from Linux and HP-UX to cloud, automotive | 400 + 120 nodes |
 | 12,000 users, mixed research and clinical estate | academic medicine role |
 
 No employer is named on the front page. Sectors and scale carry it instead.
 This is a deliberate departure from the Operating Review deck, which lists
-organisations by name; that list is his employment history rather than a client
+organizations by name; that list is his employment history rather than a client
 list, and naming them on an indexed public page is a different exposure from
 showing them in a room. Restoring the names is a content decision, not a
 technical one.

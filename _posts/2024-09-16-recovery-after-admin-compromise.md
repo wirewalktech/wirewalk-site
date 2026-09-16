@@ -22,7 +22,7 @@ Make a worksheet with a row for each dependency:
 
 | Dependency | Normal authority | Recovery authority | Independent copy |
 |---|---|---|---|
-| Backup catalogue | Backup service account | Recovery operator | Export outside production |
+| Backup catalog | Backup service account | Recovery operator | Export outside production |
 | Encryption keys | KMS administrators | Documented recovery custodians | Supported KMS recovery material |
 | Storage configuration | Storage administrators | Restricted emergency account | Protected configuration export |
 | Application secrets | Application identity | Approved recovery workflow | Recoverable secret store |
