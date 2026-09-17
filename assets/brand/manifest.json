@@ -1,0 +1,58 @@
+[
+  {
+    "name": "wirewalk",
+    "viewBox": [
+      82,
+      168,
+      2034,
+      375
+    ],
+    "originalPixels": [
+      2172,
+      724
+    ],
+    "accent": "#D97757"
+  },
+  {
+    "name": "wirewalk-ai",
+    "viewBox": [
+      61,
+      185,
+      2046,
+      334
+    ],
+    "originalPixels": [
+      2172,
+      724
+    ],
+    "accent": "#D97757"
+  },
+  {
+    "name": "wirewalk-studio",
+    "viewBox": [
+      57,
+      223,
+      2058,
+      283
+    ],
+    "originalPixels": [
+      2172,
+      724
+    ],
+    "accent": "#775478"
+  },
+  {
+    "name": "wirewalk-forensics",
+    "viewBox": [
+      53,
+      216,
+      2067,
+      272
+    ],
+    "originalPixels": [
+      2172,
+      724
+    ],
+    "accent": "#276B70"
+  }
+]

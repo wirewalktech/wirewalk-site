@@ -2,8 +2,7 @@
 {%- assign writing = '/writing/' | relative_url -%}
 <header id="hd"><div class="wrap nav">
   <div class="nav-l">
-    <a href="{% if page.is_home %}#top{% else %}{{ home }}{% endif %}" class="brand"><span class="mark"><i></i><i></i><i></i><i></i></span>
-      <span class="bn"><span>Wirewalk<s>Advisory</s></span></span></a>
+    <a href="{% if page.is_home %}#top{% else %}{{ home }}{% endif %}" class="brand"><img class="brand-logo" src="{{ '/assets/brand/wirewalk/wirewalk.svg' | relative_url }}" alt="Wirewalk" width="2034" height="375"></a>
   </div>
   <div class="nav-c">
     <nav class="lk" id="lk">
