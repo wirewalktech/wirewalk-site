@@ -273,6 +273,10 @@ footer.end a{color:var(--ac2)}
       <div class="fld"><label for="pay-org">Organization <span class="h">&mdash; optional</span></label>
         <input id="pay-org" type="text"></div>
     </div>
+    <div class="fld"><label for="pay-method">Payment method</label>
+      <select id="pay-method"><option value="card">Card</option>
+        <option value="ach">US bank account (ACH) — 3% discount</option></select></div>
+    <div class="note" id="payment-status" role="status"></div>
     <div class="note" id="paysum" hidden></div>
     <div id="ts" style="margin:14px 0"></div>
     <button class="btn" id="paygo" disabled>Continue to payment</button>
@@ -313,14 +317,14 @@ const ORDERS   = "https://wirewalk-orders.wirewalk-upload.workers.dev";
 const SITE_KEY = "0x4AAAAAAEuBwz8OpbI3bmtE";
 
 const $ = s => document.querySelector(s);
-let ITEMS = [], widgetId = null;
+let ITEMS = [], widgetId = null, PAYMENT_MODE = "unconfigured";
 
 /* The catalog is fetched rather than hard-coded so the page and the charge
    can never disagree about a figure, and a monthly special appears here the
    moment it is live without touching this file. */
 fetch(ORDERS + "/catalog?practice=wirewalk")
-  .then(r => r.json())
-  .then(d => { ITEMS = d.items || []; renderCatalog(); fillSelects(); })
+  .then(r => { if (!r.ok) throw new Error("pricing unavailable"); return r.json(); })
+  .then(d => { PAYMENT_MODE = d.paymentMode || "unconfigured"; showPaymentStatus(); ITEMS = d.items || []; renderCatalog(); fillSelects(); selectLinkedSku(); })
   .catch(() => {
     $("#catalog").innerHTML =
       '<p class="sub">Pricing could not be loaded just now. Email ' +
@@ -379,22 +383,40 @@ function fillSelects(){
   if (!ITEMS.some(i => !i.priceOnApplication)) return;
   $("#pay-svc").addEventListener("change", summarize);
   $("#pay-mode").addEventListener("change", summarize);
+  $("#pay-method").addEventListener("change", summarize);
 }
 
+function showPaymentStatus(){
+  const box = $("#payment-status");
+  box.hidden = PAYMENT_MODE === "live";
+  box.textContent = PAYMENT_MODE === "test"
+    ? "Online payment is not live yet. Prices below are previews; use the purchase-order or invoice request to place a real order."
+    : "Online payment is unavailable. Please request an invoice or submit a purchase order.";
+}
+function selectLinkedSku(){
+  const sku = new URLSearchParams(location.search).get("sku");
+  const item = ITEMS.find(i => i.sku === sku);
+  if (!item) return;
+  $("#po-svc").value = sku;
+  if (!item.priceOnApplication) { $("#pay-svc").value = sku; summarize(); }
+  const button = [...document.querySelectorAll("[data-sku]")].find(el => el.dataset.sku === sku);
+  if (button) { const row=button.closest("tr"); row.style.outline="2px solid var(--ac)"; row.scrollIntoView({block:"center"}); }
+}
 function summarize(){
   const i = ITEMS.find(x => x.sku === $("#pay-svc").value);
   const box = $("#paysum"), btn = $("#paygo");
   if (!i || i.priceOnApplication){ box.hidden = true; btn.disabled = true; return; }
-  const dep = $("#pay-mode").value === "deposit";
+  const dep = $("#pay-mode").value === "deposit", ach = $("#pay-method").value === "ach";
+  const due = ach ? (dep ? i.ach.depositFormatted : i.ach.fullFormatted)
+                  : (dep ? i.deposit.formatted : i.prepay.formatted);
+  const total = ach ? i.ach.totalFormatted : i.listFormatted;
+  const balance = ach ? i.ach.balanceFormatted : i.deposit.balanceFormatted;
   box.hidden = false;
-  box.innerHTML = dep
-    ? `<b>${i.deposit.formatted} due now.</b> Deposit against ${i.listFormatted}.
-       The balance of ${i.deposit.balanceFormatted} is invoiced on delivery.
-       The prepay discount does not apply to a deposit.`
-    : `<b>${i.prepay.formatted} due now.</b> ${i.name} paid in full,
-       saving ${i.prepay.savingFormatted} against the ${i.listFormatted} list price.
-       Dates are reserved on receipt of funds.`;
-  btn.disabled = false;
+  box.textContent = dep
+    ? due + " due now. Deposit against " + total + ". Balance " + balance + " invoiced on delivery. No prepay discount on deposits."
+    : due + " due now for full payment by " + (ach ? "US bank account" : "card") + ". List price " + i.listFormatted + ".";
+  if (ach) box.textContent += " The bank-transfer discount is included. ACH confirmation can take several business days.";
+  btn.disabled = PAYMENT_MODE !== "live";
 }
 
 function token(){
@@ -409,6 +431,7 @@ function token(){
 
 $("#paygo").addEventListener("click", async () => {
   const btn = $("#paygo"), msg = $("#paymsg");
+  if (PAYMENT_MODE !== "live") { showPaymentStatus(); return; }
   const email = $("#pay-email").value.trim();
   if (!email || !$("#pay-email").checkValidity()){
     msg.className = "msg bad"; msg.textContent = "Please enter an email address for the receipt.";
@@ -422,6 +445,7 @@ $("#paygo").addEventListener("click", async () => {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         sku: $("#pay-svc").value, mode: $("#pay-mode").value, email,
+        method: $("#pay-method").value, practice: "wirewalk",
         organization: $("#pay-org").value.trim(), token: t }),
     });
     const d = await r.json();

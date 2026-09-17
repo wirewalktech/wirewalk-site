@@ -56,7 +56,7 @@ footer.end{margin:52px 0 40px;padding-top:22px;border-top:1px solid var(--ln);co
 </div></header>
 <div class="wrap">
   <span class="eyebrow">Ordering</span>
-  <h1>Payment received.</h1>
+  <h1 id="payment-heading">Payment status</h1>
   <div id="detail"><p class="lead">Confirming your payment&hellip;</p></div>
   <h2>What happens next</h2>
   <ol class="steps">
@@ -78,14 +78,16 @@ footer.end{margin:52px 0 40px;padding-top:22px;border-top:1px solid var(--ln);co
   var W = "https://wirewalk-orders.wirewalk-upload.workers.dev";
   var id = new URLSearchParams(location.search).get("session");
   var box = document.getElementById("detail");
-  if (!id) { box.innerHTML = '<p class="lead">Your payment has been recorded.</p>'; return; }
+  if (!id) { box.textContent = 'No payment reference was supplied. We cannot confirm a payment. Contact sales@wirewalk.com if you need help.'; return; }
   fetch(W + "/session?id=" + encodeURIComponent(id))
-    .then(function(r){ return r.json(); })
+    .then(function(r){ if (!r.ok) throw new Error("Payment could not be verified"); return r.json(); })
     .then(function(d){
+      if (d.livemode === false) { box.textContent = "This was a test checkout. No real payment was collected."; return; }
       if (!d.paid) { box.innerHTML =
         '<p class="lead">This payment has not completed. If you believe that is wrong, ' +
         'email <a href="mailto:sales@wirewalk.com">sales@wirewalk.com</a> before trying again ' +
         'so you are not charged twice.</p>'; return; }
+      document.getElementById('payment-heading').textContent = 'Payment received';
       var bal = d.balanceDue > 0
         ? ' The remaining <b>' + d.balanceDueFormatted + '</b> is invoiced on delivery.' : '';
       box.innerHTML = '<p class="lead"><span class="ok">' + d.amountFormatted +
@@ -93,7 +95,7 @@ footer.end{margin:52px 0 40px;padding-top:22px;border-top:1px solid var(--ln);co
         '.' + bal + '</p>';
     })
     .catch(function(){
-      box.innerHTML = '<p class="lead">Your payment has been recorded. A receipt follows by email.</p>';
+      box.textContent = 'We could not verify this payment. Contact sales@wirewalk.com before trying again so you are not charged twice.';
     });
 })();
 </script>
