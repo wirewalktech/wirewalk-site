@@ -30,6 +30,9 @@ defaults:
     values: { layout: post }
 
 exclude:
+  - AI.MD
+  - AGENTS.md
+  - CLAUDE.md
   - README.md
   - Gemfile
   - Gemfile.lock
