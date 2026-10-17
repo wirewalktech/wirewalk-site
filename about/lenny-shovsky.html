@@ -1,0 +1,85 @@
+---
+layout: base
+permalink: /about/lenny-shovsky/
+title: Lenny Shovsky
+description: "Lenny Shovsky is an HPC and AI infrastructure engineer and architect working across compute, InfiniBand fabric and parallel storage, and the author of the Wirewalk Advisory technical articles."
+---
+{%- comment -%}
+  Author page. Exists so the byline on every article resolves to something, and so
+  there is one URL that search engines can attach the name to. Every claim here is
+  already made on the home page -- this page restates areas of work, not new ones.
+{%- endcomment -%}
+<section class="sec" style="border-bottom:0"><div class="wrap">
+  <div class="sh-split">
+    <div>
+      <span class="eyebrow">Author</span>
+      <h2>Lenny Shovsky</h2>
+    </div>
+    <p>HPC and AI infrastructure engineer and architect. I work across compute, fabric and
+    storage as one system, because the failures that matter happen between them rather than
+    inside any one of them.</p>
+  </div>
+
+  <div class="prose" style="margin-top:8px">
+    <p>I have held roles as HPC architect, engineer, group lead and IT director, in environments
+    where the machines are expensive and the deadlines are external. The work runs from
+    architecture and procurement through build-out, benchmarking and the operational life of a
+    cluster afterwards.</p>
+
+    <h2 id="areas">What I work on</h2>
+    <ul>
+      <li><b>Compute and provisioning</b> — hardware selection, node classes, image and
+      provisioning lifecycle, capacity planning.</li>
+      <li><b>Fabric</b> — InfiniBand from EDR through NDR, fat tree and dragonfly topologies,
+      OpenSM routing engines, RoCE and RDMA, switch and adapter firmware.</li>
+      <li><b>Parallel storage</b> — GPFS and IBM Storage Scale, Lustre, WekaFS, VAST, Isilon,
+      DDN, BeeGFS and Ceph. Policy and tiering, data movement, and benchmarking that measures
+      the filesystem rather than a client cache.</li>
+      <li><b>GPU and AI stacks</b> — A100 and H100 systems, NVLink, DCGM, CUDA and ROCm, NCCL
+      collective tuning, containerised delivery.</li>
+      <li><b>Schedulers</b> — Slurm, PBS Pro, LSF and Grid Engine. Partition and QoS design,
+      GPU and licence-aware scheduling, fair share and accounting.</li>
+      <li><b>The enterprise IT around it</b> — identity, monitoring, patching and the
+      compliance the cluster has to live inside.</li>
+    </ul>
+
+    <h2 id="writing">Writing</h2>
+    <p>I write up the failure modes that cost time, with the command that distinguishes each
+    one. Most articles exist because something looked fine and was not: a benchmark measuring a
+    cache, a counter read as a rate, a check that was green because it was pointed slightly to
+    the side of the fault.</p>
+    <p><a href="{{ '/writing/' | relative_url }}">All {{ site.posts.size }} articles</a> ·
+       <a href="{{ '/writing/topics/' | relative_url }}">Browse by topic</a> ·
+       <a href="{{ '/feed.xml' | relative_url }}">RSS</a></p>
+
+    <h2 id="contact">Contact</h2>
+    <p>Assessment and engineering work is performed under written authorisation.
+       <a href="{{ '/' | relative_url }}#contact">Get in touch</a>.</p>
+  </div>
+
+  <p style="margin-top:36px"><a href="{{ '/writing/' | relative_url }}" class="btn btn-g">Read the articles</a></p>
+</div></section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Lenny Shovsky",
+    "jobTitle": "HPC and AI infrastructure engineer and architect",
+    "url": {{ '/about/lenny-shovsky/' | absolute_url | jsonify }},
+    "worksFor": {
+      "@type": "Organization",
+      "name": {{ site.organization | default: site.title | jsonify }},
+      "url": {{ '/' | absolute_url | jsonify }}
+    },
+    "knowsAbout": [
+      "High performance computing", "AI infrastructure", "InfiniBand", "RDMA",
+      "GPFS", "IBM Storage Scale", "Lustre", "WekaFS", "Parallel filesystems",
+      "Slurm", "GPU clusters", "NCCL", "DCGM", "Cluster provisioning",
+      "Storage benchmarking", "IOR", "HPL", "Linux systems engineering"
+    ]
+  }
+}
+</script>

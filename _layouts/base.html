@@ -21,6 +21,105 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{{ '/assets/og.png' | absolute_url }}">
+{%- comment -%}
+  Publication dates for machines.
+
+  For editorially placed articles (archive_date) the visible date is a placement in a
+  series, NOT a publication date -- the page says so in its own note. So article:* meta
+  and the structured data below use published_on / last_reviewed, which are the true
+  dates. Asserting the archive date to a search engine would be a claim we know is false.
+{%- endcomment -%}
+{%- if page.archive_date and page.published_on -%}
+  {%- assign pub_date = page.published_on -%}
+{%- else -%}
+  {%- assign pub_date = page.date -%}
+{%- endif -%}
+{%- if page.last_reviewed -%}{%- assign mod_date = page.last_reviewed -%}{%- else -%}{%- assign mod_date = pub_date -%}{%- endif -%}
+{%- assign meta_desc = page.description | default: page.summary | default: site.description | strip_newlines | strip | truncate: 300 -%}
+
+<meta name="theme-color" content="#0b0e14">
+<meta property="og:locale" content="{{ site.locale | default: 'en_US' }}">
+<meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+<meta name="twitter:description" content="{{ meta_desc | escape }}">
+{%- if page.layout == 'post' %}
+<meta name="author" content="{{ site.author }}">
+<meta property="article:author" content="{{ site.author }}">
+<meta property="article:published_time" content="{{ pub_date | date: '%Y-%m-%d' }}">
+<meta property="article:modified_time" content="{{ mod_date | date: '%Y-%m-%d' }}">
+{%- if page.category %}<meta property="article:section" content="{{ page.category }}">{% endif %}
+{%- for t in page.tags %}
+<meta property="article:tag" content="{{ t }}">
+{%- endfor %}
+{%- if page.tags %}<meta name="keywords" content="{{ page.tags | join: ', ' }}">{% endif %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ meta_desc | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "mainEntityOfPage": { "@type": "WebPage", "@id": {{ page.url | absolute_url | jsonify }} },
+  "datePublished": "{{ pub_date | date: '%Y-%m-%d' }}",
+  "dateModified": "{{ mod_date | date: '%Y-%m-%d' }}",
+  "inLanguage": "en",
+  "author": {
+    "@type": "Person",
+    "name": {{ site.author | jsonify }},
+    "jobTitle": {{ site.author_role | jsonify }},
+    "url": {{ site.author_url | absolute_url | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ site.organization | default: site.title | jsonify }},
+    "url": {{ '/' | absolute_url | jsonify }},
+    "logo": { "@type": "ImageObject", "url": {{ '/assets/brand/wirewalk/wirewalk-mark-180.png' | absolute_url | jsonify }} }
+  },
+  "image": {{ '/assets/og.png' | absolute_url | jsonify }}
+  {%- if page.category %},
+  "articleSection": {{ page.category | jsonify }}
+  {%- endif %}
+  {%- if page.tags %},
+  "keywords": {{ page.tags | join: ', ' | jsonify }}
+  {%- endif %}
+  {%- if page.series %},
+  "isPartOf": { "@type": "CreativeWorkSeries", "name": {{ page.series | jsonify }} }
+  {%- endif %}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": {{ '/' | absolute_url | jsonify }} },
+    { "@type": "ListItem", "position": 2, "name": "Writing", "item": {{ '/writing/' | absolute_url | jsonify }} },
+    { "@type": "ListItem", "position": 3, "name": {{ page.title | jsonify }}, "item": {{ page.url | absolute_url | jsonify }} }
+  ]
+}
+</script>
+{%- else %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": {{ site.organization | default: site.title | jsonify }},
+  "url": {{ '/' | absolute_url | jsonify }},
+  "description": {{ site.description | strip_newlines | strip | jsonify }},
+  "image": {{ '/assets/og.png' | absolute_url | jsonify }},
+  "areaServed": "US",
+  "knowsAbout": [
+    "High performance computing", "AI infrastructure", "InfiniBand fabric",
+    "Parallel filesystems", "GPFS", "Slurm", "GPU clusters", "Parallel storage benchmarking"
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": {{ site.author | jsonify }},
+    "jobTitle": {{ site.author_role | jsonify }},
+    "url": {{ site.author_url | absolute_url | jsonify }}
+  }
+}
+</script>
+{%- endif %}
 {% include site-style.html %}
 {% include prose.html %}
 </head>

@@ -6,6 +6,11 @@
 .art-hd .lead{font-size:19px;line-height:1.6;color:var(--tx2);max-width:64ch}
 .art-meta{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin-top:20px;
  padding-top:18px;border-top:1px solid var(--ln);font-size:14px;color:#6E6B65}
+/* The byline is the one emphasised item in the meta row: global style is
+   a{color:inherit}, so without this the author link is indistinguishable from
+   plain text and reads as unclickable. */
+.art-meta .byline a{color:var(--tx);border-bottom:1px solid var(--ln2)}
+.art-meta .byline a:hover{border-bottom-color:currentColor}
 .art-meta .tag{font:500 11.5px/1 var(--mono);letter-spacing:.05em;color:var(--ac2);
  border:1px solid var(--ln2);border-radius:999px;padding:5px 10px}
 .archive-note{max-width:74ch;font-size:14px;line-height:1.6;color:var(--tx2);border-left:2px solid var(--ac);padding:12px 18px;background:var(--alt);margin:0 0 32px}

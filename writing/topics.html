@@ -1,0 +1,80 @@
+---
+layout: base
+permalink: /writing/topics/
+title: Article topics
+description: "Browse Wirewalk Advisory technical articles by topic: InfiniBand, GPFS, parallel storage, Slurm, GPU and AI infrastructure, benchmarking, Linux operations and detection engineering."
+---
+{%- comment -%}
+  Tag index. Tags were rendered on each article but were not links anywhere, so they
+  were invisible to a crawler and unusable to a reader. This gives every tag one URL
+  with an anchor, and produces the internal linking that a flat post list does not.
+{%- endcomment -%}
+{%- comment -%}
+  Tag index. Tags were rendered on each article but linked nowhere, so they were
+  invisible to a crawler and unusable to a reader.
+
+  The vocabulary is unnormalised across the corpus: of ~215 distinct tags, most are
+  used once. Giving each its own section produced a 245 KB page of 215 headings, which
+  is worse than no facet at all. So tags carrying two or more articles get a real
+  section, and the single-article long tail becomes one compact list of links -- every
+  tag still reachable, without pretending 172 of them are topics.
+{%- endcomment -%}
+{%- assign all_tags = site.posts | map: 'tags' | join: ',' | split: ',' | uniq | sort_natural -%}
+{%- assign main_tags = "" | split: "" -%}
+{%- assign tail_tags = "" | split: "" -%}
+{%- for t in all_tags -%}
+  {%- assign n = site.posts | where_exp: "p", "p.tags contains t" | size -%}
+  {%- if n > 1 -%}{%- assign main_tags = main_tags | push: t -%}
+  {%- else -%}{%- assign tail_tags = tail_tags | push: t -%}{%- endif -%}
+{%- endfor -%}
+<section class="sec" style="border-bottom:0"><div class="wrap">
+  <div class="sh-split">
+    <div><span class="eyebrow">Topics &middot; {{ main_tags.size }}</span>
+      <h2>Every topic, and the articles under it.</h2></div>
+    <p>The same {{ site.posts.size }} articles as the <a href="{{ '/writing/' | relative_url }}">main
+    index</a>, grouped by subject rather than by category. A topic appears here when it carries
+    more than one article; everything else is listed at the foot of the page.</p>
+  </div>
+
+  <nav class="topic-nav" aria-label="Topics">
+    {%- for t in main_tags %}<a href="#t-{{ t | slugify }}">{{ t }}</a>{% endfor %}
+  </nav>
+
+  {%- for t in main_tags %}
+  {%- assign hits = site.posts | where_exp: "p", "p.tags contains t" %}
+  <section class="topic-group" id="t-{{ t | slugify }}" aria-labelledby="h-{{ t | slugify }}">
+    <h3 id="h-{{ t | slugify }}">{{ t }} <span class="muted small">&middot; {{ hits.size }}</span></h3>
+    <div class="plist">
+      {%- for post in hits %}
+      <article class="pitem">
+        <div>
+          <h4><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h4>
+          <p>{{ post.summary | default: post.excerpt | strip_html | truncate: 160 }}</p>
+        </div>
+        <div class="pm">
+          <b>{{ post.category | default: 'Notes' }}</b>
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b %Y" }}</time>
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+  </section>
+  {%- endfor %}
+
+  {%- if tail_tags.size > 0 %}
+  <section class="topic-group" id="t-other" aria-labelledby="h-other">
+    <h3 id="h-other">Also tagged <span class="muted small">&middot; {{ tail_tags.size }}</span></h3>
+    <p class="small muted">Tags carrying a single article, linked straight to it.</p>
+    <nav class="topic-nav" aria-label="Single-article tags">
+      {%- for t in tail_tags %}
+      {%- assign one = site.posts | where_exp: "p", "p.tags contains t" | first %}
+      {%- if one %}<a href="{{ one.url | relative_url }}" title="{{ one.title | escape }}">{{ t }}</a>{% endif %}
+      {%- endfor %}
+    </nav>
+  </section>
+  {%- endif %}
+
+  <p style="margin-top:32px" class="small muted">Written by
+    <a href="{{ '/about/lenny-shovsky/' | relative_url }}">Lenny Shovsky</a>.
+    Subscribe by <a href="{{ '/feed.xml' | relative_url }}">RSS</a>.</p>
+</div></section>

@@ -12,8 +12,9 @@ description: Practical articles on enterprise security, VAST, PowerScale, WEKA, 
   {% assign topics = site.posts | group_by: 'category' | sort: 'name' %}
   <nav class="topic-nav" aria-label="Article topics">
     {% for topic in topics %}<a href="#topic-{{ topic.name | slugify }}">{{ topic.name }} · {{ topic.items.size }}</a>{% endfor %}
+    <a href="{{ '/writing/topics/' | relative_url }}">By topic &rarr;</a>
   </nav>
-  <p class="archive-note">The enterprise infrastructure and security series uses editorial archive dates across 2024–2026. These are not original publication dates: the series was published and its documentation reviewed on 9 September 2026. Product guidance should be checked against your installed release.</p>
+  <p class="archive-note">Some articles carry an editorial <b>archive date</b> rather than an original publication date, and each one says so at the top. The enterprise infrastructure and security series (dated across 2024–2026) was published and its documentation reviewed on 9 September 2026. The HPC and AI infrastructure engineering series (dated across August–October 2026) was published and reviewed on 17 October 2026. Product guidance should be checked against your installed release.</p>
   {% for topic in topics %}
   <section class="topic-group" id="topic-{{ topic.name | slugify }}" aria-labelledby="heading-{{ topic.name | slugify }}">
     <h3 id="heading-{{ topic.name | slugify }}">{{ topic.name }}</h3>
@@ -34,5 +35,8 @@ description: Practical articles on enterprise security, VAST, PowerScale, WEKA, 
   </section>
   {% endfor %}
   {% if site.posts.size == 0 %}<p class="muted" style="padding:28px 0">No articles yet.</p>{% endif %}
-  <p style="margin-top:32px" class="small muted">Subscribe by <a href="{{ '/feed.xml' | relative_url }}">RSS</a>.</p>
+  <p style="margin-top:32px" class="small muted">Written by
+    <a href="{{ '/about/lenny-shovsky/' | relative_url }}">Lenny Shovsky</a>.
+    <a href="{{ '/writing/topics/' | relative_url }}">Browse by topic</a>.
+    Subscribe by <a href="{{ '/feed.xml' | relative_url }}">RSS</a>.</p>
 </div></section>

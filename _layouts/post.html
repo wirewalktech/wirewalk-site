@@ -9,6 +9,14 @@ layout: base
     <h1>{{ page.title }}</h1>
     {%- if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
     <div class="art-meta">
+      {%- comment -%}
+        Byline in the layout, not in 60-odd front matter blocks: one place to change,
+        and no post can be published without it. rel=author + the itemprop pair give
+        the name a machine-readable home alongside the JSON-LD in the head.
+      {%- endcomment -%}
+      <span class="byline" itemprop="author" itemscope itemtype="https://schema.org/Person">By <a
+        href="{{ site.author_url | default: '/about/lenny-shovsky/' | relative_url }}"
+        rel="author"><span itemprop="name">{{ site.author }}</span></a></span>
       <span>{% if page.archive_date %}Archive date: {% endif %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time></span>
       <span>{{ mins }} min read</span>
       {%- for t in page.tags %}<span class="tag">{{ t }}</span>{% endfor %}

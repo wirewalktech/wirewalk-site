@@ -1,7 +1,7 @@
 ---
 title: "WEKA Snap-To-Object: prove recovery without the source cluster"
 category: "Storage security"
-tags: ["WEKA", "Object storage", "Snapshots"]
+tags: ["WEKA", "Object Storage", "Snapshots"]
 summary: "A completed upload is a milestone. Recovery also needs the locator, compatible software, credentials, and usable application data."
 date: "2024-12-21"
 archive_date: true

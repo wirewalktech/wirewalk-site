@@ -4,7 +4,15 @@ description: >-
   HPC and AI infrastructure engineering and architecture. Cluster design and
   build-out, InfiniBand fabric, parallel storage, GPU and AI stacks, schedulers,
   and the enterprise IT around them.
-author: Wirewalk Advisory
+# Byline and schema identity. site.author is the human who writes the articles --
+# it appears in the Atom feed, the visible byline, and the Article/Person
+# structured data. The organisation is a separate field so schema can name a
+# publisher distinct from the author.
+author: Lenny Shovsky
+author_url: /about/lenny-shovsky/
+author_role: HPC and AI infrastructure engineer
+organization: Wirewalk Advisory
+locale: en_US
 
 # Change both of these together if the repository is renamed.
 url: https://www.wirewalk.com
