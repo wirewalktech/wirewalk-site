@@ -6,12 +6,12 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/wirewalk/wirewalk-mark-180.png">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{% if page.title %}{{ page.title }} &mdash; {{ site.title }}{% else %}{{ site.title }} &mdash; {{ site.tagline }}{% endif %}</title>
+<title>{% if page.title %}{{ page.title | escape }} &mdash; {{ site.title }}{% else %}{{ site.title }} &mdash; {{ site.tagline }}{% endif %}</title>
 <meta name="description" content="{{ page.description | default: page.summary | default: site.description | strip_newlines | truncate: 300 | escape }}">
 <link rel="canonical" href="{{ page.url | absolute_url }}">
 <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">
 <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
-<meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+<meta property="og:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title }}{% endif %}">
 <meta property="og:description" content="{{ page.description | default: page.summary | default: site.description | strip_newlines | truncate: 300 | escape }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 <meta property="og:site_name" content="{{ site.title }}">
@@ -39,7 +39,7 @@
 
 <meta name="theme-color" content="#0b0e14">
 <meta property="og:locale" content="{{ site.locale | default: 'en_US' }}">
-<meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+<meta name="twitter:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title }}{% endif %}">
 <meta name="twitter:description" content="{{ meta_desc | escape }}">
 {%- if page.layout == 'post' %}
 <meta name="author" content="{{ site.author }}">
@@ -109,7 +109,9 @@
   "areaServed": "US",
   "knowsAbout": [
     "High performance computing", "AI infrastructure", "InfiniBand fabric",
-    "Parallel filesystems", "GPFS", "Slurm", "GPU clusters", "Parallel storage benchmarking"
+    "Parallel filesystems", "GPFS", "Slurm", "GPU clusters", "Parallel storage benchmarking",
+    "CPU computing", "Linux", "Scientific software", "AI training pipelines",
+    "Big data", "AI factories", "Research computing", "Low-latency networking"
   ],
   "founder": {
     "@type": "Person",

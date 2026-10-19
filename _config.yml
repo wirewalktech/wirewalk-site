@@ -1,9 +1,9 @@
 title: Wirewalk Advisory
 tagline: HPC and AI infrastructure
 description: >-
-  HPC and AI infrastructure engineering and architecture. Cluster design and
-  build-out, InfiniBand fabric, parallel storage, GPU and AI stacks, schedulers,
-  and the enterprise IT around them.
+  AI and HPC infrastructure engineering: GPU and CPU compute, Linux, data pipelines,
+  parallel storage and low-latency networking for AI factories and research centers.
+
 # Byline and schema identity. site.author is the human who writes the articles --
 # it appears in the Atom feed, the visible byline, and the Article/Person
 # structured data. The organisation is a separate field so schema can name a

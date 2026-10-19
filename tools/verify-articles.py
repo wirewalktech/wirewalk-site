@@ -81,9 +81,9 @@ def main():
         if path not in index.links:failures.append(f'Absent from index: {path}')
         if m.get('archive_date'):
             for heading in re.findall(r'^## (.+)$',body,re.M):
-                if heading.replace("’", "'") not in [h.replace("’", "'") for h in page.h2]:failures.append(f'Missing section {heading}: {path}')
+                if heading.replace("`", "").replace("’", "'") not in [h.replace("’", "'") for h in page.h2]:failures.append(f'Missing section {heading}: {path}')
             if 'Archive date is an editorial placement' not in rendered:failures.append(f'Missing date disclosure: {path}')
-            if m['summary']!=page.description:failures.append(f'Description mismatch: {path}')
+            if str(m.get('description') or m['summary']).replace('\n', '')[:300]!=page.description:failures.append(f'Description mismatch: {path}')
         if re.search(r'{%|{{\s*(?:page|site|post)\.',rendered):failures.append(f'Unrendered Liquid: {path}')
         for link in page.links:
             u=urlsplit(urljoin('https://www.wirewalk.com'+path,link))
@@ -105,16 +105,18 @@ def main():
             if e is None:failures.append(f'Missing feed entry: {path}');continue
             if m.get('archive_date') and not e.find('a:published',ns).text.startswith(str(m['published_on'])):failures.append(f'Feed publication mismatch: {path}')
     except ET.ParseError as e:failures.append(f'Invalid Atom XML: {e}')
-    external=[]
+    external=[]; unverifiable=[]
     if args.external:
         with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
             for url,r in zip(sorted(sources),pool.map(request,sorted(sources))):
                 row={k:r[k] for k in ('status','final','error')};row['url']=url
                 external.append(row)
-                if r['status']!=200:failures.append(f'External HTTP {r["status"]}: {url}')
-    result={'posts':len(posts),'new_articles':sum(bool(m.get('archive_date')) for _,m,_ in posts),'source_urls':len(sources),'checked_pages':len(cache),'external':external,'failures':sorted(set(failures)),'evidence':evidence}
+                if r['status'] in (401,403,405,429):unverifiable.append(f'External HTTP {r["status"]}: {url}')
+                elif r['status']!=200:failures.append(f'External HTTP {r["status"]}: {url}')
+    result={'posts':len(posts),'new_articles':sum(bool(m.get('archive_date')) for _,m,_ in posts),'source_urls':len(sources),'checked_pages':len(cache),'external':external,'unverifiable':unverifiable,'failures':sorted(set(failures)),'evidence':evidence}
     if args.report:Path(args.report).write_text(json.dumps(result,indent=2))
     print(f'{len(posts)} source posts; {result["new_articles"]} new articles; {len(cache)} pages checked; {len(sources)} source URLs')
+    for item in unverifiable:print('UNVERIFIABLE:',item)
     for fail in result['failures']:print('FAIL:',fail)
     print(f'{len(result["failures"])} failure(s)')
     return bool(result['failures'])

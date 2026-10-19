@@ -1,20 +1,31 @@
 ---
 layout: base
-title: Writing
-description: Practical articles on enterprise security, VAST, PowerScale, WEKA, IDS and IPS, identity, recovery, Linux operations, and HPC engineering.
+title: AI & HPC Infrastructure Articles
+description: Technical guides to GPU and CPU compute, AI training pipelines, Linux, parallel storage, InfiniBand and HPC performance for AI factories and research centers.
 ---
 <section class="sec" style="border-bottom:0"><div class="wrap">
   <div class="sh-split">
     <div><span class="eyebrow">Writing · {{ site.posts.size }} articles</span>
-      <h2>Security, infrastructure, and the checks that prove they work.</h2></div>
-    <p>Technical guides to storage protection, detection, identity, recovery, and Linux operations, alongside our HPC and fabric series. Each security article connects a concrete failure mode to a practical validation method.</p>
+      <h1>AI and HPC infrastructure articles.</h1></div>
+    <p>GPU and CPU compute, Linux and scientific software, AI training and big-data pipelines, parallel storage and low-latency networking. Practical engineering for AI factories and research centers, from benchmark design to production operation. Security, identity and recovery remain part of running the whole system.</p>
   </div>
+  <nav class="topic-nav" aria-label="Start with HPC and AI">
+    <a href="{{ '/writing/pytorch-dataloader-bottlenecks-hpc-gpu-training/' | relative_url }}">AI training pipelines</a>
+    <a href="{{ '/writing/reading-gpu-utilization-mfu-honestly/' | relative_url }}">GPU performance</a>
+    <a href="{{ '/writing/hpl-benchmarking/' | relative_url }}">CPU compute benchmarks</a>
+    <a href="{{ '/writing/distributed-ai-checkpoint-storage-restart-testing/' | relative_url }}">Checkpoint storage</a>
+    <a href="{{ '/writing/ior-mdtest-parallel-storage/' | relative_url }}">Parallel storage</a>
+    <a href="{{ '/writing/powerscale-isilon-ai-hpc-storage-design/' | relative_url }}">PowerScale / Isilon</a>
+    <a href="{{ '/writing/lustre-striping-ai-hpc-workloads/' | relative_url }}">Lustre</a>
+    <a href="{{ '/writing/mpi-troubleshooting-playbook/' | relative_url }}">Low-latency networking</a>
+    <a href="{{ '/writing/environment-modules-failure-modes/' | relative_url }}">Linux software stacks</a>
+  </nav>
   {% assign topics = site.posts | group_by: 'category' | sort: 'name' %}
   <nav class="topic-nav" aria-label="Article topics">
     {% for topic in topics %}<a href="#topic-{{ topic.name | slugify }}">{{ topic.name }} · {{ topic.items.size }}</a>{% endfor %}
     <a href="{{ '/writing/topics/' | relative_url }}">By topic &rarr;</a>
   </nav>
-  <p class="archive-note">Some articles carry an editorial <b>archive date</b> rather than an original publication date, and each one says so at the top. The enterprise infrastructure and security series (dated across 2024–2026) was published and its documentation reviewed on 9 September 2026. The HPC and AI infrastructure engineering series (dated across August–October 2026) was published and reviewed on 17 October 2026. Product guidance should be checked against your installed release.</p>
+  <p class="archive-note">Some articles carry an editorial <b>archive date</b> rather than an original publication date, and each one says so at the top. The enterprise infrastructure and security series (dated across 2024–2026) was published and its documentation reviewed on 9 September 2026. The archived HPC and AI infrastructure engineering articles (dated across August–October 2026) were published and reviewed on 17 October 2026. The additional AI pipeline and PowerScale/Isilon and Lustre guides use varied editorial archive dates; they were published and reviewed on 18 October 2026. Each article retains its actual publication date. Product guidance should be checked against your installed release.</p>
   {% for topic in topics %}
   <section class="topic-group" id="topic-{{ topic.name | slugify }}" aria-labelledby="heading-{{ topic.name | slugify }}">
     <h3 id="heading-{{ topic.name | slugify }}">{{ topic.name }}</h3>

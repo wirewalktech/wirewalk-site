@@ -19,7 +19,7 @@ layout: base
         rel="author"><span itemprop="name">{{ site.author }}</span></a></span>
       <span>{% if page.archive_date %}Archive date: {% endif %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time></span>
       <span>{{ mins }} min read</span>
-      {%- for t in page.tags %}<span class="tag">{{ t }}</span>{% endfor %}
+      {%- for t in page.tags %}<a class="tag" href="{{ '/writing/topics/' | relative_url }}#t-{{ t | slugify }}">{{ t }}</a>{% endfor %}
     </div>
   </header>
 
@@ -33,6 +33,26 @@ layout: base
     </div>
     <aside class="toc" id="toc" hidden><b>Contents</b><nav></nav></aside>
   </div>
+
+  {% assign related_count = 0 %}
+  {% capture related_links %}
+    {% for candidate in site.posts %}
+      {% if candidate.url != page.url and related_count < 3 %}
+        {% assign shared_topic = false %}
+        {% for tag in page.tags %}{% if candidate.tags contains tag %}{% assign shared_topic = true %}{% endif %}{% endfor %}
+        {% if shared_topic %}
+          <li><a href="{{ candidate.url | relative_url }}">{{ candidate.title }}</a></li>
+          {% assign related_count = related_count | plus: 1 %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endcapture %}
+  {% if related_count > 0 %}
+  <section class="prose" aria-labelledby="related-heading" style="margin-top:40px">
+    <h2 id="related-heading">Related articles</h2>
+    <ul>{{ related_links }}</ul>
+  </section>
+  {% endif %}
 
   {%- if page.previous or page.next %}
   <nav class="pnav" aria-label="More articles">
