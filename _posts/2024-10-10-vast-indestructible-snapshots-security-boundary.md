@@ -4,8 +4,6 @@ category: "Storage security"
 tags: ["VAST", "Snapshots", "Ransomware"]
 summary: "Retention, administrative separation, support unlock, and recovery are different parts of the same protection design."
 date: "2024-10-10"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

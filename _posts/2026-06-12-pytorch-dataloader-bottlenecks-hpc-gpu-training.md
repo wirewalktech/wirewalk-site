@@ -5,9 +5,7 @@ tags: ["PyTorch", "DataLoader", "GPU Training", "Parallel Storage"]
 summary: "Diagnose slow PyTorch data loading on HPC clusters with per-rank timing, worker sweeps, storage checks, and reproducible GPU throughput measurements."
 description: "Diagnose slow PyTorch data loading on HPC clusters with per-rank timing, worker sweeps, storage checks, and reproducible GPU throughput measurements."
 date: "2026-06-12"
-archive_date: true
 featured: true
-published_on: "2026-10-18"
 last_reviewed: "2026-10-18"
 series: "HPC and AI infrastructure engineering"
 ---

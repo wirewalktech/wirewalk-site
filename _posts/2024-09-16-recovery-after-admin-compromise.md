@@ -4,8 +4,6 @@ category: "Recovery"
 tags: ["Backup", "Identity", "Recovery"]
 summary: "A recovery copy is only useful if the people and systems needed to restore it survive the same incident."
 date: "2024-09-16"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

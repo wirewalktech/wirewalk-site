@@ -8,8 +8,6 @@ summary: >-
   zero and fails, and an environment change discarded by a pipe.
 description: "Bash pitfalls that fail silently in production scripts: empty IFS from command substitution, quoting through ssh, grep -c exit status, subshell environment loss, and pgrep matching itself."
 date: "2026-09-02"
-archive_date: true
-published_on: "2026-10-17"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
 ---

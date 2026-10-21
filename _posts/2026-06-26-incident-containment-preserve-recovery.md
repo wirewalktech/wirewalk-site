@@ -4,8 +4,6 @@ category: "Recovery"
 tags: ["Incident response", "EDR", "Network isolation"]
 summary: "Containment decisions should stop harmful activity while preserving evidence and an authorized recovery path."
 date: "2026-06-26"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

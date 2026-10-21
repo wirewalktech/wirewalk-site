@@ -4,8 +4,6 @@ category: "Enterprise IT"
 tags: ["OpenSCAP", "RHEL", "Hardening", "Audit"]
 summary: "A scan result becomes useful evidence when the profile, content version, scope, and exceptions are retained."
 date: "2026-05-09"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

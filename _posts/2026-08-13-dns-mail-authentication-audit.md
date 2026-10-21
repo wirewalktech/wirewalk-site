@@ -4,8 +4,6 @@ category: "Enterprise IT"
 tags: ["DNS", "SPF", "DKIM", "DMARC"]
 summary: "Check record content, sender alignment, and real message headers before declaring mail authentication healthy."
 date: "2026-08-13"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

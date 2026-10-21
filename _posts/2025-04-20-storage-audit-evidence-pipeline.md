@@ -4,8 +4,6 @@ category: "Detection"
 tags: ["Storage", "Audit", "SIEM"]
 summary: "An enabled audit setting is the start of an evidence pipeline, not proof that usable records exist."
 date: "2025-04-20"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

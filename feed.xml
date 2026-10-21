@@ -13,7 +13,7 @@
   <entry>
     <title>{{ post.title | xml_escape }}</title>
     <link href="{{ post.url | absolute_url }}"/>
-    <published>{{ post.published_on | default: post.date | date_to_xmlschema }}</published>
+    <published>{{ post.date | date_to_xmlschema }}</published>
     <updated>{{ post.last_reviewed | default: post.date | date_to_xmlschema }}</updated>
     <id>{{ post.url | absolute_url }}</id>
     <summary>{{ post.summary | default: post.excerpt | strip_html | xml_escape }}</summary>

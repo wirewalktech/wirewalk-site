@@ -4,8 +4,6 @@ category: "Storage security"
 tags: ["WEKA", "Object Storage", "Snapshots"]
 summary: "A completed upload is a milestone. Recovery also needs the locator, compatible software, credentials, and usable application data."
 date: "2024-12-21"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

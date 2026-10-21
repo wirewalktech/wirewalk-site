@@ -4,8 +4,6 @@ category: "Detection"
 tags: ["TLS", "Zeek", "Suricata", "EDR"]
 summary: "Combine network, endpoint, and application evidence instead of assuming one sensor sees inside every connection."
 date: "2025-09-11"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

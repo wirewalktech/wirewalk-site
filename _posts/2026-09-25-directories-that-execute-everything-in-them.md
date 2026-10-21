@@ -8,8 +8,6 @@ summary: >-
   configuration — displayed to users, parsed as a job, or loaded as software.
 description: "Why editing config in place and leaving a .bak alongside it breaks drop-in directories like /etc/motd.d, /etc/cron.d and MODULEPATH, and where backups should go instead."
 date: "2026-09-25"
-archive_date: true
-published_on: "2026-10-17"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
 ---

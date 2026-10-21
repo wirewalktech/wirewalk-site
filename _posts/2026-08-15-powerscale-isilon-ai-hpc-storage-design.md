@@ -5,9 +5,7 @@ tags: ["PowerScale", "Isilon", "OneFS", "AI Infrastructure", "NFS"]
 summary: "Design Dell PowerScale and Isilon storage for AI and HPC pipelines: map client access, dataset layout, compute placement, capacity, and recovery requirements."
 description: "Design Dell PowerScale and Isilon storage for AI and HPC pipelines: map client access, dataset layout, compute placement, capacity, and recovery requirements."
 date: "2026-08-15"
-archive_date: true
 featured: true
-published_on: "2026-10-18"
 last_reviewed: "2026-10-18"
 series: "AI and HPC storage engineering"
 ---

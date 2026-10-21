@@ -8,8 +8,6 @@ summary: >-
   mid-thirties result on a real training run is normal rather than alarming.
 description: "Why nvidia-smi utilization misleads for GPU training, how to compute model FLOPs utilization (MFU), what a realistic MFU looks like, and which bottleneck each symptom points to."
 date: "2026-09-18"
-archive_date: true
-published_on: "2026-10-17"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
 ---

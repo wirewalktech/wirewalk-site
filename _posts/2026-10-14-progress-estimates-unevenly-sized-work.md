@@ -8,8 +8,6 @@ summary: >-
   long transfer it can be wrong by more than an order of magnitude.
 description: "Why percent-complete and ETA mislead when work items vary in size, how byte-weighted progress fixes it, and which monitoring signals distinguish stalled from slow."
 date: "2026-10-14"
-archive_date: true
-published_on: "2026-10-17"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
 ---

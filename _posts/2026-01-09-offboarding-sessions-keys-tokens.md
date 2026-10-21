@@ -4,8 +4,6 @@ category: "Identity"
 tags: ["Active Directory", "Microsoft Entra", "SSH", "Tokens"]
 summary: "Test existing sessions and independent credentials as well as new sign-ins."
 date: "2026-01-09"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

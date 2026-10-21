@@ -8,8 +8,6 @@ summary: >-
   delta over a known window tells you whether a link is degrading.
 description: "How to read InfiniBand port error counters correctly: cumulative versus windowed deltas, which counters indicate a bad cable, and separating a degraded link from a fabric-wide problem."
 date: "2026-08-24"
-archive_date: true
-published_on: "2026-10-17"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
 ---

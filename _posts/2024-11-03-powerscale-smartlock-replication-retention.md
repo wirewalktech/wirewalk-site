@@ -4,8 +4,6 @@ category: "Storage security"
 tags: ["PowerScale", "Isilon", "SmartLock", "SyncIQ"]
 summary: "Check destination WORM state and retention explicitly instead of treating a successful replication job as proof."
 date: "2024-11-03"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

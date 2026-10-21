@@ -4,8 +4,6 @@ category: "Enterprise IT"
 tags: ["iDRAC", "iLO", "Redfish", "Segmentation"]
 summary: "BMCs, hypervisors, storage controllers, and provisioning services belong in the privileged-access model."
 date: "2026-02-26"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

@@ -4,8 +4,6 @@ category: "Storage security"
 tags: ["WEKA", "KMS", "Vault", "Encryption"]
 summary: "Encrypted data and recoverable data are different outcomes. Test the key dependency without risking production keys."
 date: "2025-01-14"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

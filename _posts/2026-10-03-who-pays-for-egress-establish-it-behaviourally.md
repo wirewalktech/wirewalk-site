@@ -9,8 +9,6 @@ summary: >-
   it definitively.
 description: "How to determine whether an S3 bucket is Requester Pays when the configuration API is denied: a behavioural test, what canonical-ID ACL grants imply, and how to record cost attribution."
 date: "2026-10-03"
-archive_date: true
-published_on: "2026-10-17"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
 ---

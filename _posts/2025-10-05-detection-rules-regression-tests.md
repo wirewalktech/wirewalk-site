@@ -4,8 +4,6 @@ category: "Detection"
 tags: ["Suricata", "Snort", "Regression testing"]
 summary: "A small fixture library makes rule changes reviewable and keeps false-positive fixes from silently removing coverage."
 date: "2025-10-05"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

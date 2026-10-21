@@ -8,8 +8,6 @@ summary: >-
   ratio means asking the allocator, and asking it about the right set of files.
 description: "How to measure compression ratio on GPFS and other parallel filesystems: why du cannot see it, which tools report allocated blocks, and the scoping error that inflates the ratio."
 date: "2026-09-15"
-archive_date: true
-published_on: "2026-10-17"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
 ---

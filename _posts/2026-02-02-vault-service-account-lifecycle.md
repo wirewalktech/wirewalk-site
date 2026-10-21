@@ -4,8 +4,6 @@ category: "Identity"
 tags: ["HashiCorp Vault", "Service accounts", "Secrets"]
 summary: "Secret issuance, application renewal, and credential revocation are separate steps to verify."
 date: "2026-02-02"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

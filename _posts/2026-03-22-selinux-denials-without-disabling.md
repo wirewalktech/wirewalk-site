@@ -4,8 +4,6 @@ category: "Enterprise IT"
 tags: ["SELinux", "RHEL", "Linux hardening"]
 summary: "Labels, supported booleans, and application behavior should be understood before a new allow rule is introduced."
 date: "2026-03-22"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

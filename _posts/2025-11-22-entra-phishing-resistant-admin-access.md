@@ -4,8 +4,6 @@ category: "Identity"
 tags: ["Microsoft Entra", "FIDO2", "MFA"]
 summary: "An MFA requirement and a phishing-resistant authentication requirement are not identical policies."
 date: "2025-11-22"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

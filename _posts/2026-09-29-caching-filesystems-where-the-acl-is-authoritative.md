@@ -9,8 +9,6 @@ summary: >-
   stop.
 description: "Why ACLs set on an AFM cache fileset revert to the home filesystem's values, why chmod destroys an NFSv4 ACL while chown preserves it, and how to verify a grant with a negative control."
 date: "2026-09-29"
-archive_date: true
-published_on: "2026-10-17"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
 ---

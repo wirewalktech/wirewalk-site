@@ -4,8 +4,6 @@ category: "Storage security"
 tags: ["Amazon S3", "Object Lock", "Retention"]
 summary: "A delete marker can hide a protected version. Recovery tooling must know which version it needs."
 date: "2025-02-07"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

@@ -4,8 +4,6 @@ category: "Storage security"
 tags: ["PowerScale", "Isilon", "Active Directory", "NFS", "SMB"]
 summary: "An SMB login and an NFS identity can reach the same files through different mappings. Test both paths."
 date: "2024-11-27"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

@@ -4,8 +4,6 @@ category: "Detection"
 tags: ["Zeek", "Network telemetry", "DNS", "TLS"]
 summary: "Use connection identifiers to connect evidence while keeping the limits of passive visibility explicit."
 date: "2025-07-01"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

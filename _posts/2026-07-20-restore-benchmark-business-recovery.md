@@ -4,8 +4,6 @@ category: "Recovery"
 tags: ["Backup", "Performance", "RTO", "Storage"]
 summary: "Throughput is one component of recovery. Metadata, identity, keys, and application validation can dominate elapsed time."
 date: "2026-07-20"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

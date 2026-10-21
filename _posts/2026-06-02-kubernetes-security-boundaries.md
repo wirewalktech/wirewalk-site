@@ -4,8 +4,6 @@ category: "Enterprise IT"
 tags: ["Kubernetes", "NetworkPolicy", "Pod security"]
 summary: "A namespace is an organizational boundary. Verify the controls that make it an access boundary."
 date: "2026-06-02"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

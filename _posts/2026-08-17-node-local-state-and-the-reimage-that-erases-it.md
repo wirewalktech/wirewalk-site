@@ -8,8 +8,6 @@ summary: >-
   it is knowing which changes are node-local and which live on shared storage.
 description: "How to avoid losing configuration at reimage: classifying node-local versus shared state, why per-node image overrides defeat a category default, and verifying from the image path."
 date: "2026-08-17"
-archive_date: true
-published_on: "2026-10-17"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
 ---

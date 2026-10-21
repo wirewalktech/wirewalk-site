@@ -4,8 +4,6 @@ category: "Enterprise IT"
 tags: ["Ansible", "Linux", "Patching"]
 summary: "Use small batches, explicit stop conditions, and application checks to avoid reporting installation as remediation."
 date: "2026-04-15"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

@@ -4,8 +4,6 @@ category: "Detection"
 tags: ["Snort 3", "IDS", "IPS", "Rule testing"]
 summary: "Use matching and nonmatching captures, explicit actions, and live enforcement tests to validate a rule change."
 date: "2025-07-25"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

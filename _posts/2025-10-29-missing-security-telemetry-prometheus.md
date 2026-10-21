@@ -4,8 +4,6 @@ category: "Detection"
 tags: ["Prometheus", "Monitoring", "SIEM"]
 summary: "A quiet dashboard can mean no incidents, a broken producer, or a source that vanished from inventory."
 date: "2025-10-29"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

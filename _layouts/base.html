@@ -21,19 +21,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{{ '/assets/og.png' | absolute_url }}">
-{%- comment -%}
-  Publication dates for machines.
-
-  For editorially placed articles (archive_date) the visible date is a placement in a
-  series rather than a publication date. Article metadata
-  and the structured data below use published_on / last_reviewed, which are the true
-  dates. Asserting the archive date to a search engine would be a claim we know is false.
-{%- endcomment -%}
-{%- if page.archive_date and page.published_on -%}
-  {%- assign pub_date = page.published_on -%}
-{%- else -%}
-  {%- assign pub_date = page.date -%}
-{%- endif -%}
+{%- assign pub_date = page.date -%}
 {%- if page.last_reviewed -%}{%- assign mod_date = page.last_reviewed -%}{%- else -%}{%- assign mod_date = pub_date -%}{%- endif -%}
 {%- assign meta_desc = page.description | default: page.summary | default: site.description | strip_newlines | strip | truncate: 300 -%}
 

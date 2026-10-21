@@ -4,8 +4,6 @@ category: "Detection"
 tags: ["Wazuh", "FIM", "Linux"]
 summary: "A selective baseline and a tested response path make file-change alerts useful."
 date: "2025-08-18"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

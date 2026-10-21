@@ -4,8 +4,6 @@ category: "Detection"
 tags: ["Suricata", "IPS", "AF_PACKET"]
 summary: "An inline sensor is part of the availability path. Validate forwarding, selective blocking, and failure behavior separately."
 date: "2025-06-07"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

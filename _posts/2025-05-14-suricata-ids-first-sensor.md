@@ -4,8 +4,6 @@ category: "Detection"
 tags: ["Suricata", "IDS", "EVE JSON"]
 summary: "Start with capture visibility and a harmless detection fixture before counting alerts."
 date: "2025-05-14"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

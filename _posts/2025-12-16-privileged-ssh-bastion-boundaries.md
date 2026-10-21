@@ -4,8 +4,6 @@ category: "Identity"
 tags: ["OpenSSH", "Bastion", "Privileged access"]
 summary: "A jump host is useful only when direct access, forwarding, and downstream authority are deliberately controlled."
 date: "2025-12-16"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

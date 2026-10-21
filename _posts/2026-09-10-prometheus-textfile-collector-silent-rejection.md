@@ -8,8 +8,6 @@ summary: >-
   script that wrote it exits zero and reports success.
 description: "Why node_exporter rejects an entire Prometheus textfile on one malformed line, how to detect it with node_textfile_scrape_error, and how to validate before publishing."
 date: "2026-09-10"
-archive_date: true
-published_on: "2026-10-17"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
 ---

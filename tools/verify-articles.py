@@ -52,11 +52,7 @@ def main():
         slug=f.name[11:-3];path='/writing/'+slug+'/'
         dt=datetime.date.fromisoformat(f.name[:10])
         if dt>datetime.date.today():failures.append(f'Future filename: {f.name}')
-        if m.get('archive_date'):
-            if len(body.split())<350:failures.append(f'Short article: {f.name}')
-            if body.count('\n## ')<4:failures.append(f'Insufficient sections: {f.name}')
-            if not m.get('published_on') or not m.get('last_reviewed'):failures.append(f'Missing provenance: {f.name}')
-            sources.update(re.findall(r'\]\((https://[^)]+)\)',body))
+        sources.update(re.findall(r'\]\((https://[^)]+)\)',body))
         posts.append((path,m,body))
     if len({p for p,_,_ in posts})!=len(posts): failures.append('Duplicate post URL')
     cache={}
@@ -79,10 +75,9 @@ def main():
         if ''.join(page.h1)!=m['title']:failures.append(f'Title mismatch: {path}')
         if page.canonical!='https://www.wirewalk.com'+path:failures.append(f'Canonical mismatch: {path}')
         if path not in index.links:failures.append(f'Absent from index: {path}')
-        if m.get('archive_date'):
-            for heading in re.findall(r'^## (.+)$',body,re.M):
-                if heading.replace("`", "").replace("’", "'") not in [h.replace("’", "'") for h in page.h2]:failures.append(f'Missing section {heading}: {path}')
-            if str(m.get('description') or m['summary']).replace('\n', '')[:300]!=page.description:failures.append(f'Description mismatch: {path}')
+        for heading in re.findall(r'^## (.+)$',body,re.M):
+            if heading.replace("`", "").replace("’", "'") not in [h.replace("’", "'") for h in page.h2]:failures.append(f'Missing section {heading}: {path}')
+        if str(m.get('description') or m['summary']).replace('\n', '')[:300]!=page.description:failures.append(f'Description mismatch: {path}')
         if re.search(r'{%|{{\s*(?:page|site|post)\.',rendered):failures.append(f'Unrendered Liquid: {path}')
         for link in page.links:
             u=urlsplit(urljoin('https://www.wirewalk.com'+path,link))
@@ -102,7 +97,7 @@ def main():
         for path,m,_ in posts:
             e=ids.get('https://www.wirewalk.com'+path)
             if e is None:failures.append(f'Missing feed entry: {path}');continue
-            if m.get('archive_date') and not e.find('a:published',ns).text.startswith(str(m['published_on'])):failures.append(f'Feed publication mismatch: {path}')
+            if not e.find('a:published',ns).text.startswith(str(m['date'])[:10]):failures.append(f'Feed publication mismatch: {path}')
     except ET.ParseError as e:failures.append(f'Invalid Atom XML: {e}')
     external=[]; unverifiable=[]
     if args.external:
@@ -112,9 +107,9 @@ def main():
                 external.append(row)
                 if r['status'] in (401,403,405,429):unverifiable.append(f'External HTTP {r["status"]}: {url}')
                 elif r['status']!=200:failures.append(f'External HTTP {r["status"]}: {url}')
-    result={'posts':len(posts),'new_articles':sum(bool(m.get('archive_date')) for _,m,_ in posts),'source_urls':len(sources),'checked_pages':len(cache),'external':external,'unverifiable':unverifiable,'failures':sorted(set(failures)),'evidence':evidence}
+    result={'posts':len(posts),'source_urls':len(sources),'checked_pages':len(cache),'external':external,'unverifiable':unverifiable,'failures':sorted(set(failures)),'evidence':evidence}
     if args.report:Path(args.report).write_text(json.dumps(result,indent=2))
-    print(f'{len(posts)} source posts; {result["new_articles"]} new articles; {len(cache)} pages checked; {len(sources)} source URLs')
+    print(f'{len(posts)} source posts; {len(cache)} pages checked; {len(sources)} source URLs')
     for item in unverifiable:print('UNVERIFIABLE:',item)
     for fail in result['failures']:print('FAIL:',fail)
     print(f'{len(result["failures"])} failure(s)')

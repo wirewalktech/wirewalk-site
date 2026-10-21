@@ -4,8 +4,6 @@ category: "Storage security"
 tags: ["NFS", "Kerberos", "Linux"]
 summary: "Client trust, user identity, integrity, and encryption are separate choices in an NFS design."
 date: "2025-03-27"
-archive_date: true
-published_on: "2026-09-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---

@@ -8,8 +8,6 @@ summary: >-
   you have a job whose behaviour cannot be deduced from its configuration.
 description: "Why cron MAILTO goes silent when a script redirects its own stdout and stderr, how stale drop-in crontabs keep running, and how to make a scheduled job prove it ran."
 date: "2026-10-08"
-archive_date: true
-published_on: "2026-10-17"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
 ---

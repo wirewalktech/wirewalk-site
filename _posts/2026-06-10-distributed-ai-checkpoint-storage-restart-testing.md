@@ -5,9 +5,7 @@ tags: ["PyTorch", "Checkpointing", "AI Training", "HPC", "Recovery"]
 summary: "Measure distributed AI checkpoint stalls, storage contention, and restart time. Validate recoverable training state before tuning asynchronous saves."
 description: "Measure distributed AI checkpoint stalls, storage contention, and restart time. Validate recoverable training state before tuning asynchronous saves."
 date: "2026-06-10"
-archive_date: true
 featured: true
-published_on: "2026-10-18"
 last_reviewed: "2026-10-18"
 series: "HPC and AI infrastructure engineering"
 ---

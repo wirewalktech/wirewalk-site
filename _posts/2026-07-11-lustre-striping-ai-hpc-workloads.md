@@ -5,9 +5,7 @@ tags: ["Lustre", "Parallel Storage", "AI Infrastructure", "Performance"]
 summary: "Choose and test Lustre stripe layouts for AI datasets, shared HPC files and checkpoints. Inspect actual file layouts and compare performance without global changes."
 description: "Choose and test Lustre stripe layouts for AI datasets, shared HPC files and checkpoints. Inspect actual file layouts and compare performance without global changes."
 date: "2026-07-11"
-archive_date: true
 featured: true
-published_on: "2026-10-18"
 last_reviewed: "2026-10-18"
 series: "AI and HPC storage engineering"
 ---

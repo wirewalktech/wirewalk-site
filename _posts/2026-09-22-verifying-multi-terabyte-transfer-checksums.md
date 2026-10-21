@@ -8,8 +8,6 @@ summary: >-
   checksum the provider will actually give you for whole objects.
 description: "How to verify a large S3 download end to end: why multipart ETags cannot be compared, which checksum algorithms cover whole objects, and how to saturate a parallel filesystem while hashing."
 date: "2026-09-22"
-archive_date: true
-published_on: "2026-10-17"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
 ---
