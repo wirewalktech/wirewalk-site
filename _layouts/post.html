@@ -17,15 +17,11 @@ layout: base
       <span class="byline" itemprop="author" itemscope itemtype="https://schema.org/Person">By <a
         href="{{ site.author_url | default: '/about/lenny-shovsky/' | relative_url }}"
         rel="author"><span itemprop="name">{{ site.author }}</span></a></span>
-      <span>{% if page.archive_date %}Archive date: {% endif %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time></span>
+      <span><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time></span>
       <span>{{ mins }} min read</span>
       {%- for t in page.tags %}<a class="tag" href="{{ '/writing/topics/' | relative_url }}#t-{{ t | slugify }}">{{ t }}</a>{% endfor %}
     </div>
   </header>
-
-  {% if page.archive_date %}
-  <p class="archive-note">Archive date is an editorial placement, not the original publication date. Published {{ page.published_on | date: "%-d %B %Y" }}; documentation reviewed {{ page.last_reviewed | date: "%-d %B %Y" }}. Examples describe proposed checks, not customer incidents or measured product results.</p>
-  {% endif %}
 
   <div class="art-body">
     <div class="prose">

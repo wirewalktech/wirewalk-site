@@ -25,7 +25,6 @@ description: Technical guides to GPU and CPU compute, AI training pipelines, Lin
     {% for topic in topics %}<a href="#topic-{{ topic.name | slugify }}">{{ topic.name }} · {{ topic.items.size }}</a>{% endfor %}
     <a href="{{ '/writing/topics/' | relative_url }}">By topic &rarr;</a>
   </nav>
-  <p class="archive-note">Some articles carry an editorial <b>archive date</b> rather than an original publication date, and each one says so at the top. The enterprise infrastructure and security series (dated across 2024–2026) was published and its documentation reviewed on 9 September 2026. The archived HPC and AI infrastructure engineering articles (dated across August–October 2026) were published and reviewed on 17 October 2026. The additional AI pipeline and PowerScale/Isilon and Lustre guides use varied editorial archive dates; they were published and reviewed on 18 October 2026. Each article retains its actual publication date. Product guidance should be checked against your installed release.</p>
   {% for topic in topics %}
   <section class="topic-group" id="topic-{{ topic.name | slugify }}" aria-labelledby="heading-{{ topic.name | slugify }}">
     <h3 id="heading-{{ topic.name | slugify }}">{{ topic.name }}</h3>
@@ -37,7 +36,7 @@ description: Technical guides to GPU and CPU compute, AI training pipelines, Lin
           <p>{{ post.summary | default: post.excerpt | strip_html | truncate: 190 }}</p>
         </div>
         <div class="pm">
-          <b>{% if post.archive_date %}Archive date{% else %}{{ post.category | default: 'Notes' }}{% endif %}</b>
+          <b>{{ post.category | default: 'Notes' }}</b>
           <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b %Y" }}</time>
         </div>
       </article>

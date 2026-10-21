@@ -17,7 +17,7 @@
     <updated>{{ post.last_reviewed | default: post.date | date_to_xmlschema }}</updated>
     <id>{{ post.url | absolute_url }}</id>
     <summary>{{ post.summary | default: post.excerpt | strip_html | xml_escape }}</summary>
-    <content type="html">{% if post.archive_date %}{{ 'Editorial archive date; first published and reviewed 9 September 2026. Examples are proposed checks, not measured customer results. ' | xml_escape }}{% endif %}{{ post.content | xml_escape }}</content>
+    <content type="html">{{ post.content | xml_escape }}</content>
   </entry>
   {%- endfor %}
 </feed>

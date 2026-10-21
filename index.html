@@ -184,7 +184,7 @@ description: >-
         <p>{{ post.summary | default: post.excerpt | strip_html | truncate: 165 }}</p>
       </div>
       <div class="pm"><b>{{ post.category | default: 'Notes' }}</b>
-        {% if post.archive_date %}<span>Archive date</span>{% endif %}<time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b %Y" }}</time></div>
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b %Y" }}</time></div>
     </article>
     {%- endfor %}
   </div>

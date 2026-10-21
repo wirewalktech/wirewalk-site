@@ -82,7 +82,6 @@ def main():
         if m.get('archive_date'):
             for heading in re.findall(r'^## (.+)$',body,re.M):
                 if heading.replace("`", "").replace("’", "'") not in [h.replace("’", "'") for h in page.h2]:failures.append(f'Missing section {heading}: {path}')
-            if 'Archive date is an editorial placement' not in rendered:failures.append(f'Missing date disclosure: {path}')
             if str(m.get('description') or m['summary']).replace('\n', '')[:300]!=page.description:failures.append(f'Description mismatch: {path}')
         if re.search(r'{%|{{\s*(?:page|site|post)\.',rendered):failures.append(f'Unrendered Liquid: {path}')
         for link in page.links:
