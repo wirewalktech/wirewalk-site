@@ -1,15 +1,33 @@
 ---
-title: "Big data layout: partitioning, columnar scans, and the small-file tax"
+title: "Feeding GPU analytics: Parquet layout and NVIDIA RAPIDS infrastructure"
 date: "2025-08-27 10:00:00-04:00"
-category: "Data Engineering"
-tags: ["Big Data", "Parquet", "Partitioning", "Analytics"]
-summary: "How to design analytical data layout around actual queries, separating partition pruning, column pruning, row-group skipping, file sizing, compaction, and snapshot correctness."
-description: "How to design analytical data layout around actual queries, separating partition pruning, column pruning, row-group skipping, file sizing, compaction, and snapshot correctness."
+category: "Data Infrastructure"
+tags: ["NVIDIA", "RAPIDS", "Spark", "Parquet", "Storage"]
+summary: "Design storage and node resources for NVIDIA RAPIDS analytics, connecting Parquet layout, small-file overhead, GPU executor placement, host memory, transfer cost, and spill behavior."
+description: "Design storage and node resources for NVIDIA RAPIDS analytics, connecting Parquet layout, small-file overhead, GPU executor placement, host memory, transfer cost, and spill behavior."
 ---
 
-A large analytical dataset can be slow even when storage bandwidth is plentiful. The job may spend its time listing objects, opening tiny files, reading unnecessary columns, or moving an oversized intermediate result. Buying faster storage helps only the parts that are actually waiting for storage service.
+NVIDIA GPUs can accelerate supported analytical operations while leaving the job dominated by file discovery, CPU work, host-to-device transfers, or shuffle. Data layout and server balance determine whether an accelerated query receives useful work quickly enough.
 
-Data layout is therefore part of query design. Choose it using representative predicates, update patterns, and measured scan behavior, rather than a universal target file size copied from another workload.
+Start with the actual query plan and storage path. Then evaluate the RAPIDS Accelerator for Apache Spark where its supported execution path matches the workload. The infrastructure objective is lower elapsed time and resource cost for a correct result, not moving every stage to a GPU.
+
+## Design a balanced GPU analytics node
+
+Budget CPU cores for parsing, scheduling, networking, and work that remains outside accelerated operators. Budget host RAM for the JVM, off-heap data, pinned transfer buffers, and spill. Add GPU memory and local scratch as separate capacity pools; compressed Parquet bytes are not an estimate of decoded device memory.
+
+The [RAPIDS Accelerator 24.04 tuning guide](https://docs.nvidia.com/spark-rapids/user-guide/24.04/tuning-guide.html) specifies one executor per GPU for that release and separate controls for executor-task and GPU-task concurrency. Treat that mapping as a version-specific deployment constraint rather than copying generic CPU Spark executor sizing onto GPU nodes.
+
+Inspect which physical operators use the GPU and where the plan crosses back to CPU execution. Transfer and conversion work can outweigh a short accelerated stage. Keep the CPU baseline on the same input snapshot, output semantics, and query set so that a comparison measures the proposed platform change.
+
+## Join storage layout to GPU memory behavior
+
+Test a few file and partition layouts using the projected columns and filters that users actually run. Record listing time, file opens, bytes read, decoded batch sizes, device memory peaks, shuffle, and spill. This reveals whether a faster kernel is hidden behind metadata or unnecessary input work.
+
+A practical experiment is to hold the query fixed while changing only file consolidation, then hold layout fixed while enabling the accelerated path. That separates a storage-layout benefit from a compute benefit. Do not attribute both to the GPU when the CPU baseline also improves after compaction.
+
+Pinned host memory and concurrent tasks need a joint budget. Too much pinned memory harms the host's ability to serve other work; too much simultaneous device demand can spill or fail. Measure two or more concurrent representative queries before deciding how many GPU executors a shared node can support comfortably.
+
+Choose local NVMe scratch for its measured spill and recovery behavior, and define what happens to incomplete output if the node disappears. The layout and snapshot controls below remain necessary even when the accelerated operator itself is correct.
 
 ## Start from the queries and the update contract
 

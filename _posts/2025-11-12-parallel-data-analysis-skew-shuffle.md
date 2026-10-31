@@ -1,15 +1,33 @@
 ---
-title: "Parallel data analysis: find the skew before adding workers"
+title: "Scaling NVIDIA GPU analytics: RAPIDS, shuffle, and straggler diagnosis"
 date: "2025-11-12 10:00:00-05:00"
-category: "Parallel Computing"
-tags: ["Parallel Analysis", "Spark", "Data Skew", "Performance"]
-summary: "A practical investigation of slow distributed analysis using stage timing, join cardinality, key skew, shuffle volume, spill, strong scaling, and correctness checks for rewritten computations."
-description: "A practical investigation of slow distributed analysis using stage timing, join cardinality, key skew, shuffle volume, spill, strong scaling, and correctness checks for rewritten computations."
+category: "Data Infrastructure"
+tags: ["NVIDIA", "RAPIDS", "Parallel Analysis", "Shuffle", "Nsight Systems"]
+summary: "Diagnose parallel GPU analysis through Spark plans, RAPIDS task concurrency, host and device spill, shuffle traffic, Nsight traces, and controlled scaling with verified output equivalence."
+description: "Diagnose parallel GPU analysis through Spark plans, RAPIDS task concurrency, host and device spill, shuffle traffic, Nsight traces, and controlled scaling with verified output equivalence."
 ---
 
-A distributed analysis finishes most tasks quickly and then waits twenty minutes for the last few. Average CPU utilization falls, the cluster appears underused, and the proposed answer is more workers. That answer helps only if there is useful work left that the new workers can actually share.
+A GPU analytics job completes most tasks quickly and waits for a few oversized partitions. More NVIDIA devices cannot share work that remains trapped behind one hot key, a bad join, or a single long-running task. The useful diagnosis crosses the query plan, GPU memory, host memory, storage, and network.
 
-The useful unit of investigation is the stage and its partition distribution. Find which task owns the tail, why that partition is expensive, and whether the computation can be redistributed without changing the result.
+Use the longest stage and partition distribution to decide whether the next intervention is a query rewrite, a concurrency change, more memory, or a fabric improvement. Keep a correct CPU or existing distributed result as the reference throughout.
+
+## Separate the Spark plan from the GPU execution path
+
+With RAPIDS Accelerator, inspect the executed plan to identify accelerated operators and CPU transitions. A cluster containing GPUs is not evidence that a particular query used them effectively. Unsupported or unsuitable parts of a plan can retain CPU and transfer costs even when some stages accelerate.
+
+The [RAPIDS 24.04 tuning guide](https://docs.nvidia.com/spark-rapids/user-guide/24.04/tuning-guide.html) distinguishes concurrent executor tasks from tasks actively sharing the GPU. For an investigation, vary those controls independently within a safe memory budget. Increasing CPU-side concurrency may improve input preparation or may multiply buffered data and spill; the task timeline should show which happened.
+
+Keep one executor mapped to one GPU for that documented release. Record the executor's host-memory budget and overhead as well as device memory. A GPU out-of-memory incident and a killed JVM are different failures and need different evidence.
+
+## Attribute the tail across device, host, and fabric
+
+For the slowest partitions, collect input rows and bytes, shuffle read and write, device spill, host spill, local-disk activity, and retries. A hot partition can saturate its assigned GPU while the rest of the cluster appears idle. A transport-limited stage can instead leave every GPU waiting.
+
+Use a short [Nsight Systems 2024.2](https://docs.nvidia.com/nsight-systems/2024.2/UserGuide/index.html) capture when the application and access policy permit it. Correlate kernel activity and transfers with stage boundaries rather than collecting a long trace with no hypothesis. Rerun timing without profiling to check the observer's overhead.
+
+A ConnectX-equipped fabric can be part of the design, but do not assume a Spark shuffle uses GPUDirect RDMA because the hardware supports it. Establish the plugin, transport, and release-specific configuration actually in use. Measure relevant network traffic and compare the executed path before crediting a fabric feature with a speedup.
+
+The skew and join transformations below should be accepted only after output comparison. Faster movement of an accidentally multiplied join result is an infrastructure expense, not a successful analysis.
 
 ## Establish a correct reference result
 

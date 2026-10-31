@@ -1,15 +1,33 @@
 ---
-title: "LoRA and QLoRA fine-tuning: memory budgets, adapters, and quality controls"
+title: "Sizing NVIDIA GPUs for LoRA and QLoRA: memory, PCIe, and the full training node"
 date: "2025-04-09 10:00:00-04:00"
 category: "AI Infrastructure"
-tags: ["LoRA", "QLoRA", "GPU Memory", "Fine-Tuning"]
-summary: "A practical adapter fine-tuning plan that distinguishes trainable parameters from total memory, budgets activations and checkpoints, tests data masking, and validates the final serving artifact."
-description: "A practical adapter fine-tuning plan that distinguishes trainable parameters from total memory, budgets activations and checkpoints, tests data masking, and validates the final serving artifact."
+tags: ["NVIDIA", "LoRA", "QLoRA", "GPU Memory", "PCIe"]
+summary: "Size adapter fine-tuning infrastructure using GPU memory, activation peaks, host offload, PCIe transfers, scratch capacity, runtime compatibility, and validation of the final serving artifact."
+description: "Size adapter fine-tuning infrastructure using GPU memory, activation peaks, host offload, PCIe transfers, scratch capacity, runtime compatibility, and validation of the final serving artifact."
 ---
 
-Adapter fine-tuning can make a useful experiment possible on hardware that cannot support a full parameter update. It can also create a misleading capacity estimate: a small adapter file does not mean the complete training job needs little memory.
+LoRA and QLoRA change which NVIDIA GPU configurations can support an adaptation job. They do not remove the need to size the complete node: host RAM, PCIe paths, preprocessing CPUs, scratch, and checkpoint storage can become the next limits after the base model fits.
 
-The base model still participates in computation. Activations, temporary buffers, sequence length, and the implementation of quantized operations all matter. Plan the run as a complete system, then verify quality on the artifact that will actually be served.
+Start with a memory and transfer ledger, then qualify a representative run on the intended server. A small adapter download is not a training capacity estimate, and a job that barely fits is not necessarily a platform that can recover or support evaluation.
+
+## Specify the device and server configuration precisely
+
+Record the exact GPU SKU and installed memory, not just “A100” or “H100.” State whether the job uses one GPU, a supported GPU partition, or a connected group, and verify how the runtime sees those devices. The [CUDA 12.4.1 Hopper guide](https://docs.nvidia.com/cuda/archive/12.4.1/hopper-tuning-guide/index.html) provides the architectural context; it does not size a particular adapter workload.
+
+Use representative maximum sequence lengths and supervised-token distributions for the fit test. Include one complete optimizer step, validation, and checkpoint saving. Leave explicit headroom instead of treating the last successful allocation as the operating limit. Compare useful tokens per second and total time to the required quality when evaluating a larger device.
+
+Check the kernels and precision modes actually used. A quantized base can save storage and memory without making every operation execute as four-bit arithmetic. Confirm the adapter library, quantization implementation, framework, CUDA runtime, and device architecture as a tested combination.
+
+## Account for offload as host and transfer demand
+
+Offloading can move pressure from device memory to host RAM and the CPU-to-GPU path. Estimate bytes transferred per step and measure the transfers in a short trace. The [Nsight Systems 2024.2 guide](https://docs.nvidia.com/nsight-systems/2024.2/UserGuide/index.html) describes CUDA tracing that can help reveal waits and copies; the proposed investigation is to correlate those events with your training-step boundaries.
+
+Place CPU workers and pinned buffers with awareness of the GPU's NUMA and PCIe attachment. Include other jobs on the node when testing host bandwidth. A configuration that succeeds on an otherwise empty server may stall when several jobs pin memory or stage data simultaneously.
+
+Budget node-local scratch for dataset shards, temporary exports, and training checkpoints. Preserve a durable completed checkpoint outside the node if node loss is in the recovery requirement. Keep training allocations and interactive serving allocations separately accounted so that a fine-tuning experiment cannot silently consume the service's latency margin.
+
+These infrastructure checks set the feasible experiment envelope. The adapter, data, and quality controls below determine whether any configuration inside that envelope produces a useful model.
 
 ## Understand what is updated
 

@@ -1,15 +1,31 @@
 ---
-title: "Choosing an AI model: requirements, evidence, and the cost of being wrong"
+title: "AI model selection as infrastructure design: sizing NVIDIA GPU services"
 date: "2024-06-12 10:00:00-04:00"
-category: "AI Engineering"
-tags: ["Model Selection", "Evaluation", "Architecture"]
-summary: "A practical model selection process covering task fit, baselines, data boundaries, failure costs, evaluation design, latency, and the operating burden behind a benchmark score."
-description: "A practical model selection process covering task fit, baselines, data boundaries, failure costs, evaluation design, latency, and the operating burden behind a benchmark score."
+category: "AI Infrastructure"
+tags: ["NVIDIA", "GPU Sizing", "Triton", "Model Selection"]
+summary: "How model requirements translate into NVIDIA GPU memory, server topology, TensorRT compatibility, Triton capacity, storage, power, and a defensible hardware acceptance test."
+description: "How model requirements translate into NVIDIA GPU memory, server topology, TensorRT compatibility, Triton capacity, storage, power, and a defensible hardware acceptance test."
 ---
 
-A model comparison starts badly when the first artifact is a leaderboard. A leaderboard can help produce a shortlist, but it cannot tell you which errors your organization can tolerate, whether the inputs are lawful to use, or how a service behaves during its busiest hour. Those are selection criteria, and they need to exist before someone starts tuning prompts or buying accelerators.
+Choosing a model commits an organization to a memory footprint, a data path, a serving stack, and a recovery procedure. The infrastructure question is whether that complete service can meet its quality and latency requirements at an acceptable cost. A leaderboard does not answer it.
 
-The useful output of model selection is a decision record: what the system must do, which candidates were tested, what eliminated each alternative, and what evidence would cause the decision to change. The following process is an engineering recommendation for producing that record.
+Start with the workload, then choose a model and NVIDIA platform together. A large model that requires several tightly coupled GPUs has a different placement and failure domain from a compact classifier that fits comfortably on one device. This article connects model acceptance to the server, fabric, and software decisions an infrastructure team must support.
+
+## Translate the model shortlist into a hardware shortlist
+
+Build a capacity sheet for each candidate: weight representation, runtime workspace, activations, concurrent requests, and, for autoregressive generation, the key/value cache. Include maximum admitted input and output lengths. Parameter count alone cannot establish how many requests fit.
+
+Compare actual server configurations rather than GPU family names. A100 and H100 are relevant data-center candidates, but memory capacity, form factor, power envelope, and GPU interconnect depend on the exact product and server design. A PCIe system and an SXM system are different infrastructure choices. Verify slot layout, power delivery, cooling, and the path from each GPU to its network adapter.
+
+The [CUDA 12.4.1 Ampere](https://docs.nvidia.com/cuda/archive/12.4.1/ampere-tuning-guide/index.html) and [Hopper tuning guides](https://docs.nvidia.com/cuda/archive/12.4.1/hopper-tuning-guide/index.html) document architecture-specific behavior. Use them to identify compatibility and optimization questions, then measure the application. Architecture capability is not a guarantee that a particular framework invokes an efficient kernel.
+
+## Choose the NVIDIA serving path before procurement
+
+For supported workloads, evaluate TensorRT as an inference optimization path and Triton Inference Server as the service layer. TensorRT, Triton, and the language-specific runtime have different roles; installing one does not make an unsupported model graph deployable. Preserve a working framework baseline and validate exported or compiled candidates against it.
+
+The [Triton 24.04 optimization guide](https://raw.githubusercontent.com/triton-inference-server/server/r24.04/docs/user_guide/optimization.md) describes batching and instance-count tradeoffs. The proposed procurement test is an end-to-end load run with the intended batch policy, concurrency, input distribution, and tail-latency limit. Increase instance count only while memory and useful throughput remain acceptable.
+
+Include host CPU, RAM, NICs, storage, and a replica-loss scenario in that test. Record requests completed within the objective per server, not just a peak model-throughput figure. A smaller model with adequate quality may free a GPU for redundancy or another service; a more demanding model must justify the extra infrastructure with a measurable task benefit.
 
 ## Write the task as an input and an accepted output
 

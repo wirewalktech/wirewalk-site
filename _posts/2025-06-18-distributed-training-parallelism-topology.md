@@ -1,15 +1,31 @@
 ---
-title: "Distributed training parallelism: match memory and communication to topology"
+title: "NVIDIA training cluster design: NVLink, InfiniBand, NCCL, and parallelism"
 date: "2025-06-18 10:00:00-04:00"
 category: "AI Infrastructure"
-tags: ["Distributed Training", "Data Parallelism", "Model Parallelism"]
-summary: "How to choose data, tensor, pipeline, and state-sharded parallelism using a memory ledger, global batch definition, communication profile, topology map, and checkpoint recovery requirements."
-description: "How to choose data, tensor, pipeline, and state-sharded parallelism using a memory ledger, global batch definition, communication profile, topology map, and checkpoint recovery requirements."
+tags: ["NVIDIA", "NCCL", "NVLink", "InfiniBand", "ConnectX"]
+summary: "Map distributed training onto NVIDIA GPU servers using a memory ledger, NVLink and PCIe topology, ConnectX and InfiniBand placement, NCCL transport evidence, and recoverable sharded checkpoints."
+description: "Map distributed training onto NVIDIA GPU servers using a memory ledger, NVLink and PCIe topology, ConnectX and InfiniBand placement, NCCL transport evidence, and recoverable sharded checkpoints."
 ---
 
-Adding GPUs introduces two separate questions: can the model fit, and does the training run become more efficient? A configuration can solve the first while making the second worse. The right parallelism strategy follows the memory footprint, communication pattern, and available topology.
+A distributed training cluster is a topology, not a GPU count. Communication within an NVLink-connected GPU group, across PCIe, and between nodes through network adapters has different costs. Parallelism choices determine how often the job pays each cost.
 
-Begin with a working single-device or smallest feasible reference. Preserve its loss behavior and useful throughput so that a distributed run can be compared against something more meaningful than aggregate GPU activity.
+Design the NVIDIA server and fabric around the intended model decomposition. The objective is an allocation that fits the state, supplies data, communicates efficiently, and restarts predictably. Adding devices without checking those paths can increase both cost and step time.
+
+## Map the physical paths to the parallel groups
+
+Inventory GPU-to-GPU connectivity, CPU sockets, PCIe switches, NIC placement, link speeds, and storage paths. Distinguish GPUs connected through NVLink or an NVSwitch fabric from devices whose communication traverses PCIe. Record the exact server design; the interconnect is not implied by the GPU architecture name.
+
+For inter-node communication, verify the installed ConnectX adapters, InfiniBand fabric, routing, firmware, and compatible communication software. An adapter link being up does not prove the training process uses RDMA. Record GPU-to-NIC affinity and rank placement so that a good test can be reproduced.
+
+Place tensor-parallel groups on fast suitable paths because their intra-layer communication can be frequent. Choose data-parallel and pipeline boundaries using measured communication volume and stage balance. These are starting hypotheses to test, not an assumption that every model should use one fixed mapping.
+
+## Prove the NCCL path before interpreting scale
+
+[NCCL's archived 2.20 overview](https://docs.nvidia.com/deeplearning/nccl/archives/nccl_2205/user-guide/docs/overview.html) describes topology-aware GPU communication across NVLink, PCIe, InfiniBand, and sockets. NCCL is a communication library; it does not configure a healthy fabric or guarantee that the application selects the intended transport.
+
+Capture library versions and a small diagnostic log from an isolated allocation. Confirm the selected interfaces and transport, then run a collective workload matching the application's participating devices and relevant message sizes. Compare single-node and multi-node behavior before changing model hyperparameters. Test one communication path at a time and preserve the logs rather than enabling verbose output indefinitely on a large run.
+
+Finally, profile the actual training step. Good isolated collective bandwidth does not establish that communication is overlapped, that one rank is not starved by input, or that a pipeline stage is balanced. Qualify checkpoint writes and restart reads over the same fabric and storage system under representative concurrent load. The design must carry training and recovery traffic, not merely pass a standalone network benchmark.
 
 ## Write down the memory problem
 

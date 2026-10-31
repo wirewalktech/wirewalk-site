@@ -1,15 +1,33 @@
 ---
-title: "Evaluating AI beyond average accuracy: thresholds, calibration, and failure slices"
+title: "Qualifying NVIDIA inference infrastructure: accuracy, latency, and capacity gates"
 date: "2024-08-21 10:00:00-04:00"
-category: "AI Engineering"
-tags: ["Evaluation", "Calibration", "Model Validation"]
-summary: "A detailed evaluation plan for classifiers and generated outputs: prevalence, review capacity, calibration, grouped uncertainty, locked test sets, and release criteria that reflect real errors."
-description: "A detailed evaluation plan for classifiers and generated outputs: prevalence, review capacity, calibration, grouped uncertainty, locked test sets, and release criteria that reflect real errors."
+category: "AI Infrastructure"
+tags: ["NVIDIA", "Inference", "Triton", "Capacity Planning", "Evaluation"]
+summary: "Build an inference acceptance test that joins model quality with NVIDIA GPU memory, Triton request timing, batch behavior, concurrency, precision changes, and replica-loss capacity."
+description: "Build an inference acceptance test that joins model quality with NVIDIA GPU memory, Triton request timing, batch behavior, concurrency, precision changes, and replica-loss capacity."
 ---
 
-An evaluation report can be numerically correct and operationally useless. “Ninety-nine percent accurate” says little when the event occurs in one record out of a thousand, or when the remaining errors all affect the same input category. A release decision needs evidence about the decisions the system will make, at the thresholds and workload it will actually use.
+An inference server is not qualified by a good offline accuracy score or a high requests-per-second result alone. It must deliver accepted outputs within its latency objective at the intended concurrency, using the memory and power budget of the actual NVIDIA system.
 
-Start by separating three questions: does the model rank cases usefully, do its scores correspond to observed outcomes, and does the chosen action policy produce acceptable results? These questions require different measurements.
+Evaluate the model and deployment configuration as one release candidate. Batch policy, precision, instance count, input limits, and fallback behavior all affect what the infrastructure can promise. The quality measurements below become release gates for that specific service configuration.
+
+## Define a server acceptance matrix
+
+Test short, typical, and long inputs at several concurrency levels. Include cold loading separately from warm operation. For each cell, capture completed requests, rejected or timed-out requests, output validity, quality on the relevant cases, device memory, and latency percentiles. For generated text, separate first-token latency from completion time.
+
+Use a representative arrival process. A closed-loop client that waits for every reply can conceal queue growth under an external burst. Include a bounded burst or arrival-rate test that reflects the callers, and state which load model produced each result.
+
+Qualify the degraded condition too. If a service must survive one failed replica, test the remaining capacity and admission policy. Two servers operating near their maximum throughput do not automatically supply one-server redundancy.
+
+## Attribute Triton latency before changing hardware
+
+The [Triton 24.04 metrics reference](https://raw.githubusercontent.com/triton-inference-server/server/r24.04/docs/user_guide/metrics.md) distinguishes request, inference, and execution counts and exposes timing components. Use those counters with client-side timings to separate queueing, input handling, computation, and response work. Do not label a server-side compute average as user-visible tail latency.
+
+For a stateless model compatible with Triton's dynamic batching, measure the throughput benefit against added queue delay. Also measure the memory impact of additional model instances. A larger batch or another instance can improve one test point while making long requests miss their deadline.
+
+If a candidate changes numerical precision or uses a TensorRT export, rerun the held-out quality and slice checks on that exact artifact. A smaller engine or faster kernel does not excuse a damaged critical output category. Preserve the framework baseline and input/output comparison so that a numerical regression can be distinguished from a load-generator or preprocessing error.
+
+The acceptance report should name the GPU SKU and memory, server topology, driver, CUDA runtime, serving backend, artifact revision, batch policy, and offered load. These are the conditions under which the quality and capacity evidence is valid.
 
 ## Specify the decision policy
 

@@ -1,15 +1,33 @@
 ---
-title: "From training experiment to releasable model: a reproducible pipeline"
+title: "Building a reproducible NVIDIA training platform: containers, storage, and recovery"
 date: "2024-10-23 10:00:00-04:00"
-category: "MLOps"
-tags: ["Training", "Reproducibility", "Release Engineering"]
-summary: "How to turn model training into a controlled release process with immutable inputs, experiment lineage, resource budgets, checkpoint recovery, evaluation gates, and a complete deployment bundle."
-description: "How to turn model training into a controlled release process with immutable inputs, experiment lineage, resource budgets, checkpoint recovery, evaluation gates, and a complete deployment bundle."
+category: "AI Infrastructure"
+tags: ["NVIDIA", "NGC", "CUDA", "Training", "Checkpointing"]
+summary: "An infrastructure-led training pipeline covering NGC containers, host-driver compatibility, GPU allocation, checkpoint bandwidth, reproducible runs, and complete inference release bundles."
+description: "An infrastructure-led training pipeline covering NGC containers, host-driver compatibility, GPU allocation, checkpoint bandwidth, reproducible runs, and complete inference release bundles."
 ---
 
-A checkpoint file is the output of a computation. It is not, by itself, a releasable system. To reproduce its behavior, an engineer may also need a tokenizer, feature transformations, a label map, a training data snapshot, runtime dependencies, and the exact configuration used to generate predictions.
+A training platform must supply a compatible GPU runtime, predictable data access, sufficient checkpoint capacity, and a way to restart a failed allocation. A checkpoint produced by an unrecoverable or undocumented environment is a weak foundation for production.
 
-A useful training pipeline builds that complete bundle while preserving enough evidence to explain how it was produced. This article proposes a practical sequence for doing that without turning every experiment into a large process ceremony.
+On an NVIDIA cluster, reproducibility crosses the host driver, CUDA libraries, container, framework, topology, dataset, and scheduler configuration. Build that environment as a controlled platform release, then use the experiment and model gates below to decide what it is allowed to produce.
+
+## Pin the host-to-container compatibility boundary
+
+An NGC framework container packages important user-space dependencies; it does not replace the host's NVIDIA driver or make every host kernel and device configuration compatible. Resolve the image tag to a digest and record the host driver, GPU inventory, container runtime integration, and any injected communication libraries.
+
+The [PyTorch 24.04 release notes](https://docs.nvidia.com/deeplearning/frameworks/pytorch-release-notes/rel-24-04.html) identify CUDA 12.4.1 and the release's component and driver requirements. Use that as a historical example of a versioned compatibility record. Do not generalize its driver exceptions to an unrelated container release.
+
+Before admitting a platform image, load the framework, allocate a device tensor, execute a small representative kernel path, and run a short distributed job if the platform promises multiple nodes. Confirm device visibility and rank placement from inside the job. A successful image pull only proves the registry path worked.
+
+## Reserve storage and network capacity for checkpoint bursts
+
+Checkpoint traffic is bursty and often synchronized across ranks. Budget the complete model and optimizer state, retained generations, write amplification, and staging space. Use measured effective throughput under competing jobs to estimate pause duration; the array's headline bandwidth is not the application's guaranteed share.
+
+A hypothetical 200 GB completed checkpoint written in 40 seconds requires 5 GB/s of effective output over that interval, before allowing for concurrent writers or publication overhead. If several jobs checkpoint together, the service needs sufficient bandwidth, scheduling, or staggering to keep those pauses acceptable. Label the assumed sizes rather than presenting them as a measured model property.
+
+Keep checkpoint staging on fast storage only if the durability policy explains how it reaches recoverable shared storage. A completed local write is not protection from loss of the node. Measure restart reads and initialization as well as writes: recovery time includes reacquiring GPUs, loading state, reconstructing input position, and returning to useful work.
+
+The run contract below should link to the platform image and checkpoint policy. That makes an experiment portable between qualified allocations without pretending every machine with the same GPU name is identical.
 
 ## Define the run contract
 

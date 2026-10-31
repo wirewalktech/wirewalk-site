@@ -1,15 +1,33 @@
 ---
-title: "Batch or streaming: event time, watermarks, and replayable results"
+title: "GPU inference in streaming pipelines: Triton capacity, backpressure, and replay"
 date: "2026-01-21 10:00:00-05:00"
-category: "Data Engineering"
-tags: ["Streaming", "Batch Processing", "Event Time", "Data Correctness"]
-summary: "How to choose a freshness model and design streaming correctness around event time, late data, idempotent effects, checkpoint state, deduplication, backfills, and reconciliation with batch results."
-description: "How to choose a freshness model and design streaming correctness around event time, late data, idempotent effects, checkpoint state, deduplication, backfills, and reconciliation with batch results."
+category: "AI Infrastructure"
+tags: ["NVIDIA", "Triton", "Streaming", "Inference", "Backpressure"]
+summary: "Integrate NVIDIA Triton scoring with batch and streaming systems using bounded GPU queues, microbatch latency budgets, versioned outputs, idempotent replay, and event-time correctness."
+description: "Integrate NVIDIA Triton scoring with batch and streaming systems using bounded GPU queues, microbatch latency budgets, versioned outputs, idempotent replay, and event-time correctness."
 ---
 
-“Real time” is often specified before anyone states how fresh the result needs to be. A dashboard may tolerate fifteen minutes. A control system may need milliseconds. A daily accounting result may value completeness and reconciliation more than immediate visibility. Those requirements lead to different architectures.
+A streaming pipeline that calls a GPU model is constrained by the slowest sustained stage. If input arrives faster than the NVIDIA inference service can score it, queues grow even while individual inference calls appear fast. Recovery can make the problem worse by replaying a backlog into the same service.
 
-Choose batch, microbatch, or continuous processing using the decision deadline, the arrival pattern, and the consequences of revising an answer. The processing engine is one component of that contract.
+Design the event-processing contract and GPU serving capacity together. Use Triton for a qualified inference stage, keep event-time and state ownership explicit, and reserve a controlled path for replay and historical backfills.
+
+## Allocate the latency budget across the whole path
+
+Break the deadline into source delay, stream scheduling, feature preparation, inference queueing, GPU execution, and output commit. A fast model kernel cannot satisfy an end-to-end deadline if a microbatch waits several seconds before it is submitted.
+
+For a stateless scoring model compatible with Triton's dynamic batching, compare client microbatching against server batching. Do not stack delays without accounting for both. Bound outstanding requests and batch size, and measure output validity and tail latency over the actual input-size distribution.
+
+The [Triton 24.04 optimization guide](https://raw.githubusercontent.com/triton-inference-server/server/r24.04/docs/user_guide/optimization.md) explains batching and instance-count tradeoffs. The proposed stream design adds an application-level rule: admission and retry policies must keep in-flight work within the measured GPU capacity. Server batching is not the same as event-time windowing.
+
+## Make replay a versioned inference workload
+
+Attach the chosen model release to each processing batch or an explicitly defined event policy. On retry, preserve that choice when reproducibility requires the same model. Otherwise a replay after a deployment can silently produce different scores for the same historical input.
+
+Use stable event identifiers at the output sink. Triton returning a score does not atomically commit the stream offset and the destination write. Model serving does not supply exactly-once delivery for arbitrary downstream effects; the checkpoint, sink, and idempotency design must provide the required behavior.
+
+Reserve inference capacity or separate device allocations for backfills. A replay that saturates every GPU can prevent current events from meeting their deadline. Throttle it using measured headroom, and monitor oldest-event age alongside device activity.
+
+Keep the roles clear when considering RAPIDS: selected batch analytics operations may benefit from acceleration, but this article does not assume that installing the Spark accelerator makes an arbitrary stateful streaming query GPU-native. Validate the supported plan and release before making that platform commitment. The watermarks, late-data policy, and reconciliation rules below still determine what the result means.
 
 ## Define freshness and completeness separately
 

@@ -1,15 +1,33 @@
 ---
-title: "Retraining a model: drift signals, mature labels, and promotion gates"
+title: "Retraining on a shared NVIDIA cluster: GPU budgets, scheduling, and safe promotion"
 date: "2024-12-11 10:00:00-05:00"
-category: "MLOps"
-tags: ["Retraining", "Drift", "Monitoring"]
-summary: "A retraining design that distinguishes data drift from quality loss, respects label delays, compares challengers fairly, prevents feedback contamination, and retains a compatible rollback path."
-description: "A retraining design that distinguishes data drift from quality loss, respects label delays, compares challengers fairly, prevents feedback contamination, and retains a compatible rollback path."
+category: "AI Infrastructure"
+tags: ["NVIDIA", "Retraining", "GPU Scheduling", "DCGM", "Capacity Planning"]
+summary: "Plan retraining as an infrastructure workload with measured GPU-hour budgets, queue limits, data staging, checkpoint recovery, interference controls, and compatible serving promotion."
+description: "Plan retraining as an infrastructure workload with measured GPU-hour budgets, queue limits, data staging, checkpoint recovery, interference controls, and compatible serving promotion."
 ---
 
-Retraining is often scheduled before anyone defines what it is intended to repair. A nightly job may keep producing new weights while the real problem is a broken feature feed, a changed target definition, or delayed labels. Automated training can then make the diagnosis harder by replacing the last understandable model.
+Retraining is a recurring consumer of GPUs, storage bandwidth, and operator time. A nightly schedule that repeatedly collides with inference or research jobs can degrade a shared NVIDIA platform even when each individual training run succeeds.
 
-Treat retraining as a controlled response to evidence. The process should explain why a candidate was produced, what data it learned from, and why it is safer or more useful than the version already serving requests.
+Treat the retraining policy and its resource envelope together. Determine which evidence justifies a new run, what compute budget it may consume, how it recovers from interruption, and how a candidate reaches the serving fleet. More frequent weight generation is useful only when the resulting service improves within that infrastructure budget.
+
+## Turn the retraining policy into an allocation budget
+
+Estimate preprocessing, training, validation, checkpointing, and artifact transfer separately. Multiply measured run time by allocated GPU count to obtain allocated GPU-hours, then record useful throughput and the achieved quality. GPU-hours describe resource consumption; they do not establish the amount of useful model work.
+
+For illustration, four GPUs allocated for six hours consume 24 GPU-hours. Running that job every day reserves 720 GPU-hours in a thirty-day month, before retries and validation. A shared cluster needs a queue policy and a capacity decision for that obligation, rather than an unbounded cron job.
+
+Use scheduler limits for concurrent retraining runs, maximum wall time, and scratch consumption. Decide whether interrupted jobs resume, restart, or wait for the next data window. A preemptible allocation is economical only if checkpoint and restart behavior preserve enough useful progress.
+
+## Isolate training pressure from inference deadlines
+
+Where training and serving share NVIDIA nodes, test interference explicitly. Separate device allocations do not eliminate contention for host RAM, CPU, PCIe, NICs, or shared storage. Keep latency-sensitive serving capacity reserved when its deadline requires that separation.
+
+Use NVIDIA DCGM for device-health and activity observations alongside scheduler accounting and application progress. The [DCGM 2.3 feature overview](https://docs.nvidia.com/datacenter/dcgm/2.3/dcgm-user-guide/feature-overview.html) documents monitoring and profiling capabilities available before this article's date. Counter availability depends on hardware and configuration; a missing metric is not evidence of zero activity.
+
+Check whether a supposed drift event coincides with a driver change, a changed container, thermal limiting, or a degraded input path. Those conditions can alter throughput or serving outcomes without creating a useful reason to learn new weights.
+
+Reserve promotion capacity as well. Loading a challenger beside a champion can temporarily require two model copies, initialization workspace, and extra cache. Rehearse the memory peak and rollback before automating a scheduled update. The label maturity and quality gates below decide whether that resource-consuming promotion should happen at all.
 
 ## Distinguish three kinds of change
 

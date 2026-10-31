@@ -1,15 +1,31 @@
 ---
-title: "RAG, fine-tuning, or pretraining: choosing the intervention that matches the failure"
+title: "RAG or fine-tuning: what each choice demands from NVIDIA infrastructure"
 date: "2025-02-19 10:00:00-05:00"
-category: "AI Architecture"
-tags: ["RAG", "Fine-Tuning", "Pretraining"]
-summary: "How to distinguish missing evidence, task behavior, and base capability when choosing retrieval, supervised adaptation, or pretraining, with separate evaluation plans and realistic infrastructure consequences."
-description: "How to distinguish missing evidence, task behavior, and base capability when choosing retrieval, supervised adaptation, or pretraining, with separate evaluation plans and realistic infrastructure consequences."
+category: "AI Infrastructure"
+tags: ["NVIDIA", "RAG", "TensorRT", "Triton", "GPU Architecture"]
+summary: "Compare retrieval, adaptation, and pretraining by GPU residency, serving topology, storage traffic, training allocations, interconnect requirements, and the failure each approach can actually repair."
+description: "Compare retrieval, adaptation, and pretraining by GPU residency, serving topology, storage traffic, training allocations, interconnect requirements, and the failure each approach can actually repair."
 ---
 
-A language-model system gives an incorrect answer. The proposed fixes arrive immediately: add retrieval, fine-tune the model, or train something larger. Each can be appropriate, and each can consume substantial time while leaving the original failure untouched.
+RAG, fine-tuning, and pretraining create different infrastructure commitments. Retrieval adds a continuously maintained data and query path. Adaptation adds scheduled GPU training, versioned datasets, and artifact promotion. Large pretraining adds long-lived distributed jobs, a high-bandwidth fabric, and substantial checkpoint obligations.
 
-Start with error analysis. Determine whether the answer failed because necessary evidence was unavailable, because the system used evidence poorly, because the requested behavior was not learned, or because the underlying model could not perform the task. The intervention should follow that diagnosis.
+Choose the AI intervention by diagnosing the failure, then budget the complete NVIDIA platform needed to support it. The useful architecture decision connects answer quality to GPU residency, storage, networking, and recovery rather than treating model technique as an isolated application choice.
+
+## Draw the resource topology before choosing the technique
+
+A retrieval-based service can have separate parsing, embedding, indexing, reranking, and generation stages. Some stages may use NVIDIA GPUs; others may remain CPU- or storage-bound. Map their owners, placement, memory, and peak rates separately. Scaling generation replicas does not repair an index whose refresh process cannot keep up.
+
+Estimate embedding refresh traffic from changed content, not only total corpus size. Include temporary index copies, metadata, authorization data, and the time needed to retire an old index safely. Measure whether embedding jobs compete with interactive requests for the same device or storage path.
+
+A fine-tuning path adds its own dataset snapshots, training allocation, checkpoints, and validation service. A distributed pretraining path adds topology constraints: several GPUs merely available somewhere in a cluster are not equivalent to a suitable connected allocation.
+
+## Assign NVIDIA software to a specific stage
+
+Triton is a candidate service layer for supported embedding, reranking, or generation backends; it is not a retrieval index or an authorization system. Its [24.04 model configuration reference](https://raw.githubusercontent.com/triton-inference-server/server/r24.04/docs/user_guide/model_configuration.md) describes backend, tensor, batch, and instance configuration. Qualify each stage's supported shapes and memory demand, then qualify their combined request path.
+
+TensorRT and [TensorRT-LLM](https://raw.githubusercontent.com/NVIDIA/TensorRT-LLM/v0.8.0/README.md) provide distinct deployment entry points for suitable supported models. Establish model, operator, precision, and runtime compatibility before budgeting gains. The [TensorRT 8.6 OSS documentation](https://raw.githubusercontent.com/NVIDIA/TensorRT/release/8.6/README.md) illustrates that deployment depends on a specific software stack and that the OSS repository represents only part of the full release. It does not imply every checkpoint converts without additional work.
+
+For a hypothetical design, keep the generator resident on its allocated GPU while batching embedding refresh work elsewhere. Compare that separation against co-location under the real latency objective. Include cache memory and a replica failure. If the model does not fit with the required concurrency, first revisit the model, precision, context policy, and admitted workload; adding a multi-GPU dependency is a substantial infrastructure decision.
 
 ## Separate knowledge access from learned behavior
 

@@ -1,15 +1,31 @@
 ---
-title: "Training data that knows the future: point-in-time joins and leakage controls"
+title: "Feeding NVIDIA training GPUs: data staging, preprocessing, and correct datasets"
 date: "2024-07-17 10:00:00-04:00"
-category: "Data Engineering"
-tags: ["Training Data", "Data Leakage", "Feature Engineering"]
-summary: "How to build training datasets that reflect what was actually knowable at prediction time, including entity splits, late data, label windows, fitted transforms, and reproducible manifests."
-description: "How to build training datasets that reflect what was actually knowable at prediction time, including entity splits, late data, label windows, fitted transforms, and reproducible manifests."
+category: "AI Infrastructure"
+tags: ["NVIDIA", "Training Data", "Storage", "DALI", "GPUDirect Storage"]
+summary: "Design a training input path that keeps NVIDIA GPUs supplied while preserving point-in-time correctness, dataset versions, host-memory limits, storage capacity, and recovery behavior."
+description: "Design a training input path that keeps NVIDIA GPUs supplied while preserving point-in-time correctness, dataset versions, host-memory limits, storage capacity, and recovery behavior."
 ---
 
-A training pipeline can be deterministic, well tested, and completely misleading. If its records contain information that becomes available only after the prediction would have been made, the evaluation measures access to the future. More data and a more powerful model can make that error look increasingly convincing.
+A GPU cluster can wait on a training dataset that appears small enough for its storage system. Millions of file opens, CPU decoding, repeated remote reads, and poorly placed staging processes can keep the accelerators idle. A faster loader can also deliver the wrong data faster if historical joins leak future information.
 
-The central question for every feature is specific: could the production system have known this value at the instant it had to decide? Answering it requires timestamps, provenance, and an explicit reconstruction policy.
+The infrastructure design must satisfy both throughput and dataset correctness. Treat ingestion, curation, staging, preprocessing, and device transfer as a measured pipeline with an immutable dataset contract, rather than a directory mounted into a training container.
+
+## Budget the path from source storage to device memory
+
+Measure source discovery, open latency, read throughput, decode time, host-to-device transfer, and time waiting for the next batch. Use the actual file-size distribution and augmentation policy. A sequential storage benchmark cannot stand in for a loader opening small compressed objects across many workers.
+
+Plan host RAM for loader processes, decoded batches, prefetch queues, and pinned transfer buffers. Multiply by concurrent jobs on the node. More loader workers can increase throughput until they saturate CPUs, memory bandwidth, the metadata service, or the source; beyond that point they can make every job slower.
+
+A proposed staging policy is to copy a versioned dataset shard to node-local NVMe, validate it against its manifest, and reuse it for the allocation's lifetime. Record which copy is authoritative and what a node failure or reimage removes. Reserve scratch for both staged input and checkpoints rather than allowing one to exhaust the other.
+
+## Select NVIDIA data-path tools for the measured bottleneck
+
+NVIDIA DALI is a candidate for supported decoding and preprocessing operations. Its presence in the [NVIDIA PyTorch 24.04 container](https://docs.nvidia.com/deeplearning/frameworks/pytorch-release-notes/rel-24-04.html) establishes an available historical software option. It does not establish that arbitrary Python feature engineering or tokenization automatically moves onto the GPU. Compare a representative loader with and without the proposed preprocessing path.
+
+GPUDirect Storage is a separate option for compatible storage-to-GPU transfers through a cuFile-aware application. The [CUDA 11.4 GDS overview](https://docs.nvidia.com/cuda/archive/11.4.0/gds/overview-guide/index.html) describes the direct path and compatibility behavior. Validate the filesystem, driver, device topology, and application integration before claiming the CPU staging path was bypassed. A normal filesystem mount alone does not provide that integration.
+
+For either option, compare useful samples or supervised tokens per second, CPU load, device idle gaps, and storage traffic. Preserve decoded sample checks and the temporal dataset rules below. Acceleration changes how inputs arrive; it does not establish that those inputs were valid at prediction time.
 
 ## Define prediction time before writing joins
 

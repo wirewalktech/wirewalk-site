@@ -1,15 +1,33 @@
 ---
-title: "Production AI is an IT service: identity, releases, capacity, and recovery"
+title: "Operating an NVIDIA AI platform: GPU Operator, DCGM, releases, and recovery"
 date: "2026-04-08 10:00:00-04:00"
-category: "IT Operations"
-tags: ["AI Operations", "Identity", "Release Engineering", "Reliability"]
-summary: "An operating design for production AI covering service identity, artifact integrity, input limits, admission control, observability, dependency failures, compatible rollback, and responsibility for incorrect answers."
-description: "An operating design for production AI covering service identity, artifact integrity, input limits, admission control, observability, dependency failures, compatible rollback, and responsibility for incorrect answers."
+category: "AI Infrastructure"
+tags: ["NVIDIA", "GPU Operator", "DCGM", "Triton", "IT Operations"]
+summary: "Operate NVIDIA AI infrastructure through controlled drivers and containers, GPU Operator boundaries, DCGM monitoring, scheduler allocation, Triton release management, and tested recovery."
+description: "Operate NVIDIA AI infrastructure through controlled drivers and containers, GPU Operator boundaries, DCGM monitoring, scheduler allocation, Triton release management, and tested recovery."
 ---
 
-A model endpoint becomes a production service when another process depends on it. At that point, correctness includes who may call it, which data it may read, whether it can survive a failed dependency, and how an operator replaces a bad release.
+An NVIDIA AI platform is an IT service before it is a model endpoint. Drivers, runtime integration, GPU allocation, health telemetry, storage, and network dependencies must work together. A model-quality score cannot substitute for a platform that can be patched, isolated, monitored, and recovered.
 
-The model introduces additional uncertainty, but it does not replace ordinary IT responsibilities. A strong operating design connects model evaluation to identity, software delivery, resource management, and incident response.
+Define a qualified platform configuration and a controlled model-release path. Keep the infrastructure responsibilities below connected to identity, artifact management, capacity, and the application owner's criteria for acceptable outputs.
+
+## Own the NVIDIA node software lifecycle
+
+For Kubernetes, NVIDIA GPU Operator is an option for managing components such as drivers, container integration, device plugins, node discovery, and monitoring. The [24.3 documentation](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/24.3.0/index.html) also describes privileged operands. Keep administration of that namespace restricted; GPU access for an application does not require permission to replace the host driver.
+
+On a Slurm or other non-Kubernetes platform, manage those host components through the site's image and configuration process. GPU Operator is not a universal cluster manager. In either case, record the kernel, driver, firmware where relevant, container runtime, and qualified application images.
+
+Canary a driver or runtime change on a drained node, then test representative training, inference, and communication before a wider rollout. Confirm how the previous node image or package set can be restored. Pinning a container digest cannot roll back an incompatible host-driver change.
+
+## Connect device health to service and scheduler behavior
+
+Use DCGM-derived observations with host, fabric, scheduler, and application metrics. The [DCGM 2.3 guide](https://docs.nvidia.com/datacenter/dcgm/2.3/dcgm-user-guide/feature-overview.html) documents health and profiling functions available before this article's date. Interpret fields using their definitions and hardware support; a busy GPU is not proof that requests meet their deadline.
+
+Preserve GPU identity and node identity in telemetry so that recurring device errors can be distinguished from a bad model release. Define a response to device faults: stop admitting work, drain or isolate the affected allocation, preserve logs, and run an appropriate maintenance diagnostic. Do not run disruptive stress diagnostics over production jobs merely because a monitoring tool offers them.
+
+For Triton serving, qualify the [24.04 model-management modes](https://raw.githubusercontent.com/triton-inference-server/server/r24.04/docs/user_guide/model_management.md) before selecting a repository update process. Version directories alone do not make a multi-component application update atomic. Promote a tested bundle and verify that the expected artifact is actually loaded on each replica.
+
+Capacity includes failure and maintenance. Reserve headroom for draining a node, loading a replacement model, and rebuilding a damaged replica. Then test the identity, data-boundary, admission, and rollback controls below through the external service interface. Infrastructure readiness and acceptable answer quality are separate gates that the production release must satisfy together.
 
 ## Draw the service and data boundaries
 
