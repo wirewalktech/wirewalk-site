@@ -1,16 +1,17 @@
 ---
 layout: home
 is_home: true
-title: AI & HPC Infrastructure Engineering
+title: Research Computing, HPC & AI Infrastructure
 description: >-
-  AI and HPC infrastructure engineering: GPU and CPU compute, Linux, data pipelines,
-  parallel storage and low-latency networking for AI factories and research centers.
+  Computing systems that help researchers do more, faster. HPC, NVIDIA GPU and AI
+  infrastructure, storage and networking, from design through daily operation.
 ---
 <section class="hero" id="top"><div class="wrap hgd">
   <div>
-    <span class="eyebrow hro">HPC and AI infrastructure</span>
-    <h1 class="hro">AI and HPC infrastructure, built for real workloads.</h1>
-    <p class="lead hro">GPU and CPU compute, Linux and scientific software, data pipelines, parallel storage and low-latency networking, engineered as one system. Two decades designing, building and operating on-premises and cloud infrastructure for AI training, big-data workloads and scientific computing. We build and lead engineering teams, and help grow the communities around AI and HPC centers: researchers, platform engineers and operators working together. From a single GPU server to AI factories and research centers, our work spans architecture, deployment, performance tuning and day-to-day operation.</p>
+    <span class="eyebrow hro">Research computing · HPC · AI</span>
+    <h1 class="hro">Helping people do more research, faster.</h1>
+    <p class="lead hro">I design, build and look after the computing systems that help researchers run more experiments, work with larger datasets and get results sooner.</p>
+    <p class="lead hro">That might mean a single GPU server, a new research cluster, or making better use of the system you already have. I work with your researchers and IT team to understand what they need and build a system they can use with confidence.</p>
     <div class="acts hro">
       <a href="#contact" class="btn btn-p">Start a conversation<svg viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a href="{{ '/order/' | relative_url }}" class="btn btn-g">Rates and ordering</a>
@@ -23,7 +24,7 @@ description: >-
     </div>
   </div>
   <div class="scopes">
-    <div class="hd"><span>What we work on</span><span class="muted">Design, build, operate</span></div>
+    <div class="hd"><span>How I can help</span><span class="muted">From planning to daily use</span></div>
     <div id="scopelist">
       <a href="#hpc">Cluster architecture and build-out<span>01</span></a>
       <a href="#hpc">InfiniBand and low latency fabric<span>02</span></a>
@@ -38,7 +39,7 @@ description: >-
 </div></section>
 
 <div class="band"><div class="wrap">
-  <b>Day to day</b>
+  <b>Tools I work with</b>
   <ul>
     <li>Slurm</li><li>PBS Pro</li><li>LSF</li><li>InfiniBand</li><li>OpenSM</li><li>NVIDIA UFM</li>
     <li>GPFS / Storage Scale</li><li>Lustre</li><li>WekaFS</li><li>VAST</li><li>CUDA</li><li>NCCL</li>
@@ -49,54 +50,49 @@ description: >-
 <section class="sec" id="hpc"><div class="wrap">
   <div class="sh-split">
     <div><span class="eyebrow">HPC and AI</span>
-      <h2>The part of the stack most people cannot hire for.</h2></div>
-    <p>Compute, fabric and storage are one system, and the failures that matter happen between them rather than inside any one of them. We work across all three, from architecture and procurement through build-out, benchmarking and day-to-day operation.</p>
+      <h2>Systems shaped around the research.</h2></div>
+    <p>A useful system starts with understanding the work people need to do. I bring compute, storage, networks and scientific software together, and stay involved through the practical work of making them run well.</p>
   </div>
   <div class="g3" data-rv>
-    <div><span class="n">01</span><h4>Cluster architecture and build-out</h4><p>Full stack design and delivery: hardware selection, provisioning, operating system and image management, node classes, and the capacity planning behind them. Bright Cluster Manager, OpenHPC, HPCM, xCAT. Multi-site and multi-region estates.</p></div>
-    <div><span class="n">02</span><h4>InfiniBand and low latency fabric</h4><p>Fabric design and management from EDR through HDR and NDR, fat tree and dragonfly topologies, OpenSM routing engines, NVIDIA UFM, RoCE and RDMA. Switch and adapter firmware, port configuration, and the diagnostics that separate a fabric problem from an application problem.</p></div>
-    <div><span class="n">03</span><h4>Parallel and scale-out storage</h4><p>GPFS and IBM Storage Scale, Lustre, WekaFS, VAST, Pure, Isilon, DDN, BeeGFS and CEPH. Tiering and policy, erasure coding, data movement, and benchmarking that measures the workload rather than the page cache.</p></div>
-    <div><span class="n">04</span><h4>GPU, CUDA and AI stacks</h4><p>A100, H100, DGX systems, NVLink, DCGM, Intel Max and AMD Instinct. CUDA and ROCm, NCCL collective tuning, PyTorch and TensorFlow environments, containerized delivery through Apptainer and Kubernetes.</p></div>
-    <div><span class="n">05</span><h4>Schedulers and workload management</h4><p>Slurm, PBS Pro, LSF, Grid Engine and Univa. Partition and QoS design, GPU and license-aware scheduling, fair share, accounting, and the migrations between schedulers that organizations put off for years.</p></div>
-    <div><span class="n">06</span><h4>Cloud and hybrid HPC</h4><p>AWS ParallelCluster, SOCA and IDEA, FSx for Lustre, EFA and the surrounding services. Azure HPC across regions. Lift and shift from on-premises, and the more common case where the honest answer is that only part of the workload should move.</p></div>
+    <div><span class="n">01</span><h4>Cluster architecture and build-out</h4><p>I help turn research needs into a working cluster: choosing hardware, planning capacity, installing systems and setting up the tools your team will use to manage them. My work includes Bright Cluster Manager, OpenHPC, HPCM and xCAT, across individual sites and larger environments.</p></div>
+    <div><span class="n">02</span><h4>InfiniBand and low latency fabric</h4><p>When an analysis spans many machines, the connections between them matter. I design and troubleshoot InfiniBand and Ethernet networks, including OpenSM, NVIDIA UFM, RoCE and RDMA, and trace performance problems through the switches, adapters and applications.</p></div>
+    <div><span class="n">03</span><h4>Parallel and scale-out storage</h4><p>Research data needs room to grow and a dependable path to the people and programs using it. I build and tune parallel storage, plan data movement and recovery, and test it with the actual workload. Systems I work with include IBM Storage Scale / GPFS, Lustre, WEKA, VAST, PowerScale / Isilon and DDN.</p></div>
+    <div><span class="n">04</span><h4>GPU, CUDA and AI stacks</h4><p>I build GPU environments for model training, inference and scientific computing, with particular experience in NVIDIA systems: A100, H100, DGX, CUDA, NVLink and NCCL. The work includes matching memory, storage and networking to the job, then making PyTorch, TensorFlow and container environments usable for the team.</p></div>
+    <div><span class="n">05</span><h4>Schedulers and workload management</h4><p>A shared cluster needs priorities that make sense to the people using it. I configure Slurm, PBS Pro and LSF, including queues, GPU allocations, fair share and usage accounting. I also help teams move to a new scheduler while keeping their research workflows in view.</p></div>
+    <div><span class="n">06</span><h4>Cloud and hybrid HPC</h4><p>I help you work out where cloud computing fits your research and budget, then build the environment and move the work. That includes AWS ParallelCluster, FSx for Lustre, EFA and Azure HPC, as well as systems that connect cloud resources with the equipment you already own.</p></div>
   </div>
 </div></section>
 
 <section class="sec tint" id="expertise"><div class="wrap">
   <div class="sh-split">
     <div><span class="eyebrow">Other areas</span>
-      <h2>The infrastructure around the cluster.</h2></div>
-    <p>HPC does not sit on its own. It depends on identity, network, storage, monitoring and compliance that have to work, and on people who can run them. AI is changing how each of these is done, and the shift is mostly practical rather than dramatic.</p>
+      <h2>The everyday work that keeps research moving.</h2></div>
+    <p>Researchers also need accounts that work, software they can use, data they can find and someone to turn to when a job fails. I work alongside the people supporting those needs, including the planning, maintenance and documentation that keep a system useful over time.</p>
   </div>
   <div class="rows" data-rv>
     <div class="row"><div>
       <h4>Enterprise IT and infrastructure</h4>
-      <p>Linux and UNIX estates at scale, identity and directory services, virtualization, configuration management with Ansible and Puppet, monitoring through Prometheus, Grafana, Nagios and Ganglia. Migrations off legacy platforms, including Solaris and HP-UX, where the hard part is the application stack rather than the operating system.
-      <br><br><b>Where AI changes it:</b> telemetry has always been collected faster than anyone could read it. Anomaly detection across metrics and logs turns that backlog into something that surfaces problems before a user reports them, and capacity forecasting stops being a spreadsheet exercise.</p>
+      <p>I look after Linux and UNIX systems, identity services, software environments and monitoring. I also help teams move from older platforms, taking care to understand the applications and working habits that depend on them. Tools include Ansible, Puppet, Prometheus and Grafana.</p>
     </div><div class="tag">Infrastructure</div></div>
 
     <div class="row"><div>
       <h4>Low latency networking</h4>
-      <p>Spine and leaf design, 10, 25 and 100 gigabit platforms, Juniper, Arista, Cisco and Brocade, OSPF and BGP, VXLAN and MLAG. Campus and transcontinental network optimization for research and engineering traffic that behaves nothing like office traffic.
-      <br><br><b>Where AI changes it:</b> traffic classification and fault correlation across a fabric this size is pattern work, and pattern work is where machine learning earns its place. It shortens the gap between a link degrading and someone knowing which link.</p>
+      <p>I design and troubleshoot the networks that connect researchers, instruments, compute and data. That includes campus networks and connections between sites, using Juniper, Arista, Cisco and Brocade platforms. I follow the path the research traffic actually takes to find where it slows down.</p>
     </div><div class="tag">Network</div></div>
 
     <div class="row"><div>
       <h4>Security, compliance and audit</h4>
-      <p>Building and running research and clinical computing under the regimes that govern it: CUI handling to NIST SP 800-171, NIH controlled-access genomic data, HIPAA, GxP and PCI. SELinux and RBAC, vulnerability management, access and filesystem auditing, threat management across cloud and on-premises. NACI Public Trust clearance. Security officer responsibility on a federal modeling platform.
-      <br><br><b>Where AI changes it:</b> evidence gathering. Most audit effort goes into collecting and correlating what a control actually did, not into judgment. Automating that collection leaves more room for the part that needs a person.</p>
+      <p>I help teams build access controls, logging, patching and recovery into the way their systems are run. My experience includes research and clinical environments with specific data-handling and audit requirements. The detailed frameworks and responsibilities are described below.</p>
     </div><div class="tag">Compliance</div></div>
 
     <div class="row"><div>
       <h4>Data management and movement</h4>
-      <p>Petascale storage planning, purchase and migration. Backup and archive across enterprise and cluster filesystems, tape libraries, snapshot and replication frameworks. Transfer at distance with Aspera and GridFTP. Retention and access control in environments where the data has legal weight.
-      <br><br><b>Where AI changes it:</b> placement. Deciding what belongs on flash, what belongs on capacity tiers and what should have been deleted is a prediction problem, and policy engines have historically guessed with very blunt rules.</p>
+      <p>I plan storage growth, migrations, backup and archive so people can keep working with their data as projects develop. That includes shared filesystems, snapshots, replication, tape and transfers between sites, with attention to access, retention and recovery.</p>
     </div><div class="tag">Storage</div></div>
 
     <div class="row"><div>
       <h4>Teams, vendors and budgets</h4>
-      <p>Group lead and IT director roles: hiring and technical screening, mentorship, team structure, vendor and contract management, budgeting and expansion planning. Running engineering, development and support functions together rather than as separate silos.
-      <br><br><b>Where AI changes it:</b> mostly in what a small team can now cover. The practical question is which work it removes and which work it quietly creates, and that is worth answering before rather than after a reorganization.</p>
+      <p>I have worked as a group lead and IT director, hiring, mentoring, planning budgets and working with vendors. I help researchers, engineers and support staff make decisions together, and leave the team with the knowledge and documentation to carry the work forward.</p>
     </div><div class="tag">Leadership</div></div>
   </div>
 </div></section>
@@ -104,8 +100,8 @@ description: >-
 <section class="sec tint" id="compliance"><div class="wrap">
   <div class="sh-split">
     <div><span class="eyebrow">Regulated environments</span>
-      <h2>The rules the cluster has to live inside.</h2></div>
-    <p>Research computing is rarely unregulated. Genomic data arrives with a data use agreement attached, a DoD subcontract brings CUI obligations onto your storage, and the moment a foreign national gets a login on a machine holding controlled technology you are in export control whether anyone planned for it or not. These are the frameworks the work has been delivered under &mdash; described as engagements, not as badges.</p>
+      <h2>Care with sensitive research data.</h2></div>
+    <p>When research comes with additional security or data-handling requirements, I help your team build them into the system and its daily operation. The examples below describe the environments and frameworks I have worked with.</p>
   </div>
   <div class="g3" data-rv>
     <div><span class="n">CUI</span><h4>Federal and controlled unclassified information</h4><p>NIST SP 800-171 across storage, scheduler and identity, with the system security plan and POA&amp;M that go with it. NIST SP 800-53 on federal systems, FISMA responsibility as a named security officer, and CMMC readiness for defense subcontracts. DISA STIG and CIS Benchmark hardening on compute at scale. NIST SP 800-88 media sanitization on decommission. FIPS 140 validated cryptography where it is required, and the exemption argument where a validated module does not exist for the hardware.</p></div>
@@ -121,8 +117,8 @@ description: >-
 
 <section class="sec" id="scale"><div class="wrap">
   <div class="sh"><span class="eyebrow">Track record</span>
-    <h2>Where the work has been done.</h2>
-    <p>Roles as HPC architect, engineer, group lead and IT director, in environments where the machines are expensive and the deadlines are external.</p></div>
+    <h2>Experience I bring to your project.</h2>
+    <p>Over two decades, I have worked as an HPC architect, engineer, group lead and IT director. That experience spans research and clinical computing, weather modeling, engineering and AI infrastructure.</p></div>
   <div class="stats" data-rv>
     <div><div class="n">8</div><p>NVIDIA AI factory environments, GPU fabric, scheduler and parallel storage integration</p><div class="src">HPC and AI infrastructure architect</div></div>
     <div><div class="n">5,000</div><p>Node liquid-cooled Cray and HPE clusters, federal weather modeling</p><div class="src">Senior HPC architect and security officer</div></div>
@@ -132,12 +128,12 @@ description: >-
     <div><div class="n">4+</div><p>High-throughput HPC estates in academic medicine, clinical research and defense postgraduate education</p><div class="src">Cluster architecture, GPFS and scheduler design</div></div>
   </div>
   <div class="sh" style="margin-top:34px"><span class="eyebrow">Right-sizing</span>
-    <h2>Most of this work starts a lot smaller than that.</h2>
-    <p>Those numbers are where the work has led. They are not the price of admission, and they are not the minimum engagement. A single GPU server that is not delivering the throughput it should, a storage mount that keeps dropping under load, a scheduler nobody has retuned since the day it was installed, a benchmark that disagrees with the vendor's datasheet &mdash; these are the same problems as the large ones with fewer zeros on the end, and most of them are an afternoon or a week rather than a project. If that is all you need, that is what we will quote, and if you do not need outside help at all we will tell you that instead.</p></div>
+    <h2>A single problem is a good place to start.</h2>
+    <p>A slow analysis, a troublesome storage connection, a GPU server that could be doing more, or a second opinion before a purchase can all be worthwhile places to start. We can agree on a focused piece of work that fits the problem, your budget and the time your team has available.</p></div>
 
   <div class="sh" style="margin-top:34px"><span class="eyebrow">Worked with</span>
     <h2>Organizations and environments.</h2>
-    <p>Work delivered in these environments, as an employee, contractor or through partners and vendors. Listed as engagements worked on, not as clients of this practice.</p></div>
+    <p>I have worked in these environments as an employee, contractor, or through partners and vendors. They reflect my experience; the list does not imply that each organization is a client of Wirewalk.</p></div>
   <div class="g3" data-rv>
     <div><span class="n">AI factories</span><h4>GPU cloud and AI infrastructure</h4><p>Alembic, IREN, Deutsche Telekom, Microsoft, Anthropic, NScale, CoreWeave, BoostRun and Novartis.</p></div>
     <div><span class="n">Academic medicine</span><h4>Research and clinical HPC</h4><p>Atrium Health Wake Forest Baptist, Albert Einstein College of Medicine, Weill Cornell Medicine, Memorial Sloan Kettering and Mayo Clinic.</p></div>
@@ -153,26 +149,23 @@ description: >-
 <section class="sec tint" id="audits"><div class="wrap">
   <div class="sh-split">
     <div><span class="eyebrow">Audits</span>
-      <h2>Independent review, when you need an outside read.</h2></div>
-    <p>Separate from build and operate work: a scoped, evidence-backed assessment of what is actually exposed or underperforming, delivered as a findings register rather than a conversation.</p>
+      <h2>A clear picture of what needs attention.</h2></div>
+    <p>If you need a second opinion on a system, a planned purchase or a recurring problem, I can take a focused look. You will get findings you can check, an explanation of why they matter and a practical order for addressing them.</p>
   </div>
   <div class="g3" data-rv>
-    <div><span class="n">01</span><h4>Infrastructure and fabric review</h4><p>Cluster, fabric and storage assessed against what the hardware should deliver. Benchmarked rather than asserted, with the configuration causes named and a remediation order.</p></div>
-    <div><span class="n">02</span><h4>Security and compliance review</h4><p>Identity and access, data protection, logging and incident readiness, mapped to whichever framework applies to you. Every finding carries reproduction steps, an owner and a date.</p></div>
-    <div><span class="n">03</span><h4>Operating review</h4><p>A wider look at where money leaks, where work takes longer than it should, and where risk has never been priced. Run as a separate practice at <a href="https://ai.wirewalk.com/">Wirewalk AI</a>.</p></div>
+    <div><span class="n">01</span><h4>Infrastructure and fabric review</h4><p>I measure how your compute, network and storage perform together, investigate the bottlenecks and set out the changes most likely to help your workload.</p></div>
+    <div><span class="n">02</span><h4>Security and compliance review</h4><p>I review access, data protection, logging and readiness for an incident against your requirements. Findings include the evidence and enough detail for your team to act on them.</p></div>
+    <div><span class="n">03</span><h4>Operating review</h4><p>For questions about how your organization works, including where AI could help with everyday tasks, I offer operating reviews through <a href="https://ai.wirewalk.com/">Wirewalk AI</a>.</p></div>
   </div>
-  <p class="muted" style="margin-top:22px;max-width:70ch"><b>The same engineers, under two names.</b> The
-  business-facing half of this practice &mdash; operating reviews, AI policy and governance,
-  and AI infrastructure sold to people who do not use the word HPC &mdash; is at
-  <a class="ilink" href="https://ai.wirewalk.com/">ai.wirewalk.com</a>. One engineering practice; the two sites exist because the buyers read different words, not because there are
-  two companies.</p>
+  <p class="muted" style="margin-top:22px;max-width:70ch"><b>Part of the same practice.</b> You can also find my work on operating reviews,
+  AI policy and governance at <a class="ilink" href="https://ai.wirewalk.com/">Wirewalk AI</a>.</p>
 </div></section>
 
 <section class="sec" id="writing"><div class="wrap">
   <div class="sh-split">
     <div><span class="eyebrow">Writing</span>
-      <h2>AI and HPC infrastructure engineering guides.</h2></div>
-    <p>Practical guides to GPU and CPU performance, Linux and scientific software, AI training pipelines, parallel storage, InfiniBand and low-latency networking. Reproducible checks for AI factories and research centers, with security and recovery covered alongside the infrastructure.</p>
+      <h2>Practical notes for the people running the systems.</h2></div>
+    <p>I share ways to investigate problems, check performance and make informed choices about research infrastructure. The articles cover GPU and CPU computing, AI training, Linux, storage and networking, with checks you can try on your own systems.</p>
   </div>
   <p style="margin:0 0 24px"><a href="{{ '/writing/#topic-ai-infrastructure' | relative_url }}">AI pipelines</a> · <a href="{{ '/writing/#topic-benchmarking' | relative_url }}">GPU and CPU benchmarks</a> · <a href="{{ '/writing/#topic-parallel-storage' | relative_url }}">Parallel storage</a> · <a href="{{ '/writing/mpi-troubleshooting-playbook/' | relative_url }}">Low-latency networking</a> · <a href="{{ '/writing/environment-modules-failure-modes/' | relative_url }}">Linux software</a></p>
   <div class="plist" data-rv>
@@ -194,10 +187,9 @@ description: >-
 <section class="sec" id="engage"><div class="wrap">
   <div class="sh-split">
     <div><span class="eyebrow">Engagements</span>
-      <h2>Defined pieces of work, with a price on them.</h2></div>
-    <p>Most of this does not need a discovery call first. If you already know what is
-    wrong, or what you want checked, the engagement is listed with a fee and can be
-    ordered directly &mdash; on a purchase order if that is what your finance team needs.</p>
+      <h2>A clear scope and a price you can plan around.</h2></div>
+    <p>If you know what you need, you can browse the services and rates below and order directly.
+    If you are still working out the problem, tell me what you are trying to do and we can find a sensible starting point.</p>
   </div>
   <div class="g3" data-rv>
     <div><span class="n">From $2,200</span><h4>Focused engagements</h4><p>One problem, a day or a week, written up. A benchmark that disagrees with the datasheet, a mount that drops under load, a second opinion before a purchase order goes out.</p></div>
@@ -215,10 +207,10 @@ description: >-
   <div class="cta-in">
    <div>
     <span class="eyebrow">Get in touch</span>
-    <h2>Tell me what you are building, or what stopped working.</h2>
+    <h2>Tell me about your research and what you need to do next.</h2>
    </div>
    <div class="cta-b">
-    <p>Whether that is a cluster to design, a fabric that is not delivering what it should, a migration nobody wants to own, or a second opinion on someone else's architecture. If the honest answer is that you do not need outside help, we will say so.</p>
+    <p>What are you trying to run? What is taking too long, or getting in the way? Whether you are planning a new system or improving one you already have, I would be glad to hear about it.</p>
    </div>
    <div class="cta-c">
     <form class="frm" action="https://formsubmit.co/sales@wirewalk.com" method="POST" novalidate="false">
