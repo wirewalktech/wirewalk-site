@@ -8,7 +8,7 @@ last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---
 
-Disconnecting a compromised system may limit damage, but an unplanned isolation step can also remove the only management route, interrupt evidence collection, or strand a critical dependency. A containment playbook should make those tradeoffs explicit before an emergency.
+Before isolating a compromised host, check what the isolation will cut off. It may remove the only management route, interrupt evidence collection or strand another service. Work through those choices in the containment playbook while the team has time to examine them.
 
 ## Establish authority and scope
 
@@ -49,6 +49,6 @@ Use a tabletop scenario that includes loss of the normal directory and backup co
 
 ## Record outcomes, not just button clicks
 
-Keep the requested action, observed network effect, remaining access, evidence preserved, and restoration result. The product console's “isolated” label should be corroborated by the behavior the team intended.
+Keep the requested action, observed network effect, remaining access, evidence preserved, and restoration result. Test the allowed and denied connections after isolation, rather than relying on the console label.
 
 Continue with [recovery after administrator compromise](/writing/recovery-after-admin-compromise/).

@@ -7,9 +7,9 @@ summary: "Build a supported NVIDIA container path around Pyxis and Enroot, immut
 description: "Operate NVIDIA Enroot and Pyxis on Slurm with pinned images, validated GPU access, cache planning, MPI checks and upgrade controls."
 ---
 
-A good GPU container service should let a researcher submit the application they need without spending the allocation installing packages or debugging the cluster's runtime. That requires more than adding a container option to `srun`. Image delivery, host-driver compatibility, device ownership and cleanup must work together.
+Researchers should be able to spend their GPU allocation running experiments, not importing images and repairing runtime settings. Before offering Enroot/Pyxis container execution through `srun`, prepare image delivery, driver compatibility, device constraints and cleanup.
 
-NVIDIA's Enroot and Pyxis provide a useful execution path for Slurm environments. Enroot supplies the container environment, while Pyxis integrates containerized task execution with Slurm through SPANK. Treat that integration as maintained infrastructure with a release process, rather than a plugin copied into place once and forgotten.
+Enroot provides the container environment, and Pyxis connects task execution to Slurm through SPANK. Maintain the pair with the host and scheduler stack so a change to one component is tested against the others.
 
 The patterns below assume an administrator-supported installation. They use generic paths and an illustrative image; they do not install software or modify a live cluster.
 
@@ -89,6 +89,6 @@ Separate cache cleanup from job-output cleanup. Deleting a runtime cache should 
 
 Maintain a small acceptance matrix covering host image, Slurm, Pyxis, Enroot, driver, framework artifact and representative workloads. Run it on a drained canary after a relevant change, including a controlled reboot when host state is involved.
 
-Keep a rollback package and the previous validated image references. The point is not to freeze the platform indefinitely. It is to make upgrades predictable enough that researchers can spend their time on experiments rather than reconstructing which layer of the GPU container stack changed last night.
+Keep the rollback package and previous image references available during the rollout. If the canary fails, restore the tested combination before researchers depend on the new runtime.
 
 Read next: [Docker or Apptainer for research computing: compare the operating models](/writing/docker-apptainer-research-container-operating-models/), [Advanced Slurm setup: prove CPU, memory and GPU isolation before admitting jobs](/writing/slurm-cgroup-v2-gpu-isolation-validation/).

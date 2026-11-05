@@ -20,9 +20,7 @@ annotator is not slow, it is being asked to do roughly thirty-eight times more w
 question requires. The records it spends its time on carry no alternate allele at all. There is
 nothing to annotate, so it annotates nothing, carefully, twenty-five million times per sample.
 
-What follows is the pattern — how to measure it, the pipeline that removes the waste, the
-correctness trap that eats sites without telling you, the two tuning parameters that only showed up
-in a sweep, and the caveat that limits the whole result to one file format.
+The measurements below led to a smaller input stream, followed by checks that the filter preserved every allele that needed annotation. Two tuning parameters helped further, but the file-format caveat at the end determines where this approach is safe to use.
 
 ## Measure the stages before touching anything
 

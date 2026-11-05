@@ -7,11 +7,11 @@ summary: "Build Redfish automation around discovered capabilities, verified iden
 description: "Design robust Redfish automation with resource discovery, task monitors, ETags, bounded retries, credential hygiene and verified postconditions."
 ---
 
-A management script sends a reset request, loses its connection and retries. The server resets twice. Another script receives HTTP 202 from a firmware action and reports success while the operation is still waiting to run. Both failures come from treating an infrastructure API as a collection of commands rather than a stateful control system.
+What should a script do if its connection drops just after it sends a server reset? Retrying may reset the machine twice; assuming failure may leave a real operation untracked. Redfish automation needs a way to reconcile that uncertainty before issuing another change.
 
-Redfish provides a standard resource model and protocol, but a reliable client still needs to discover capabilities, preserve operation state and verify the result that matters. Hardware families and firmware versions can expose different supported actions and settings.
+The resource model standardizes discovery and operations, but supported actions still vary by hardware and firmware. Record the request, follow any returned task and check what the hardware actually did.
 
-This guide uses DMTF's published Redfish specification and generic examples. It does not include credentials, real management addresses or executable power-changing requests.
+The examples use DMTF's published specification and placeholder addresses. They include read-only discovery, without credentials or executable power-changing requests.
 
 ## Discover resources instead of inventing their paths
 
@@ -91,6 +91,6 @@ Test session expiry and cleanup. An automation service that leaks sessions can e
 
 After a successful operation, reread the relevant state and run the independent health checks appropriate to the change. For a boot override, confirm both the configured override and the subsequent boot outcome. For a power action, verify the operating system's recovery before releasing the node.
 
-A good Redfish client can explain what it asked, what the service reported, what the hardware did and what remains uncertain. That evidence matters most when the network fails halfway through the operation, precisely when a simple command-and-retry script becomes least trustworthy.
+Leave an unresolved operation visible in the journal until task state or an independent check settles it. During a network failure, that record helps the next operator decide whether to wait, investigate or safely retry.
 
 Read next: [Redfish firmware rollouts for HPC: from inventory to verified readmission](/writing/redfish-firmware-rollout-slurm-admission-gates/), [Management networks: isolate the systems that can rebuild everything](/writing/management-network-bmc-isolation/).

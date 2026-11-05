@@ -154,5 +154,4 @@ observing zero proves only that you reset it.
 | Zero errors, poor collective performance | A link at reduced width or rate | `iblinkinfo`, mind per-lane rate |
 | Clean sweep, no traffic during it | The window had no load | repeat under load |
 
-**A counter is a total, and a total is not a symptom.** Give every number a window and a load
-before you let it justify a maintenance action.
+Attach the sampling window and workload to every reported counter change. That lets the maintenance team distinguish an active fault from old history before replacing a cable.

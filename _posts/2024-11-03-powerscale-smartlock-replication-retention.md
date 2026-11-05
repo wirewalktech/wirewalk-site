@@ -8,9 +8,9 @@ last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---
 
-On a Dell PowerScale or older Isilon estate, SnapshotIQ, SyncIQ, and SmartLock answer different questions. A point-in-time view, a remote copy, and a write-once retention policy should not be represented by one green status in an operations dashboard.
+On PowerScale and older Isilon systems, SnapshotIQ, SyncIQ and SmartLock protect against different problems. A dashboard that rolls them into one green indicator can hide a serious gap: the remote data arrived, but its intended retention protection did not.
 
-The particularly useful failure case is a replica whose data arrived but whose intended retention protection did not.
+Check the destination independently. The presence of a replica does not tell you who can alter it or when it may be deleted.
 
 ## Read the source-to-target rules
 
@@ -41,6 +41,6 @@ Then evaluate failback using Dell's matrix for the exact domain pair. A recovery
 
 Dell documents additional planning for compliance-mode failover, including cluster configuration and compliance clocks. [Its failover guide](https://www.dell.com/support/manuals/en-us/isilon-onefs/ifs_pub_backup_and_recovery_guide_dell_emc/smartlock-compliance-mode-failover-and-failback?guid=guid-5f55892f-92b6-4219-bf55-4d79cfae4499&lang=en-us) should be part of the change record.
 
-Keep retention requirements separate from product feature names. Choosing a mode does not establish the organization's regulatory compliance. The engineering deliverable is a verified source-to-target protection contract, a recovery procedure, and documented ownership of exceptions.
+Keep retention requirements separate from product feature names. Choosing a mode does not establish the organization's regulatory compliance. Document the source and destination protections, prove the recovery procedure and name the people responsible for exceptions.
 
 For the wider recovery sequence, read [replication and clean failback](/writing/replication-failback-clean-recovery/).

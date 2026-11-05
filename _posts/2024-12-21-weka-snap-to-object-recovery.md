@@ -8,7 +8,7 @@ last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---
 
-A WEKA snapshot visible on the source cluster is not the same as a recoverable copy outside that cluster. Snap-To-Object is useful precisely because the recovery design can separate those dependencies, but the separation has to be demonstrated.
+If the source WEKA cluster is unavailable, can you still recover the data? A snapshot listed on that cluster does not answer the question. Snap-To-Object can support an independent recovery path, but that path needs its own test.
 
 ## Identify the recovery artifacts
 
@@ -42,6 +42,6 @@ Do not add object-lock or lifecycle settings to an active WEKA bucket by analogy
 
 Track when the filesystem becomes available and when representative reads finish. Data or metadata fetched on demand can make initial availability look much better than workload recovery. Measure the first full working-set access separately from a later warm-cache run.
 
-Retain the completed-upload evidence, recovery release, manifest comparison, and application results. That bundle establishes a recovery capability. A dashboard showing that uploads are scheduled establishes only intent.
+Retain the completed-upload evidence, recovery release, manifest comparison, and application results. Those results show what can actually be recovered and how long it takes. Keep them beside the upload schedule so an operator can tell which recovery path has been exercised.
 
 Continue with [WEKA and KMS recovery](/writing/weka-encryption-kms-recovery/).

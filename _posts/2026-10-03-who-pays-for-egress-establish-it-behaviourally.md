@@ -13,11 +13,9 @@ last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
 ---
 
-A collaborator grants you access to a bucket and asks you to take a copy. The dataset is tens
-of terabytes. Somebody is going to be billed for that transfer, and the person who should find
-out which somebody is you, before the transfer rather than after it.
+Before copying tens of terabytes from a collaborator's bucket, agree who will pay for the transfer. Your access grant may allow downloads while denying the configuration call that would show the bucket's payment setting.
 
-The question has a precise technical answer, and the obvious way to look it up does not work.
+A small, authorized request can help establish the required behavior before the full transfer starts.
 
 ## The configuration call you cannot make
 
@@ -151,8 +149,4 @@ change. Worth knowing which bucket your alerting puts it in.
 | Transfer succeeds, surprise invoice | Requester Pays was on and the tool set the header for you | probe before, not after |
 | Recursive sync fails immediately | First call is a LIST | drive from a key list |
 
-The principle generalises past S3: **when the configuration API is closed to you, the
-specification's mandatory behaviour is still an oracle.** A setting you are not allowed to read
-can often be established by the response to a request you are allowed to make — and that is a
-stronger result than reading the config, because it tests the path your transfer will actually
-take.
+Keep the small request and its response with the transfer plan. When configuration access is restricted, that test records how the permitted download path behaved, including whether it required the payer header.

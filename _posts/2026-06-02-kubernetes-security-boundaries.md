@@ -8,7 +8,7 @@ last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---
 
-A workload placed in its own namespace is easier to organize, but that fact alone does not prove isolation. Kubernetes admission controls, network policy, identities, and storage permissions each enforce a different part of the boundary.
+A namespace organizes Kubernetes workloads, but isolation depends on the controls around them. Check admission, network policy, identity and storage permissions separately: a workload can be restricted by one and still have excessive access through another.
 
 ## Define the workload's permitted behavior
 
@@ -50,4 +50,4 @@ Use a disposable manifest that requests a prohibited capability and confirm admi
 
 ## Keep the evidence tied to the release
 
-Record Kubernetes and network-plugin versions, policy objects, test identities, and expected-versus-observed results. Rerun after cluster upgrades and CNI or CSI changes. The accepted boundary belongs to the tested system, not to a YAML file considered in isolation.
+Record Kubernetes and network-plugin versions, policy objects, test identities, and expected-versus-observed results. Rerun after cluster upgrades and CNI or CSI changes. The saved manifests show what was intended; the test results show what the cluster enforced.

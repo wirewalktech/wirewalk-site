@@ -9,15 +9,9 @@ summary: >-
   up tuning the wrong thing.
 ---
 
-High Performance Linpack solves a dense system of linear equations by LU
-factorization with partial pivoting, in double precision, distributed across a
-process grid. It is the benchmark behind the TOP500 list, which is why it
-carries more political weight than technical weight.
+High Performance Linpack solves a dense system of linear equations using LU factorization with partial pivoting, in double precision across a process grid. Its TOP500 role makes the score familiar, but the most useful local comparison is often the same machine before and after a change.
 
-The useful framing is this: HPL is a poor predictor of how your applications
-will perform, and an excellent way to find out whether a machine is broken.
-Both things are true at once, and most arguments about HPL come from people
-holding one half of that and assuming the other half is wrong.
+Use HPL to exercise dense compute and look for regressions. Use application runs and complementary benchmarks to assess workloads that depend more heavily on memory, communication or I/O.
 
 ## Why it flatters hardware
 
@@ -112,6 +106,4 @@ signal. An absolute efficiency number compared against a different site's
 machine is mostly a comparison of two vendors' BLAS libraries and two people's
 patience with parameter sweeps.
 
-Use HPL to prove the machine is healthy and to catch regressions after firmware
-and driver changes. Use HPCG, and your own applications, to decide what the
-machine is worth.
+Rerun the same HPL configuration after firmware and driver changes, alongside HPCG and representative applications. The combination shows more about the machine than any one score.

@@ -7,9 +7,9 @@ summary: "Reconstruct a failed job across allocation and step records, applicati
 description: "Investigate Slurm job failures using step-level exit codes, cgroup memory evidence, application logs and bounded reproductions."
 ---
 
-A job marked failed does not tell you what failed first. The application may have raised an exception, a worker may have exceeded a memory limit, a storage request may have stalled or the batch wrapper may have hidden the useful return code. The scheduler records part of that story, not the entire execution.
+After a Slurm job fails, find the earliest error before increasing its memory and trying again. A worker exception, a memory kill, stalled storage and a wrapper that hid the return code can all leave similar scheduler records.
 
-Start by preserving evidence from the failed run. A quick resubmission with twice the memory sometimes succeeds, but it does not explain whether memory was the cause, whether the original input was unusual or whether a different node changed the outcome. For expensive research jobs, understanding that distinction is worth the small effort of a structured investigation.
+Preserve the failed run's output, step records and node list. A larger-memory retry may succeed because the limit helped, because the input changed or because it ran on a different node. A small controlled reproduction can tell those possibilities apart.
 
 The commands here use an illustrative job ID. They do not assume that a particular accounting field is populated on every cluster.
 
@@ -105,6 +105,6 @@ Only change one suspected cause per experiment. Save a small matrix of input, ta
 
 A zero exit status is necessary for many workflows but insufficient for research correctness. Check output count, expected dimensions, checksums or application invariants. Partial outputs from an interrupted run can make a retry appear complete when some work was skipped.
 
-A useful closure states the first failure, the evidence linking it to the remedy and the validation performed afterward. If the cause remains uncertain, say what the successful workaround changes and what remains unexplained. Researchers can plan around an honest limit more effectively than around a confident diagnosis built from one ambiguous accounting field.
+Give the researcher the first failure found, the change made and the result of the reproduction. If only a workaround is known, say what it changes and what remains unexplained, so the next run does not begin with a false diagnosis.
 
 Read next: [A distributed Slurm job is running but making no progress: a debugging sequence](/writing/slurm-distributed-job-hangs-launch-ranks-fabric/), [Node-local scratch under Slurm: stage data without losing the result](/writing/slurm-node-local-scratch-staging-result-publication/).

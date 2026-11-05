@@ -8,7 +8,7 @@ last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---
 
-A network alert becomes more useful when an analyst can establish what happened immediately before and after it. Zeek supplies protocol and connection context that can support that investigation, even when a signature alone gives little explanation.
+An alert rarely explains the whole connection. An analyst also needs to know what preceded it, which service answered and what followed. Zeek's connection and protocol logs provide that context when the signature alone leaves questions open.
 
 ## Begin with a known capture
 
@@ -53,4 +53,4 @@ Then repeat on the live monitored path using approved harmless traffic. Verify t
 
 A large transfer is not automatically exfiltration. A new destination is not automatically malicious. Use inventory, business purpose, endpoint process information, and access records to test the hypothesis.
 
-A useful deployment delivers dependable context and explicit blind spots. See [encrypted traffic visibility](/writing/encrypted-traffic-detection-boundaries/) for the complementary sensor-placement review.
+Document which questions the logs can answer and where encryption or sensor placement leaves gaps. See [encrypted traffic visibility](/writing/encrypted-traffic-detection-boundaries/) for the complementary sensor-placement review.

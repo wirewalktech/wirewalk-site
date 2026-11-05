@@ -8,7 +8,7 @@ last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---
 
-Putting a bastion in a network diagram does not force administrators to use it. If managed hosts still accept direct connections from broad networks or share long-lived keys, the new hop may add logging while leaving the original access path intact.
+After installing a bastion, try the old direct SSH route. If it still works from the same broad networks, administrators can bypass the new hop and its logging. Enforce the intended route on the managed hosts and the network, then test both routes.
 
 ## Define the authorized route
 
@@ -47,4 +47,4 @@ Record session start, identity, destination, and privileged actions according to
 
 Keep a working rescue session and independently verified console access during the pilot. Apply changes to a small group, establish a new session through the intended route, and verify both allowed and denied behavior before expanding.
 
-The result should be a route enforced by network and host policy, with bounded downstream authority and a working recovery path. See [management-network isolation](/writing/management-network-bmc-isolation/) for the infrastructure beneath that route.
+Check the route again from a fresh session before closing the rescue connection. Confirm that downstream privileges and emergency access still behave as intended. See [management-network isolation](/writing/management-network-bmc-isolation/) for the infrastructure beneath that route.

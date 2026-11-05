@@ -7,9 +7,9 @@ summary: "Build a Slurm admission test around CPU placement, memory enforcement,
 description: "Validate Slurm cgroup v2 setup, CPU affinity, memory limits and NVIDIA GPU isolation with canary jobs and repeatable admission checks."
 ---
 
-A scheduler can allocate the correct resources while the operating system allows a job to use resources belonging to someone else. The queue looks healthy, accounting produces records, and the first sign of trouble is a researcher whose run slows down whenever a neighboring job starts.
+Before opening a new Slurm node to users, run two small jobs beside each other and check what each can access. Correct allocation records will not protect a researcher if the operating system lets a neighboring job use the same CPUs, memory or GPUs.
 
-Advanced Slurm setup begins with proving that the allocation is enforced. Configuration files describe an intention. A useful admission test follows that intention through a running job, its processes, its cgroups and the devices it can actually open.
+Follow the running task into its cgroups and inspect the devices it can open. That connects the scheduler's allocation to what is enforced on the node, including cleanup when the job ends.
 
 The examples below describe a generic Linux cluster using a unified cgroup v2 hierarchy and whole NVIDIA GPUs. They are design and validation examples, not a complete cluster configuration. MIG, GPU sharing, SSH adoption and container runtimes require additional tests against the deployed release.
 
@@ -116,6 +116,6 @@ Keep the canary suite small enough to rerun after a driver update, a Slurm upgra
 
 The release gate should include a controlled reboot and readmission. Otherwise, the site has tested a live repair rather than the configuration that future nodes will receive. Rollback means restoring a known compatible image and configuration together, then rerunning the same admission checks.
 
-The practical outcome is a node the operator can explain: what it advertises, what it enforces, how it accounts and what remains after a job ends. That gives researchers a reliable place to work and gives administrators a smaller, clearer problem when a job fails.
+Keep the passing results with the node image and Slurm configuration. When a later job interferes with its neighbor, repeat the relevant test against that baseline before changing the fleet.
 
 Read next: [Advanced Slurm job troubleshooting: memory, exit codes and missing evidence](/writing/slurm-job-failure-memory-exit-code-debugging/), [NVIDIA containers under Slurm: operating Enroot and Pyxis as a supported service](/writing/nvidia-enroot-pyxis-slurm-container-pipeline/).

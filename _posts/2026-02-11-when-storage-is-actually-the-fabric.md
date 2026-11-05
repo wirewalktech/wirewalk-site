@@ -10,7 +10,7 @@ summary: >-
   command that would have answered it on the first morning.
 ---
 
-There is a symptom shape that sends people looking in the wrong layer for a week.
+This read/write imbalance is easy to mistake for a storage problem.
 A parallel filesystem writes close to the number the design predicted and reads
 at roughly half that. Nothing is saturated. Client adapters sit well below half
 their line rate, the storage servers are not CPU-bound, the disks are not busy,
@@ -553,8 +553,7 @@ the fabric is being managed from the switch rather than from a host.
 Be careful about the size of the claim. The evidence supports this: for this node
 allocation, in the read direction, the achievable aggregate is bounded by three
 inter-switch links, two of them at 95% of payload ceiling, and a network-only
-test with no storage in the path reproduces the bound to within 2%. Narrow,
-strong, checkable.
+test with no storage in the path reproduces the bound to within 2%. The measurements apply to that allocation and direction.
 
 It does not support "the storage is fine". The storage was never tested above
 50.3 GiB/s on reads because the network would not deliver more. When the routing

@@ -8,7 +8,7 @@ last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---
 
-A rule can parse successfully and never match the traffic it was meant to detect. Another can match so broadly that moving it into an inline policy interrupts legitimate work. Snort 3 changes need evidence at both boundaries.
+A Snort rule can load cleanly and never match its intended traffic. It can also match too broadly, with little consequence in an offline test but a serious outage once enabled inline. Test syntax, matching behavior and enforcement separately.
 
 ## Pin the inputs
 
@@ -44,4 +44,4 @@ Do not infer physical fail-open or fail-closed behavior from a rule action. Thos
 
 ## Keep the result small and auditable
 
-An acceptance record can be a table of fixture hashes, expected signature IDs, observed IDs, and pass/fail outcomes. Add client evidence for enforcement tests. This is much stronger than “Snort started” and cheap enough to repeat with every rule change.
+An acceptance record can be a table of fixture hashes, expected signature IDs, observed IDs, and pass/fail outcomes. Add client evidence for enforcement tests. Repeat that small set of cases with each rule change, before the new rules reach the live enforcement path.

@@ -7,11 +7,11 @@ summary: "Design a node-local staging workflow with capacity checks, immutable i
 description: "Use node-local NVMe with Slurm safely through verified staging, capacity budgets, atomic publication and interruption-aware result recovery."
 ---
 
-Node-local NVMe can remove repeated reads from a shared filesystem and give temporary work a fast place to run. It can also become the only place a completed result exists. A node reboot, reimage or cleanup job then turns a successful computation into lost work.
+Local NVMe is a good place to avoid repeated shared-filesystem reads and hold temporary work. It is a poor place for the only copy of a completed result. A reboot, reimage or cleanup can remove that result before anyone notices it was never published.
 
-A reliable staging workflow distinguishes temporary execution state from a published research result. It should be possible to answer three questions after interruption: which inputs were used, whether computation finished, and whether the output reached durable project storage in a complete form.
+Give the job separate states for staged inputs, completed computation and validated publication to project storage. After interruption, an operator should be able to identify which of those stages finished.
 
-This article focuses on the lifecycle around a Slurm job rather than checkpoint-format tuning. Paths and sizes are illustrative. The publication design must be validated against the actual filesystem and failure model.
+The paths and sizes below are examples. Test the publication procedure against the actual filesystem guarantees and the failures it needs to survive.
 
 ## Define the lifetime of each copy
 
@@ -91,6 +91,6 @@ Delete local state only after the durable destination is validated under the wor
 
 Test cancellation during stage-in, computation and stage-out using disposable data. Test a fresh allocation reading the published result without access to the original local disk. That is stronger evidence than validating output from the process that still has it cached.
 
-The desired outcome is a workflow that benefits from local speed while giving researchers a clear completion boundary. Temporary storage should accelerate the work, not make its survival depend on whether someone happens to reboot the node afterward.
+Only mark the job complete when a fresh allocation can read and validate the published result without the original local disk. Researchers can then rely on the completion status even after the compute node is rebuilt.
 
 Read next: [Storage Scale has free space, but the job cannot write: filesets, inodes and quotas](/writing/storage-scale-filesets-inodes-quota-troubleshooting/), [Distributed AI checkpoints: storage performance and restart testing](/writing/distributed-ai-checkpoint-storage-restart-testing/).

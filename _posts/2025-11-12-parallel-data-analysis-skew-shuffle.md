@@ -7,9 +7,9 @@ summary: "Diagnose parallel GPU analysis through Spark plans, RAPIDS task concur
 description: "Diagnose parallel GPU analysis through Spark plans, RAPIDS task concurrency, host and device spill, shuffle traffic, Nsight traces, and controlled scaling with verified output equivalence."
 ---
 
-A GPU analytics job completes most tasks quickly and waits for a few oversized partitions. More NVIDIA devices cannot share work that remains trapped behind one hot key, a bad join, or a single long-running task. The useful diagnosis crosses the query plan, GPU memory, host memory, storage, and network.
+Most tasks finish, but a few oversized partitions keep the analytics job running. Adding NVIDIA GPUs will not split a hot key or repair a join that multiplied the data. Follow the slow stage through GPU memory, host memory, storage and network before buying more capacity.
 
-Use the longest stage and partition distribution to decide whether the next intervention is a query rewrite, a concurrency change, more memory, or a fabric improvement. Keep a correct CPU or existing distributed result as the reference throughout.
+The partition distribution should guide the next experiment: a query rewrite, a concurrency change, more memory or a fabric improvement. Keep a correct CPU or existing distributed result available to check every candidate.
 
 ## Separate the Spark plan from the GPU execution path
 
@@ -91,4 +91,4 @@ The [2010 Spark paper](https://www.usenix.org/conference/hotcloud-10/spark-clust
 
 For every accepted change, preserve the original and revised plans, stage distributions, resource configuration, elapsed time, and output comparison. Repeat enough runs to distinguish the effect from cache and load variation, while stating which cache state each run represents.
 
-An optimization is ready when it removes a measured bottleneck and preserves the defined result. More workers are one possible tool. Better partitioning, fewer bytes, or a corrected join can be the more direct answer.
+If the revised plan returns the same result faster across repeat runs, keep it with the measurements. If more workers leave the same tail of slow tasks, return to the partition and join evidence before scaling again.

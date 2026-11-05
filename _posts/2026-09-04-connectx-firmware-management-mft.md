@@ -9,11 +9,7 @@ summary: >-
   number.
 ---
 
-Firmware on a ConnectX adapter is not one thing. There is the image in flash,
-the device configuration stored alongside it, and the running state, and all
-three can disagree after a partial update. A card that reports the new version
-but behaves like the old one is common, and the reason is almost always that
-nothing reset it.
+After a ConnectX update, compare the image in flash, stored device configuration and running firmware. They can disagree if activation is incomplete. A reported new image version is therefore a reason to check the reset and running state before troubleshooting its behavior.
 
 ## Start the driver, find the device
 
@@ -172,6 +168,4 @@ deserves its own written procedure. So does recovery from an interrupted burn â€
 a recovery image. That one is worth writing down once, by whoever has just done
 it, rather than improvised under pressure.
 
-Command syntax drifts between MFT releases. What is above describes the shape of
-the tools rather than one version, and `--help` on the release you are running
-is authoritative over anything written down elsewhere, this included.
+Command syntax drifts between MFT releases. Check the installed release's `--help` output and documentation for the commands above before using them; flags and supported reset behavior vary between versions.

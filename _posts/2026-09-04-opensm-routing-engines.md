@@ -160,8 +160,7 @@ adaptive routing adds anything.
 
 ## The short version
 
-Set the engine, restart, then read the log to find out which engine you are
-actually running. Give `updn` an explicit root list. Expect `ftree` to decline if
+After an approved engine change and restart, read the log to confirm which engine is running. Give `updn` an explicit root list. Expect `ftree` to decline if
 anything about the topology is irregular, and treat its explanation as a cabling
 bug report rather than a configuration problem. Measure with collectives, not
 with a single pair.

@@ -147,7 +147,4 @@ The pattern is not specific to transfers.
 | Percent static, job healthy | One large item in progress | publish bytes and items separately |
 | Early estimate repeated as a commitment | Rate reported without its window | always report the window and the sample size |
 
-The principle: **a percentage is a ratio, and most of the error lives in the denominator.** Get
-the denominator into the unit the work is actually measured in, take rates from a window rather
-than from the beginning of time, and refuse to produce an estimate before the sample can
-support one.
+Measure progress in the unit that drives the work—bytes for a transfer, for example—and report the rate window. If large items are still in flight and partial progress is unavailable, label the estimate as provisional or wait for a more representative sample.

@@ -8,7 +8,7 @@ last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---
 
-Changing a signature from alerting to dropping is only one part of an IPS rollout. Traffic must traverse the enforcement path, legitimate work must continue, and the organization must understand what happens when the sensor or capture process fails.
+Changing a Suricata rule from alert to drop can interrupt legitimate work. Before enabling it, check that traffic takes the intended enforcement path and agree what should happen if the sensor fails. Both decisions matter as much as the signature.
 
 ## State the enforcement design
 

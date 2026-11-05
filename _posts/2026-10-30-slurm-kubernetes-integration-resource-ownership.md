@@ -7,9 +7,9 @@ summary: "Compare separate worker pools, Slurm on Kubernetes and coordinated sch
 description: "Design Slurm and Kubernetes integration around resource ownership, GPU allocation, identity, storage and failure recovery."
 ---
 
-Research organizations often need both Slurm and Kubernetes. A simulation team wants predictable multi-node batch allocations. A platform team wants services, notebooks and inference endpoints. Both see the same expensive GPU fleet and reasonably ask whether it can serve more than one kind of work.
+A simulation team wants multi-node batch allocations; a platform team needs notebooks, inference endpoints and services. Sharing their GPU fleet is an appealing way to use expensive capacity, provided both teams can still rely on their workloads' placement and recovery.
 
-The difficult part is not launching a Slurm daemon in a container. It is ensuring that two control systems never promise the same resources independently. The integration has to survive cancellation, node failure and upgrades, when its view of ownership is least reliable.
+Decide who owns each allocation before connecting the schedulers. Slurm and Kubernetes must not independently promise the same GPU, including during cancellation, worker loss and upgrades.
 
 This article compares architectural patterns and proposes an acceptance process. It does not prescribe a particular operator release or promise that every Slurm feature works in every Kubernetes environment. Examples describe hypothetical infrastructure, without production topology or identities.
 
@@ -79,6 +79,6 @@ Define success using completed research work and service objectives. Compare que
 
 Include a rollback path that restores exclusive ownership to separate pools. Retain the original image and scheduling definitions, and verify cleanup before moving machines back. The ability to reverse a pilot is part of its design.
 
-A successful integration lets users keep the workflows that help them while infrastructure ownership stays explainable during failures. If the ownership story requires two independent schedulers to remain perfectly synchronized without a supported coordination mechanism, the design needs more work before the fleet is shared.
+Before sharing the fleet, demonstrate allocation and release while one control system is unavailable. If ownership cannot be reconciled safely, keep the worker pools separate until a supported coordination path is ready.
 
 Read next: [Docker or Apptainer for research computing: compare the operating models](/writing/docker-apptainer-research-container-operating-models/), [Advanced Slurm setup: prove CPU, memory and GPU isolation before admitting jobs](/writing/slurm-cgroup-v2-gpu-isolation-validation/).

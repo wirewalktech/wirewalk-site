@@ -8,7 +8,7 @@ last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---
 
-Encryption changes the evidence available to a network sensor. It does not make all monitoring useless, and it does not justify pretending that a packet inspection engine sees application content it cannot decrypt.
+Encryption leaves a network sensor with a different set of clues. Flows and handshake details may still help, while the application content remains unreadable. Plan the investigation around what each sensor can actually observe, and use endpoint or application logs for the questions it cannot answer.
 
 ## Build a visibility table
 
@@ -45,4 +45,4 @@ In an analyst exercise, write each conclusion beside its evidence source. “Hos
 
 ## Verify the blind spots
 
-Repeat the fixture when routing, TLS termination, or endpoint tooling changes. Retain a list of unobserved paths and assign owners. A security architecture with documented limits is more actionable than a dashboard claiming complete coverage without a reproducible test.
+Repeat the fixture when routing, TLS termination, or endpoint tooling changes. Retain a list of unobserved paths and assign owners. Give investigators that list before an incident, so they know where to look when the network trace cannot answer a question.

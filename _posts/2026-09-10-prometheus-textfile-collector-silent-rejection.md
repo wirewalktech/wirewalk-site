@@ -154,7 +154,4 @@ durable, or publish it as a gauge and be honest that it is one.
 | Metric appears then vanishes per scrape | Two writers, same filename | one file per writer |
 | Query works in Grafana, alert never fires | Expression over absent data is not a breach | alert on `absent()` as well |
 
-The general principle is the one that applies to every pipeline that transforms text into
-state: **the component that writes is not the component that decides whether the write was
-valid.** Exit zero from the writer tells you a file was produced. Only the reader's own error
-metric tells you it was accepted.
+Check node_exporter's scrape-error metric after publishing a file, and confirm the expected series appear. The writer can exit successfully even when the collector rejects everything it wrote.

@@ -7,9 +7,9 @@ summary: "Choose a research container workflow by comparing identity, privilege,
 description: "Compare Docker and Apptainer for research workloads: privilege, identity, storage, GPU access, image delivery and Slurm integration."
 ---
 
-A researcher who already has a working Docker image should not have to rewrite the application to use an HPC cluster. At the same time, a shared cluster cannot assume that the Docker operating model used on a personal workstation is appropriate for every compute node.
+A working Docker image is a useful starting point for moving research software onto an HPC cluster. The application may need little change, but execution needs to fit the site's users, storage and scheduler. That is where the choice of runtime matters.
 
-The useful comparison is therefore broader than which tool can start the image. It includes who owns the process, which host files are visible, how resources are constrained, where images are cached and how the result can be reproduced later.
+Compare how the processes are owned, which host files are exposed, how limits are enforced and where images are cached. Test those behaviors along with the application, rather than choosing a runtime only because it can start the image.
 
 Docker and Apptainer can belong to the same workflow: build and validate an OCI image in a controlled environment, then execute it using the site's supported runtime. The boundary between those stages should be explicit.
 
@@ -88,6 +88,6 @@ A useful acceptance run writes a small known output, verifies its ownership, che
 
 Preserve the executable image, input version, command line, relevant environment, host driver and runtime versions, and application-level validation. Hardware differences and nondeterministic algorithms can still affect results. State what kind of reproducibility is required rather than promising bitwise identity without testing it.
 
-The decision should make research easier: a stable way to deliver software, clear rules for accessing data and hardware, and an execution path the infrastructure team can support. Choosing that contract is more useful than declaring a winner based only on which container command a researcher learned first.
+Publish the supported launch command with the tested image, mount rules and hardware requirements. That gives researchers a route from their working software to a scheduled job without having to rediscover the cluster integration themselves.
 
 Read next: [Apptainer, MPI and RDMA: make the host–container boundary explicit](/writing/apptainer-mpi-rdma-host-container-compatibility/), [NVIDIA containers under Slurm: operating Enroot and Pyxis as a supported service](/writing/nvidia-enroot-pyxis-slurm-container-pipeline/).

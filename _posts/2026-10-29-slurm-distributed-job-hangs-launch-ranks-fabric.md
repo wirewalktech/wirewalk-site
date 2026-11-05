@@ -7,9 +7,9 @@ summary: "Separate allocation, process launch, rendezvous, communication and app
 description: "Debug stalled Slurm MPI and NVIDIA training jobs by isolating launch, rendezvous, rank failure, RDMA transport and application progress."
 ---
 
-The scheduler says a job is running. GPUs are allocated, processes exist and the output file has stopped changing. That combination is common enough to invite a familiar response: change an MPI or NCCL setting and try again. Sometimes it works. Often it simply moves the failure or hides the route that the application should have used.
+GPUs are allocated and processes are alive, but the distributed job has stopped printing progress. Before trying another MPI or NCCL setting, find out how far each rank got. One missing worker can leave all the others waiting.
 
-A distributed workload has several opportunities to stop before useful computation begins. Allocation, task launch, process-manager initialization, rendezvous, transport setup and the first application collective are separate stages. Locate the last stage that completed before changing the system beneath the job.
+Check task launch, process-manager initialization, rendezvous, transport setup and the first collective in order. The last completed stage narrows the investigation without changing several parts of the stack at once.
 
 This sequence applies to generic Slurm-managed MPI and NVIDIA GPU workloads. The exact launcher and diagnostics depend on the installed MPI, PMIx, framework and NCCL versions. All job IDs and node descriptions are illustrative.
 
@@ -95,6 +95,6 @@ For MPI, check whether the application makes the progress calls expected by its 
 
 A two-node success does not establish a full allocation is healthy. After fixing the isolated fault, rerun at the scale and placement that exposed it, with representative input and an explicit completion condition.
 
-Save the launch model, versions, selected interfaces, task mapping, elapsed initialization time and application outcome. The useful result is not merely that processes stayed alive. It is that every intended participant joined, communication used the expected path and the workload resumed measurable progress.
+Save the launch model, versions, selected interfaces, task mapping, elapsed initialization time and application outcome. Confirm every intended participant joined, communication used the expected path and the workload resumed measurable progress.
 
 Read next: [Apptainer, MPI and RDMA: make the host–container boundary explicit](/writing/apptainer-mpi-rdma-host-container-compatibility/), [An MPI troubleshooting playbook: symptom to cause](/writing/mpi-troubleshooting-playbook/).

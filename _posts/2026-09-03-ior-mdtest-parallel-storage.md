@@ -9,14 +9,9 @@ summary: >-
   almost nobody measures it.
 ---
 
-Two tools cover most of what you need from a parallel filesystem. IOR measures
-bandwidth by moving large blocks. mdtest measures metadata by creating, stating
-and removing enormous numbers of files. Both come from the same repository and
-build together.
+IOR and mdtest answer different questions about a parallel filesystem. IOR moves blocks to measure bandwidth; mdtest creates, stats and removes files to measure metadata operations. They build from the same repository, so it is straightforward to keep both in a storage test suite.
 
-The common failure is running only IOR, getting a large number, and concluding
-the storage is healthy. For a training workload reading millions of small files,
-that number describes almost nothing you care about.
+For a training workload with millions of small files, a good IOR result leaves much of the access path untested. Include metadata measurements and the application's actual file sizes and concurrency.
 
 ## Defeating the cache, which is most of the work
 
@@ -107,7 +102,4 @@ version and the mount options alongside the result. Run against a directory with
 the same striping or placement policy the real workload will use, because a
 default-policy test directory can behave nothing like a production dataset.
 
-And run the same configuration on a schedule. A storage benchmark taken once
-during acceptance is an anecdote. The same benchmark taken monthly is a baseline,
-and a baseline is the only thing that turns "it feels slower lately" into a
-number you can act on.
+Repeat the same configuration on a suitable schedule and retain the results. When someone reports that storage has become slower, compare equivalent runs before changing the system.

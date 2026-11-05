@@ -19,13 +19,9 @@ name, the right owner and a plausible size. Nothing in the monitoring turns
 amber. And the contents are wrong — empty where they should be populated,
 defaulted where you chose something else, stale where you expected fresh.
 
-This class has no single cause. It has about seven, and they are mechanical
-enough to be listed. What follows is the taxonomy, then the checking discipline
-that actually catches them, which is narrower and more annoying than the one
-most of us write by default.
+The seven examples below show how these failures escape ordinary status checks. Each needs a check on the output or behavior, and a deliberate fault to prove the check can fail.
 
-The organizing claim: **a check that asserts on status rather than content is
-not a check.** It is a record that something ran.
+**Check the output as well as the status.** A successful exit establishes that a process ran to completion; it may say nothing about whether it produced the intended result.
 
 ## The taxonomy
 

@@ -8,7 +8,7 @@ last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---
 
-An application failing under SELinux enforcement is evidence to investigate, not proof that enforcement must be disabled. The failure may be a mislabeled path, a supported configuration option, or behavior that the service should not be performing.
+When an application fails under SELinux, capture the denial before changing enforcement. A mislabeled directory, a supported service setting and an operation the service should never perform need different fixes.
 
 ## Capture the actual denial
 
@@ -51,4 +51,4 @@ Reboot or redeploy the pilot where appropriate to confirm the fix survives norma
 
 ## Retain the reason
 
-Keep the denial, diagnosis, exact change, positive test, and negative test. Document any exception with its owner and review date. This turns an operational inconvenience into a repeatable hardening improvement instead of a permanent loss of enforcement.
+Keep the denial, diagnosis, exact change, positive test, and negative test. Document any exception with its owner and review date. The record should explain why the exception or label change was necessary, so it can be reviewed when the service or image changes.

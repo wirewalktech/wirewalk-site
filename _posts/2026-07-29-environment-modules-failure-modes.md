@@ -21,8 +21,7 @@ The module system reports success in all three cases, and the failure surfaces e
 `command not found`, a missing Python package, or a linker error naming an unfamiliar symbol
 version.
 
-What follows is nine mechanisms, each with the command that tells it apart, then a harness that
-catches most of them before a user does.
+The nine cases below each have a distinguishing check. The final harness combines several of those checks so a broken module can be found before a user submits work with it.
 
 ## What `module` actually is
 
@@ -697,6 +696,4 @@ works interactively fails for every job.
 | Works on a login node, fails in a batch job | different profile scripts or `MODULEPATH` | run the same check under `srun` and diff the environments |
 | Works for you, fails for a user | something in your `.bashrc` | re-test under `env -i ... bash --noprofile --norc` |
 
-None of this is exotic. It is one failure repeated: an environment change that did not happen, or
-happened where it could not be observed, reported as success. It is worth writing down because
-the evidence points at the software, and the software is fine.
+When a module appears to load but the tool fails, inspect the environment in the shell that will run it. A missing change, a change made only in a child shell or a stale path can make the application look broken even when its installation is intact.

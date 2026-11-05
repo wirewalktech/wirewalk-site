@@ -8,7 +8,7 @@ last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---
 
-A user can appear correctly restricted from a Windows workstation and still gain unexpected access through a Linux client. The files did not change; the identity and authorization path did. This is a central security test for a PowerScale estate serving both SMB and NFS.
+The same file can be properly restricted from Windows and unexpectedly accessible from Linux. Its contents have not changed; the server is interpreting a different identity and authorization path. Test both paths on a PowerScale system that serves SMB and NFS.
 
 ## Map identity before editing permissions
 
@@ -48,6 +48,6 @@ Repeat the access test after a group membership change using a new authenticated
 
 Before moving a directory tree, capture ownership, inherited ACL behavior, identity mappings, and application service identities. A byte-identical copy can still be an authorization failure if SID-to-UID mapping changes at the destination.
 
-Accept the migration only when the expected allowed and denied operations agree on both protocols. Keep the test users and synthetic dataset for later directory or OneFS upgrades. This small regression suite is more useful than a one-time screenshot of permissions.
+Accept the migration only when the expected allowed and denied operations agree on both protocols. Keep the test users and synthetic dataset for later directory or OneFS upgrades. The same tests can catch a mapping change during the next upgrade, when an old permissions screenshot would tell you very little.
 
 Related: [NFS authentication boundaries](/writing/nfs-auth-sys-kerberos-boundaries/).

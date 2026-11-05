@@ -8,7 +8,7 @@ last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---
 
-A hardening score can improve because controls were implemented, because rules were excluded, or because the wrong profile was scanned. An assessment needs enough context to distinguish those outcomes.
+A higher OpenSCAP score may mean a host was hardened. It may also mean rules were excluded or a different profile was selected. Keep the scan inputs beside the result so a reviewer can tell which happened.
 
 ## Pin the benchmark inputs
 
@@ -52,6 +52,6 @@ Some controls affect authentication, mounts, kernel behavior, or cryptography. T
 
 When a later scan differs, compare content and profile versions before attributing the change to configuration drift. A revised benchmark can produce a different result on an unchanged host.
 
-Keep a small evidence bundle for each assessment: input hashes, target inventory, results, exceptions, remediation record, and post-change checks. That supports a repeatable engineering review. It should never be shortened to an unsupported claim that the whole estate is “compliant.”
+Keep a small evidence bundle for each assessment: input hashes, target inventory, results, exceptions, remediation record, and post-change checks. Use that bundle to review the specific hosts and controls assessed. It cannot establish compliance for systems and requirements outside the scan.
 
 Related: [SELinux diagnosis](/writing/selinux-denials-without-disabling/) and [staged Linux maintenance](/writing/ansible-linux-patching-canaries/).

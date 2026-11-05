@@ -15,10 +15,7 @@ across the internal drives of ordinary servers. There is no controller, no exter
 array, and no appliance. You get the ESS data protection model on hardware you
 specify yourself.
 
-The installation itself is mechanical and IBM documents it well. What follows
-concentrates on the decisions that are cheap to make correctly on day one and
-painful to revisit later, and on the failures that are hard to diagnose because the
-system reports success while doing the wrong thing.
+IBM documents the installation sequence. The decisions below deserve attention before installation: fault tolerance, hardware validation, network paths and capacity. Later sections cover cases where the configured values and running system disagree.
 
 ## Decide whether ECE is the right answer at all
 
@@ -399,6 +396,4 @@ starts with none.
 - **config versus running state** — periodically diff `mmlsconfig` against
   `mmfsadm dump config`. Divergence is silent and accumulates
 
-The last one deserves emphasis. Nearly every long-running problem described here
-shares a shape: the system reported success, the configuration said one thing, and
-the running state said another. Build the habit of checking the second one.
+Keep the configuration-versus-runtime comparison in routine checks. It catches a change that was saved but never applied, without waiting for the next workload to expose it.

@@ -7,9 +7,9 @@ summary: "Validate hybrid and bind MPI container models through launcher, ABI, p
 description: "Run MPI containers reliably with Apptainer and Slurm by validating launcher, ABI, PMIx, RDMA libraries, device access and cleanup."
 ---
 
-A containerized MPI application can pass a one-node test and fail immediately on two nodes. It can also complete at scale while using a slower transport than the cluster was built to provide. Both outcomes are understandable once the container is treated as one component of the communication stack rather than a sealed replacement for the host.
+When an MPI image works on one node and fails on two, inspect the boundary between its libraries and the host launch environment. The same boundary can also let a job finish over a slower transport while leaving the intended RDMA path unused.
 
-The application, MPI libraries, process manager, fabric provider, kernel driver and device access all participate. The practical task is to define which side supplies each layer, then test that exact combination.
+List which side supplies MPI, the process manager, fabric userspace, kernel driver and devices. Validate that combination before expanding the test to more nodes.
 
 The examples use an already validated image and generic application paths. They are launch patterns, not a promise that arbitrary host and container MPI builds can be mixed.
 
@@ -92,6 +92,6 @@ Cancel a small multi-node test through the normal scheduler interface and verify
 
 Repeat acceptance after changing Slurm, MPI, the container runtime, the kernel or fabric drivers. The image checksum can remain identical while the host side of the contract changes underneath it.
 
-Maintain a supported-combination table with native and container results. This gives researchers a predictable path: build against a known interface, use a tested image and launch through a documented model. It also turns the next two-node failure into a comparison against evidence rather than another round of arbitrary library mounts.
+Keep native and container results in the supported-combination table, with the tested launch command. A researcher can then choose a known configuration, and the next two-node failure has a matching baseline to compare.
 
 Read next: [A distributed Slurm job is running but making no progress: a debugging sequence](/writing/slurm-distributed-job-hangs-launch-ranks-fabric/), [NVIDIA containers under Slurm: operating Enroot and Pyxis as a supported service](/writing/nvidia-enroot-pyxis-slurm-container-pipeline/).

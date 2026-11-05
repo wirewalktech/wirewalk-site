@@ -7,9 +7,9 @@ summary: "Integrate NVIDIA Triton scoring with batch and streaming systems using
 description: "Integrate NVIDIA Triton scoring with batch and streaming systems using bounded GPU queues, microbatch latency budgets, versioned outputs, idempotent replay, and event-time correctness."
 ---
 
-A streaming pipeline that calls a GPU model is constrained by the slowest sustained stage. If input arrives faster than the NVIDIA inference service can score it, queues grow even while individual inference calls appear fast. Recovery can make the problem worse by replaying a backlog into the same service.
+Fast individual inference calls can hide a growing queue. When events arrive faster than an NVIDIA inference service can process them, the pipeline falls behind; replaying a backlog through the same service adds more pressure.
 
-Design the event-processing contract and GPU serving capacity together. Use Triton for a qualified inference stage, keep event-time and state ownership explicit, and reserve a controlled path for replay and historical backfills.
+Budget event processing and GPU serving together. For a qualified Triton stage, define who owns event-time state, how results change when late data arrives and how much capacity replay and historical backfills may consume.
 
 ## Allocate the latency budget across the whole path
 
@@ -97,4 +97,4 @@ A reconciliation job also needs an owner and alerting. A silent comparison that 
 
 A scheduled incremental batch may meet a fifteen-minute requirement with less state and fewer recovery paths. A low-latency stream may be justified when a delayed decision loses value. Some systems need both a provisional stream and a reconciled batch view.
 
-Record the tradeoff: freshness target, completeness policy, replay horizon, state budget, and recovery procedure. The architecture is ready when it can explain what a number means, when that number may change, and how the same result can be reconstructed after failure.
+Record the tradeoff: freshness target, completeness policy, replay horizon, state budget, and recovery procedure. Give downstream users a clear explanation of what each reported number includes, when late data may change it and how it can be reconstructed after failure.

@@ -8,7 +8,7 @@ last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---
 
-Monitoring every changing file on a busy server produces activity, but not necessarily useful evidence. A file integrity monitoring deployment should begin with a small set of paths whose unexpected modification has a clear owner and consequence.
+On a busy server, monitoring every file change can bury the modifications someone needs to investigate. Start Wazuh file integrity monitoring with paths that have clear owners: authentication settings, service definitions and privileged automation, for example.
 
 ## Choose a meaningful baseline
 

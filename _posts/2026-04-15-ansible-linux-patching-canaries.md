@@ -8,7 +8,7 @@ last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---
 
-A package update can complete while the vulnerable process remains running or the application becomes unhealthy. Patching is a controlled transition of a service, not merely a package-manager transaction.
+A package manager can report a successful update while the vulnerable process keeps running. A required restart can also leave the application unhealthy. Include running-service checks and reboot requirements in the patch plan before rolling it across the inventory.
 
 ## Define the change boundary
 
@@ -49,4 +49,4 @@ If the canary fails, stop the rollout. Do not mark a host recovered merely becau
 
 Report unreachable hosts, skipped tasks, deferred reboots, and accepted exceptions separately. An inventory of 200 targets with 190 successful transactions is not a fully patched fleet. Preserve the original target list so disappearing machines cannot improve the success percentage.
 
-The release record should show what was targeted, what changed, which running services were verified, and what remains outstanding. Repeat the same acceptance checks after the next image rebuild so the patched state survives replacement as well as reboot.
+For each target, record the change, the running-service check and any work still outstanding. Repeat the same acceptance checks after the next image rebuild so the patched state survives replacement as well as reboot.

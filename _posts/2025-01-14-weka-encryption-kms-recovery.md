@@ -8,7 +8,7 @@ last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
 ---
 
-Encryption creates a dependency that storage capacity planning often misses: the availability and integrity of the key-management service. A healthy storage cluster can still be unusable if the recovery environment cannot authenticate to the KMS or obtain the required key material.
+A storage cluster can be healthy and its data inaccessible because the recovery environment cannot reach the key-management service. Include KMS authentication, certificates and key availability in the recovery plan, alongside the storage and network dependencies.
 
 ## Establish the release and encryption state
 
@@ -44,4 +44,4 @@ Restore the lab KMS path and repeat the original operation. Record any manual st
 
 Key rewrapping, key replacement, and bulk data re-encryption are not interchangeable terms. Use the release-specific workflow and inspect the resulting configuration. A successful rotation task should be followed by access and recovery tests using the intended recovery environment.
 
-The acceptance criterion is straightforward: protected data remains confidential, authorized workloads can use it, and the documented recovery path works when the normal site is unavailable. See [Snap-To-Object recovery](/writing/weka-snap-to-object-recovery/) for the associated data-side exercise.
+Test that authorized workloads can use the protected data from the recovery environment, while unauthorized identities remain excluded. Repeat with the normal site unavailable. See [Snap-To-Object recovery](/writing/weka-snap-to-object-recovery/) for the associated data-side exercise.

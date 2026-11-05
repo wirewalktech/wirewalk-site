@@ -302,5 +302,4 @@ Before believing any MPI number on a RoCE fabric:
    `buf_discard` on the RoCE priority and `rp_cnp_handled` moving. Any discard on
    the lossless class is a stop-and-fix.
 
-That takes half an hour and it is the difference between a fabric that performs
-predictably and one that performs well on Tuesday.
+Save those checks with the load-test result and repeat them after changes to the path. They provide a baseline for investigating performance that varies between allocations.

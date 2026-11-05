@@ -10,9 +10,9 @@ last_reviewed: "2026-10-18"
 series: "AI and HPC storage engineering"
 ---
 
-PowerScale and Isilon storage design starts with the applications that will use it. An AI factory reading training datasets, a research center ingesting instrument output and an analysis team sharing files can use the same namespace while placing very different demands on it.
+Instrument ingest, training reads and a shared analysis workspace may all use one PowerScale namespace, but they create different storage loads. Size the system around those operations and their overlap, including what happens during recovery.
 
-This guide focuses on design questions and acceptance tests. It does not prescribe a node model, promise a bandwidth figure or replace the compatibility and sizing guidance for the installed OneFS release.
+The questions below help prepare a design and its workload tests. Use the installed OneFS release's compatibility and sizing guidance when choosing node models and supported configurations.
 
 ## Map the pipeline before sizing storage
 
@@ -54,6 +54,6 @@ Define which data is reproducible, which must be retained, and which needs an in
 
 Run a small matrix covering ingestion, concurrent training reads, checkpoint writes and metadata-heavy analysis. Repeat with realistic background activity. Capture both aggregate throughput and the slowest client's latency, with versions, connection distribution and dataset layout attached.
 
-Use the results to establish a baseline and a growth trigger. Purchasing additional storage should answer a measured constraint in the pipeline.
+Keep these results as the baseline for growth planning. When more capacity is proposed, identify which workload constraint the purchase is expected to relieve.
 
 Continue with [PowerScale performance diagnosis](/writing/powerscale-isilon-nfs-performance-troubleshooting/), [PyTorch input pipelines](/writing/pytorch-dataloader-bottlenecks-hpc-gpu-training/), and [multiprotocol identity and ACLs](/writing/powerscale-multiprotocol-identity-acls/).

@@ -7,9 +7,9 @@ summary: "Compare retrieval, adaptation, and pretraining by GPU residency, servi
 description: "Compare retrieval, adaptation, and pretraining by GPU residency, serving topology, storage traffic, training allocations, interconnect requirements, and the failure each approach can actually repair."
 ---
 
-RAG, fine-tuning, and pretraining create different infrastructure commitments. Retrieval adds a continuously maintained data and query path. Adaptation adds scheduled GPU training, versioned datasets, and artifact promotion. Large pretraining adds long-lived distributed jobs, a high-bandwidth fabric, and substantial checkpoint obligations.
+When an AI system gives poor answers, adding retrieval and retraining the model solve different problems. They also place different demands on the infrastructure. Retrieval needs a maintained data and query path; adaptation needs GPU jobs and versioned datasets; large pretraining needs sustained distributed capacity and substantial checkpoint storage.
 
-Choose the AI intervention by diagnosing the failure, then budget the complete NVIDIA platform needed to support it. The useful architecture decision connects answer quality to GPU residency, storage, networking, and recovery rather than treating model technique as an isolated application choice.
+Find the failure first, then cost the complete NVIDIA platform needed to address it. Compare answer quality alongside GPU residency, storage, networking and the work of keeping the system recoverable.
 
 ## Draw the resource topology before choosing the technique
 
@@ -89,4 +89,4 @@ Retrieval adds ingestion and query-time dependencies. Fine-tuning adds dataset m
 
 Measure end-to-end latency, indexing freshness, access correctness, answer quality, and operator workload. A cheap generator with a complicated retrieval path may cost more to operate than a simpler alternative. A highly accurate fine-tune may be unsuitable if its training data cannot be maintained.
 
-Choose the smallest intervention that resolves a demonstrated failure and survives the acceptance tests. Keep the diagnostic cases. They are the evidence that lets a future engineer tell whether the next model or data change has repaired the system or merely changed its mistakes.
+Choose the smallest intervention that resolves a demonstrated failure and survives the acceptance tests. Keep the cases that exposed the original failure. Rerunning them after a model or data change is the quickest way to see whether that problem was actually fixed.

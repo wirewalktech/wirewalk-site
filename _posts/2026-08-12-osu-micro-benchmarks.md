@@ -9,14 +9,9 @@ summary: >-
   on top of them.
 ---
 
-When a distributed job runs slower than expected, the fabric is the first thing
-accused and the last thing measured. The OSU Micro-Benchmarks exist to close
-that gap. They are small MPI programs from the MVAPICH group at Ohio State that
-measure one communication pattern at a time, with nothing else running.
+When a distributed job slows down, a saved OSU Micro-Benchmarks result can settle whether communication has changed. These small MPI programs from the MVAPICH group at Ohio State measure individual communication patterns without the application's compute and I/O work.
 
-The value is not the numbers themselves. It is that you take them once when the
-machine is known good, write them down, and compare against them every time
-something feels slow afterwards.
+Run them while the machine is known to be healthy and keep the curves. During an incident, use the same placement and software stack to compare the new result with that baseline.
 
 ## The two that matter most
 
@@ -112,8 +107,7 @@ rather than merely installed.
 ## What to record
 
 Keep a file in version control with the date, the firmware and driver versions,
-the MPI build, the node pair, and the resulting curves. It takes ten minutes and
-it converts every future performance argument from opinion into a comparison.
+the MPI build, the node pair, and the resulting curves. That gives the next investigation a concrete comparison, with the node pair and software versions already recorded.
 
 The next articles in this series work up the stack from here: dense compute with
 HPL, memory and network behavior with HPCG, mixed precision with HPL-MxP, and

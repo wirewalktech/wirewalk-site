@@ -7,9 +7,9 @@ summary: "Trace a pending Slurm job through resource shape, association limits, 
 description: "Debug pending Slurm jobs using reason codes, resource shape, QOS limits, priority and backfill evidence rather than idle-node counts."
 ---
 
-An idle node is not necessarily a node that can run a particular job. It may lack the requested GPU type, belong to the wrong partition, sit inside a reservation or be unable to fit the job before a higher-priority reservation begins. The researcher's question is reasonable: why is the machine doing nothing while my job waits? The answer needs a concrete constraint, not a vague reference to policy.
+“Why is my job waiting when these nodes are idle?” is a fair question. The free machines may lack the requested GPU type, sit in another partition or reservation, or offer too short a gap before higher-priority work. Show the researcher the constraint that applies to their request.
 
-A productive investigation reconstructs one job's eligibility and placement. Keep the original submission intact long enough to capture it. Repeatedly canceling and resubmitting can erase useful context and, depending on site policy, change the factors being investigated.
+Save the original submission before canceling or resubmitting. Its effective request and scheduling history help distinguish a placement problem from a limit or priority decision.
 
 All identifiers in these examples are illustrative. Commands inspect state; administrative changes require a separate decision about whose workload and policy they affect.
 
@@ -110,6 +110,6 @@ Once the constraint is understood, offer a choice the researcher can evaluate: w
 
 A good pending-job report contains the effective request, the blocking constraint, the observations that support it and the expected next condition. It distinguishes invalid requests from eligible jobs waiting under policy.
 
-If the investigation finds a scheduler fault, preserve the controller version, relevant configuration and bounded logs before changing anything. If the scheduler is behaving as configured, document that behavior clearly. The goal is to make the wait understandable and, where possible, reduce it without quietly weakening the rules shared by everyone using the cluster.
+If the investigation finds a scheduler fault, preserve the controller version, relevant configuration and bounded logs before changing anything. If the scheduler is behaving as configured, document that behavior clearly. Explain which event or request change would make the job eligible to start. If a policy change is needed, make that a separate decision for the people who share the cluster.
 
 Read next: [Advanced Slurm setup: prove CPU, memory and GPU isolation before admitting jobs](/writing/slurm-cgroup-v2-gpu-isolation-validation/), [Reading Slurm accounting without fooling yourself about efficiency](/writing/slurm-efficiency-accounting-traps/).

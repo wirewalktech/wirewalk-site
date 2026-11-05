@@ -16,9 +16,7 @@ the number is wrong in a way that will not announce itself. Both of the common m
 output that looks like a measurement: one gives you a beautiful figure, one gives you an alarming
 figure, and neither has anything to do with how busy the cores were.
 
-This is about getting a defensible number out of `sacct`, knowing which fields lie to you, and
-knowing what the number means once you have it — because the usual interpretation of a low
-efficiency figure is also wrong.
+The `sacct` query needs to distinguish allocated CPU time from consumed CPU time, include the relevant steps and account for how tasks were launched. Once those are right, a low percentage still needs interpretation against the workload.
 
 ## What CPU efficiency actually is
 

@@ -7,11 +7,11 @@ summary: "Plan firmware maintenance by hardware compatibility and failure domain
 description: "Run controlled HPC firmware rollouts with Redfish inventory, canaries, activation tracking, failure-domain limits and Slurm readmission tests."
 ---
 
-A firmware rollout is complete when the node is safe to use again. An uploaded package, a successful task and a changed version string are useful observations, but none establishes that the host can run the workload it served before maintenance.
+Do not return a node to researchers just because its firmware update task succeeded. First check what booted and run a small scheduled workload. The package can be installed correctly while the host has lost an adapter, changed topology or booted from the wrong target.
 
-For HPC and GPU infrastructure, firmware can affect CPU topology, PCIe behavior, adapter enumeration, link speed and boot order. Those changes cross the boundary between the management controller and the operating environment. A rollout plan has to cross that boundary too.
+Firmware maintenance on HPC and GPU systems needs checks for CPU topology, PCIe devices, adapter enumeration, link speed and boot order. Follow the update from the BMC through the operating system and back into the scheduler.
 
-This guide describes a generic maintenance process using Redfish capabilities where supported. It is not a vendor-specific update recipe and contains no power or flash commands. Apply-time behavior, dependencies and recovery options must come from the exact platform's documentation.
+Use the platform's documentation for package dependencies, application timing and recovery. The procedure below outlines a generic rollout using supported Redfish capabilities; it contains no power or flash commands.
 
 ## Build a compatibility inventory
 
@@ -91,6 +91,6 @@ Record asset identity, previous and target versions, package identity, operation
 
 Expand in bounded waves with explicit stop conditions. Compare post-change workload behavior with the baseline, including failures and tail latency rather than only best-case throughput.
 
-The useful outcome is not a uniformly newer inventory. It is a fleet whose firmware state is known, whose important functions were tested and whose return to research work can be explained node by node. That makes the next maintenance window both safer and easier to repeat.
+Keep failed nodes drained, with the failed test and recovery plan attached. For nodes that pass, retain the version and workload results before readmission so the next maintenance window starts from a known baseline.
 
 Read next: [Advanced Redfish automation: discovery, tasks and uncertain outcomes](/writing/redfish-automation-state-machines-tasks-etags/), [Advanced Slurm setup: prove CPU, memory and GPU isolation before admitting jobs](/writing/slurm-cgroup-v2-gpu-isolation-validation/).

@@ -9,16 +9,9 @@ summary: >-
   constraint. Test from the bottom and most investigations end in an hour.
 ---
 
-An MPI job that runs slower than expected is a question with about nine
-plausible answers, spread across four layers of stack that were installed by
-different people at different times. The reason these investigations run long is
-almost never that the answer is subtle. It is that the search was unordered.
+An MPI slowdown can originate in a link, the host, the communication libraries or the application. These components are often installed and maintained separately, which makes it easy for an investigation to jump between them without settling any one question.
 
-The discipline that fixes it is simple to state. Each layer has a performance
-ceiling determined by the layer below it. Measure the bottom first, establish
-what the ceiling is, and only then ask whether the layer above is achieving it.
-A number at layer four means nothing until you know what layers one through
-three can deliver.
+Work up from the hardware. Establish what each layer can deliver before checking the layer above it. A collective result becomes much easier to interpret once the links, verbs path and MPI point-to-point behavior have known baselines.
 
 ## The layers
 
@@ -298,6 +291,4 @@ firmware versions, the PCIe link status, the `ib_write_bw` and `ib_read_bw`
 plateaus, the `osu_latency` small-message number, and the collective curves at
 the job sizes you actually run.
 
-That file is what converts the next incident from an investigation into a diff.
-It takes half a day to produce on a machine that is known good, and there is no
-other moment when producing it is as cheap.
+Collect that record while the machine is healthy. During the next incident, compare the same node pairs and node sets before changing libraries or fabric settings.

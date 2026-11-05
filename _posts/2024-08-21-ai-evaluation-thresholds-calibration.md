@@ -7,9 +7,9 @@ summary: "Build an inference acceptance test that joins model quality with NVIDI
 description: "Build an inference acceptance test that joins model quality with NVIDIA GPU memory, Triton request timing, batch behavior, concurrency, precision changes, and replica-loss capacity."
 ---
 
-An inference server is not qualified by a good offline accuracy score or a high requests-per-second result alone. It must deliver accepted outputs within its latency objective at the intended concurrency, using the memory and power budget of the actual NVIDIA system.
+Offline accuracy tells you little about how long a researcher will wait for an answer when the inference server is busy. A high requests-per-second figure can be equally misleading if the answers fail the task. Test quality and latency together, on the NVIDIA system and at the concurrency you intend to support.
 
-Evaluate the model and deployment configuration as one release candidate. Batch policy, precision, instance count, input limits, and fallback behavior all affect what the infrastructure can promise. The quality measurements below become release gates for that specific service configuration.
+Keep the deployment configuration with the model under evaluation. Batch policy, precision, instance count, input limits and fallback behavior can all change the result. Approve that combination as a release, so the production service matches what was tested.
 
 ## Define a server acceptance matrix
 
@@ -89,4 +89,4 @@ The [scikit-learn 1.4 model evaluation reference](https://scikit-learn.org/1.4/m
 
 A release report should contain the dataset version, sampling frame, label maturity, policy thresholds, aggregate counts, slice results, latency and failure rates, and a list of unresolved error modes. Include examples that demonstrate the most consequential failures.
 
-Choose monitoring signals that correspond to the evaluation assumptions. If the evaluation depended on a stable document source or a known feature availability rate, monitor those properties. The purpose of evaluation is to establish a bounded claim about a particular service, then recognize when the evidence supporting that claim has expired.
+Choose monitoring signals that correspond to the evaluation assumptions. If the evaluation depended on a stable document source or a known feature availability rate, monitor those properties. Those signals tell you when the original test no longer describes the service people are using.

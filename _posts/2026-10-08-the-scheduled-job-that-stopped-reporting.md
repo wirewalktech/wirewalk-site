@@ -12,9 +12,7 @@ last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
 ---
 
-Scheduled work fails quietly more often than anything else in an estate, because the mechanism
-that was supposed to tell you is usually the thing that broke. Three mechanisms, each of which
-produces a job whose real behaviour cannot be read off its configuration.
+When a scheduled job stops reporting, its notification mechanism may be part of the failure. The three cases below leave configuration that looks plausible while the running job behaves differently—or never runs at all.
 
 ## 1. The script that silences its own notifications
 
@@ -169,6 +167,4 @@ Question 6 is the one that usually has no answer, and it is the one that matters
 | Pipeline failure reported as success | Exit status of a pipeline is the last element | `set -o pipefail` |
 | Nobody noticed for months | Nothing alerts on absence | success stamp + staleness alert |
 
-**Silence is not a status.** A monitoring design where "no news is good news" cannot distinguish
-a healthy job from a job that no longer exists, and a scheduled job that nothing checks is
-indistinguishable from one that was never installed.
+Have an independent check watch for the last successful run and alert when it becomes stale. That covers a job that vanished entirely as well as one whose own notification path failed.

@@ -7,9 +7,9 @@ summary: "How model requirements translate into NVIDIA GPU memory, server topolo
 description: "How model requirements translate into NVIDIA GPU memory, server topology, TensorRT compatibility, Triton capacity, storage, power, and a defensible hardware acceptance test."
 ---
 
-Choosing a model commits an organization to a memory footprint, a data path, a serving stack, and a recovery procedure. The infrastructure question is whether that complete service can meet its quality and latency requirements at an acceptable cost. A leaderboard does not answer it.
+A model that wins a benchmark can still be a poor fit for the service you need to run. It may need more GPU memory than the available servers have, miss the latency target under load, or leave too little capacity for a failed replica. Model selection is also a decision about the infrastructure and people who will support it.
 
-Start with the workload, then choose a model and NVIDIA platform together. A large model that requires several tightly coupled GPUs has a different placement and failure domain from a compact classifier that fits comfortably on one device. This article connects model acceptance to the server, fabric, and software decisions an infrastructure team must support.
+Work through the workload and the NVIDIA platform together. A large model spread across tightly coupled GPUs creates different placement and recovery problems from a classifier that fits on one device. Include those costs while comparing quality, before the hardware is ordered.
 
 ## Translate the model shortlist into a hardware shortlist
 
@@ -87,4 +87,4 @@ For the finalists, rehearse a version change, a failed dependency, and a rollbac
 
 Record the exact model revision, preprocessing, prompt or feature pipeline, runtime, and acceptance thresholds. Schedule a review trigger such as a changed task, changed input distribution, revoked artifact availability, or measured quality regression. The [2017 ML Test Score](https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/) provides a production-readiness rubric; the decision gates here are a proposed way to apply that concern to selection.
 
-The final record should allow another engineer to explain why the chosen system was acceptable, reproduce the comparison, and recognize when the assumptions no longer hold. That is a more durable result than declaring a universal best model.
+Leave enough detail for the next engineer to rerun the comparison and understand the choice. When the workload or input data changes, that record will show which assumptions need checking again.

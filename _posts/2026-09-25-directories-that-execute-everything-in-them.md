@@ -148,5 +148,4 @@ how a `.bak-` suffix gets tested instead of the real file.
 | Backups present on one node only | Backup dir on a local parent of a shared mount | `findmnt --target` |
 | sudo rule ignored | Filename contains a `.` | rename; `visudo -c` |
 
-**A directory is an interface.** If its contract is "everything in here", then writing a file
-into it is a configuration change, whatever you intended by the filename.
+Keep backups outside directories whose consumers read every file. After editing, inspect the consumer's output to confirm that only the intended configuration was loaded.

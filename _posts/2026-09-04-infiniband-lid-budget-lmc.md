@@ -149,5 +149,4 @@ nodes, split ports, second ports brought up, a new storage tier. The calculation
 takes a few minutes and the alternative is discovering the limit during a
 maintenance window with the change half applied.
 
-And keep LMC deliberate. It is one line in a configuration file and it is the
-single largest multiplier on everything above.
+Include the chosen LMC value in that budget. Its address multiplier can consume forwarding-table capacity much faster than endpoint counts alone suggest.

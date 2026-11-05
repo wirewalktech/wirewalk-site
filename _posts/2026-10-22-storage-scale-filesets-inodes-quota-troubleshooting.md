@@ -7,9 +7,9 @@ summary: "Diagnose write failures despite free filesystem capacity by separating
 description: "Debug GPFS and IBM Storage Scale write failures involving fileset inode space, quotas, pool capacity, permissions and misleading free-space totals."
 ---
 
-A researcher reports that a job cannot create an output file. The filesystem dashboard shows ample free space, so the first response is often to retry the job or increase a quota. Either action may be wrong. The path can be on an unexpected mount, a project can have exhausted its inode allowance, or the relevant storage pool can lack usable capacity even when the filesystem total looks comfortable.
+“There is plenty of free space” is a frustrating answer when a research job cannot create its output. The filesystem total may be correct while a fileset has exhausted its inode allowance, a quota blocks the user or the required pool lacks headroom. The path may even be on an unexpected mount.
 
-The useful question is which operation failed under which identity at which path. Start there, then follow the layers that control allocation. This guide uses generic IBM Storage Scale terminology and illustrative names. It contains read-only starting points, not instructions to alter quota policy or storage layout during an incident.
+Capture the failed operation, identity and path, then follow the allocation checks below. Filesystem and project names are illustrative; the commands inspect state without changing quota policy or storage layout.
 
 ## Preserve the exact failure
 
@@ -94,6 +94,6 @@ A quota increase may be appropriate when the project is entitled to more capacit
 
 Do not delete broadly by age from a shared tree. Recent access time may not reflect scientific importance, and a temporary-looking directory may contain the only copy of a result. Prepare an inventory, agree the action and validate capacity afterward.
 
-Close the incident by repeating the failed operation under the original identity and environment. Record the specific binding constraint, the change made and the resulting job behavior. The result should explain why the system rejected the write, not simply that a retry eventually succeeded.
+Close the incident by repeating the failed operation under the original identity and environment. Record the specific binding constraint, the change made and the resulting job behavior. Keep that explanation with the job record so a later write failure can be compared against the same constraint.
 
 Read next: [Node-local scratch under Slurm: stage data without losing the result](/writing/slurm-node-local-scratch-staging-result-publication/), [GPFS multihomed storage: when ARP filtering hides a second RDMA path](/writing/gpfs-multihomed-storage-arp-source-routing/).
