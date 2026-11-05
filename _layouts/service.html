@@ -10,14 +10,14 @@ layout: base
     <p class="lead">{{ service.lead }}</p>
     <div class="acts" style="margin-top:24px">
       <a class="btn btn-p" href="{{ '/' | relative_url }}#contact">Discuss your system</a>
-      <a class="btn btn-g" href="{{ '/order/' | relative_url }}?sku={{ service.skus | first }}">Current rates and ordering</a>
+      <a class="btn btn-g" href="#engagement-options">View engagement options</a>
     </div>
   </header>
   <div class="art-body">
     <div class="prose">{{ content }}
       <h2 id="engagement-options">Engagement options</h2>
-      <p>These are the current engagement formats relevant to this work. Rates, procurement options and the accepted scope are set out on the ordering page.</p>
-      <ul>{% for sku in service.skus %}{% assign engagement = site.data.engagements | where: 'sku', sku | first %}<li><a href="{{ '/order/' | relative_url }}?sku={{ sku }}">{{ engagement.name }}</a></li>{% endfor %}</ul>
+      <p>Choose a format below to see current rates and the ordering options for that engagement. If you are unsure which fits, we can work through the scope together.</p>
+      <ul class="engagement-list">{% for sku in service.skus %}{% assign engagement = site.data.engagements | where: 'sku', sku | first %}<li><a href="{{ '/order/' | relative_url }}?sku={{ sku }}">{{ engagement.name }}</a><span>{{ engagement.description }}</span></li>{% endfor %}</ul>
       <h2 id="related-guides">Technical guides</h2>
       <ul>{% for slug in service.articles %}{% assign article_url = '/writing/' | append: slug | append: '/' %}{% assign article = site.posts | where: 'url', article_url | first %}{% if article %}<li><a href="{{ article.url | relative_url }}">{{ article.title }}</a></li>{% endif %}{% endfor %}</ul>
       <p><a href="{{ '/services/' | relative_url }}">Explore all services</a> · <a href="{{ '/about/lenny-shovsky/' | relative_url }}">About Lenny Shovsky</a></p>
