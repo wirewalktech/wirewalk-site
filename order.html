@@ -99,6 +99,10 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
      color:#fff;cursor:pointer}
 .btn:hover{background:var(--ac2)}
 .btn[disabled]{opacity:.5;cursor:not-allowed}
+.cat button{font:inherit;cursor:pointer;color:var(--ac);background:transparent;border:1px solid var(--ln2);border-radius:6px;padding:7px 10px;text-align:left}
+.cat button:hover{border-color:var(--ac);background:var(--acs)}
+.cat .choose-service{font-weight:700;margin-bottom:5px}
+.cat button:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
 .btn.g{background:transparent;color:var(--tx);border-color:var(--ln2)}
 .btn.g:hover{border-color:var(--ac);color:var(--ac)}
 .note{font-size:14.5px;color:var(--tx2);border-left:2px solid var(--ac);padding-left:15px;margin:20px 0}
@@ -110,6 +114,15 @@ details p,details li{color:var(--tx2);font-size:14.5px}
 footer.end{margin:54px 0 42px;padding-top:24px;border-top:1px solid var(--ln);
            color:var(--tx3);font-size:14px}
 footer.end a{color:var(--ac2)}
+@media(max-width:640px){
+  table.cat,table.cat tbody{display:block;width:100%;overflow:visible}
+  table.cat thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  table.cat tr{display:grid;grid-template-columns:1fr;gap:10px;border:1px solid var(--ln);border-radius:10px;padding:16px;margin-bottom:14px}
+  table.cat td,table.cat td.p{display:block;padding:0;border:0;text-align:left;white-space:normal}
+  table.cat td.n span{margin:6px 0 12px}
+  table.cat td.p:nth-child(2):not(.poa)::before{content:"List price: ";color:var(--tx3)}
+  table.cat button{min-height:44px}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -351,16 +364,16 @@ function renderCatalog(){
       </tr></thead><tbody>`;
     for (const i of rows){
       if (i.priceOnApplication){
-        html += `<tr><td class="n">${esc(i.name)}<span>${esc(i.blurb)}</span></td>
+        html += `<tr><td class="n"><button type="button" class="choose-service" data-sku="${esc(i.sku)}" data-route="po">${esc(i.name)}</button><span>${esc(i.blurb)}</span></td>
                  <td class="p poa" colspan="3">Quoted per engagement</td></tr>`;
         continue;
       }
       const sp = i.special ? `<span class="save">${esc(i.special.label)}</span>` : "";
       html += `<tr>
-        <td class="n">${esc(i.name)}<span>${esc(i.blurb)}</span></td>
+        <td class="n"><button type="button" class="choose-service" data-sku="${esc(i.sku)}" data-route="full">${esc(i.name)}</button><span>${esc(i.blurb)}</span><button type="button" data-sku="${esc(i.sku)}" data-route="po">Use a purchase order</button></td>
         <td class="p">${i.listFormatted}</td>
-        <td class="p">${i.prepay.formatted}<span class="save">save ${i.prepay.savingFormatted}</span>${sp}</td>
-        <td class="p">${i.deposit.formatted}</td></tr>`;
+        <td class="p"><button type="button" data-sku="${esc(i.sku)}" data-route="full">Prepay ${i.prepay.formatted}</button><span class="save">save ${i.prepay.savingFormatted}</span>${sp}</td>
+        <td class="p"><button type="button" data-sku="${esc(i.sku)}" data-route="deposit">Deposit ${i.deposit.formatted}</button></td></tr>`;
     }
     html += "</tbody></table></div>";
   }
@@ -393,14 +406,29 @@ function showPaymentStatus(){
     ? "Online payment is not live yet. Prices below are previews; use the purchase-order or invoice request to place a real order."
     : "Online payment is unavailable. Please request an invoice or submit a purchase order.";
 }
-function selectLinkedSku(){
-  const sku = new URLSearchParams(location.search).get("sku");
+function chooseService(sku, route, focus = true){
   const item = ITEMS.find(i => i.sku === sku);
   if (!item) return;
   $("#po-svc").value = sku;
-  if (!item.priceOnApplication) { $("#pay-svc").value = sku; summarize(); }
-  const button = [...document.querySelectorAll("[data-sku]")].find(el => el.dataset.sku === sku);
-  if (button) { const row=button.closest("tr"); row.style.outline="2px solid var(--ac)"; row.scrollIntoView({block:"center"}); }
+  const usePo = item.priceOnApplication || route === "po";
+  if (!usePo){
+    $("#pay-svc").value = sku;
+    $("#pay-mode").value = route === "deposit" ? "deposit" : "full";
+    summarize();
+  }
+  if (focus){
+    const target = $(usePo ? "#po-svc" : "#pay-email");
+    $(usePo ? "#po" : "#pay").scrollIntoView({block:"start"});
+    target.focus({preventScroll:true});
+  }
+}
+$("#catalog").addEventListener("click", event => {
+  const button = event.target.closest("button[data-sku]");
+  if (button) chooseService(button.dataset.sku, button.dataset.route);
+});
+function selectLinkedSku(){
+  const params = new URLSearchParams(location.search);
+  chooseService(params.get("sku"), params.get("mode"), Boolean(params.get("sku")));
 }
 function summarize(){
   const i = ITEMS.find(x => x.sku === $("#pay-svc").value);
@@ -421,11 +449,17 @@ function summarize(){
 
 function token(){
   return new Promise((resolve, reject) => {
-    if (!window.turnstile) return reject(new Error("verification did not load"));
-    const opts = { sitekey: SITE_KEY, callback: resolve,
-                   "error-callback": () => reject(new Error("verification failed")) };
-    if (widgetId === null) widgetId = turnstile.render("#ts", opts);
-    else { turnstile.reset(widgetId); turnstile.execute(widgetId, opts); }
+    if (!window.turnstile) return reject(new Error("Payment verification did not load. Please reload and try again"));
+    const timer = setTimeout(() => fail("Payment verification timed out. Please try again"), 60000);
+    function fail(message){ clearTimeout(timer); reject(new Error(message)); }
+    if (widgetId !== null) { turnstile.remove(widgetId); widgetId = null; }
+    widgetId = turnstile.render("#ts", {
+      sitekey: SITE_KEY,
+      callback: value => { clearTimeout(timer); resolve(value); },
+      "error-callback": () => fail("Payment verification failed. Please try again"),
+      "timeout-callback": () => fail("Payment verification timed out. Please try again"),
+      "expired-callback": () => fail("Payment verification expired. Please try again")
+    });
   });
 }
 
