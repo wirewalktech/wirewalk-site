@@ -2,6 +2,7 @@
 layout: null
 permalink: /order/
 title: Order an engagement
+seo_title: Order HPC Consulting, Diagnostics & Assessments
 description: >-
   Order a Wirewalk engagement by purchase order, invoice, deposit or prepayment.
   Purchase orders are the primary route; prepayment earns a 5% discount.
@@ -12,9 +13,19 @@ description: >-
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/wirewalk/wirewalk-mark-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/wirewalk/wirewalk-mark-180.png">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Order an engagement — Wirewalk</title>
+<title>{{ page.seo_title | escape }} — Wirewalk</title>
 <meta name="description" content="{{ page.description }}">
 <link rel="canonical" href="{{ '/order/' | absolute_url }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ page.seo_title | escape }}">
+<meta property="og:description" content="{{ page.description | strip_newlines | strip | escape }}">
+<meta property="og:url" content="{{ '/order/' | absolute_url }}">
+<meta property="og:site_name" content="Wirewalk Advisory">
+<meta property="og:image" content="{{ '/assets/og.png' | absolute_url }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page.seo_title | escape }}">
+<meta name="twitter:description" content="{{ page.description | strip_newlines | strip | escape }}">
+<meta name="twitter:image" content="{{ '/assets/og.png' | absolute_url }}">
 <style>
 :root{
   --bg:#FAF9F5; --alt:#F3F1EA; --ln:#E4E0D5; --ln2:#CFC9B9;
@@ -69,6 +80,9 @@ table.cat td.n span{display:block;font-weight:400;color:var(--tx2);font-size:13.
 table.cat td.p{white-space:nowrap;font-variant-numeric:tabular-nums;text-align:right}
 .save{color:var(--ok);font-size:12.5px;display:block}
 .poa{color:var(--tx3);font-style:italic;font-size:14px}
+.order-paths{display:flex;flex-wrap:wrap;gap:10px 20px;margin:24px 0 32px}
+.order-paths a,.route b a{color:var(--ac2);text-decoration:underline;text-underline-offset:3px}
+.order-paths a{padding:8px 0}
 .routes{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:18px 0 0}
 .route{border:1px solid var(--ln);border-radius:11px;padding:18px;background:var(--alt)}
 .route.primary{border-color:var(--ac);background:var(--acs)}
@@ -143,39 +157,46 @@ footer.end a{color:var(--ac2)}
   that does not fit a description here, is scoped and quoted &mdash; and if the honest
   answer is that you do not need outside help, I will say so before taking an order.</p>
 
-  <h2>What can be ordered</h2>
+  <nav class="order-paths" aria-label="Ordering options">
+    <a href="#catalog-heading">Browse services and prices</a>
+    <a href="#po" data-request="Purchase order">Use a purchase order</a>
+    <a href="#po" data-request="Invoice request">Request an invoice</a>
+    <a href="#pay">Pay by card or bank account</a>
+  </nav>
+  <h2 id="catalog-heading">Services and current rates</h2>
+  <p class="sub">Read the <a href="{{ '/services/' | relative_url }}">service descriptions and technical scope</a> before choosing an engagement. Current prices load below from the ordering catalog.</p>
   <div id="catalog"><p class="sub">Loading current pricing&hellip;</p></div>
   <p class="sub" style="margin-top:14px">Prices exclude any applicable sales or use tax.
   Paying in full in advance earns <b>5%</b> and reserves the dates on receipt of funds;
   the discount does not apply to deposits or invoiced balances.</p>
 
-  <h2>How to order</h2>
+  <h2>Ways to arrange the work</h2>
   <div class="routes">
     <div class="route primary">
       <span class="tagp">Primary route</span>
-      <b>Purchase order</b>
+      <b><a href="#po" data-request="Purchase order">Purchase order</a></b>
       <p>Raise a PO against the engagement and we invoice against it on net 30 terms.
       What most institutional buyers need, and the only route that fits many
       procurement systems.</p>
     </div>
     <div class="route">
-      <b>Request an invoice</b>
+      <b><a href="#po" data-request="Invoice request">Request an invoice</a></b>
       <p>No PO in your process? Ask for an invoice and pay it by card, ACH or bank
       transfer. Same net 30 terms.</p>
     </div>
     <div class="route">
-      <b>Prepay and reserve &mdash; 5% off</b>
+      <b><a href="#pay" data-payment="full">Prepay &mdash; 5% off</a></b>
       <p>Pay in full up front, take 5% off, and the dates are held on receipt of funds.
       Card or ACH.</p>
     </div>
     <div class="route">
-      <b>Deposit</b>
+      <b><a href="#pay" data-payment="deposit">Deposit</a></b>
       <p>Pay a deposit to book the engagement; the balance is invoiced on delivery.</p>
     </div>
   </div>
 
   <!-- ============================ PURCHASE ORDER ======================== -->
-  <h2 id="po">Submit a purchase order</h2>
+  <h2 id="po">Purchase orders and invoice requests</h2>
   <p class="sub">Attach the PO if you have it. If your procurement office needs a
   quotation, W-9, insurance certificate or supplier registration before a PO can be
   raised, say so below and those come back the same day.</p>
@@ -213,6 +234,8 @@ footer.end a{color:var(--ac2)}
 
     <fieldset>
       <legend>The engagement</legend>
+      <div class="fld"><label for="po-request">What would you like to send?</label>
+        <select id="po-request" name="Request type"><option>Purchase order</option><option>Invoice request</option><option>Scope or quotation request</option></select></div>
       <div class="row">
         <div class="fld"><label for="po-svc">Service</label>
           <select id="po-svc" name="Service" required>
@@ -259,7 +282,7 @@ footer.end a{color:var(--ac2)}
         authorized to submit this order on behalf of the organization named above</label></div>
     </fieldset>
 
-    <button class="btn" type="submit">Submit purchase order</button>
+    <button class="btn" type="submit">Send request</button>
     <p class="sub" style="margin-top:12px">Prefer to talk first? Call
     <a href="tel:+19172177975">917-217-7975</a> or email
     <a href="mailto:sales@wirewalk.com">sales@wirewalk.com</a>.</p>
@@ -411,6 +434,7 @@ function chooseService(sku, route, focus = true){
   if (!item) return;
   $("#po-svc").value = sku;
   const usePo = item.priceOnApplication || route === "po";
+  $("#po-request").value = item.priceOnApplication ? "Scope or quotation request" : "Purchase order";
   if (!usePo){
     $("#pay-svc").value = sku;
     $("#pay-mode").value = route === "deposit" ? "deposit" : "full";
@@ -426,6 +450,16 @@ $("#catalog").addEventListener("click", event => {
   const button = event.target.closest("button[data-sku]");
   if (button) chooseService(button.dataset.sku, button.dataset.route);
 });
+document.querySelectorAll("[data-request]").forEach(link => link.addEventListener("click", event => {
+  event.preventDefault();
+  $("#po").scrollIntoView({block:"start"});
+  $("#po-request").value = link.dataset.request;
+  $("#po-org").focus({preventScroll:true});
+}));
+document.querySelectorAll("[data-payment]").forEach(link => link.addEventListener("click", () => {
+  $("#pay-mode").value = link.dataset.payment;
+  summarize();
+}));
 function selectLinkedSku(){
   const params = new URLSearchParams(location.search);
   chooseService(params.get("sku"), params.get("mode"), Boolean(params.get("sku")));

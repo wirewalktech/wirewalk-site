@@ -3,16 +3,17 @@ title: "PyTorch DataLoader bottlenecks on HPC GPU clusters"
 category: AI Infrastructure
 tags: ["PyTorch", "DataLoader", "GPU Training", "Parallel Storage"]
 summary: "Diagnose slow PyTorch data loading on HPC clusters with per-rank timing, worker sweeps, storage checks, and reproducible GPU throughput measurements."
-description: "Diagnose slow PyTorch data loading on HPC clusters with per-rank timing, worker sweeps, storage checks, and reproducible GPU throughput measurements."
 date: "2026-06-12"
 featured: true
 last_reviewed: "2026-10-18"
 series: "HPC and AI infrastructure engineering"
+seo_title: "PyTorch DataLoader Bottlenecks on HPC GPU Clusters"
+description: "Diagnose slow PyTorch data loading with per-rank timing, worker sweeps and storage checks, then compare reproducible GPU training throughput."
 ---
 
-A GPU training job can spend more time waiting for its next batch than computing it. Before adding GPUs, measure the path from dataset storage through CPU preprocessing to the accelerator. The useful question is how much that path delays each training step.
+Before adding GPUs to a slow training job, measure how long each step waits for a batch. The delay may be in storage, CPU preprocessing or transfer to the device, while the model itself runs quickly.
 
-This guide describes an investigation method, not a benchmark result. Use it with the documentation for your installed PyTorch release and with a representative slice of your own data.
+Use representative data and the documentation for the installed PyTorch release. The comparisons below are diagnostic experiments, not reported benchmark results.
 
 ## Separate the input pipeline from model execution
 
@@ -60,6 +61,6 @@ Watch host memory and shared-memory use, especially in containers and multi-work
 
 Record samples or useful tokens per second, step-time distribution, batch wait per rank, worker count per rank, CPU allocation, host memory, dataset layout, cache conditions and software versions. Include startup and staging costs when reporting job completion time.
 
-A successful change reduces wall-clock time for the same useful work without changing the sample population or training semantics. GPU busy percentage alone cannot establish that.
+Compare wall-clock time for the same samples and training semantics after each change. A higher GPU busy percentage is encouraging only if the training work finishes sooner.
 
 Continue with [GPU utilization and model FLOPs utilization](/writing/reading-gpu-utilization-mfu-honestly/), [IOR and mdtest storage benchmarking](/writing/ior-mdtest-parallel-storage/), and [Slurm efficiency accounting](/writing/slurm-efficiency-accounting-traps/).

@@ -6,9 +6,11 @@ summary: "Start with capture visibility and a harmless detection fixture before 
 date: "2025-05-14"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Suricata IDS Setup: Capture Visibility and Detection Tests"
+description: "Validate a Suricata IDS sensor with known traffic, EVE JSON records and packet-loss measurements before relying on its alerts."
 ---
 
-A Suricata service can be running with a current ruleset and still inspect the wrong traffic. The first acceptance test is visibility: the intended packets reach the sensor, the expected rule fires, and the event reaches the analyst.
+Suricata can be running with fresh rules while seeing none of the traffic you meant to inspect. Before tuning detection, prove that representative packets reach the sensor, trigger the expected rule and arrive at the analyst's console.
 
 ## Define the observation point
 
@@ -53,4 +55,4 @@ Do not publish a throughput guarantee from a small fixture. Keep the configurati
 
 ## Acceptance evidence
 
-Retain configuration-test output, fixture identity, expected alert, live-path alert, SIEM arrival, and coverage limitations. That establishes a functioning IDS path. Blocking requires a separate [IPS rollout](/writing/suricata-ips-controlled-rollout/).
+Retain configuration-test output, fixture identity, expected alert, live-path alert, SIEM arrival, and coverage limitations. Keep those results together so coverage can be checked after a network or sensor change. Blocking needs a separate [IPS rollout](/writing/suricata-ips-controlled-rollout/).

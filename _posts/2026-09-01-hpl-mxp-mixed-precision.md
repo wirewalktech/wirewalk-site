@@ -7,12 +7,11 @@ summary: >-
   HPL-MxP reports a much larger number than HPL on the same machine. Knowing
   exactly where that factor comes from is the difference between a useful
   measurement and a marketing slide.
+seo_title: "HPL-MxP Benchmarking: Mixed-Precision Results Explained"
+description: "Interpret HPL-MxP mixed-precision results with attention to numerical validation, hardware support and the limits of comparison with standard HPL."
 ---
 
-HPL-MxP, previously published as HPL-AI, solves the same problem as HPL and
-returns a much larger number. The machine did not get faster. Understanding the
-gap is the whole value of the benchmark, and misunderstanding it is how the
-number ends up in a slide deck meaning nothing.
+HPL-MxP, previously published as HPL-AI, solves the same problem as HPL using a different precision strategy. Its much larger score reflects how that strategy uses the hardware; it does not mean the machine became equally faster for every workload.
 
 ## What it does differently
 
@@ -102,6 +101,4 @@ measure collectives directly with nccl-tests and then measure your actual model.
 
 If you publish an HPL-MxP figure, publish the precision used for the
 factorization, the iteration count, the problem size, and the classic HPL result
-from the same machine alongside it. Without those four pieces, the number is
-unfalsifiable, and an unfalsifiable performance number is worth what it costs to
-produce.
+from the same machine alongside it. Those details allow another operator to reproduce the run and interpret the gain over double-precision HPL.

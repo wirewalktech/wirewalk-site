@@ -6,11 +6,13 @@ summary: "A recovery copy is only useful if the people and systems needed to res
 date: "2024-09-16"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Administrator Account Compromise: Backup Recovery Planning"
+description: "Plan recovery after an administrator account is compromised. Test backup access, identity dependencies and the time needed to restore a usable service."
 ---
 
-A backup job can finish successfully while the recovery design remains vulnerable to one stolen administrator account. The question is whether that account can disable protection, remove recovery points, change retention, or obtain the credentials needed to destroy the other copies.
+A successful backup offers little comfort if one stolen administrator account can remove every recovery point. Check what that account can actually do: disable protection, shorten retention, delete copies or retrieve the credentials for another backup system.
 
-This is an architecture review and a proposed exercise, not a report of a customer incident. Start with one critical service and trace the actual dependencies needed to bring it back.
+The exercise below uses one critical service and disposable test data. It is a proposed recovery review, not a customer incident report. Trace everything needed to bring that service back, including identities and keys.
 
 ## Draw the recovery dependency chain
 

@@ -6,9 +6,11 @@ summary: "Throughput is one component of recovery. Metadata, identity, keys, and
 date: "2026-07-20"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Restore Benchmarking: Measure Time to Usable Service"
+description: "Measure recovery through application availability, identity and dependencies, including the time between restored files and a service people can use."
 ---
 
-A restore speed of several gigabytes per second can sound reassuring while saying little about the time needed to recover a real service. The benchmark must include the dataset shape and the work that happens before and after copying bytes.
+“Several gigabytes per second” sounds like a fast restore until the team starts rebuilding the service around the copied files. Time the dependency setup, data transfer, validation and application recovery together. The service owner needs to know when people can use it again.
 
 ## Define the finish line
 
@@ -55,4 +57,4 @@ Compare a pre-recorded manifest, checksums for the test corpus, ownership, and e
 
 Publish the dataset, tool versions, topology, elapsed milestones, throughput, errors, and manual interventions. Label estimates as estimates and lab results as lab results. Do not extrapolate a small trial linearly without explaining the limits.
 
-The useful deliverable is a recovery time the business can assess, together with the bottleneck that must change if it is too slow.
+Give the service owner the measured recovery time and the work that dominated it. If it misses the objective, that identifies what the next exercise needs to improve.

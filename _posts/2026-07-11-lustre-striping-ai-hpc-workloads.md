@@ -3,16 +3,17 @@ title: "Lustre striping for AI and HPC: match layouts to the workload"
 category: Parallel Storage
 tags: ["Lustre", "Parallel Storage", "AI Infrastructure", "Performance"]
 summary: "Choose and test Lustre stripe layouts for AI datasets, shared HPC files and checkpoints. Inspect actual file layouts and compare performance without global changes."
-description: "Choose and test Lustre stripe layouts for AI datasets, shared HPC files and checkpoints. Inspect actual file layouts and compare performance without global changes."
 date: "2026-07-11"
 featured: true
 last_reviewed: "2026-10-18"
 series: "AI and HPC storage engineering"
+seo_title: "Lustre Striping for AI Datasets, HPC Files and Checkpoints"
+description: "Choose Lustre stripe layouts for AI datasets, shared HPC files and checkpoints. Inspect actual layouts and compare workloads before broad changes."
 ---
 
-Lustre stripe count is a workload decision. A checkpoint shared by many ranks, one file per process and millions of small training samples do not need the same layout. Setting every file to span every target can add overhead without improving the work the application completes.
+A shared checkpoint and a directory of tiny training samples ask different things of Lustre. Spreading every file over every target may help one access pattern and add overhead to another. Choose a stripe layout by testing the workload that will use it.
 
-This guide describes a bounded experiment using disposable data. It does not recommend a filesystem-wide default or a universal stripe size.
+Use disposable data and separate test directories for the experiments below. The results apply to those workloads; they are not a recommendation to change the filesystem-wide default.
 
 ## Understand the layout before tuning it
 
@@ -63,6 +64,6 @@ If a layout helps isolated bandwidth but worsens other jobs' latency, the operat
 
 For a useful result, retain layout output, file sizes/counts, client and rank placement, concurrency, useful throughput, tail latency and errors. State whether the test used a fresh dataset or a warm cache, and whether other load was present.
 
-Adopt a layout when it improves the intended workload within acceptable shared-system costs. Revisit that choice when dataset shape, concurrency or storage hardware changes.
+Keep the layout that improves the job without imposing unacceptable costs on neighboring work. Repeat the comparison when file sizes, concurrency or storage hardware change.
 
 Continue with [Lustre metadata and capacity diagnosis](/writing/lustre-metadata-capacity-performance-operations/), [IOR and mdtest methodology](/writing/ior-mdtest-parallel-storage/), and [AI checkpoint recovery](/writing/distributed-ai-checkpoint-storage-restart-testing/).

@@ -6,9 +6,11 @@ summary: "A small fixture library makes rule changes reviewable and keeps false-
 date: "2025-10-05"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Detection Rule Regression Tests: Matching and Negative Cases"
+description: "Build regression tests for Suricata and Snort rules with expected matches, negative cases, parser checks and separate alert-delivery validation."
 ---
 
-A detection rule has two obligations: identify the behavior it was written for and leave expected activity alone. Testing only the first produces false positives; testing only the second can remove the detection entirely.
+Before releasing a detection rule, try a legitimate transaction that resembles the suspicious one. The rule needs to catch its target and leave that transaction alone. Keeping both examples makes the next false-positive fix much easier to assess.
 
 ## Write the detection contract
 
@@ -53,4 +55,4 @@ Keep fixture size modest and access controlled. Packet captures can contain cred
 
 ## What to release
 
-Release the rule, its tests, configuration changes, and results together. Keep the previous working version available for rollback. This turns a ruleset update into an engineering change with known behavior rather than a hopeful increase in the number of enabled signatures.
+Release the rule, its tests, configuration changes, and results together. Keep the previous working version available for rollback. The next maintainer can then see which behavior changed and rerun the cases before enabling the rules.

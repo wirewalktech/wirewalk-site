@@ -6,6 +6,8 @@ tags: [InfiniBand, LID, LMC, OpenSM]
 summary: >-
   Every endpoint you add consumes address space and forwarding table entries.
   Both are finite, both are countable in advance, and neither fails gracefully.
+seo_title: "InfiniBand LID Budgets: Endpoint Counts and LMC"
+description: "Calculate InfiniBand LID requirements as endpoint counts and LMC change, then check subnet-manager addressing limits before expanding a fabric."
 ---
 
 A Local Identifier is the address a subnet manager assigns to a port so switches
@@ -149,5 +151,4 @@ nodes, split ports, second ports brought up, a new storage tier. The calculation
 takes a few minutes and the alternative is discovering the limit during a
 maintenance window with the change half applied.
 
-And keep LMC deliberate. It is one line in a configuration file and it is the
-single largest multiplier on everything above.
+Include the chosen LMC value in that budget. Its address multiplier can consume forwarding-table capacity much faster than endpoint counts alone suggest.

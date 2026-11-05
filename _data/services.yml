@@ -1,0 +1,194 @@
+- id: hpc-cluster-design
+  name: HPC cluster design and build-out
+  url: /services/hpc-cluster-design/
+  description: HPC cluster architecture, provisioning, fabric, storage and scheduler integration for research teams,
+    from a few GPU servers to larger compute environments.
+  lead: I help researchers and IT teams turn a workload, a budget and a room full of equipment into a cluster they
+    can use and maintain.
+  skus:
+  - buildout
+  categories:
+  - HPC
+  tags:
+  - Cluster provisioning
+  - Bright Cluster Manager
+  - BCM
+  - Cloud HPC
+  articles:
+  - gpfs-ece-cluster-deployment
+  - mpi-layered-test-methodology
+  - node-local-state-and-the-reimage-that-erases-it
+- id: nvidia-gpu-ai-infrastructure
+  name: NVIDIA GPU and AI infrastructure
+  url: /services/nvidia-gpu-ai-infrastructure/
+  description: 'NVIDIA GPU infrastructure for research, training and inference: CUDA, NCCL, containers, storage
+    and fabric integration, with workload-based validation.'
+  lead: I build GPU environments that help your team run experiments reliably, then investigate the bottlenecks
+    that keep expensive devices waiting.
+  skus:
+  - buildout
+  - diag-acceptance
+  categories:
+  - AI Infrastructure
+  - GPU Infrastructure
+  tags:
+  - NVIDIA GPUs
+  - GPU Infrastructure
+  - CUDA
+  - PyTorch
+  articles:
+  - pytorch-dataloader-bottlenecks-hpc-gpu-training
+  - nvidia-enroot-pyxis-slurm-container-pipeline
+  - reading-gpu-utilization-mfu-honestly
+- id: infiniband-roce-diagnostics
+  name: InfiniBand, RoCE and Ethernet diagnostics
+  url: /services/infiniband-roce-diagnostics/
+  description: InfiniBand, RoCE and Ethernet diagnostics covering link health, routing, congestion, NVIDIA UFM,
+    RDMA paths and NCCL communication for agreed workloads.
+  lead: I trace slow or unreliable communication from the application through adapters, switches and routing, so
+    your team can see where the work is being held up.
+  skus:
+  - diag-fabric
+  categories:
+  - Fabric
+  tags:
+  - InfiniBand
+  - RDMA
+  - RoCE
+  - NCCL
+  articles:
+  - mpi-troubleshooting-playbook
+  - infiniband-error-counters-deltas-not-totals
+  - nccl-tests-collective-bandwidth
+- id: parallel-storage
+  name: Parallel storage setup and performance review
+  url: /services/parallel-storage/
+  description: Parallel storage setup and diagnostics for GPFS, IBM Storage Scale, Lustre, WEKA and VAST, with workload
+    tests, client checks and administrator handover.
+  lead: I help research teams make shared storage dependable and fast enough for the work, from filesystem setup
+    to a difficult client or performance problem.
+  skus:
+  - diag-storage
+  categories:
+  - Parallel Storage
+  - Storage
+  - Storage security
+  - Data Infrastructure
+  - Recovery
+  tags:
+  - GPFS
+  - IBM Storage Scale
+  - Lustre
+  - WEKA
+  - VAST
+  articles:
+  - storage-scale-filesets-inodes-quota-troubleshooting
+  - gpfs-multihomed-storage-arp-source-routing
+  - ior-mdtest-parallel-storage
+- id: slurm-workload-management
+  name: Slurm and workload management
+  url: /services/slurm-workload-management/
+  description: 'Slurm, PBS Pro and LSF setup and workload review: queues, fair share, backfill, GPU allocation,
+    accounting and representative job testing.'
+  lead: I configure shared clusters so researchers can submit work with fewer surprises, and help administrators
+    explain why a job is waiting, failing or wasting resources.
+  skus:
+  - diag-scheduler
+  categories:
+  - HPC Operations
+  - HPC Architecture
+  tags:
+  - Slurm
+  - Scheduling
+  - QOS
+  - Job Troubleshooting
+  articles:
+  - slurm-pending-jobs-priority-backfill-qos
+  - slurm-cgroup-v2-gpu-isolation-validation
+  - slurm-job-failure-memory-exit-code-debugging
+- id: hpc-ai-benchmarking
+  name: HPC and AI benchmark and acceptance testing
+  url: /services/hpc-ai-benchmarking/
+  description: Independent HPC and AI acceptance testing using agreed training workloads, IOR/mdtest, OSU, NCCL
+    and application tests, with reproducible reports.
+  lead: I measure what a cluster delivers for your workloads and give your team a report it can use with vendors,
+    procurement and future operators.
+  skus:
+  - diag-acceptance
+  categories:
+  - Benchmarking
+  tags:
+  - Benchmarking
+  - HPL
+  - HPCG
+  - OSU
+  articles:
+  - mpi-layered-test-methodology
+  - reading-gpu-utilization-mfu-honestly
+  - distributed-ai-checkpoint-storage-restart-testing
+- id: linux-infrastructure-operations
+  name: Linux infrastructure and research operations
+  url: /services/linux-infrastructure-operations/
+  description: 'Linux infrastructure support for research computing: software environments, provisioning, monitoring,
+    identity, automation and scoped operational troubleshooting.'
+  lead: 'I work alongside the people keeping research systems usable: accounts, software, node images, monitoring
+    and the operational details that make a cluster dependable.'
+  skus:
+  - focused-day
+  - focused-week
+  - buildout
+  categories:
+  - Enterprise IT
+  - Operations
+  - Systems Management
+  - Genomics
+  tags:
+  - Linux
+  - Ansible
+  - Redfish
+  - Environment Modules
+  articles:
+  - environment-modules-failure-modes
+  - redfish-automation-state-machines-tasks-etags
+  - the-scheduled-job-that-stopped-reporting
+- id: security-compliance-review
+  name: Security and compliance review
+  url: /services/security-compliance-review/
+  description: Security and compliance readiness, assessment and remediation for research infrastructure, covering
+    access, storage, schedulers, audit and recovery requirements.
+  lead: I help research and IT teams understand the controls their systems need, examine what is actually configured
+    and agree practical work to close the gaps.
+  skus:
+  - compliance-readiness
+  - compliance-assessment
+  - compliance-remediation
+  categories:
+  - Detection
+  - Identity
+  tags:
+  - Security
+  - Compliance
+  - NIST
+  - HIPAA
+  articles:
+  - recovery-after-admin-compromise
+  - storage-audit-evidence-pipeline
+  - management-network-bmc-isolation
+- id: focused-hpc-troubleshooting
+  name: Focused HPC troubleshooting and second opinions
+  url: /services/focused-hpc-troubleshooting/
+  description: A focused day or week for an HPC problem, performance investigation or purchase review, with a written
+    explanation and a scope agreed before work starts.
+  lead: A single slow job, unreliable mount or unanswered purchase question can be a good place to start. We agree
+    on one problem and work through it with your team.
+  skus:
+  - focused-day
+  - focused-week
+  categories:
+  - Research Infrastructure
+  tags:
+  - Troubleshooting
+  articles:
+  - benchmarks-that-lie
+  - slurm-job-failure-memory-exit-code-debugging
+  - powerscale-isilon-nfs-performance-troubleshooting

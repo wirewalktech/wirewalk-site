@@ -6,9 +6,11 @@ summary: "An enabled audit setting is the start of an evidence pipeline, not pro
 date: "2025-04-20"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Storage Audit Logging: Test the Path from Event to SIEM"
+description: "Test storage audit logging from a controlled file event through the SIEM to an investigator, including timestamps, record loss and alert ownership."
 ---
 
-A storage platform can record an event locally while the security team sees nothing. Events may be excluded, delayed, dropped by a collector, parsed incorrectly, or retained for less time than investigators expect. Test the path end to end with a known operation.
+The storage system recorded the event, but the investigator cannot find it. Somewhere between the local log and the security console, it was filtered, delayed, dropped or parsed incorrectly. Generate a known operation and follow that one event through the whole path.
 
 ## Define the event contract
 

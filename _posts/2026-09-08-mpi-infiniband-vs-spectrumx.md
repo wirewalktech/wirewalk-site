@@ -7,6 +7,8 @@ summary: >-
   The MPI layer looks identical on both. Everything underneath it is different,
   and on the Ethernet side a single hop configured wrongly degrades collectives
   across the entire fabric while every link reports healthy.
+seo_title: "MPI on InfiniBand vs. NVIDIA Spectrum-X: Fabric Differences"
+description: "Compare MPI infrastructure on InfiniBand and NVIDIA Spectrum-X, including RoCE, PFC, ECN, DCQCN and Ethernet acceptance checks."
 ---
 
 Running MPI over an Ethernet fabric with RoCEv2 and running it over InfiniBand
@@ -302,5 +304,4 @@ Before believing any MPI number on a RoCE fabric:
    `buf_discard` on the RoCE priority and `rp_cnp_handled` moving. Any discard on
    the lossless class is a stop-and-fix.
 
-That takes half an hour and it is the difference between a fabric that performs
-predictably and one that performs well on Tuesday.
+Save those checks with the load-test result and repeat them after changes to the path. They provide a baseline for investigating performance that varies between allocations.

@@ -6,10 +6,11 @@ summary: >-
   Port counters are cumulative since the last reset, so a large number may be
   five years of history and a small one may be happening right now. Only a
   delta over a known window tells you whether a link is degrading.
-description: "How to read InfiniBand port error counters correctly: cumulative versus windowed deltas, which counters indicate a bad cable, and separating a degraded link from a fabric-wide problem."
 date: "2026-08-24"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "InfiniBand Error Counters: Measure Deltas and Link Health"
+description: "Read InfiniBand error counters over a defined interval. Use deltas and topology to distinguish a degraded link from a wider fabric problem."
 ---
 
 Someone runs a fabric error sweep, finds a port with a symbol error count in the millions, and
@@ -154,5 +155,4 @@ observing zero proves only that you reset it.
 | Zero errors, poor collective performance | A link at reduced width or rate | `iblinkinfo`, mind per-lane rate |
 | Clean sweep, no traffic during it | The window had no load | repeat under load |
 
-**A counter is a total, and a total is not a symptom.** Give every number a window and a load
-before you let it justify a maintenance action.
+Attach the sampling window and workload to every reported counter change. That lets the maintenance team distinguish an active fault from old history before replacing a cable.

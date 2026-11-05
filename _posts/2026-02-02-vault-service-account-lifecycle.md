@@ -6,9 +6,11 @@ summary: "Secret issuance, application renewal, and credential revocation are se
 date: "2026-02-02"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Vault Service Accounts: Credential Rotation and Revocation"
+description: "Test Vault service-account credentials through issuance, application renewal and revocation, including bootstrap access and key-service outages."
 ---
 
-A secret manager can issue a new credential while the application continues to use the old one from a configuration file or a connection pool. The security outcome depends on the consumer, not just the successful rotation task.
+Credential rotation is unfinished if the application keeps using the old secret from a configuration file or connection pool. Test the consumer through a refresh, a restart and revocation, so the rotation procedure covers what the application actually does.
 
 ## Start with one service identity
 
@@ -46,4 +48,4 @@ Prefer workload identity methods supported by the environment, scope policies ti
 
 Test a temporary loss of the secret-management path in a lab. Distinguish an already running application from a cold restart. Record the maximum acceptable interruption and the approved recovery path. Do not silently extend credentials indefinitely to make an availability test pass.
 
-A completed implementation includes a successful permitted operation, denied excess access, observed rotation, tested revocation, and understood outage behavior. The existence of a Vault policy is only the configuration portion of that evidence.
+Keep the permitted and denied operation results with the rotation, revocation and outage tests. They show how the Vault policy behaves in the running application and what an operator must do if the secret service is unavailable.

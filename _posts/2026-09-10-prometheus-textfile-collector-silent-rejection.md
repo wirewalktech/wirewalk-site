@@ -6,10 +6,11 @@ summary: >-
   The textfile collector parses a metrics file as a single unit. One misplaced
   TYPE declaration and node_exporter drops every series in the file, while the
   script that wrote it exits zero and reports success.
-description: "Why node_exporter rejects an entire Prometheus textfile on one malformed line, how to detect it with node_textfile_scrape_error, and how to validate before publishing."
 date: "2026-09-10"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "Prometheus Textfile Collector: Rejected Metrics Debugging"
+description: "Find why node_exporter rejects a Prometheus textfile, check node_textfile_scrape_error and validate metrics before publishing them."
 ---
 
 The textfile collector is the usual way to get custom metrics into Prometheus from a machine
@@ -154,7 +155,4 @@ durable, or publish it as a gauge and be honest that it is one.
 | Metric appears then vanishes per scrape | Two writers, same filename | one file per writer |
 | Query works in Grafana, alert never fires | Expression over absent data is not a breach | alert on `absent()` as well |
 
-The general principle is the one that applies to every pipeline that transforms text into
-state: **the component that writes is not the component that decides whether the write was
-valid.** Exit zero from the writer tells you a file was produced. Only the reader's own error
-metric tells you it was accepted.
+Check node_exporter's scrape-error metric after publishing a file, and confirm the expected series appear. The writer can exit successfully even when the collector rejects everything it wrote.

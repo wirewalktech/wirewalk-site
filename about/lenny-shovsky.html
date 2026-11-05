@@ -2,6 +2,7 @@
 layout: base
 permalink: /about/lenny-shovsky/
 title: Lenny Shovsky
+seo_title: Lenny Shovsky — HPC & AI Infrastructure Engineer
 description: "Lenny Shovsky is an HPC and AI infrastructure engineer and architect working across compute, InfiniBand fabric and parallel storage, and the author of the Wirewalk Advisory technical articles."
 ---
 {%- comment -%}
@@ -13,7 +14,7 @@ description: "Lenny Shovsky is an HPC and AI infrastructure engineer and archite
   <div class="sh-split">
     <div>
       <span class="eyebrow">Author</span>
-      <h2>Lenny Shovsky</h2>
+      <h1 style="font-size:clamp(30px,3.6vw,44px);line-height:1.16">Lenny Shovsky</h1>
     </div>
     <p>HPC and AI infrastructure engineer and architect. I work across compute, fabric and
     storage as one system, because the failures that matter happen between them rather than
@@ -54,7 +55,7 @@ description: "Lenny Shovsky is an HPC and AI infrastructure engineer and archite
 
     <h2 id="contact">Contact</h2>
     <p>Assessment and engineering work is performed under written authorisation.
-       <a href="{{ '/' | relative_url }}#contact">Get in touch</a>.</p>
+       <a href="{{ '/' | relative_url }}#contact">Get in touch</a> or <a href="{{ '/services/' | relative_url }}">explore the services</a>.</p>
   </div>
 
   <p style="margin-top:36px"><a href="{{ '/writing/' | relative_url }}" class="btn btn-g">Read the articles</a></p>
@@ -64,13 +65,17 @@ description: "Lenny Shovsky is an HPC and AI infrastructure engineer and archite
 {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
+  "@id": {{ page.url | absolute_url | append: '#profile' | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
   "mainEntity": {
     "@type": "Person",
+    "@id": {{ page.url | absolute_url | append: '#person' | jsonify }},
     "name": "Lenny Shovsky",
     "jobTitle": "HPC and AI infrastructure engineer and architect",
     "url": {{ '/about/lenny-shovsky/' | absolute_url | jsonify }},
     "worksFor": {
       "@type": "Organization",
+      "@id": {{ '/' | absolute_url | append: '#organization' | jsonify }},
       "name": {{ site.organization | default: site.title | jsonify }},
       "url": {{ '/' | absolute_url | jsonify }}
     },

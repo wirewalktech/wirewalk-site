@@ -6,15 +6,14 @@ summary: >-
   A cron job that redirects its own output has disabled the only notification
   channel cron has. Add a second copy of the crontab that nobody is reading and
   you have a job whose behaviour cannot be deduced from its configuration.
-description: "Why cron MAILTO goes silent when a script redirects its own stdout and stderr, how stale drop-in crontabs keep running, and how to make a scheduled job prove it ran."
 date: "2026-10-08"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "Cron Monitoring: Missing MAILTO Output and Stale Jobs"
+description: "Investigate silent cron jobs through output redirection, MAILTO and duplicate schedules, then add evidence that scheduled work ran and completed."
 ---
 
-Scheduled work fails quietly more often than anything else in an estate, because the mechanism
-that was supposed to tell you is usually the thing that broke. Three mechanisms, each of which
-produces a job whose real behaviour cannot be read off its configuration.
+When a scheduled job stops reporting, its notification mechanism may be part of the failure. The three cases below leave configuration that looks plausible while the running job behaves differently—or never runs at all.
 
 ## 1. The script that silences its own notifications
 
@@ -169,6 +168,4 @@ Question 6 is the one that usually has no answer, and it is the one that matters
 | Pipeline failure reported as success | Exit status of a pipeline is the last element | `set -o pipefail` |
 | Nobody noticed for months | Nothing alerts on absence | success stamp + staleness alert |
 
-**Silence is not a status.** A monitoring design where "no news is good news" cannot distinguish
-a healthy job from a job that no longer exists, and a scheduled job that nothing checks is
-indistinguishable from one that was never installed.
+Have an independent check watch for the last successful run and alert when it becomes stale. That covers a job that vanished entirely as well as one whose own notification path failed.

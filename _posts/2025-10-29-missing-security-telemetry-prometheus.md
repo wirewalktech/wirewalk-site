@@ -6,9 +6,11 @@ summary: "A quiet dashboard can mean no incidents, a broken producer, or a sourc
 date: "2025-10-29"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Prometheus Security Monitoring: Missing and Stale Telemetry"
+description: "Detect missing security telemetry with Prometheus freshness checks, source inventory and alert-chain tests that distinguish silence from normal activity."
 ---
 
-A collector answering health checks can still receive no useful events. A source removed from service discovery may disappear from every dashboard. Security monitoring needs a separate definition of which sources should exist and how recently each should have produced evidence.
+What should happen when a security sensor goes quiet? A failed target, a reachable collector receiving stale data and a source missing from discovery need different checks. Keep an independent inventory of expected sources so one disappearing from the dashboard still raises attention.
 
 ## Distinguish three failure states
 
@@ -48,4 +50,4 @@ Preserve maintenance windows with expiry. A permanent silence created for a temp
 
 Clock skew can make a producer appear fresh or stale incorrectly. Compare event time with ingest time and monitor clock synchronization independently. Confirm that alert routing reaches a staffed destination using an approved test notification workflow.
 
-The completed control is not a query that evaluates successfully. It is an expected source inventory, a freshness signal, and a demonstrated response when each part stops working. Apply the same approach to [storage audit pipelines](/writing/storage-audit-evidence-pipeline/).
+Test the response to each failure: a missing source, stale data and an unavailable target. Keep the expected-source inventory independent of the systems it is checking. Apply the same approach to [storage audit pipelines](/writing/storage-audit-evidence-pipeline/).

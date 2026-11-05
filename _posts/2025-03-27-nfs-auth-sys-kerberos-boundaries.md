@@ -6,9 +6,11 @@ summary: "Client trust, user identity, integrity, and encryption are separate ch
 date: "2025-03-27"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "NFS Security: AUTH_SYS, Root Squashing and Kerberos"
+description: "Compare NFS AUTH_SYS and Kerberos security boundaries. Inspect mounted security flavors and test user identity, integrity and encryption requirements."
 ---
 
-An export restricted to a subnet can still trust more client authority than its owner intended. Before tightening filesystem permissions, establish how the server decides which user made each request.
+Limiting an NFS export to a trusted subnet says which machines may connect. It does not settle how much authority those clients have to identify their users. Establish that trust relationship before trying to repair access with filesystem permissions.
 
 ## Distinguish the security flavors
 
@@ -47,6 +49,6 @@ Kerberos introduces dependencies on time, name resolution, principals, and key d
 
 ## Acceptance criteria
 
-Retain the negotiated security flavor, identity used, expected-versus-observed operation matrix, and long-running job result. Document residual client trust explicitly when AUTH_SYS remains necessary. Network segmentation and managed clients can reduce exposure, but they should not be described as cryptographic user authentication.
+Keep the negotiated security flavor and test identity with the results for each allowed and denied operation. Include a long-running job so credential renewal is exercised too. Document residual client trust explicitly when AUTH_SYS remains necessary. Network segmentation and managed clients can reduce exposure, but they should not be described as cryptographic user authentication.
 
 Related: [PowerScale multiprotocol identities](/writing/powerscale-multiprotocol-identity-acls/).

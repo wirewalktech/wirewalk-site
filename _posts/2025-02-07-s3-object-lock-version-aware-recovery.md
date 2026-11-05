@@ -6,9 +6,11 @@ summary: "A delete marker can hide a protected version. Recovery tooling must kn
 date: "2025-02-07"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "S3 Object Lock Recovery: Versions, Retention and Delete Markers"
+description: "Recover protected S3 objects by version ID. Check retention, delete markers and recovery-tool behavior rather than relying on an object's name."
 ---
 
-An object disappearing from a normal listing does not prove its protected contents were destroyed. Conversely, enabling a bucket feature does not prove that every object version has the intended retention. S3 recovery tests need version-aware evidence.
+An S3 object can disappear from a normal listing while a protected version remains intact. The reverse mistake is just as costly: seeing Object Lock enabled on a bucket and assuming every version has the required retention. Inspect and retrieve the specific versions the recovery plan depends on.
 
 ## Understand the unit of protection
 
@@ -45,6 +47,6 @@ Monitor failed writes, cleanup failures, and capacity growth after rollout. Prot
 
 ## Evidence that answers the question
 
-The useful report contains the bucket configuration, version identifier, retention state, tested identities, denied destructive operation, and successful version-specific retrieval. “Object Lock enabled” is only one line in that report.
+Keep the bucket configuration, protected version ID, retention state and tested identities with the results of the deletion-denial and retrieval tests. “Object Lock enabled” is only one line in that report.
 
 Compare this model with [PowerScale SmartLock](/writing/powerscale-smartlock-replication-retention/); the two are related design problems, not interchangeable implementations.

@@ -3,16 +3,17 @@ title: "Distributed AI checkpoints: storage performance and restart testing"
 category: Parallel Storage
 tags: ["PyTorch", "Checkpointing", "AI Training", "HPC", "Recovery"]
 summary: "Measure distributed AI checkpoint stalls, storage contention, and restart time. Validate recoverable training state before tuning asynchronous saves."
-description: "Measure distributed AI checkpoint stalls, storage contention, and restart time. Validate recoverable training state before tuning asynchronous saves."
 date: "2026-06-10"
 featured: true
 last_reviewed: "2026-10-18"
 series: "HPC and AI infrastructure engineering"
+seo_title: "Distributed AI Checkpoints: Storage and Restart Testing"
+description: "Measure checkpoint stalls, storage contention and restart time in distributed AI training. Test recoverable state before tuning asynchronous saves."
 ---
 
-A checkpoint is useful when training can resume from it. A fast save call, a directory full of shard files, or an asynchronous task returning a handle does not establish that outcome.
+Try loading the checkpoint in a fresh allocation before relying on it. A directory of shards or a fast save call will not tell you whether training can resume, particularly after the original workers and their local state are gone.
 
-For distributed AI training on HPC infrastructure, evaluate checkpointing as a recovery path: capture consistent state, persist it outside the intended failure boundary, discover a complete checkpoint, and restore useful computation. The method below is operational guidance, not a claim about measured product performance.
+For distributed training, follow the saved state from capture through persistence, discovery and restore. The procedure below proposes recovery tests; it does not report measured product performance.
 
 ## Define the failure the checkpoint must survive
 
@@ -66,6 +67,6 @@ If recovery after a changed world size is a requirement, test that exact configu
 
 Shorter intervals reduce the amount of completed work exposed to loss, but add save overhead and storage load. Longer intervals do the reverse. Base the choice on measured stall and restart times, the tolerated loss of progress, capacity and the failures the system needs to withstand.
 
-Report the interval, checkpoint size, rank count, foreground stall, full completion time, contention impact, retained generations and fresh-allocation restore time. Those measurements let another engineer assess the tradeoff. Peak write bandwidth alone does not.
+Report the interval, checkpoint size, rank count, foreground stall, full completion time, contention impact, retained generations and fresh-allocation restore time. Use those measurements to choose the interval, including the work lost during failure and the time needed to restart.
 
 Related guides: [parallel storage benchmarking with IOR and mdtest](/writing/ior-mdtest-parallel-storage/), [multi-terabyte checksum verification](/writing/verifying-multi-terabyte-transfer-checksums/), and [what node reimaging erases](/writing/node-local-state-and-the-reimage-that-erases-it/).

@@ -6,6 +6,8 @@ tags: [InfiniBand, Quantum, Topology, Port splitting]
 summary: >-
   Doubling your port count is the easy part. The parts that surprise people are
   the renumbering, the cabling, and what it does to the subnet manager.
+seo_title: "NVIDIA Quantum Port Splitting: Cabling, Capacity and Topology"
+description: "Plan NVIDIA Quantum switch port splitting with attention to port numbering, cable compatibility, capacity and subnet-manager consequences."
 ---
 
 Port splitting turns one high-rate port into two or four lower-rate ports. On a
@@ -155,6 +157,4 @@ limit, splitting is how you find the limit. And if the fabric is a single switch
 with no maintenance window available, the reboot is the whole problem and no
 amount of planning removes it.
 
-Splitting is a good answer to a specific question: you have more endpoints than
-ports, and those endpoints do not need full rate. Outside that question it is
-usually the wrong tool.
+Use splitting when the endpoint count exceeds the available ports and the endpoints can use the reduced rate. Check those conditions, the forwarding budget and the required maintenance window before choosing a split profile.

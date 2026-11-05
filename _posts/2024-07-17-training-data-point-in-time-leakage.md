@@ -4,12 +4,13 @@ date: "2024-07-17 10:00:00-04:00"
 category: "AI Infrastructure"
 tags: ["NVIDIA", "Training Data", "Storage", "DALI", "GPUDirect Storage"]
 summary: "Design a training input path that keeps NVIDIA GPUs supplied while preserving point-in-time correctness, dataset versions, host-memory limits, storage capacity, and recovery behavior."
-description: "Design a training input path that keeps NVIDIA GPUs supplied while preserving point-in-time correctness, dataset versions, host-memory limits, storage capacity, and recovery behavior."
+seo_title: "NVIDIA Training Data Pipelines: Staging and Preprocessing"
+description: "Keep training GPUs supplied with versioned datasets, DALI preprocessing and storage staging that respects memory limits and point-in-time correctness."
 ---
 
-A GPU cluster can wait on a training dataset that appears small enough for its storage system. Millions of file opens, CPU decoding, repeated remote reads, and poorly placed staging processes can keep the accelerators idle. A faster loader can also deliver the wrong data faster if historical joins leak future information.
+The dataset fits on storage, yet the GPUs keep waiting. File opens, CPU decoding and repeated remote reads can account for much of that delay. Fixing the loader helps only if it also delivers the right records: a fast pipeline with future information leaking into historical examples will train a misleading model.
 
-The infrastructure design must satisfy both throughput and dataset correctness. Treat ingestion, curation, staging, preprocessing, and device transfer as a measured pipeline with an immutable dataset contract, rather than a directory mounted into a training container.
+Follow the data from ingestion through preprocessing and staging to device memory. At each step, check both the time spent and the dataset version being produced. Throughput and historical correctness need to survive the same pipeline.
 
 ## Budget the path from source storage to device memory
 
@@ -88,4 +89,4 @@ A useful manifest records source snapshots or immutable object versions, query r
 
 Run a deliberately hostile review: remove the most predictive suspicious feature, move the cutoff earlier, evaluate on entirely new entities, and compare performance. A large collapse is not automatic proof of leakage, but it identifies an assumption worth investigating before deployment.
 
-The [2015 paper on hidden technical debt in ML systems](https://research.google/pubs/hidden-technical-debt-in-machine-learning-systems/) describes the risks of data dependencies and system interactions. The timestamp and join checks here are proposed controls for one concrete manifestation of that debt. A model should earn its score using information the deployed system can actually obtain.
+The [2015 paper on hidden technical debt in ML systems](https://research.google/pubs/hidden-technical-debt-in-machine-learning-systems/) describes the risks of data dependencies and system interactions. The timestamp and join checks above address that problem directly: every feature used in a historical example must have been available when the real decision would have been made.

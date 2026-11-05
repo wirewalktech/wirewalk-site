@@ -7,17 +7,16 @@ summary: >-
   know whose invoice it lands on. The configuration API that would answer the
   question is usually denied to you — but the behaviour of a single GET answers
   it definitively.
-description: "How to determine whether an S3 bucket is Requester Pays when the configuration API is denied: a behavioural test, what canonical-ID ACL grants imply, and how to record cost attribution."
 date: "2026-10-03"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "S3 Requester Pays: Testing Egress Cost Attribution"
+description: "Determine whether S3 Requester Pays applies when configuration access is denied, using a scoped request and evidence of billing-related behavior."
 ---
 
-A collaborator grants you access to a bucket and asks you to take a copy. The dataset is tens
-of terabytes. Somebody is going to be billed for that transfer, and the person who should find
-out which somebody is you, before the transfer rather than after it.
+Before copying tens of terabytes from a collaborator's bucket, agree who will pay for the transfer. Your access grant may allow downloads while denying the configuration call that would show the bucket's payment setting.
 
-The question has a precise technical answer, and the obvious way to look it up does not work.
+A small, authorized request can help establish the required behavior before the full transfer starts.
 
 ## The configuration call you cannot make
 
@@ -151,8 +150,4 @@ change. Worth knowing which bucket your alerting puts it in.
 | Transfer succeeds, surprise invoice | Requester Pays was on and the tool set the header for you | probe before, not after |
 | Recursive sync fails immediately | First call is a LIST | drive from a key list |
 
-The principle generalises past S3: **when the configuration API is closed to you, the
-specification's mandatory behaviour is still an oracle.** A setting you are not allowed to read
-can often be established by the response to a request you are allowed to make — and that is a
-stronger result than reading the config, because it tests the path your transfer will actually
-take.
+Keep the small request and its response with the transfer plan. When configuration access is restricted, that test records how the permitted download path behaved, including whether it required the payer header.

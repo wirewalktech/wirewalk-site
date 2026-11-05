@@ -3,15 +3,16 @@ title: "PowerScale and Isilon NFS performance: a Linux-to-OneFS investigation"
 category: Parallel Storage
 tags: ["PowerScale", "Isilon", "OneFS", "NFS", "Performance"]
 summary: "Troubleshoot PowerScale and Isilon NFS performance from Linux clients through SmartConnect to OneFS, separating metadata, data, network, and background work."
-description: "Troubleshoot PowerScale and Isilon NFS performance from Linux clients through SmartConnect to OneFS, separating metadata, data, network, and background work."
 date: "2026-07-27"
 last_reviewed: "2026-10-18"
 series: "AI and HPC storage engineering"
+seo_title: "PowerScale and Isilon NFS Performance Troubleshooting"
+description: "Trace PowerScale and Isilon NFS performance from Linux clients through SmartConnect to OneFS, separating metadata, network and background activity."
 ---
 
-A report that “Isilon is slow” needs a smaller question: which operation is slow, for which clients, against which data, and during which interval? Treat PowerScale performance as a path from application to Linux client, network, connection endpoint and OneFS resources.
+When someone reports that “Isilon is slow,” ask them to show one slow operation. Record the client, path and time, then follow that request through the Linux mount, network connection and OneFS resources. That gives both teams something specific to investigate.
 
-The procedure here is a diagnostic workflow. Commands are read-only observations; release-specific administrative changes belong in a separate, measured change plan.
+The commands below inspect state without changing it. Plan any release-specific administrative change separately, with a workload measurement to check its effect.
 
 ## Capture a reproducible symptom
 
@@ -63,6 +64,6 @@ Check data placement and available capacity with the cluster owner. Uneven workl
 
 For each proposed fix, predict the observable effect before applying it. If connection distribution is the hypothesis, endpoint load should change. If preprocessing is the bottleneck, CPU and loader timing should improve without requiring greater storage bandwidth.
 
-Repeat the same workload after the change. Keep useful throughput, tail latency, errors and resource pressure in the result. Report unresolved limitations rather than translating a green link or clean log into a claim that the application is fixed.
+Repeat the same workload after the change. Keep useful throughput, tail latency, errors and resource pressure in the result. If the application is still slow, keep that open even when link and error checks pass.
 
 Pair this workflow with [PowerScale architecture for AI/HPC](/writing/powerscale-isilon-ai-hpc-storage-design/), [storage benchmarking](/writing/ior-mdtest-parallel-storage/), and [distributed checkpoint testing](/writing/distributed-ai-checkpoint-storage-restart-testing/).

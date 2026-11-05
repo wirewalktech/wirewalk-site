@@ -8,16 +8,13 @@ summary: >-
   short of it. The reasons are enumerable, most of them are in the host rather
   than the fabric, and the first thing to establish is whether MPI is using the
   second adapter at all.
+seo_title: "Multi-Rail MPI: UCX Device Selection and NUMA Placement"
+description: "Check whether MPI uses both adapters, then investigate UCX device selection, NUMA placement and RDMA transport before judging multi-rail scaling."
 ---
 
-Dual-rail hosts are now the default on anything built for AI and common on
-general HPC nodes. Two adapters, two cables, two ports on the leaf, and a
-reasonable expectation that a bandwidth-bound job goes twice as fast.
+A second adapter adds another path, but doubling link capacity does not guarantee that an MPI job will run twice as fast. The application must use both paths, and the host's PCIe, NUMA and memory resources must be able to sustain them together.
 
-It rarely does, and the gap between what was bought and what arrives is
-attributed to fabric overhead far more often than it deserves. In practice, the
-second rail underdelivers for one of a short list of reasons, most of which are
-inside the node and all of which are measurable.
+Check those limits before blaming fabric overhead. The tests below distinguish an unused rail, a host bottleneck and a workload whose messages cannot benefit from striping.
 
 ## First: is the second rail carrying anything at all?
 

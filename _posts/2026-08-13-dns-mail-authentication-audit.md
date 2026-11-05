@@ -6,9 +6,11 @@ summary: "Check record content, sender alignment, and real message headers befor
 date: "2026-08-13"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "DNS Mail Authentication: SPF, DKIM and DMARC Validation"
+description: "Audit SPF, DKIM and DMARC beyond a successful TXT lookup. Check policy syntax, alignment and actual message authentication results."
 ---
 
-A DNS query returning text is not proof that the requested security record exists. Wildcards, stale records, and malformed content can make a superficial check look successful. Mail authentication needs both DNS inspection and an authorized message test.
+Before trusting a mail-authentication check, inspect the returned DNS record. A wildcard or stale TXT entry can produce a nonempty answer at the wrong name. Follow the DNS inspection with an authorized message test and read the receiver's authentication results.
 
 ## Inspect the exact names
 
@@ -49,4 +51,4 @@ Begin with an inventory and reporting workflow, review legitimate failures, and 
 
 The automated check should validate policy syntax, uniqueness where required, record type, and the relationship between DNS and observed message authentication. It should report lookup errors as incomplete evidence, not absence or success.
 
-Repeat after adding a SaaS sender, changing mail providers, or replacing the website's form handler. Domain authentication is a maintained dependency of business communication, not a one-time DNS task.
+Repeat after adding a SaaS sender, changing mail providers, or replacing the website's form handler. Each of those changes can add a new sender or alter the authentication path.

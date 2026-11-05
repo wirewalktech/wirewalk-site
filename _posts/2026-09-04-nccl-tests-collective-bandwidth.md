@@ -7,6 +7,8 @@ summary: >-
   Two of the columns nccl-tests prints look like bandwidth. Only one of them is
   comparable across job sizes, and picking the wrong one is how a healthy
   cluster gets declared broken.
+seo_title: "NCCL Tests: Collective Bandwidth and busbw Interpretation"
+description: "Interpret nccl-tests results using algorithm and bus bandwidth, topology and workload size when evaluating NVIDIA GPU collective performance."
 ---
 
 Distributed training spends a large share of its wall clock inside collective
@@ -146,7 +148,4 @@ Record the `busbw` plateau, the message size where the curve leaves the
 latency-bound regime, the rank count, and the driver, NCCL and firmware
 versions. Re-run it after every driver update and every firmware change.
 
-Collectives degrade quietly. Nothing fails, nothing logs an error, and step time
-drifts up by a percentage nobody notices until the quarter's throughput is
-compared against the previous one. A five-minute benchmark on a known baseline
-catches it the same day.
+A collective slowdown may first appear as a small increase in training step time, with no error in the logs. Comparing the saved curves after a driver or firmware change can reveal it before it affects many long runs.

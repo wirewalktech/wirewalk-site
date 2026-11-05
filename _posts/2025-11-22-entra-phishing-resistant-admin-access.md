@@ -6,9 +6,11 @@ summary: "An MFA requirement and a phishing-resistant authentication requirement
 date: "2025-11-22"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Microsoft Entra Admin Access: Phishing-Resistant MFA Tests"
+description: "Test Microsoft Entra authentication strength, FIDO2 registration, recovery and policy exclusions for privileged access requiring phishing-resistant MFA."
 ---
 
-An administrator can satisfy a broad MFA policy with a method that does not meet the organization's intended resistance to phishing. The policy needs to specify the required assurance, and the rollout needs to prove both allowed access and denied fallback.
+An administrator may pass an MFA check using a method the organization did not intend to allow. If phishing resistance is the requirement, specify the acceptable authentication strength and test that weaker fallback methods are rejected.
 
 ## Inspect authentication strength
 
@@ -44,6 +46,6 @@ Check the interaction with other Conditional Access policies. The effective resu
 
 Stronger authentication does not remove excessive privileges, insecure administrator workstations, or stolen active sessions. Keep privileged work separate from ordinary browsing and email, minimize standing authority, and document session-revocation procedures.
 
-A valid acceptance report includes policy scope, exclusions, allowed and denied test outcomes, sign-in evidence, and the tested recovery path. Avoid presenting enrollment counts as equivalent to enforced protection.
+Keep sign-in evidence for allowed and denied attempts, together with the policy scope, exclusions and recovery test. Enrollment counts will not show whether the policy actually blocked a weaker method.
 
 Next, examine [privileged SSH access](/writing/privileged-ssh-bastion-boundaries/) and [offboarding across sessions and tokens](/writing/offboarding-sessions-keys-tokens/).

@@ -6,9 +6,11 @@ summary: "BMCs, hypervisors, storage controllers, and provisioning services belo
 date: "2026-02-26"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "BMC Network Isolation: iDRAC, iLO and Redfish Access"
+description: "Design management-network access for BMCs, hypervisors and provisioning systems. Check segmentation, identity and recovery without changing host power."
 ---
 
-A management interface often has authority below the operating system's security controls. A BMC can affect power and console access; a provisioning service can replace a host image. These paths deserve their own network and identity review.
+A BMC can power off a host that the operating system has carefully secured. A provisioning service can replace its image. Put those management routes, their credentials and their recovery access through a separate review.
 
 ## Inventory privileged control planes
 
@@ -49,4 +51,4 @@ A segmented network with one shared administrator password still has a concentra
 
 ## Acceptance record
 
-Keep the inventory, allowed-flow matrix, read-only access tests, denied-path tests, firmware review, and emergency-access procedure. Repeat after network changes and hardware additions. The management plane is a moving estate, not a one-time VLAN configuration.
+Keep the inventory, allowed-flow matrix, read-only access tests, denied-path tests, firmware review, and emergency-access procedure. Repeat after network changes and hardware additions. Revisit the matrix whenever hardware is added or network routes change; an old VLAN diagram will not capture those changes on its own.

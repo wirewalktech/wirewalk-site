@@ -6,17 +6,18 @@ summary: >-
   Each of these is valid shell that runs without error and produces a wrong
   answer: an empty field separator that looks like a tab, a grep that prints
   zero and fails, and an environment change discarded by a pipe.
-description: "Bash pitfalls that fail silently in production scripts: empty IFS from command substitution, quoting through ssh, grep -c exit status, subshell environment loss, and pgrep matching itself."
 date: "2026-09-02"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "Bash Data Pipeline Failures: Quoting, Pipes and Exit Status"
+description: "Find Bash data-pipeline failures involving command substitution, SSH quoting, grep exit status, subshell environments and process matching."
 ---
 
 The shell bugs that cost real time are not syntax errors. They are constructs that parse, run,
 exit zero, and return something subtly wrong — so the failure surfaces three steps downstream as
 bad data rather than as an error.
 
-Six that have each cost more than an hour.
+The six cases below show where a valid shell command can quietly corrupt the next stage's input.
 
 ## 1. `IFS=$(printf '\t')` is an empty IFS
 
@@ -190,7 +191,4 @@ Pin `LC_ALL=C` for any comparison, and re-sort locally rather than trusting remo
 | A line is "only in A" and "only in B" | Inputs sorted under different locales |
 | Tool exits 0, output empty | Nothing asserted on the artefact |
 
-The connective tissue: **the shell reports on command execution, not on intent.** Every one of
-these runs correctly in the sense the shell cares about. If a step in a pipeline matters, assert
-on what it produced — the row count, the field split, the file size — because the exit status is
-answering a different question.
+For each important step, check the row count, field split or output file as well as the command's exit status. These examples pass through the shell successfully; the mistake becomes visible only when the resulting data is inspected.

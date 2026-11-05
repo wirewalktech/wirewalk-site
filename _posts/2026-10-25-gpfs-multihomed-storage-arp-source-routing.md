@@ -4,14 +4,15 @@ date: "2026-10-25 10:00:00 -0400"
 category: "Parallel Storage"
 tags: ["GPFS", "IBM Storage Scale", "IPoIB", "RDMA", "Policy Routing", "ARP"]
 summary: "Diagnose a missing GPFS storage path by tracing IPoIB neighbor discovery, ARP filtering and source routing. Preserve peer traffic, verify both RDMA paths and make the fix survive interface changes."
-description: "Fix missing GPFS RDMA paths on multihomed storage nodes: IPoIB neighbor discovery, ARP filtering, source routing, peer exceptions and verified recovery."
+seo_title: "GPFS Multihoming: ARP Filtering and Source Routing"
+description: "Diagnose missing GPFS RDMA paths on multihomed storage nodes through IPoIB neighbor discovery, ARP filtering, source routing and peer exceptions."
 ---
 
-A storage server can have two healthy InfiniBand ports and still serve its clients through only one. The filesystem remains available. Jobs keep running. The unused capacity becomes easy to overlook because the system is working, just with fewer useful paths than its design intended.
+Check the second storage port while a client workload is running. It may be healthy and carrying storage-peer traffic, yet carrying none of the client traffic it was meant to serve. Jobs continue, so the missing path can remain unnoticed.
 
-Before buying more storage or changing GPFS tuning parameters, check whether clients can discover and reach every storage address they are supposed to use. An IPv4 neighbor-discovery problem can prevent an intended RDMA path from becoming usable in the first place.
+Before changing GPFS tuning or adding storage, check whether clients can discover and reach every intended storage address. An IPv4 neighbor-discovery failure can prevent an RDMA path from being established.
 
-The corrective pattern here is **source-based routing with the existing ARP policy left in place**. It is not a recommendation to disable ARP filtering across a storage fleet.
+The fix described here adds **source-based routing while retaining the existing ARP policy**. ARP filtering stays enabled.
 
 *This is a generalized engineering example. The address plan, names, interface labels and routing identifiers are illustrative. Production logs, inventory, incident dates and benchmark figures are deliberately omitted.*
 
@@ -221,6 +222,6 @@ After rollback, repeat the route matrix, neighbor probe, GPFS connection inspect
 
 Compare a representative workload before and after the change using matched clients, data, concurrency and cache conditions. Capture per-port traffic and application progress together. Do not infer a fixed speedup from the number of ports, or describe a storage-to-storage connection as evidence of client bandwidth.
 
-This example deliberately omits production benchmark results. The transferable lesson is the diagnostic sequence: identify the missing path, observe neighbor discovery, read the source-qualified route decision, preserve peer policy, and then verify the application and lifecycle behavior.
+Production benchmark results are omitted from this generalized example. To investigate the same symptom, follow neighbor discovery and the source-qualified route, check the peer exception, then verify GPFS connections and persistence.
 
-That sequence can reveal capacity the system was already intended to provide. For the people waiting on an analysis or a training run, making an existing path usable can matter more than another round of storage tuning.
+Repeat the workload once both client paths are usable. That comparison shows whether the repaired path helps the analysis or training run before another storage change is considered.

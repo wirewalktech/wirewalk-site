@@ -6,10 +6,11 @@ summary: >-
   A whole class of Unix configuration is "every file in this directory counts".
   Edit one in place and leave a .bak beside it, and the backup becomes live
   configuration — displayed to users, parsed as a job, or loaded as software.
-description: "Why editing config in place and leaving a .bak alongside it breaks drop-in directories like /etc/motd.d, /etc/cron.d and MODULEPATH, and where backups should go instead."
 date: "2026-09-25"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "Linux Drop-In Directories: Why Backup Files Become Config"
+description: "Check how Linux drop-in directories select files before leaving backups beside live configuration, including cron, MOTD and Environment Modules paths."
 ---
 
 `cp file file.bak` before editing is such deeply ingrained practice that it does not get
@@ -148,5 +149,4 @@ how a `.bak-` suffix gets tested instead of the real file.
 | Backups present on one node only | Backup dir on a local parent of a shared mount | `findmnt --target` |
 | sudo rule ignored | Filename contains a `.` | rename; `visudo -c` |
 
-**A directory is an interface.** If its contract is "everything in here", then writing a file
-into it is a configuration change, whatever you intended by the filename.
+Keep backups outside directories whose consumers read every file. After editing, inspect the consumer's output to confirm that only the intended configuration was loaded.

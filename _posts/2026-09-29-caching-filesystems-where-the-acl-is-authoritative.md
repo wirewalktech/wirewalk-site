@@ -7,15 +7,14 @@ summary: >-
   authoritative and revalidation overwrites what you did. Add chmod silently
   destroying NFSv4 ACLs and you have permissions that appear to work and then
   stop.
-description: "Why ACLs set on an AFM cache fileset revert to the home filesystem's values, why chmod destroys an NFSv4 ACL while chown preserves it, and how to verify a grant with a negative control."
 date: "2026-09-29"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "GPFS AFM ACL Troubleshooting: Cache and Home Authority"
+description: "Trace ACL changes on GPFS AFM cache filesets to the authoritative home filesystem. Check NFSv4 ACL handling and verify allowed and denied access."
 ---
 
-Giving a collaborator access to a dataset is a five-minute job that occasionally takes a day.
-The long version happens on caching filesystems, where the thing you edited is not the thing
-that decides.
+You grant a collaborator access, verify it and find the permission has disappeared a minute later. On a caching filesystem, check which side owns the metadata before trying the change again. The cache may be restoring the authoritative permissions from home.
 
 ## The cache is a view, and views do not own data
 
@@ -148,6 +147,4 @@ connection to anything anyone changed that day.
 | Collaborator can read, so can everyone | Fixed by loosening the mode | negative control; `find -perm -o=r` |
 | Works on one node, not another | Different mount, or stale metadata on that client | compare `findmnt`; check cache state |
 
-**Decide which side is authoritative before you change anything.** On a caching filesystem that
-decision has already been made for you, and every minute spent setting metadata on the
-non-authoritative side is a minute spent writing something that will be overwritten.
+Apply the permission change on the authoritative side, then verify it from the clients that need access. Include a denied-access test so restoring collaboration does not accidentally expose the dataset more widely.

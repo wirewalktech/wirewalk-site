@@ -6,9 +6,11 @@ summary: "Retention, administrative separation, support unlock, and recovery are
 date: "2024-10-10"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "VAST Indestructible Snapshots: Retention and Recovery Tests"
+description: "Evaluate VAST snapshot protection through retention settings, administrative authority, recovery tests and capacity planning for protected data."
 ---
 
-A read-only snapshot stops a client from overwriting its historical contents. It does not automatically stop a storage administrator from removing the snapshot. For VAST, the distinction to examine is the protection attached to snapshots and policies, together with the authority that can change that protection.
+A read-only snapshot protects its contents from client writes. Whether an administrator can delete the snapshot is a separate question. On VAST, examine the protection on the snapshots and policies, then identify every person or process allowed to change it.
 
 ## Establish the documented boundary
 
@@ -42,4 +44,4 @@ Separately review the support-unlock contacts and approval process with the cust
 
 Retained history occupies capacity as the live dataset changes. Model a high-change incident window as well as routine daily churn. An unexpectedly long retention period can create an operational problem precisely because ordinary deletion is restricted.
 
-Finally, restore to an isolated destination and validate representative file contents, permissions, and application behavior. Snapshot survival is the first result; usable recovery is the second. Keep both in the acceptance report, alongside [the identity boundary around recovery](/writing/recovery-after-admin-compromise/).
+Restore to an isolated destination and check representative files, permissions and application behavior. A retained snapshot still has to support a usable recovery. Keep both in the acceptance report, alongside [the identity boundary around recovery](/writing/recovery-after-admin-compromise/).

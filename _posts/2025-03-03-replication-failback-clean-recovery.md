@@ -6,9 +6,11 @@ summary: "Remote availability, historical recovery, and returning service to the
 date: "2025-03-03"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Replication Failback: Clean Recovery Points and Data Authority"
+description: "Plan replication failback around a clean recovery point, explicit data authority and a tested return to the primary site after an incident."
 ---
 
-Replication can faithfully transfer an unwanted change. That is useful for availability and dangerous when an operator mistakes the remote copy for an independently protected history. The recovery plan must say which failure it covers.
+Replication carries deletions and corruption as faithfully as useful updates. Before promoting a remote copy, establish whether you are recovering from a failed site, damaged data or a compromised administrator. Each calls for a different recovery point and a different level of trust in the replica.
 
 ## Classify the event before promotion
 

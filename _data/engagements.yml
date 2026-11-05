@@ -1,0 +1,30 @@
+- sku: focused-day
+  name: Focused engagement — one day
+  description: A bounded problem or second opinion, worked through over one day.
+- sku: focused-week
+  name: Focused engagement — one week
+  description: A focused week for investigation or implementation with an agreed scope.
+- sku: diag-fabric
+  name: Fabric and interconnect diagnostic
+  description: A defined fabric and interconnect diagnostic.
+- sku: diag-storage
+  name: Parallel filesystem setup and performance review
+  description: A defined parallel filesystem setup and performance review.
+- sku: diag-scheduler
+  name: Scheduler setup and workload review
+  description: A defined scheduler setup and workload review.
+- sku: diag-acceptance
+  name: Benchmark and acceptance testing
+  description: Independent benchmark and acceptance work for an agreed system.
+- sku: compliance-readiness
+  name: Compliance readiness review
+  description: Start with the framework, gaps and practical next steps.
+- sku: compliance-assessment
+  name: Full compliance assessment
+  description: A fuller assessment with scope and evidence agreed in advance.
+- sku: compliance-remediation
+  name: Remediation program
+  description: Implementation work scoped and quoted for your environment.
+- sku: buildout
+  name: Cluster design and build-out — any scale
+  description: Architecture and delivery scoped and quoted for your system.

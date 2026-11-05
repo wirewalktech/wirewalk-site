@@ -6,19 +6,16 @@ summary: >-
   A transfer that reports success has told you about HTTP status codes, not
   about bytes. Verifying tens of terabytes is tractable, but only if you pick a
   checksum the provider will actually give you for whole objects.
-description: "How to verify a large S3 download end to end: why multipart ETags cannot be compared, which checksum algorithms cover whole objects, and how to saturate a parallel filesystem while hashing."
 date: "2026-09-22"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "Large S3 Transfer Verification: Checksums and Multipart ETags"
+description: "Verify large S3 transfers with whole-object checksum semantics, account for multipart ETags and measure hashing throughput alongside storage load."
 ---
 
-A bulk download finishes. The log says every object returned 200 and the byte counts match the
-listing. That is a statement about transport, and it is worth less than it looks: it confirms
-the number of bytes that arrived, not which bytes. Truncation shows up in a size check.
-Corruption in the middle of a 200 GB object does not.
+For data that will feed months of analysis, matching object counts and byte sizes is not enough to check a bulk download. Those checks catch missing or truncated files, but corruption inside a large object needs a content comparison.
 
-If the data is going to be the input to months of analysis, the verification pass is cheap
-insurance. The question is what to compare against.
+Before starting the verification pass, find out which checksum the source supplies and what bytes it covers.
 
 ## The ETag will usually not help you
 
@@ -143,7 +140,4 @@ to, and discovering that mid-run costs a restart.
 | ETA wildly pessimistic early | Small objects complete first | weight progress by bytes, not object count |
 | Verification cannot read the data | Destination is `0700` and owned elsewhere | run as owner or root; mind ACL-destroying `chmod` |
 
-The principle: **success reported by the thing doing the copying is not verification.** A
-verification pass is a separate pass, over a value the source committed to independently, and
-if the source never committed to such a value then the honest description of what you have is
-"sizes and counts match" — which is a real statement, just a much weaker one.
+Report which comparison was performed. If the source provides an independent checksum, name the algorithm and coverage. If it does not, say that sizes and counts match, and document any sample re-downloads without presenting them as full content verification.

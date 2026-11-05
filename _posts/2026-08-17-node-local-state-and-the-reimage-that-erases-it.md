@@ -6,19 +6,18 @@ summary: >-
   A fix applied to a running node survives until that node is reimaged, and
   then it is gone with no event to connect the two. The decision that prevents
   it is knowing which changes are node-local and which live on shared storage.
-description: "How to avoid losing configuration at reimage: classifying node-local versus shared state, why per-node image overrides defeat a category default, and verifying from the image path."
 date: "2026-08-17"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "BCM Node Reimaging: Preserve Configuration and Local State"
+description: "Keep required configuration through BCM reimaging by separating shared and node-local state, checking image overrides and verifying the selected image."
 ---
 
 A node misbehaves, you fix it, you verify the fix, you move on. Eight weeks later the same node
 shows the same fault. Nothing changed in between — except that the node was reimaged for a
 kernel update, and the fix lived in its local filesystem.
 
-This is the most reliably recurring class of operational loss in a provisioned estate, and
-avoiding it is a classification question asked **before** the change, not a discipline applied
-afterwards.
+Before making the repair, find out where the changed file lives and what will recreate it. A live node, its provisioning image and a shared filesystem can require three different update procedures.
 
 ## Classify the change before making it
 
@@ -152,5 +151,4 @@ answer rather than depending on whether anyone remembered.
 | Works on one cluster, not the other | Same path, local on one, shared on the other | compare `findmnt` output |
 | Image file present, no effect | Wrong path inside the tree, or wrong mode | assert content and mode from the image |
 
-**Durability is a property of location, not of effort.** The verification that matters is not
-that the change was applied, but that it is stored somewhere a rebuild reads from.
+Before closing the repair, check the copy that the next rebuild will read. A correct file on today's running node will not survive if the provisioning source still contains the old version.

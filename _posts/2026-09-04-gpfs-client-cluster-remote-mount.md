@@ -7,6 +7,8 @@ summary: >-
   Keeping compute nodes in their own cluster and remote-mounting the filesystem is
   the right default for almost every site. The setup is four commands. The parts
   that bite are the ones that only show up under load, months later.
+seo_title: "GPFS Remote Mounts: Separate Client Cluster Configuration"
+description: "Configure a separate GPFS client cluster for remote mounts, including cluster trust, filesystem access, connectivity and recovery checks."
 ---
 
 A GPFS filesystem does not have to be mounted by the cluster that owns it. The
@@ -14,9 +16,7 @@ owning cluster exports it, a separate client cluster mounts it, and the two are
 administered independently. This is the multicluster or remote mount model, and for
 most sites with distinct storage and compute hardware it should be the default.
 
-The mechanics are four commands. What follows is the reasoning for the model, the
-full sequence, and the failures that appear later — including one that will kill
-every running job on a node without logging anything that points at the cause.
+The setup sequence is short, but the mount and service behavior deserves care. In particular, remounting a bind used as a running job's working directory can cause a delayed failure that appears to come from the application.
 
 ## Why separate the clusters at all
 
@@ -258,9 +258,7 @@ not notice on its own.
 
 ## The pattern underneath all of these
 
-Every failure in this guide has the same shape. The command returned success. The
-configuration file says the right thing. The systemd unit reports `active`. And the
-running state is different.
+When a remote mount behaves differently from its configuration, inspect the running client. The examples above include successful commands and services reporting `active` whose actual mount or RDMA state was still wrong.
 
 The habit that prevents most of it is cheap: after any change, check the thing
 itself rather than the thing that describes it. `findmnt` rather than

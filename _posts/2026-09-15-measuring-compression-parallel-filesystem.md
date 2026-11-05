@@ -6,15 +6,14 @@ summary: >-
   du reports a file's apparent size, so on a transparently compressed filesystem
   it measures the data you wrote, not the space you occupy. Getting the real
   ratio means asking the allocator, and asking it about the right set of files.
-description: "How to measure compression ratio on GPFS and other parallel filesystems: why du cannot see it, which tools report allocated blocks, and the scoping error that inflates the ratio."
 date: "2026-09-15"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "GPFS Compression Measurement: Apparent Size vs. Allocation"
+description: "Measure GPFS compression using allocated storage and a defined data scope. Understand why apparent file size alone cannot establish compression savings."
 ---
 
-Someone enables transparent compression on a dataset, waits for the policy run to finish, and
-then wants to know what it bought. The obvious command is wrong, and the wrong answer it gives
-is a plausible one — which is the only kind of wrong answer that causes trouble.
+After a compression policy finishes, the next question is how much storage it saved. A familiar directory-size command can give a plausible answer while looking at the wrong accounting layer. Compare logical data with the allocation reported by the filesystem.
 
 ## du measures the wrong thing, by design
 
@@ -153,6 +152,4 @@ Three habits that make this survivable:
 | Policy run exits 0, no output | `-g` not on shared storage, or `-L` too low | check record count, not exit status |
 | Space shrinks less than the ratio predicts | Data was already compressed | measure per dataset, not per filesystem |
 
-The underlying point is the one that applies whenever a layer below you is doing work on your
-behalf: **a tool that reports a file's size is not reporting your storage consumption.** If you
-want to know what you are paying for, ask the thing that does the allocating.
+Use the filesystem's allocation accounting for capacity planning, with logical size shown alongside it. Keep the dataset scope the same on both sides of the ratio.

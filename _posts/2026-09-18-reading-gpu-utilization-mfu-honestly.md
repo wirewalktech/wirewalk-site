@@ -6,14 +6,14 @@ summary: >-
   nvidia-smi reporting 100% means a kernel was resident, not that the tensor
   cores did useful work. Model FLOPs utilization is the honest number, and a
   mid-thirties result on a real training run is normal rather than alarming.
-description: "Why nvidia-smi utilization misleads for GPU training, how to compute model FLOPs utilization (MFU), what a realistic MFU looks like, and which bottleneck each symptom points to."
 date: "2026-09-18"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "GPU Utilization vs. MFU: Interpreting NVIDIA Training Metrics"
+description: "Distinguish nvidia-smi GPU activity from model FLOPs utilization. Calculate MFU and use training measurements to investigate compute and input limits."
 ---
 
-A researcher reports their training job is running at 100% GPU utilization and asks for more
-GPUs. The number is accurate and it does not mean what it is being used to mean.
+Before approving more GPUs for a job reporting 100% utilization, ask what that field measures. It tells you that kernels were active during the sample; it does not tell you how much useful model work the hardware completed.
 
 ## What nvidia-smi's utilization field measures
 
@@ -156,5 +156,4 @@ attributes memory to categories, and the category that is unexpectedly large is 
 A result reported this way can be reproduced and argued with. "100% GPU utilization" cannot be,
 and it is the number most often used to justify buying more hardware.
 
-**Utilization answers "is the device busy". MFU answers "is the device useful".** Only one of
-those is a capacity planning input.
+For capacity planning, use useful throughput and MFU alongside utilization, with the model, precision and measurement window recorded. That provides a basis for deciding whether another GPU would help.

@@ -6,9 +6,11 @@ summary: "Test existing sessions and independent credentials as well as new sign
 date: "2026-01-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Account Offboarding: Sessions, SSH Keys and Access Tokens"
+description: "Verify account offboarding across new sign-ins, existing sessions, SSH keys and independent tokens rather than stopping at directory disablement."
 ---
 
-An employee's directory account can be disabled while an application session, SSH key, or API token remains usable. Offboarding is an access-removal workflow across systems, not a single identity-console action.
+Disabling a directory account may leave an existing application session, SSH key or API token usable. Follow a departure through each form of access, including credentials held by applications the person maintained.
 
 ## Inventory the access forms
 
@@ -50,6 +52,6 @@ Some departures require temporary continuity for scheduled tasks or shared busin
 
 ## Acceptance evidence
 
-Keep the systems covered, access attempts, revocation timestamps, unresolved dependencies, and ownership transfers. Report incomplete items explicitly. “Account disabled” is a valid fact, but it is not a defensible summary of the entire access state.
+Keep the systems covered, access attempts, revocation timestamps, unresolved dependencies, and ownership transfers. Report incomplete items explicitly. If a token or session remains usable, record it as unfinished access removal even though the directory account is disabled.
 
 Review [service-account lifecycle](/writing/vault-service-account-lifecycle/) to reduce the number of workflows tied to personal credentials before the next departure.

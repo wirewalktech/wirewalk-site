@@ -6,19 +6,13 @@ tags: [HPCG, Memory bandwidth, Sparse]
 summary: >-
   HPCG reaches a small percentage of peak and that is the entire point. It
   measures the parts of the machine that actually limit most scientific codes.
+seo_title: "HPCG Benchmarking: Memory, Communication and Scaling"
+description: "Use HPCG to examine memory access, communication and scaling, with controlled problem sizes and placement for meaningful comparisons."
 ---
 
-High Performance Conjugate Gradients was written by the HPL authors as a
-deliberate counterweight to their own benchmark. Where HPL is dense, regular
-and compute-bound, HPCG is sparse, irregular, and limited by memory bandwidth
-and communication latency. It exists because procurement decisions were being
-made on a number that predicted almost nothing about real workloads.
+HPCG was developed by the HPL authors to exercise the memory and communication costs that dense Linpack work largely avoids. Its sparse, irregular operations provide a useful second view of an HPC system alongside HPL.
 
-The headline result is startling the first time you see it. A machine that hits
-a large fraction of peak on HPL will typically return a low single-digit
-percentage of peak on HPCG. Nothing is wrong. That gap is the honest distance
-between what the floating point units can do and what the memory system can feed
-them.
+Expect a much smaller fraction of theoretical peak. A low single-digit percentage can be normal for HPCG because moving the data and coordinating the work limit how quickly the floating-point units can be fed.
 
 ## What it actually runs
 
@@ -112,6 +106,4 @@ NUMA behavior rather than the processors. If both drop together, suspect clocks,
 power or cooling. If HPCG holds and HPL drops, suspect the math library or a
 thermal limit that only sustained dense work reaches.
 
-Neither benchmark predicts your applications. Together they bracket the machine
-between what it can do when everything is favorable and what it can do when
-almost nothing is, and most real codes live somewhere in between.
+Keep both baselines, then compare them with the applications the machine is meant to run. Their different sensitivities help narrow an investigation, even though neither score predicts application performance on its own.

@@ -4,12 +4,13 @@ date: "2025-06-18 10:00:00-04:00"
 category: "AI Infrastructure"
 tags: ["NVIDIA", "NCCL", "NVLink", "InfiniBand", "ConnectX"]
 summary: "Map distributed training onto NVIDIA GPU servers using a memory ledger, NVLink and PCIe topology, ConnectX and InfiniBand placement, NCCL transport evidence, and recoverable sharded checkpoints."
-description: "Map distributed training onto NVIDIA GPU servers using a memory ledger, NVLink and PCIe topology, ConnectX and InfiniBand placement, NCCL transport evidence, and recoverable sharded checkpoints."
+seo_title: "NVIDIA Training Cluster Design: NVLink, InfiniBand and NCCL"
+description: "Map distributed training onto NVIDIA servers with GPU memory budgets, NVLink and PCIe topology, InfiniBand placement and NCCL transport tests."
 ---
 
-A distributed training cluster is a topology, not a GPU count. Communication within an NVLink-connected GPU group, across PCIe, and between nodes through network adapters has different costs. Parallelism choices determine how often the job pays each cost.
+Adding GPUs can make a training step slower if the new parallel groups communicate over the wrong links. NVLink, PCIe and the network between nodes carry different costs, and the model's decomposition determines how often each path is used.
 
-Design the NVIDIA server and fabric around the intended model decomposition. The objective is an allocation that fits the state, supplies data, communicates efficiently, and restarts predictably. Adding devices without checking those paths can increase both cost and step time.
+Map that communication onto the intended NVIDIA servers and fabric. Check that the allocation can hold the model state, feed the GPUs and reload a checkpoint before committing to a larger device count.
 
 ## Map the physical paths to the parallel groups
 
@@ -89,4 +90,4 @@ Ensure each data replica receives the intended records. Check for accidental dup
 
 Rehearse a worker failure in an isolated run. Determine whether the checkpoint can reload under the same topology and whether a changed device count requires conversion or is unsupported. A sharded checkpoint is not automatically portable to every serving or training arrangement.
 
-Choose the simplest layout that fits, scales acceptably, and can be recovered by the operating team. A sophisticated parallelism diagram is useful only when its memory and communication assumptions survive measurement.
+Choose the simplest layout that fits, scales acceptably, and can be recovered by the operating team. Keep the rank mapping and measurements with that layout so the next run can reproduce the same placement.

@@ -8,6 +8,8 @@ summary: >-
   spending almost all of its time on records with nothing to annotate, how to
   remove that work in the right order so you do not silently lose sites, and how
   to prove the fast output is identical to the slow one.
+seo_title: "Annotation Pipeline Optimization: Avoiding Unnecessary Work"
+description: "Find unnecessary annotation work by checking data eligibility before expensive processing, then verify that the smaller workload preserves the result."
 ---
 
 A variant annotation pipeline takes per-sample genomic VCF files in and produces annotated
@@ -20,9 +22,7 @@ annotator is not slow, it is being asked to do roughly thirty-eight times more w
 question requires. The records it spends its time on carry no alternate allele at all. There is
 nothing to annotate, so it annotates nothing, carefully, twenty-five million times per sample.
 
-What follows is the pattern — how to measure it, the pipeline that removes the waste, the
-correctness trap that eats sites without telling you, the two tuning parameters that only showed up
-in a sweep, and the caveat that limits the whole result to one file format.
+The measurements below led to a smaller input stream, followed by checks that the filter preserved every allele that needed annotation. Two tuning parameters helped further, but the file-format caveat at the end determines where this approach is safe to use.
 
 ## Measure the stages before touching anything
 

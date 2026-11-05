@@ -7,6 +7,8 @@ summary: >-
   A single flow takes a single path, so a pair test is indifferent to almost
   everything that is wrong with a fabric. Fan-out puts many flows on it at once,
   and that is when static routing, ISL capacity and one slow node show up.
+seo_title: "MPI Fan-Out Tests: Collective Scaling and Fabric Bottlenecks"
+description: "Use MPI fan-out tests to expose routing imbalance, inter-switch limits and slow nodes that a single point-to-point flow may miss."
 ---
 
 A point-to-point bandwidth test between two nodes exercises one path. Under
@@ -17,9 +19,7 @@ can have a routing engine that has collapsed eight parallel inter-switch links
 onto three, and `osu_bw` between a well-chosen pair will report a perfect
 number, every time, reproducibly.
 
-That is the gap fan-out tests exist to close. The moment you put many
-simultaneous flows on the fabric, path selection stops being a detail and
-becomes the dominant term.
+Fan-out tests add the simultaneous flows missing from that pairwise result. They expose how the routing tables distribute a busy allocation across the available paths.
 
 ## The three shapes
 
@@ -248,7 +248,4 @@ concurrency at which each was reached; the alltoall and allreduce curves across
 your real node-count range with the node lists attached; and the per-uplink
 counter deltas from one representative alltoall.
 
-The counter deltas are the item people omit and the one that ages best. Bandwidth
-numbers move when hardware changes. A routing distribution that was even in
-January and is lopsided in June is a change in the fabric, and having the
-January baseline is the difference between knowing that and arguing about it.
+Keep the per-uplink deltas with the curves. If an even routing distribution becomes lopsided months later, those older samples show what changed, even when hardware upgrades make the headline bandwidth figures harder to compare.

@@ -8,18 +8,15 @@ summary: >-
   per-lane, and a link that negotiated two lanes instead of four is Active and
   silent. On a synchronized collective, one such link sets the speed of the
   entire job.
+seo_title: "Mixed InfiniBand Generations: EDR, HDR, NDR and XDR Links"
+description: "Diagnose mixed-generation InfiniBand fabrics through negotiated link width, rate units, firmware compatibility and slow-node effects on collectives."
 ---
 
-Clusters accumulate generations. An EDR island from 2017 that still runs
-production, an HDR expansion, an NDR refresh, and now XDR arriving for the GPU
-tier — frequently all reachable from one another, sometimes in one subnet. Mixed
-fabrics work. What does not work is reasoning about them from a mental model
-built on a single generation, because the reporting is inconsistent and the
-failure modes are quiet.
+An older EDR island may still run production while HDR, NDR and an XDR GPU tier are added around it. The generations can coexist, but their tools do not always report rates and widths in the same way. Inventory the actual links before applying expectations from a single-generation fabric.
 
 ## The rate table, and which number each tool prints
 
-The confusion is entirely avoidable and it costs people days.
+Read the rate and width together, and establish which unit each tool is printing.
 
 | Generation | Lanes | Per-lane signalling | 4X link rate | Encoding |
 |---|---|---|---|---|
@@ -261,5 +258,4 @@ expensive class of quiet failure into a notification.
 lower rate than the adapter supports, write down why. Otherwise every future
 audit rediscovers it as an anomaly and someone eventually "fixes" it.
 
-**Baseline `mlxlink` output per port** at install and compare periodically. It is
-the only way to see a link degrading rather than a link failed.
+**Baseline `mlxlink` output per port** at install and compare periodically. The comparison can reveal a link degrading before it fails outright.

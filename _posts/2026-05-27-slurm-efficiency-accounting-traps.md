@@ -8,6 +8,8 @@ summary: >-
   the number survives a sceptical reader, which two field choices produce
   confidently wrong answers that nobody catches, and why a low fleet figure is
   almost always a request-shape problem rather than a user-behavior problem.
+seo_title: "Slurm Accounting: CPU and Memory Efficiency Calculation"
+description: "Calculate Slurm CPU and memory efficiency from allocation and step records. Avoid CPUTimeRAW, allocation-only queries and other accounting traps."
 ---
 
 Someone asks how well the cluster is being used. It is a reasonable question and there is a
@@ -16,9 +18,7 @@ the number is wrong in a way that will not announce itself. Both of the common m
 output that looks like a measurement: one gives you a beautiful figure, one gives you an alarming
 figure, and neither has anything to do with how busy the cores were.
 
-This is about getting a defensible number out of `sacct`, knowing which fields lie to you, and
-knowing what the number means once you have it — because the usual interpretation of a low
-efficiency figure is also wrong.
+The `sacct` query needs to distinguish allocated CPU time from consumed CPU time, include the relevant steps and account for how tasks were launched. Once those are right, a low percentage still needs interpretation against the workload.
 
 ## What CPU efficiency actually is
 

@@ -4,12 +4,13 @@ date: "2024-12-11 10:00:00-05:00"
 category: "AI Infrastructure"
 tags: ["NVIDIA", "Retraining", "GPU Scheduling", "DCGM", "Capacity Planning"]
 summary: "Plan retraining as an infrastructure workload with measured GPU-hour budgets, queue limits, data staging, checkpoint recovery, interference controls, and compatible serving promotion."
-description: "Plan retraining as an infrastructure workload with measured GPU-hour budgets, queue limits, data staging, checkpoint recovery, interference controls, and compatible serving promotion."
+seo_title: "NVIDIA Cluster Retraining: GPU Budgets and Model Promotion"
+description: "Plan retraining on shared NVIDIA clusters with GPU-hour budgets, queue limits, checkpoint recovery and tests before promoting a model to serving."
 ---
 
-Retraining is a recurring consumer of GPUs, storage bandwidth, and operator time. A nightly schedule that repeatedly collides with inference or research jobs can degrade a shared NVIDIA platform even when each individual training run succeeds.
+A nightly retraining job can finish on time and still cause trouble for everyone sharing the GPU platform. It may collide with inference, compete with research jobs for storage bandwidth or leave no room for retries. Decide how much capacity the recurring work is allowed to consume before putting it on a schedule.
 
-Treat the retraining policy and its resource envelope together. Determine which evidence justifies a new run, what compute budget it may consume, how it recovers from interruption, and how a candidate reaches the serving fleet. More frequent weight generation is useful only when the resulting service improves within that infrastructure budget.
+Then connect each run to a reason for retraining, an interruption plan and a decision about promotion. Producing weights more often is worthwhile when the service improves enough to justify the compute and operator time.
 
 ## Turn the retraining policy into an allocation budget
 
@@ -91,4 +92,4 @@ A cycle record should contain the trigger, source snapshots, label cutoff, windo
 
 The [2015 hidden technical debt paper](https://research.google/pubs/hidden-technical-debt-in-machine-learning-systems/) identifies feedback and dependency risks; the [2022 operationalizing ML study](https://arxiv.org/abs/2209.09125) describes production ML as continuing evaluation and maintenance. The controls here are proposed operating practices for those concerns.
 
-Retraining earns its place when it improves a defined service under controlled evidence. Generating a new model on schedule is only the beginning of that argument.
+If several retraining cycles fail the same acceptance tests, investigate the data and the trigger policy before scheduling more compute. Another completed run will not resolve an unanswered quality question.

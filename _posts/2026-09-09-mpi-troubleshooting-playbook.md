@@ -7,15 +7,13 @@ summary: >-
   Hangs, stragglers, silent TCP fallback, launcher failures and results that
   change between runs. Each has a small set of causes and a command that
   distinguishes them, and most of the time lost is spent on the wrong layer.
+seo_title: "MPI Troubleshooting: Hangs, TCP Fallback and Stragglers"
+description: "Diagnose MPI startup hangs, collective stalls, TCP fallback and stragglers with checks for launchers, UCX, PMIx, transport and placement."
 ---
 
-This is the reference half of the series. The earlier articles argue for testing
-in a particular order; this one is the lookup table for when something is already
-broken and you need the shortest path to a cause.
+Use this playbook when an MPI job is already failing and you need a check that distinguishes the likely causes. The earlier articles develop the testing order; the index below starts from the symptom.
 
-The single most useful habit underneath all of it: **capture the node list, the
-environment and the module versions with every run**. Most of the diagnoses below
-are trivial with that information and genuinely difficult without it.
+**Save the node list, environment and module versions with every run.** A failure that follows one node or one library combination is much easier to recognize when that information is available.
 
 ## The index
 
@@ -364,6 +362,4 @@ Keep a baseline file, in version control, per cluster:
 - Allreduce and alltoall curves at the job sizes you run, with node lists
 - The width-and-rate histogram for the whole fabric
 
-Regenerate it after every maintenance window. Almost every diagnosis in this
-article becomes a diff against that file, and a diff takes minutes where an
-investigation takes days.
+Regenerate the baseline after maintenance and retain the previous version. Compare an incident against the matching node group and software stack before starting a fresh investigation.

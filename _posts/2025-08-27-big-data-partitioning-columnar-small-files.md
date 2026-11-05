@@ -4,12 +4,13 @@ date: "2025-08-27 10:00:00-04:00"
 category: "Data Infrastructure"
 tags: ["NVIDIA", "RAPIDS", "Spark", "Parquet", "Storage"]
 summary: "Design storage and node resources for NVIDIA RAPIDS analytics, connecting Parquet layout, small-file overhead, GPU executor placement, host memory, transfer cost, and spill behavior."
-description: "Design storage and node resources for NVIDIA RAPIDS analytics, connecting Parquet layout, small-file overhead, GPU executor placement, host memory, transfer cost, and spill behavior."
+seo_title: "NVIDIA RAPIDS Storage Design: Parquet and Small-File Costs"
+description: "Plan NVIDIA RAPIDS storage around Parquet layout, small-file overhead, GPU executor placement, host memory and spill behavior."
 ---
 
-NVIDIA GPUs can accelerate supported analytical operations while leaving the job dominated by file discovery, CPU work, host-to-device transfers, or shuffle. Data layout and server balance determine whether an accelerated query receives useful work quickly enough.
+A query running on NVIDIA GPUs can still spend most of its time finding files, decoding on CPUs or shuffling data. Before sizing another GPU node, inspect the plan and find out how quickly the storage layout supplies work to the accelerators.
 
-Start with the actual query plan and storage path. Then evaluate the RAPIDS Accelerator for Apache Spark where its supported execution path matches the workload. The infrastructure objective is lower elapsed time and resource cost for a correct result, not moving every stage to a GPU.
+Evaluate the RAPIDS Accelerator for Apache Spark where its supported path matches the query. Compare elapsed time, resource cost and result correctness, including stages that remain on the CPU.
 
 ## Design a balanced GPU analytics node
 
@@ -93,4 +94,4 @@ Keep the scan and shuffle measurements separate so that a layout improvement is 
 
 Record the dataset snapshot, writer and reader versions, compression, partition columns, file and row-group size distributions, query set, cache state, concurrency, and measured results. Include the cost and operational duration of compaction.
 
-Choose the layout that improves the important workload within the update and recovery constraints. Revisit it when query patterns or ingestion behavior change. The most useful data organization is the one that avoids unnecessary work while preserving a consistent, explainable dataset.
+Choose the layout that improves the important workload within the update and recovery constraints. Revisit it when query patterns or ingestion behavior change. Keep the benchmark queries with the layout record. They will help determine whether the next ingestion or query change calls for a different layout.
