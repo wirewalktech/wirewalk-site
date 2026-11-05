@@ -6,6 +6,8 @@ summary: "Test existing sessions and independent credentials as well as new sign
 date: "2026-01-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Account Offboarding: Sessions, SSH Keys and Access Tokens"
+description: "Verify account offboarding across new sign-ins, existing sessions, SSH keys and independent tokens rather than stopping at directory disablement."
 ---
 
 Disabling a directory account may leave an existing application session, SSH key or API token usable. Follow a departure through each form of access, including credentials held by applications the person maintained.

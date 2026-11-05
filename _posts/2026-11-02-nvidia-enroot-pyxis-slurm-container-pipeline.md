@@ -4,7 +4,8 @@ date: "2026-11-02 10:00:00 -0500"
 category: "GPU Infrastructure"
 tags: ["NVIDIA", "Enroot", "Pyxis", "Slurm", "Containers"]
 summary: "Build a supported NVIDIA container path around Pyxis and Enroot, immutable images, cache placement, GPU constraints and multi-node acceptance tests."
-description: "Operate NVIDIA Enroot and Pyxis on Slurm with pinned images, validated GPU access, cache planning, MPI checks and upgrade controls."
+seo_title: "NVIDIA Enroot and Pyxis: Container Operations under Slurm"
+description: "Operate NVIDIA Enroot and Pyxis with Slurm using pinned images, checked GPU access, cache planning, MPI tests and controlled upgrades."
 ---
 
 Researchers should be able to spend their GPU allocation running experiments, not importing images and repairing runtime settings. Before offering Enroot/Pyxis container execution through `srun`, prepare image delivery, driver compatibility, device constraints and cleanup.

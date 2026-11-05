@@ -6,6 +6,8 @@ summary: "An inline sensor is part of the availability path. Validate forwarding
 date: "2025-06-07"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Suricata IPS Deployment: Blocking and Failure Behavior"
+description: "Plan a controlled Suricata IPS rollout with separate tests for forwarding, selective blocking, operational failure and narrow exceptions."
 ---
 
 Changing a Suricata rule from alert to drop can interrupt legitimate work. Before enabling it, check that traffic takes the intended enforcement path and agree what should happen if the sensor fails. Both decisions matter as much as the signature.

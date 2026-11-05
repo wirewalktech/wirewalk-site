@@ -7,10 +7,11 @@ summary: >-
   know whose invoice it lands on. The configuration API that would answer the
   question is usually denied to you — but the behaviour of a single GET answers
   it definitively.
-description: "How to determine whether an S3 bucket is Requester Pays when the configuration API is denied: a behavioural test, what canonical-ID ACL grants imply, and how to record cost attribution."
 date: "2026-10-03"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "S3 Requester Pays: Testing Egress Cost Attribution"
+description: "Determine whether S3 Requester Pays applies when configuration access is denied, using a scoped request and evidence of billing-related behavior."
 ---
 
 Before copying tens of terabytes from a collaborator's bucket, agree who will pay for the transfer. Your access grant may allow downloads while denying the configuration call that would show the bucket's payment setting.

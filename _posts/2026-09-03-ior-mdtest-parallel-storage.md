@@ -7,6 +7,8 @@ summary: >-
   Streaming bandwidth is the easiest number to produce and the least likely to
   describe an AI training workload. The metadata rate usually matters more, and
   almost nobody measures it.
+seo_title: "IOR and mdtest: Parallel Storage Benchmark Design"
+description: "Design IOR and mdtest runs that expose storage limits through workload size, concurrency, metadata patterns and evidence about caching."
 ---
 
 IOR and mdtest answer different questions about a parallel filesystem. IOR moves blocks to measure bandwidth; mdtest creates, stats and removes files to measure metadata operations. They build from the same repository, so it is straightforward to keep both in a storage test suite.

@@ -6,6 +6,8 @@ summary: "BMCs, hypervisors, storage controllers, and provisioning services belo
 date: "2026-02-26"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "BMC Network Isolation: iDRAC, iLO and Redfish Access"
+description: "Design management-network access for BMCs, hypervisors and provisioning systems. Check segmentation, identity and recovery without changing host power."
 ---
 
 A BMC can power off a host that the operating system has carefully secured. A provisioning service can replace its image. Put those management routes, their credentials and their recovery access through a separate review.

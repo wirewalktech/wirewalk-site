@@ -6,10 +6,11 @@ summary: >-
   A cron job that redirects its own output has disabled the only notification
   channel cron has. Add a second copy of the crontab that nobody is reading and
   you have a job whose behaviour cannot be deduced from its configuration.
-description: "Why cron MAILTO goes silent when a script redirects its own stdout and stderr, how stale drop-in crontabs keep running, and how to make a scheduled job prove it ran."
 date: "2026-10-08"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "Cron Monitoring: Missing MAILTO Output and Stale Jobs"
+description: "Investigate silent cron jobs through output redirection, MAILTO and duplicate schedules, then add evidence that scheduled work ran and completed."
 ---
 
 When a scheduled job stops reporting, its notification mechanism may be part of the failure. The three cases below leave configuration that looks plausible while the running job behaves differently—or never runs at all.

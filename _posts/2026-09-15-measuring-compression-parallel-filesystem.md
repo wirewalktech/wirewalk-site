@@ -6,10 +6,11 @@ summary: >-
   du reports a file's apparent size, so on a transparently compressed filesystem
   it measures the data you wrote, not the space you occupy. Getting the real
   ratio means asking the allocator, and asking it about the right set of files.
-description: "How to measure compression ratio on GPFS and other parallel filesystems: why du cannot see it, which tools report allocated blocks, and the scoping error that inflates the ratio."
 date: "2026-09-15"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "GPFS Compression Measurement: Apparent Size vs. Allocation"
+description: "Measure GPFS compression using allocated storage and a defined data scope. Understand why apparent file size alone cannot establish compression savings."
 ---
 
 After a compression policy finishes, the next question is how much storage it saved. A familiar directory-size command can give a plausible answer while looking at the wrong accounting layer. Compare logical data with the allocation reported by the filesystem.

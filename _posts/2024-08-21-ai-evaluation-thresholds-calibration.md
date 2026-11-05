@@ -4,7 +4,8 @@ date: "2024-08-21 10:00:00-04:00"
 category: "AI Infrastructure"
 tags: ["NVIDIA", "Inference", "Triton", "Capacity Planning", "Evaluation"]
 summary: "Build an inference acceptance test that joins model quality with NVIDIA GPU memory, Triton request timing, batch behavior, concurrency, precision changes, and replica-loss capacity."
-description: "Build an inference acceptance test that joins model quality with NVIDIA GPU memory, Triton request timing, batch behavior, concurrency, precision changes, and replica-loss capacity."
+seo_title: "NVIDIA Inference Testing: Accuracy, Latency and Capacity"
+description: "Qualify NVIDIA inference services with accuracy tests, Triton latency measurements, concurrency limits and capacity checks after a replica fails."
 ---
 
 Offline accuracy tells you little about how long a researcher will wait for an answer when the inference server is busy. A high requests-per-second figure can be equally misleading if the answers fail the task. Test quality and latency together, on the NVIDIA system and at the concurrency you intend to support.

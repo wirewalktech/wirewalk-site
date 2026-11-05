@@ -75,7 +75,8 @@ def main():
         if ''.join(page.h1)!=m['title']:failures.append(f'Title mismatch: {path}')
         if page.canonical!='https://www.wirewalk.com'+path:failures.append(f'Canonical mismatch: {path}')
         if path not in index.links:failures.append(f'Absent from index: {path}')
-        for heading in re.findall(r'^## (.+)$',body,re.M):
+        prose_body = re.sub(r'^```[^\n]*\n.*?^```[ \t]*$', '', body, flags=re.M | re.S)
+        for heading in re.findall(r'^## (.+)$',prose_body,re.M):
             if heading.replace("`", "").replace("’", "'") not in [h.replace("’", "'") for h in page.h2]:failures.append(f'Missing section {heading}: {path}')
         if str(m.get('description') or m['summary']).replace('\n', '')[:300]!=page.description:failures.append(f'Description mismatch: {path}')
         if re.search(r'{%|{{\s*(?:page|site|post)\.',rendered):failures.append(f'Unrendered Liquid: {path}')

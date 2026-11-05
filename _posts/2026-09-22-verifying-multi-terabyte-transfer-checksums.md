@@ -6,10 +6,11 @@ summary: >-
   A transfer that reports success has told you about HTTP status codes, not
   about bytes. Verifying tens of terabytes is tractable, but only if you pick a
   checksum the provider will actually give you for whole objects.
-description: "How to verify a large S3 download end to end: why multipart ETags cannot be compared, which checksum algorithms cover whole objects, and how to saturate a parallel filesystem while hashing."
 date: "2026-09-22"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "Large S3 Transfer Verification: Checksums and Multipart ETags"
+description: "Verify large S3 transfers with whole-object checksum semantics, account for multipart ETags and measure hashing throughput alongside storage load."
 ---
 
 For data that will feed months of analysis, matching object counts and byte sizes is not enough to check a bulk download. Those checks catch missing or truncated files, but corruption inside a large object needs a content comparison.

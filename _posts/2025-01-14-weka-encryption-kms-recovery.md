@@ -6,6 +6,8 @@ summary: "Encrypted data and recoverable data are different outcomes. Test the k
 date: "2025-01-14"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "WEKA Encryption: KMS Dependencies and Recovery Testing"
+description: "Include KMS availability, credentials and startup order in WEKA recovery planning. Test key-service failure without risking production keys."
 ---
 
 A storage cluster can be healthy and its data inaccessible because the recovery environment cannot reach the key-management service. Include KMS authentication, certificates and key availability in the recovery plan, alongside the storage and network dependencies.

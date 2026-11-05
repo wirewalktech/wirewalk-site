@@ -4,7 +4,8 @@ date: "2024-06-12 10:00:00-04:00"
 category: "AI Infrastructure"
 tags: ["NVIDIA", "GPU Sizing", "Triton", "Model Selection"]
 summary: "How model requirements translate into NVIDIA GPU memory, server topology, TensorRT compatibility, Triton capacity, storage, power, and a defensible hardware acceptance test."
-description: "How model requirements translate into NVIDIA GPU memory, server topology, TensorRT compatibility, Triton capacity, storage, power, and a defensible hardware acceptance test."
+seo_title: "AI Model Selection: NVIDIA GPU Sizing and Infrastructure"
+description: "Choose NVIDIA GPU infrastructure from model memory, latency and throughput needs, then test server topology, Triton capacity and runtime compatibility."
 ---
 
 A model that wins a benchmark can still be a poor fit for the service you need to run. It may need more GPU memory than the available servers have, miss the latency target under load, or leave too little capacity for a failed replica. Model selection is also a decision about the infrastructure and people who will support it.

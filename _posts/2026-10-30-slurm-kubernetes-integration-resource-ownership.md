@@ -4,7 +4,8 @@ date: "2026-10-30 10:00:00 -0400"
 category: "HPC Architecture"
 tags: ["Slurm", "Kubernetes", "NVIDIA", "GPU Scheduling"]
 summary: "Compare separate worker pools, Slurm on Kubernetes and coordinated scheduling, then test GPU ownership, identity, storage and failure recovery before sharing capacity."
-description: "Design Slurm and Kubernetes integration around resource ownership, GPU allocation, identity, storage and failure recovery."
+seo_title: "Slurm and Kubernetes Integration: GPU Resource Ownership"
+description: "Compare Slurm and Kubernetes integration approaches through GPU ownership, worker pools, identity, storage access and failure recovery."
 ---
 
 A simulation team wants multi-node batch allocations; a platform team needs notebooks, inference endpoints and services. Sharing their GPU fleet is an appealing way to use expensive capacity, provided both teams can still rely on their workloads' placement and recovery.

@@ -8,6 +8,8 @@ summary: >-
   per-lane, and a link that negotiated two lanes instead of four is Active and
   silent. On a synchronized collective, one such link sets the speed of the
   entire job.
+seo_title: "Mixed InfiniBand Generations: EDR, HDR, NDR and XDR Links"
+description: "Diagnose mixed-generation InfiniBand fabrics through negotiated link width, rate units, firmware compatibility and slow-node effects on collectives."
 ---
 
 An older EDR island may still run production while HDR, NDR and an XDR GPU tier are added around it. The generations can coexist, but their tools do not always report rates and widths in the same way. Inventory the actual links before applying expectations from a single-generation fabric.

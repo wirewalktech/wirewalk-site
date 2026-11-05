@@ -6,6 +6,8 @@ summary: "Secret issuance, application renewal, and credential revocation are se
 date: "2026-02-02"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Vault Service Accounts: Credential Rotation and Revocation"
+description: "Test Vault service-account credentials through issuance, application renewal and revocation, including bootstrap access and key-service outages."
 ---
 
 Credential rotation is unfinished if the application keeps using the old secret from a configuration file or connection pool. Test the consumer through a refresh, a restart and revocation, so the rotation procedure covers what the application actually does.

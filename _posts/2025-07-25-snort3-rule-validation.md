@@ -6,6 +6,8 @@ summary: "Use matching and nonmatching captures, explicit actions, and live enfo
 date: "2025-07-25"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Snort 3 Rule Testing: Detection and Enforcement Validation"
+description: "Validate Snort 3 rules with matching and nonmatching captures, parser checks and live enforcement tests before releasing a rule change."
 ---
 
 A Snort rule can load cleanly and never match its intended traffic. It can also match too broadly, with little consequence in an offline test but a serious outage once enabled inline. Test syntax, matching behavior and enforcement separately.

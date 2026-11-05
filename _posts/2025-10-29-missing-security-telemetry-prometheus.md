@@ -6,6 +6,8 @@ summary: "A quiet dashboard can mean no incidents, a broken producer, or a sourc
 date: "2025-10-29"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Prometheus Security Monitoring: Missing and Stale Telemetry"
+description: "Detect missing security telemetry with Prometheus freshness checks, source inventory and alert-chain tests that distinguish silence from normal activity."
 ---
 
 What should happen when a security sensor goes quiet? A failed target, a reachable collector receiving stale data and a source missing from discovery need different checks. Keep an independent inventory of expected sources so one disappearing from the dashboard still raises attention.

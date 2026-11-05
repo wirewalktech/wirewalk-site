@@ -8,6 +8,8 @@ summary: >-
   filesystem with no external RAID. The install is well documented. The decisions
   that are expensive to reverse are not, and most of them are made in the first
   hour.
+seo_title: "GPFS ECE Deployment: Storage Cluster Setup and Validation"
+description: "Work through GPFS ECE deployment from storage-server prerequisites and recovery groups to filesystem setup, client access and validation."
 ---
 
 Erasure Code Edition (ECE) runs IBM Storage Scale's declustered RAID in software,

@@ -6,6 +6,8 @@ summary: "A jump host is useful only when direct access, forwarding, and downstr
 date: "2025-12-16"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "OpenSSH Bastion Security: Access and Forwarding Boundaries"
+description: "Check OpenSSH bastion controls for direct access, forwarding and downstream privilege. Test effective settings while preserving a recovery route."
 ---
 
 After installing a bastion, try the old direct SSH route. If it still works from the same broad networks, administrators can bypass the new hop and its logging. Enforce the intended route on the managed hosts and the network, then test both routes.

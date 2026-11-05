@@ -4,7 +4,8 @@ date: "2026-10-27 10:00:00 -0400"
 category: "HPC Operations"
 tags: ["Slurm", "Scheduling", "QOS", "Job Troubleshooting"]
 summary: "Trace a pending Slurm job through resource shape, association limits, priority, reservations and backfill without changing cluster policy to repair one submission."
-description: "Debug pending Slurm jobs using reason codes, resource shape, QOS limits, priority and backfill evidence rather than idle-node counts."
+seo_title: "Slurm Pending Jobs: Priority, Backfill and QOS Debugging"
+description: "Investigate pending Slurm jobs through reason codes, resource requests, QOS limits, priority, reservations and backfill rather than idle-node counts."
 ---
 
 “Why is my job waiting when these nodes are idle?” is a fair question. The free machines may lack the requested GPU type, sit in another partition or reservation, or offer too short a gap before higher-priority work. Show the researcher the constraint that applies to their request.

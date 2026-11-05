@@ -4,7 +4,8 @@ date: "2026-10-31 10:00:00 -0400"
 category: "Research Infrastructure"
 tags: ["Docker", "Apptainer", "Containers", "Slurm"]
 summary: "Choose a research container workflow by comparing identity, privilege, filesystems, image delivery, scheduler integration and reproducibility rather than image format alone."
-description: "Compare Docker and Apptainer for research workloads: privilege, identity, storage, GPU access, image delivery and Slurm integration."
+seo_title: "Docker vs. Apptainer for Research Computing and Slurm"
+description: "Compare Docker and Apptainer operating models for research workloads, including privilege, identity, filesystems, GPU access and Slurm integration."
 ---
 
 A working Docker image is a useful starting point for moving research software onto an HPC cluster. The application may need little change, but execution needs to fit the site's users, storage and scheduler. That is where the choice of runtime matters.

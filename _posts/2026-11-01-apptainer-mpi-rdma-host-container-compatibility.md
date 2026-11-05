@@ -4,7 +4,8 @@ date: "2026-11-01 10:00:00 -0500"
 category: "HPC Operations"
 tags: ["Apptainer", "MPI", "RDMA", "PMIx", "Slurm"]
 summary: "Validate hybrid and bind MPI container models through launcher, ABI, process manager, fabric libraries and device access, then prove the intended transport at scale."
-description: "Run MPI containers reliably with Apptainer and Slurm by validating launcher, ABI, PMIx, RDMA libraries, device access and cleanup."
+seo_title: "Apptainer MPI and RDMA: Host and Container Compatibility"
+description: "Validate Apptainer MPI workloads across launcher, ABI, PMIx, RDMA libraries and device access, then test the intended transport and process cleanup."
 ---
 
 When an MPI image works on one node and fails on two, inspect the boundary between its libraries and the host launch environment. The same boundary can also let a job finish over a slower transport while leaving the intended RDMA path unused.

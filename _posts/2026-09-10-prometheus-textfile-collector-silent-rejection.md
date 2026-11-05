@@ -6,10 +6,11 @@ summary: >-
   The textfile collector parses a metrics file as a single unit. One misplaced
   TYPE declaration and node_exporter drops every series in the file, while the
   script that wrote it exits zero and reports success.
-description: "Why node_exporter rejects an entire Prometheus textfile on one malformed line, how to detect it with node_textfile_scrape_error, and how to validate before publishing."
 date: "2026-09-10"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "Prometheus Textfile Collector: Rejected Metrics Debugging"
+description: "Find why node_exporter rejects a Prometheus textfile, check node_textfile_scrape_error and validate metrics before publishing them."
 ---
 
 The textfile collector is the usual way to get custom metrics into Prometheus from a machine

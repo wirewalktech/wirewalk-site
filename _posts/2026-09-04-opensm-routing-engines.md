@@ -7,6 +7,8 @@ summary: >-
   Setting routing_engine does not mean the engine you named is the engine you
   got. ftree in particular declines the job and hands it back, and it does so in
   a log line most people never read.
+seo_title: "OpenSM Routing Engines: ftree, updn and Fallback Diagnosis"
+description: "Check which OpenSM routing engine actually ran. Diagnose ftree rejection, fallback behavior and topology assumptions from subnet-manager evidence."
 ---
 
 The subnet manager decides which path every packet takes through the fabric, and

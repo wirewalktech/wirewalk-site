@@ -1,0 +1,20 @@
+- sku: focused-day
+  name: Focused engagement — one day
+- sku: focused-week
+  name: Focused engagement — one week
+- sku: diag-fabric
+  name: Fabric and interconnect diagnostic
+- sku: diag-storage
+  name: Parallel filesystem setup and performance review
+- sku: diag-scheduler
+  name: Scheduler setup and workload review
+- sku: diag-acceptance
+  name: Benchmark and acceptance testing
+- sku: compliance-readiness
+  name: Compliance readiness review
+- sku: compliance-assessment
+  name: Full compliance assessment
+- sku: compliance-remediation
+  name: Remediation program
+- sku: buildout
+  name: Cluster design and build-out — any scale

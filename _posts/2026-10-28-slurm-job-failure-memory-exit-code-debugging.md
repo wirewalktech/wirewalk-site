@@ -4,7 +4,8 @@ date: "2026-10-28 10:00:00 -0400"
 category: "HPC Operations"
 tags: ["Slurm", "Linux Memory", "Debugging", "Research Computing"]
 summary: "Reconstruct a failed job across allocation and step records, application output, cgroup limits and node events, then design a small reproduction that distinguishes causes."
-description: "Investigate Slurm job failures using step-level exit codes, cgroup memory evidence, application logs and bounded reproductions."
+seo_title: "Slurm Job Failures: Memory Limits, Exit Codes and Logs"
+description: "Investigate Slurm job failures with step-level exit codes, cgroup memory evidence, application logs and small reproductions that separate possible causes."
 ---
 
 After a Slurm job fails, find the earliest error before increasing its memory and trying again. A worker exception, a memory kill, stalled storage and a wrapper that hid the return code can all leave similar scheduler records.

@@ -4,7 +4,8 @@ date: "2026-10-25 10:00:00 -0400"
 category: "Systems Management"
 tags: ["Redfish", "Firmware", "Slurm", "NVIDIA", "Change Management"]
 summary: "Plan firmware maintenance by hardware compatibility and failure domain, track transfer and activation separately, then verify boot, fabric, storage and scheduled workloads before readmission."
-description: "Run controlled HPC firmware rollouts with Redfish inventory, canaries, activation tracking, failure-domain limits and Slurm readmission tests."
+seo_title: "HPC Firmware Rollouts: Redfish and Slurm Readmission Tests"
+description: "Plan Redfish firmware rollouts with inventory, canaries and activation tracking, then test boot, fabric, storage and Slurm workloads before readmission."
 ---
 
 Do not return a node to researchers just because its firmware update task succeeded. First check what booted and run a small scheduled workload. The package can be installed correctly while the host has lost an adapter, changed topology or booted from the wrong target.

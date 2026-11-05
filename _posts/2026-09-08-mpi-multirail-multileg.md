@@ -8,6 +8,8 @@ summary: >-
   short of it. The reasons are enumerable, most of them are in the host rather
   than the fabric, and the first thing to establish is whether MPI is using the
   second adapter at all.
+seo_title: "Multi-Rail MPI: UCX Device Selection and NUMA Placement"
+description: "Check whether MPI uses both adapters, then investigate UCX device selection, NUMA placement and RDMA transport before judging multi-rail scaling."
 ---
 
 A second adapter adds another path, but doubling link capacity does not guarantee that an MPI job will run twice as fast. The application must use both paths, and the host's PCIe, NUMA and memory resources must be able to sustain them together.

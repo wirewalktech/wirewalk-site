@@ -9,7 +9,7 @@
     {%- if page.is_home %}
       <span id="pill"></span>
       <a href="#hpc" data-sec="hpc">HPC and AI</a>
-      <a href="#expertise" data-sec="expertise">Expertise</a>
+      <a href="{{ '/services/' | relative_url }}">Services</a>
       <a href="#compliance" data-sec="compliance">Compliance</a>
       <a href="#scale" data-sec="scale">Track record</a>
       <a href="#audits" data-sec="audits">Audits</a>
@@ -17,7 +17,7 @@
       <a href="{{ '/order/' | relative_url }}">Ordering</a>
     {%- else %}
       <a href="{{ home }}#hpc">HPC and AI</a>
-      <a href="{{ home }}#expertise">Expertise</a>
+      <a href="{{ '/services/' | relative_url }}">Services</a>
       <a href="{{ home }}#scale">Track record</a>
       <a href="{{ home }}#audits">Audits</a>
       <a href="{{ writing }}">Writing</a>

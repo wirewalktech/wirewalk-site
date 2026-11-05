@@ -3,11 +3,12 @@ title: "PowerScale and Isilon for AI and HPC: designing the data path"
 category: Parallel Storage
 tags: ["PowerScale", "Isilon", "OneFS", "AI Infrastructure", "NFS"]
 summary: "Design Dell PowerScale and Isilon storage for AI and HPC pipelines: map client access, dataset layout, compute placement, capacity, and recovery requirements."
-description: "Design Dell PowerScale and Isilon storage for AI and HPC pipelines: map client access, dataset layout, compute placement, capacity, and recovery requirements."
 date: "2026-08-15"
 featured: true
 last_reviewed: "2026-10-18"
 series: "AI and HPC storage engineering"
+seo_title: "PowerScale and Isilon Storage Design for AI and HPC"
+description: "Design PowerScale and Isilon data paths for AI and HPC workloads around client access, dataset layout, compute placement, capacity and recovery."
 ---
 
 Instrument ingest, training reads and a shared analysis workspace may all use one PowerScale namespace, but they create different storage loads. Size the system around those operations and their overlap, including what happens during recovery.

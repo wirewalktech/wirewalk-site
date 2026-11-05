@@ -4,7 +4,8 @@ date: "2025-11-12 10:00:00-05:00"
 category: "Data Infrastructure"
 tags: ["NVIDIA", "RAPIDS", "Parallel Analysis", "Shuffle", "Nsight Systems"]
 summary: "Diagnose parallel GPU analysis through Spark plans, RAPIDS task concurrency, host and device spill, shuffle traffic, Nsight traces, and controlled scaling with verified output equivalence."
-description: "Diagnose parallel GPU analysis through Spark plans, RAPIDS task concurrency, host and device spill, shuffle traffic, Nsight traces, and controlled scaling with verified output equivalence."
+seo_title: "NVIDIA RAPIDS Scaling: Shuffle, Spill and Straggler Diagnosis"
+description: "Investigate NVIDIA RAPIDS scaling through Spark plans, task concurrency, shuffle traffic and memory spill, then compare output and measured throughput."
 ---
 
 Most tasks finish, but a few oversized partitions keep the analytics job running. Adding NVIDIA GPUs will not split a hot key or repair a join that multiplied the data. Follow the slow stage through GPU memory, host memory, storage and network before buying more capacity.

@@ -6,6 +6,8 @@ summary: "Containment decisions should stop harmful activity while preserving ev
 date: "2026-06-26"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Incident Containment: Preserve Investigation and Recovery"
+description: "Plan incident containment without cutting off the identities, management access and evidence needed to investigate and restore affected services."
 ---
 
 Before isolating a compromised host, check what the isolation will cut off. It may remove the only management route, interrupt evidence collection or strand another service. Work through those choices in the containment playbook while the team has time to examine them.

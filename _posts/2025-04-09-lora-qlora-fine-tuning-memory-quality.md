@@ -4,7 +4,8 @@ date: "2025-04-09 10:00:00-04:00"
 category: "AI Infrastructure"
 tags: ["NVIDIA", "LoRA", "QLoRA", "GPU Memory", "PCIe"]
 summary: "Size adapter fine-tuning infrastructure using GPU memory, activation peaks, host offload, PCIe transfers, scratch capacity, runtime compatibility, and validation of the final serving artifact."
-description: "Size adapter fine-tuning infrastructure using GPU memory, activation peaks, host offload, PCIe transfers, scratch capacity, runtime compatibility, and validation of the final serving artifact."
+seo_title: "LoRA and QLoRA GPU Sizing: Memory, PCIe and Host Resources"
+description: "Size NVIDIA fine-tuning nodes for LoRA and QLoRA using activation memory, host offload, PCIe transfers, scratch storage and serving compatibility."
 ---
 
 LoRA or QLoRA may let an adaptation job fit on fewer NVIDIA GPUs. The rest of the server still matters. Once the base model fits, host RAM, PCIe transfers, preprocessing CPUs or checkpoint storage can become the limiting resource.

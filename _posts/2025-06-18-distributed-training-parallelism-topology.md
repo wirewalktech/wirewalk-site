@@ -4,7 +4,8 @@ date: "2025-06-18 10:00:00-04:00"
 category: "AI Infrastructure"
 tags: ["NVIDIA", "NCCL", "NVLink", "InfiniBand", "ConnectX"]
 summary: "Map distributed training onto NVIDIA GPU servers using a memory ledger, NVLink and PCIe topology, ConnectX and InfiniBand placement, NCCL transport evidence, and recoverable sharded checkpoints."
-description: "Map distributed training onto NVIDIA GPU servers using a memory ledger, NVLink and PCIe topology, ConnectX and InfiniBand placement, NCCL transport evidence, and recoverable sharded checkpoints."
+seo_title: "NVIDIA Training Cluster Design: NVLink, InfiniBand and NCCL"
+description: "Map distributed training onto NVIDIA servers with GPU memory budgets, NVLink and PCIe topology, InfiniBand placement and NCCL transport tests."
 ---
 
 Adding GPUs can make a training step slower if the new parallel groups communicate over the wrong links. NVLink, PCIe and the network between nodes carry different costs, and the model's decomposition determines how often each path is used.

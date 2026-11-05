@@ -7,6 +7,8 @@ summary: >-
   Hangs, stragglers, silent TCP fallback, launcher failures and results that
   change between runs. Each has a small set of causes and a command that
   distinguishes them, and most of the time lost is spent on the wrong layer.
+seo_title: "MPI Troubleshooting: Hangs, TCP Fallback and Stragglers"
+description: "Diagnose MPI startup hangs, collective stalls, TCP fallback and stragglers with checks for launchers, UCX, PMIx, transport and placement."
 ---
 
 Use this playbook when an MPI job is already failing and you need a check that distinguishes the likely causes. The earlier articles develop the testing order; the index below starts from the symptom.

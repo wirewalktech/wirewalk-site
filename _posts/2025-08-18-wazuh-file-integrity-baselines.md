@@ -6,6 +6,8 @@ summary: "A selective baseline and a tested response path make file-change alert
 date: "2025-08-18"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Wazuh File Integrity Monitoring: Baselines and Alert Tests"
+description: "Choose a useful Wazuh file integrity baseline, generate controlled file changes and follow alerts to an owner before expanding monitoring scope."
 ---
 
 On a busy server, monitoring every file change can bury the modifications someone needs to investigate. Start Wazuh file integrity monitoring with paths that have clear owners: authentication settings, service definitions and privileged automation, for example.

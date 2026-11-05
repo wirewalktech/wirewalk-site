@@ -4,7 +4,8 @@ date: "2026-10-24 10:00:00 -0400"
 category: "Systems Management"
 tags: ["Redfish", "DMTF", "BMC", "Automation", "Infrastructure"]
 summary: "Build Redfish automation around discovered capabilities, verified identity, asynchronous task tracking, conditional updates and recovery from uncertain request outcomes."
-description: "Design robust Redfish automation with resource discovery, task monitors, ETags, bounded retries, credential hygiene and verified postconditions."
+seo_title: "Advanced Redfish Automation: Tasks, ETags and Retry Handling"
+description: "Design Redfish automation with resource discovery, asynchronous tasks, ETags and bounded retries, then verify the resulting system state."
 ---
 
 What should a script do if its connection drops just after it sends a server reset? Retrying may reset the machine twice; assuming failure may leave a real operation untracked. Redfish automation needs a way to reconcile that uncertainty before issuing another change.

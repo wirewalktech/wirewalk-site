@@ -7,6 +7,8 @@ summary: >-
   Four commands do the work, and the one people skip is the one that makes the
   update real. The order matters, and the PSID matters more than the version
   number.
+seo_title: "ConnectX Firmware Updates: PSID, MFT and Verification"
+description: "Plan NVIDIA ConnectX firmware maintenance with PSID checks, compatible images, MFT tooling and verification after activation or reset."
 ---
 
 After a ConnectX update, compare the image in flash, stored device configuration and running firmware. They can disagree if activation is incomplete. A reported new image version is therefore a reason to check the reset and running state before troubleshooting its behavior.

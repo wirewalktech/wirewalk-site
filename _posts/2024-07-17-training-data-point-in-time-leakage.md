@@ -4,7 +4,8 @@ date: "2024-07-17 10:00:00-04:00"
 category: "AI Infrastructure"
 tags: ["NVIDIA", "Training Data", "Storage", "DALI", "GPUDirect Storage"]
 summary: "Design a training input path that keeps NVIDIA GPUs supplied while preserving point-in-time correctness, dataset versions, host-memory limits, storage capacity, and recovery behavior."
-description: "Design a training input path that keeps NVIDIA GPUs supplied while preserving point-in-time correctness, dataset versions, host-memory limits, storage capacity, and recovery behavior."
+seo_title: "NVIDIA Training Data Pipelines: Staging and Preprocessing"
+description: "Keep training GPUs supplied with versioned datasets, DALI preprocessing and storage staging that respects memory limits and point-in-time correctness."
 ---
 
 The dataset fits on storage, yet the GPUs keep waiting. File opens, CPU decoding and repeated remote reads can account for much of that delay. Fixing the loader helps only if it also delivers the right records: a fast pipeline with future information leaking into historical examples will train a misleading model.

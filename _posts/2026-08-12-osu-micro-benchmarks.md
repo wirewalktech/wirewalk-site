@@ -7,6 +7,8 @@ summary: >-
   Point-to-point latency and bandwidth are the first numbers to establish on a
   new cluster, because every distributed result you collect afterwards is built
   on top of them.
+seo_title: "OSU Micro-Benchmarks: MPI Latency and Bandwidth Testing"
+description: "Use OSU Micro-Benchmarks to measure MPI latency, bandwidth and collective behavior with controlled placement and enough concurrency to test the fabric."
 ---
 
 When a distributed job slows down, a saved OSU Micro-Benchmarks result can settle whether communication has changed. These small MPI programs from the MVAPICH group at Ohio State measure individual communication patterns without the application's compute and I/O work.

@@ -6,10 +6,11 @@ summary: >-
   Completion order correlates with size, so the first items to finish are the
   small ones. Any rate extrapolated from early completions is biased, and on a
   long transfer it can be wrong by more than an order of magnitude.
-description: "Why percent-complete and ETA mislead when work items vary in size, how byte-weighted progress fixes it, and which monitoring signals distinguish stalled from slow."
 date: "2026-10-14"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "Progress and ETA Monitoring for Uneven Workloads"
+description: "Estimate progress for uneven workloads using byte-weighted measurements, and distinguish slow work from stalled processing without early-completion bias."
 ---
 
 Mid-way through a long job, someone asks how long it has left. There is a number available —

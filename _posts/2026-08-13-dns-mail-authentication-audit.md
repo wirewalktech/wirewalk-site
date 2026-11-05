@@ -6,6 +6,8 @@ summary: "Check record content, sender alignment, and real message headers befor
 date: "2026-08-13"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "DNS Mail Authentication: SPF, DKIM and DMARC Validation"
+description: "Audit SPF, DKIM and DMARC beyond a successful TXT lookup. Check policy syntax, alignment and actual message authentication results."
 ---
 
 Before trusting a mail-authentication check, inspect the returned DNS record. A wildcard or stale TXT entry can produce a nonempty answer at the wrong name. Follow the DNS inspection with an authorized message test and read the receiver's authentication results.

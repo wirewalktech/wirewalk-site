@@ -6,6 +6,8 @@ summary: "Throughput is one component of recovery. Metadata, identity, keys, and
 date: "2026-07-20"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Restore Benchmarking: Measure Time to Usable Service"
+description: "Measure recovery through application availability, identity and dependencies, including the time between restored files and a service people can use."
 ---
 
 “Several gigabytes per second” sounds like a fast restore until the team starts rebuilding the service around the copied files. Time the dependency setup, data transfer, validation and application recovery together. The service owner needs to know when people can use it again.

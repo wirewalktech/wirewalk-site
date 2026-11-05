@@ -6,6 +6,8 @@ tags: [HPCG, Memory bandwidth, Sparse]
 summary: >-
   HPCG reaches a small percentage of peak and that is the entire point. It
   measures the parts of the machine that actually limit most scientific codes.
+seo_title: "HPCG Benchmarking: Memory, Communication and Scaling"
+description: "Use HPCG to examine memory access, communication and scaling, with controlled problem sizes and placement for meaningful comparisons."
 ---
 
 HPCG was developed by the HPL authors to exercise the memory and communication costs that dense Linpack work largely avoids. Its sparse, irregular operations provide a useful second view of an HPC system alongside HPL.

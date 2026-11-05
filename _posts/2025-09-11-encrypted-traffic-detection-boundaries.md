@@ -6,6 +6,8 @@ summary: "Combine network, endpoint, and application evidence instead of assumin
 date: "2025-09-11"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Encrypted Traffic Monitoring: Network and Endpoint Visibility"
+description: "Assess what TLS network sensors, endpoints and applications can establish. Test visibility gaps and decryption tradeoffs before making detection claims."
 ---
 
 Encryption leaves a network sensor with a different set of clues. Flows and handshake details may still help, while the application content remains unreadable. Plan the investigation around what each sensor can actually observe, and use endpoint or application logs for the questions it cannot answer.

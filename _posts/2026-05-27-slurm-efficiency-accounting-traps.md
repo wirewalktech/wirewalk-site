@@ -8,6 +8,8 @@ summary: >-
   the number survives a sceptical reader, which two field choices produce
   confidently wrong answers that nobody catches, and why a low fleet figure is
   almost always a request-shape problem rather than a user-behavior problem.
+seo_title: "Slurm Accounting: CPU and Memory Efficiency Calculation"
+description: "Calculate Slurm CPU and memory efficiency from allocation and step records. Avoid CPUTimeRAW, allocation-only queries and other accounting traps."
 ---
 
 Someone asks how well the cluster is being used. It is a reasonable question and there is a

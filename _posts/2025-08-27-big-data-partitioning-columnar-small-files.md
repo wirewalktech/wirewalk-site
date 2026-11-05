@@ -4,7 +4,8 @@ date: "2025-08-27 10:00:00-04:00"
 category: "Data Infrastructure"
 tags: ["NVIDIA", "RAPIDS", "Spark", "Parquet", "Storage"]
 summary: "Design storage and node resources for NVIDIA RAPIDS analytics, connecting Parquet layout, small-file overhead, GPU executor placement, host memory, transfer cost, and spill behavior."
-description: "Design storage and node resources for NVIDIA RAPIDS analytics, connecting Parquet layout, small-file overhead, GPU executor placement, host memory, transfer cost, and spill behavior."
+seo_title: "NVIDIA RAPIDS Storage Design: Parquet and Small-File Costs"
+description: "Plan NVIDIA RAPIDS storage around Parquet layout, small-file overhead, GPU executor placement, host memory and spill behavior."
 ---
 
 A query running on NVIDIA GPUs can still spend most of its time finding files, decoding on CPUs or shuffling data. Before sizing another GPU node, inspect the plan and find out how quickly the storage layout supplies work to the accelerators.

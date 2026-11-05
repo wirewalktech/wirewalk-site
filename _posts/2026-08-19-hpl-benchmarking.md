@@ -7,6 +7,8 @@ summary: >-
   HPL is a poor predictor of application performance and an excellent acceptance
   test. Those two statements are both true, and confusing them is how people end
   up tuning the wrong thing.
+seo_title: "HPL Benchmarking: Linpack Setup and Result Interpretation"
+description: "Interpret HPL Linpack results through problem size, process placement and system limits, and distinguish dense compute performance from other workloads."
 ---
 
 High Performance Linpack solves a dense system of linear equations using LU factorization with partial pivoting, in double precision across a process grid. Its TOP500 role makes the score familiar, but the most useful local comparison is often the same machine before and after a change.

@@ -6,6 +6,8 @@ summary: "Check destination WORM state and retention explicitly instead of treat
 date: "2024-11-03"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "PowerScale SmartLock and SyncIQ: Verify Replica Retention"
+description: "Check PowerScale SmartLock retention and destination WORM state after SyncIQ replication, using representative recovery and protection tests."
 ---
 
 On PowerScale and older Isilon systems, SnapshotIQ, SyncIQ and SmartLock protect against different problems. A dashboard that rolls them into one green indicator can hide a serious gap: the remote data arrived, but its intended retention protection did not.

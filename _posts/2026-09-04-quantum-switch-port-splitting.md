@@ -6,6 +6,8 @@ tags: [InfiniBand, Quantum, Topology, Port splitting]
 summary: >-
   Doubling your port count is the easy part. The parts that surprise people are
   the renumbering, the cabling, and what it does to the subnet manager.
+seo_title: "NVIDIA Quantum Port Splitting: Cabling, Capacity and Topology"
+description: "Plan NVIDIA Quantum switch port splitting with attention to port numbering, cable compatibility, capacity and subnet-manager consequences."
 ---
 
 Port splitting turns one high-rate port into two or four lower-rate ports. On a

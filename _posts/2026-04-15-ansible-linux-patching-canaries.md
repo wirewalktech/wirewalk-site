@@ -6,6 +6,8 @@ summary: "Use small batches, explicit stop conditions, and application checks to
 date: "2026-04-15"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Ansible Linux Patching: Canary Batches and Service Checks"
+description: "Use Ansible canary batches, stop conditions and running-service checks to verify Linux patching beyond a successful package transaction."
 ---
 
 A package manager can report a successful update while the vulnerable process keeps running. A required restart can also leave the application unhealthy. Include running-service checks and reboot requirements in the patch plan before rolling it across the inventory.

@@ -8,6 +8,8 @@ summary: >-
   under-driven benchmark is indistinguishable from a ceiling. Counters are not
   rates, and aggregate CPU idle is meaningless on a many-core box. Here is the
   arithmetic that catches each one before you act on the number.
+seo_title: "Storage Benchmark Errors: Caching, Concurrency and Counters"
+description: "Find misleading storage benchmark results caused by server caching, insufficient concurrency, cumulative counters and aggregate CPU measurements."
 ---
 
 Storage benchmarks are unusually good at producing wrong answers that look

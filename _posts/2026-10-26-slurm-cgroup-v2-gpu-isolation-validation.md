@@ -4,7 +4,8 @@ date: "2026-10-26 10:00:00 -0400"
 category: "HPC Operations"
 tags: ["Slurm", "cgroup v2", "NVIDIA GPUs", "Linux"]
 summary: "Build a Slurm admission test around CPU placement, memory enforcement, GPU device access and process cleanup, then carry that evidence through image and driver changes."
-description: "Validate Slurm cgroup v2 setup, CPU affinity, memory limits and NVIDIA GPU isolation with canary jobs and repeatable admission checks."
+seo_title: "Slurm cgroup v2 Setup: CPU, Memory and GPU Isolation"
+description: "Validate Slurm cgroup v2 configuration with CPU affinity, memory enforcement, NVIDIA GPU access and cleanup tests before admitting workloads."
 ---
 
 Before opening a new Slurm node to users, run two small jobs beside each other and check what each can access. Correct allocation records will not protect a researcher if the operating system lets a neighboring job use the same CPUs, memory or GPUs.

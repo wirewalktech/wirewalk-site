@@ -6,6 +6,8 @@ summary: "A completed upload is a milestone. Recovery also needs the locator, co
 date: "2024-12-21"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "WEKA Snap-To-Object: Independent Recovery Testing"
+description: "Test WEKA Snap-To-Object recovery without the source cluster, including snapshot locators, credentials, software compatibility and application data."
 ---
 
 If the source WEKA cluster is unavailable, can you still recover the data? A snapshot listed on that cluster does not answer the question. Snap-To-Object can support an independent recovery path, but that path needs its own test.

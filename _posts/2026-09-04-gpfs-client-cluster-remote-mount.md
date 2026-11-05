@@ -7,6 +7,8 @@ summary: >-
   Keeping compute nodes in their own cluster and remote-mounting the filesystem is
   the right default for almost every site. The setup is four commands. The parts
   that bite are the ones that only show up under load, months later.
+seo_title: "GPFS Remote Mounts: Separate Client Cluster Configuration"
+description: "Configure a separate GPFS client cluster for remote mounts, including cluster trust, filesystem access, connectivity and recovery checks."
 ---
 
 A GPFS filesystem does not have to be mounted by the cluster that owns it. The

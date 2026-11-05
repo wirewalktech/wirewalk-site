@@ -6,6 +6,8 @@ summary: "Retention, administrative separation, support unlock, and recovery are
 date: "2024-10-10"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "VAST Indestructible Snapshots: Retention and Recovery Tests"
+description: "Evaluate VAST snapshot protection through retention settings, administrative authority, recovery tests and capacity planning for protected data."
 ---
 
 A read-only snapshot protects its contents from client writes. Whether an administrator can delete the snapshot is a separate question. On VAST, examine the protection on the snapshots and policies, then identify every person or process allowed to change it.

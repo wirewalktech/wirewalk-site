@@ -7,6 +7,8 @@ summary: >-
   The MPI layer looks identical on both. Everything underneath it is different,
   and on the Ethernet side a single hop configured wrongly degrades collectives
   across the entire fabric while every link reports healthy.
+seo_title: "MPI on InfiniBand vs. NVIDIA Spectrum-X: Fabric Differences"
+description: "Compare MPI infrastructure on InfiniBand and NVIDIA Spectrum-X, including RoCE, PFC, ECN, DCQCN and Ethernet acceptance checks."
 ---
 
 Running MPI over an Ethernet fabric with RoCEv2 and running it over InfiniBand

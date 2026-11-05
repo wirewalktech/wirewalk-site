@@ -3,10 +3,11 @@ title: "PowerScale and Isilon NFS performance: a Linux-to-OneFS investigation"
 category: Parallel Storage
 tags: ["PowerScale", "Isilon", "OneFS", "NFS", "Performance"]
 summary: "Troubleshoot PowerScale and Isilon NFS performance from Linux clients through SmartConnect to OneFS, separating metadata, data, network, and background work."
-description: "Troubleshoot PowerScale and Isilon NFS performance from Linux clients through SmartConnect to OneFS, separating metadata, data, network, and background work."
 date: "2026-07-27"
 last_reviewed: "2026-10-18"
 series: "AI and HPC storage engineering"
+seo_title: "PowerScale and Isilon NFS Performance Troubleshooting"
+description: "Trace PowerScale and Isilon NFS performance from Linux clients through SmartConnect to OneFS, separating metadata, network and background activity."
 ---
 
 When someone reports that “Isilon is slow,” ask them to show one slow operation. Record the client, path and time, then follow that request through the Linux mount, network connection and OneFS resources. That gives both teams something specific to investigate.

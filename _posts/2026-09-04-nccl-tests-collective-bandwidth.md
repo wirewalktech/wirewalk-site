@@ -7,6 +7,8 @@ summary: >-
   Two of the columns nccl-tests prints look like bandwidth. Only one of them is
   comparable across job sizes, and picking the wrong one is how a healthy
   cluster gets declared broken.
+seo_title: "NCCL Tests: Collective Bandwidth and busbw Interpretation"
+description: "Interpret nccl-tests results using algorithm and bus bandwidth, topology and workload size when evaluating NVIDIA GPU collective performance."
 ---
 
 Distributed training spends a large share of its wall clock inside collective

@@ -6,6 +6,8 @@ summary: "Labels, supported booleans, and application behavior should be underst
 date: "2026-03-22"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "SELinux Denial Troubleshooting: Labels, Booleans and Policy"
+description: "Investigate SELinux denials through labels, supported booleans and application behavior, then validate a narrow fix before adding allow rules."
 ---
 
 When an application fails under SELinux, capture the denial before changing enforcement. A mislabeled directory, a supported service setting and an operation the service should never perform need different fixes.

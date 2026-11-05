@@ -6,6 +6,8 @@ summary: "Client trust, user identity, integrity, and encryption are separate ch
 date: "2025-03-27"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "NFS Security: AUTH_SYS, Root Squashing and Kerberos"
+description: "Compare NFS AUTH_SYS and Kerberos security boundaries. Inspect mounted security flavors and test user identity, integrity and encryption requirements."
 ---
 
 Limiting an NFS export to a trusted subnet says which machines may connect. It does not settle how much authority those clients have to identify their users. Establish that trust relationship before trying to repair access with filesystem permissions.

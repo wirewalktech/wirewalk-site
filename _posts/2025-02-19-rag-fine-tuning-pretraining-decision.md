@@ -4,7 +4,8 @@ date: "2025-02-19 10:00:00-05:00"
 category: "AI Infrastructure"
 tags: ["NVIDIA", "RAG", "TensorRT", "Triton", "GPU Architecture"]
 summary: "Compare retrieval, adaptation, and pretraining by GPU residency, serving topology, storage traffic, training allocations, interconnect requirements, and the failure each approach can actually repair."
-description: "Compare retrieval, adaptation, and pretraining by GPU residency, serving topology, storage traffic, training allocations, interconnect requirements, and the failure each approach can actually repair."
+seo_title: "RAG vs. Fine-Tuning: NVIDIA Infrastructure Requirements"
+description: "Compare RAG, fine-tuning and pretraining through GPU memory, serving topology, storage traffic and training allocations before choosing an approach."
 ---
 
 When an AI system gives poor answers, adding retrieval and retraining the model solve different problems. They also place different demands on the infrastructure. Retrieval needs a maintained data and query path; adaptation needs GPU jobs and versioned datasets; large pretraining needs sustained distributed capacity and substantial checkpoint storage.

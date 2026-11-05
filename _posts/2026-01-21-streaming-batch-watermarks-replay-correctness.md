@@ -4,7 +4,8 @@ date: "2026-01-21 10:00:00-05:00"
 category: "AI Infrastructure"
 tags: ["NVIDIA", "Triton", "Streaming", "Inference", "Backpressure"]
 summary: "Integrate NVIDIA Triton scoring with batch and streaming systems using bounded GPU queues, microbatch latency budgets, versioned outputs, idempotent replay, and event-time correctness."
-description: "Integrate NVIDIA Triton scoring with batch and streaming systems using bounded GPU queues, microbatch latency budgets, versioned outputs, idempotent replay, and event-time correctness."
+seo_title: "Triton Streaming Inference: Capacity, Backpressure and Replay"
+description: "Connect NVIDIA Triton to streaming pipelines with bounded queues, latency budgets, versioned outputs and replay behavior that preserves correctness."
 ---
 
 Fast individual inference calls can hide a growing queue. When events arrive faster than an NVIDIA inference service can process them, the pipeline falls behind; replaying a backlog through the same service adds more pressure.

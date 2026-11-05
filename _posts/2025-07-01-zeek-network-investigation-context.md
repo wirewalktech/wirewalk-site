@@ -6,6 +6,8 @@ summary: "Use connection identifiers to connect evidence while keeping the limit
 date: "2025-07-01"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Zeek Network Investigation: Connections, DNS and TLS Evidence"
+description: "Follow a connection through Zeek logs, DNS and TLS metadata. Build repeatable investigations while accounting for passive visibility limits."
 ---
 
 An alert rarely explains the whole connection. An analyst also needs to know what preceded it, which service answered and what followed. Zeek's connection and protocol logs provide that context when the signature alone leaves questions open.

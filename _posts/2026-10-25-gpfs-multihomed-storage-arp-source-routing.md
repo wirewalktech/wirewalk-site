@@ -4,7 +4,8 @@ date: "2026-10-25 10:00:00 -0400"
 category: "Parallel Storage"
 tags: ["GPFS", "IBM Storage Scale", "IPoIB", "RDMA", "Policy Routing", "ARP"]
 summary: "Diagnose a missing GPFS storage path by tracing IPoIB neighbor discovery, ARP filtering and source routing. Preserve peer traffic, verify both RDMA paths and make the fix survive interface changes."
-description: "Fix missing GPFS RDMA paths on multihomed storage nodes: IPoIB neighbor discovery, ARP filtering, source routing, peer exceptions and verified recovery."
+seo_title: "GPFS Multihoming: ARP Filtering and Source Routing"
+description: "Diagnose missing GPFS RDMA paths on multihomed storage nodes through IPoIB neighbor discovery, ARP filtering, source routing and peer exceptions."
 ---
 
 Check the second storage port while a client workload is running. It may be healthy and carrying storage-peer traffic, yet carrying none of the client traffic it was meant to serve. Jobs continue, so the missing path can remain unnoticed.

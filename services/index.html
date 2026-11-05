@@ -1,0 +1,45 @@
+---
+layout: base
+title: Research computing and HPC services
+seo_title: HPC, NVIDIA GPU & Research Computing Services
+description: "HPC and research computing services from Wirewalk Advisory: cluster design, NVIDIA GPUs, Slurm, InfiniBand, parallel storage, diagnostics and security review."
+---
+<section class="art"><div class="wrap">
+  <header class="art-hd">
+    <span class="eyebrow">Wirewalk Advisory services</span>
+    <h1>Computing systems that help your research move forward.</h1>
+    <p class="lead">I help research and IT teams plan new systems, make existing ones work better and resolve the problems holding up their work. We can start with a single question or agree a larger build-out.</p>
+    <div class="acts" style="margin-top:24px"><a class="btn btn-p" href="{{ '/' | relative_url }}#contact">Talk about your project</a><a class="btn btn-g" href="{{ '/order/' | relative_url }}">Current rates and ordering</a></div>
+  </header>
+  <div class="g3 service-grid">
+    {% for service in site.data.services %}
+    <section class="service-card">
+      <h2><a href="{{ service.url | relative_url }}">{{ service.name }}</a></h2>
+      <p>{{ service.lead }}</p>
+      <a class="ilink" href="{{ service.url | relative_url }}">Explore {{ service.name }} &rarr;</a>
+    </section>
+    {% endfor %}
+  </div>
+  <div class="prose" style="margin-top:48px">
+    <h2>Agree the work before it starts</h2>
+    <p>We discuss your workload, system, access requirements and timescale, then confirm the scope and expected deliverable. The ordering page explains current engagement formats, purchase orders, invoicing and payment terms. Larger build-outs and work outside those formats are scoped and quoted.</p>
+    <p>The fixed-scope fabric, filesystem, scheduler and acceptance services can be booked after a brief qualification call. A paid architecture assessment is not required first.</p>
+    <h2>Work with someone who understands the whole path</h2>
+    <p>I work across compute, storage, networks and software, alongside the people who use and maintain them. <a href="{{ '/about/lenny-shovsky/' | relative_url }}">Read about my background</a> or browse the <a href="{{ '/writing/' | relative_url }}">technical articles</a> for examples of the problems and methods involved.</p>
+    <p>For operating reviews and AI policy or governance, see <a href="https://ai.wirewalk.com/">Wirewalk AI</a>.</p>
+  </div>
+</div></section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "OfferCatalog",
+  "@id": {{ '/services/' | absolute_url | append: '#catalog' | jsonify }},
+  "name": "Wirewalk research infrastructure services",
+  "url": {{ '/services/' | absolute_url | jsonify }},
+  "itemListElement": [
+    {% for service in site.data.services %}{% unless forloop.first %},{% endunless %}
+    { "@type": "Offer", "url": {{ service.url | absolute_url | jsonify }}, "offeredBy": { "@id": {{ '/' | absolute_url | append: '#organization' | jsonify }} }, "itemOffered": { "@type": "Service", "@id": {{ service.url | absolute_url | append: '#service' | jsonify }}, "name": {{ service.name | jsonify }}, "url": {{ service.url | absolute_url | jsonify }} } }
+    {% endfor %}
+  ]
+}
+</script>

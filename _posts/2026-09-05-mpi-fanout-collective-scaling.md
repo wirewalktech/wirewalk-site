@@ -7,6 +7,8 @@ summary: >-
   A single flow takes a single path, so a pair test is indifferent to almost
   everything that is wrong with a fabric. Fan-out puts many flows on it at once,
   and that is when static routing, ISL capacity and one slow node show up.
+seo_title: "MPI Fan-Out Tests: Collective Scaling and Fabric Bottlenecks"
+description: "Use MPI fan-out tests to expose routing imbalance, inter-switch limits and slow nodes that a single point-to-point flow may miss."
 ---
 
 A point-to-point bandwidth test between two nodes exercises one path. Under

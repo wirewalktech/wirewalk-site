@@ -8,6 +8,8 @@ summary: >-
   collapse on the inter-switch links, using per-ISL counter deltas and a
   network-only corroboration test. Includes the elimination order and the one
   command that would have answered it on the first morning.
+seo_title: "InfiniBand Routing: Diagnosing a Storage Read Ceiling"
+description: "Distinguish a parallel storage bottleneck from InfiniBand routing imbalance using per-ISL counter deltas and network-only tests."
 ---
 
 This read/write imbalance is easy to mistake for a storage problem.

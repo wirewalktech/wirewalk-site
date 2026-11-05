@@ -4,7 +4,8 @@ date: "2026-10-29 10:00:00 -0400"
 category: "HPC Operations"
 tags: ["Slurm", "MPI", "NCCL", "RDMA", "Distributed Training"]
 summary: "Separate allocation, process launch, rendezvous, communication and application progress when a distributed MPI or NVIDIA GPU workload appears to hang."
-description: "Debug stalled Slurm MPI and NVIDIA training jobs by isolating launch, rendezvous, rank failure, RDMA transport and application progress."
+seo_title: "Slurm Job Hangs: MPI, NCCL and RDMA Troubleshooting"
+description: "Trace stalled Slurm MPI and NVIDIA training jobs through process launch, rendezvous, rank failure, RDMA transport and application progress."
 ---
 
 GPUs are allocated and processes are alive, but the distributed job has stopped printing progress. Before trying another MPI or NCCL setting, find out how far each rank got. One missing worker can leave all the others waiting.

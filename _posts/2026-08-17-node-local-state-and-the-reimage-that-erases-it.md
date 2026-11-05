@@ -6,10 +6,11 @@ summary: >-
   A fix applied to a running node survives until that node is reimaged, and
   then it is gone with no event to connect the two. The decision that prevents
   it is knowing which changes are node-local and which live on shared storage.
-description: "How to avoid losing configuration at reimage: classifying node-local versus shared state, why per-node image overrides defeat a category default, and verifying from the image path."
 date: "2026-08-17"
 last_reviewed: "2026-10-17"
 series: "HPC and AI infrastructure engineering"
+seo_title: "BCM Node Reimaging: Preserve Configuration and Local State"
+description: "Keep required configuration through BCM reimaging by separating shared and node-local state, checking image overrides and verifying the selected image."
 ---
 
 A node misbehaves, you fix it, you verify the fix, you move on. Eight weeks later the same node

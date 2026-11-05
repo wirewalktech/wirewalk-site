@@ -6,34 +6,39 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/wirewalk/wirewalk-mark-180.png">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{% if page.title %}{{ page.title | escape }} &mdash; {{ site.title }}{% else %}{{ site.title }} &mdash; {{ site.tagline }}{% endif %}</title>
-<meta name="description" content="{{ page.description | default: page.summary | default: site.description | strip_newlines | truncate: 300 | escape }}">
+{%- assign search_title = page.seo_title | default: page.title | default: site.title -%}
+{%- assign meta_desc = page.description | default: page.summary | default: site.description | strip_newlines | strip -%}
+<title>{{ search_title | escape }} &mdash; {{ site.seo_brand | default: site.title | escape }}</title>
+<meta name="description" content="{{ meta_desc | escape }}">
 <link rel="canonical" href="{{ page.url | absolute_url }}">
 <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">
 <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
-<meta property="og:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title }}{% endif %}">
-<meta property="og:description" content="{{ page.description | default: page.summary | default: site.description | strip_newlines | truncate: 300 | escape }}">
+<meta property="og:title" content="{{ search_title | escape }}">
+<meta property="og:description" content="{{ meta_desc | escape }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 <meta property="og:site_name" content="{{ site.title }}">
 <!-- summary_large_image without an image renders as nothing at all. -->
 <meta property="og:image" content="{{ '/assets/og.png' | absolute_url }}">
+<meta property="og:image:alt" content="Wirewalk Advisory — research computing and HPC infrastructure">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta name="twitter:image:alt" content="Wirewalk Advisory — research computing and HPC infrastructure">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{{ '/assets/og.png' | absolute_url }}">
 {%- assign pub_date = page.date -%}
-{%- if page.last_reviewed -%}{%- assign mod_date = page.last_reviewed -%}{%- else -%}{%- assign mod_date = pub_date -%}{%- endif -%}
-{%- assign meta_desc = page.description | default: page.summary | default: site.description | strip_newlines | strip | truncate: 300 -%}
+{%- comment -%}A factual review date is not a content-modification timestamp. Emit dateModified only when explicitly recorded.{%- endcomment -%}
+{%- assign mod_date = page.last_modified_at -%}
+
 
 <meta name="theme-color" content="#0b0e14">
 <meta property="og:locale" content="{{ site.locale | default: 'en_US' }}">
-<meta name="twitter:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title }}{% endif %}">
+<meta name="twitter:title" content="{{ search_title | escape }}">
 <meta name="twitter:description" content="{{ meta_desc | escape }}">
 {%- if page.layout == 'post' %}
 <meta name="author" content="{{ site.author }}">
-<meta property="article:author" content="{{ site.author }}">
-<meta property="article:published_time" content="{{ pub_date | date: '%Y-%m-%d' }}">
-<meta property="article:modified_time" content="{{ mod_date | date: '%Y-%m-%d' }}">
+<meta property="article:author" content="{{ site.author_url | absolute_url }}">
+<meta property="article:published_time" content="{{ pub_date | date_to_xmlschema }}">
+{% if mod_date %}<meta property="article:modified_time" content="{{ mod_date | date_to_xmlschema }}">{% endif %}
 {%- if page.category %}<meta property="article:section" content="{{ page.category }}">{% endif %}
 {%- for t in page.tags %}
 <meta property="article:tag" content="{{ t }}">
@@ -43,21 +48,24 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
+  "@id": {{ page.url | absolute_url | append: '#article' | jsonify }},
   "headline": {{ page.title | jsonify }},
   "description": {{ meta_desc | jsonify }},
   "url": {{ page.url | absolute_url | jsonify }},
   "mainEntityOfPage": { "@type": "WebPage", "@id": {{ page.url | absolute_url | jsonify }} },
-  "datePublished": "{{ pub_date | date: '%Y-%m-%d' }}",
-  "dateModified": "{{ mod_date | date: '%Y-%m-%d' }}",
+  "datePublished": "{{ pub_date | date_to_xmlschema }}",
+  {% if mod_date %}"dateModified": "{{ mod_date | date_to_xmlschema }}",{% endif %}
   "inLanguage": "en",
   "author": {
     "@type": "Person",
+    "@id": {{ site.author_url | absolute_url | append: '#person' | jsonify }},
     "name": {{ site.author | jsonify }},
     "jobTitle": {{ site.author_role | jsonify }},
     "url": {{ site.author_url | absolute_url | jsonify }}
   },
   "publisher": {
     "@type": "Organization",
+    "@id": {{ '/' | absolute_url | append: '#organization' | jsonify }},
     "name": {{ site.organization | default: site.title | jsonify }},
     "url": {{ '/' | absolute_url | jsonify }},
     "logo": { "@type": "ImageObject", "url": {{ '/assets/brand/wirewalk/wirewalk-mark-180.png' | absolute_url | jsonify }} }
@@ -89,24 +97,40 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": "WebPage",
+  "@id": {{ page.url | absolute_url | append: '#webpage' | jsonify }},
+  "name": {{ page.title | default: site.title | jsonify }},
+  "description": {{ meta_desc | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "isPartOf": { "@id": {{ '/' | absolute_url | append: '#website' | jsonify }} }
+  {% if page.service_id %}, "mainEntity": { "@id": {{ page.url | absolute_url | append: '#service' | jsonify }} }{% endif %}
+}
+</script>
+{%- endif %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": {{ '/' | absolute_url | append: '#organization' | jsonify }},
   "name": {{ site.organization | default: site.title | jsonify }},
+  "alternateName": "Wirewalk",
   "url": {{ '/' | absolute_url | jsonify }},
   "description": {{ site.description | strip_newlines | strip | jsonify }},
-  "image": {{ '/assets/og.png' | absolute_url | jsonify }},
-  "areaServed": "US",
-  "knowsAbout": [
-    "High performance computing", "AI infrastructure", "InfiniBand fabric",
-    "Parallel filesystems", "GPFS", "Slurm", "GPU clusters", "Parallel storage benchmarking",
-    "CPU computing", "Linux", "Scientific software", "AI training pipelines",
-    "Big data", "AI factories", "Research computing", "Low-latency networking"
-  ],
-  "founder": {
-    "@type": "Person",
-    "name": {{ site.author | jsonify }},
-    "jobTitle": {{ site.author_role | jsonify }},
-    "url": {{ site.author_url | absolute_url | jsonify }}
-  }
+  "logo": { "@type": "ImageObject", "url": {{ '/assets/brand/wirewalk/wirewalk-mark-180.png' | absolute_url | jsonify }} },
+  "hasOfferCatalog": { "@id": {{ '/services/' | absolute_url | append: '#catalog' | jsonify }} },
+  "founder": { "@type": "Person", "@id": {{ site.author_url | absolute_url | append: '#person' | jsonify }}, "name": {{ site.author | jsonify }}, "url": {{ site.author_url | absolute_url | jsonify }} }
+}
+</script>
+{%- if page.is_home %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": {{ '/' | absolute_url | append: '#website' | jsonify }},
+  "name": {{ site.title | jsonify }},
+  "alternateName": "Wirewalk",
+  "url": {{ '/' | absolute_url | jsonify }},
+  "publisher": { "@id": {{ '/' | absolute_url | append: '#organization' | jsonify }} }
 }
 </script>
 {%- endif %}

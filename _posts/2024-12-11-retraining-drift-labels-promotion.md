@@ -4,7 +4,8 @@ date: "2024-12-11 10:00:00-05:00"
 category: "AI Infrastructure"
 tags: ["NVIDIA", "Retraining", "GPU Scheduling", "DCGM", "Capacity Planning"]
 summary: "Plan retraining as an infrastructure workload with measured GPU-hour budgets, queue limits, data staging, checkpoint recovery, interference controls, and compatible serving promotion."
-description: "Plan retraining as an infrastructure workload with measured GPU-hour budgets, queue limits, data staging, checkpoint recovery, interference controls, and compatible serving promotion."
+seo_title: "NVIDIA Cluster Retraining: GPU Budgets and Model Promotion"
+description: "Plan retraining on shared NVIDIA clusters with GPU-hour budgets, queue limits, checkpoint recovery and tests before promoting a model to serving."
 ---
 
 A nightly retraining job can finish on time and still cause trouble for everyone sharing the GPU platform. It may collide with inference, compete with research jobs for storage bandwidth or leave no room for retries. Decide how much capacity the recurring work is allowed to consume before putting it on a schedule.

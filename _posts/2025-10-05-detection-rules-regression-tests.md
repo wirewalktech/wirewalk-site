@@ -6,6 +6,8 @@ summary: "A small fixture library makes rule changes reviewable and keeps false-
 date: "2025-10-05"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Detection Rule Regression Tests: Matching and Negative Cases"
+description: "Build regression tests for Suricata and Snort rules with expected matches, negative cases, parser checks and separate alert-delivery validation."
 ---
 
 Before releasing a detection rule, try a legitimate transaction that resembles the suspicious one. The rule needs to catch its target and leave that transaction alone. Keeping both examples makes the next false-positive fix much easier to assess.

@@ -6,6 +6,8 @@ summary: "Start with capture visibility and a harmless detection fixture before 
 date: "2025-05-14"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Suricata IDS Setup: Capture Visibility and Detection Tests"
+description: "Validate a Suricata IDS sensor with known traffic, EVE JSON records and packet-loss measurements before relying on its alerts."
 ---
 
 Suricata can be running with fresh rules while seeing none of the traffic you meant to inspect. Before tuning detection, prove that representative packets reach the sensor, trigger the expected rule and arrive at the analyst's console.

@@ -6,6 +6,8 @@ summary: "A scan result becomes useful evidence when the profile, content versio
 date: "2026-05-09"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "OpenSCAP Hardening Reports: Profiles, Scope and Exceptions"
+description: "Make OpenSCAP reports useful for review by retaining the profile, content version, scan scope and exceptions, then testing remediation as a service change."
 ---
 
 A higher OpenSCAP score may mean a host was hardened. It may also mean rules were excluded or a different profile was selected. Keep the scan inputs beside the result so a reviewer can tell which happened.

@@ -6,6 +6,8 @@ summary: "A delete marker can hide a protected version. Recovery tooling must kn
 date: "2025-02-07"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "S3 Object Lock Recovery: Versions, Retention and Delete Markers"
+description: "Recover protected S3 objects by version ID. Check retention, delete markers and recovery-tool behavior rather than relying on an object's name."
 ---
 
 An S3 object can disappear from a normal listing while a protected version remains intact. The reverse mistake is just as costly: seeing Object Lock enabled on a bucket and assuming every version has the required retention. Inspect and retrieve the specific versions the recovery plan depends on.

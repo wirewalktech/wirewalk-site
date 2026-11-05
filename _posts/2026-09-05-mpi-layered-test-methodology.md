@@ -7,6 +7,8 @@ summary: >-
   Every layer of an MPI stack has a ceiling set by the layer beneath it. Test
   from the top and you will spend a week tuning something that was never the
   constraint. Test from the bottom and most investigations end in an hour.
+seo_title: "MPI Performance Testing: From Link Checks to Applications"
+description: "Test MPI performance in layers: link state, RDMA verbs, point-to-point traffic, collectives and applications, recording what each test rules out."
 ---
 
 An MPI slowdown can originate in a link, the host, the communication libraries or the application. These components are often installed and maintained separately, which makes it easy for an investigation to jump between them without settling any one question.

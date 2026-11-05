@@ -4,7 +4,8 @@ date: "2024-10-23 10:00:00-04:00"
 category: "AI Infrastructure"
 tags: ["NVIDIA", "NGC", "CUDA", "Training", "Checkpointing"]
 summary: "An infrastructure-led training pipeline covering NGC containers, host-driver compatibility, GPU allocation, checkpoint bandwidth, reproducible runs, and complete inference release bundles."
-description: "An infrastructure-led training pipeline covering NGC containers, host-driver compatibility, GPU allocation, checkpoint bandwidth, reproducible runs, and complete inference release bundles."
+seo_title: "NVIDIA Training Platforms: Containers, Checkpoints and Recovery"
+description: "Build reproducible NVIDIA training workflows with NGC containers, compatible drivers, GPU allocation, checkpoint storage and complete release artifacts."
 ---
 
 When a training run fails, the team needs more than a checkpoint filename. They need the right dataset, compatible GPU software, enough storage to reload the state and a record of how the job was launched. Losing any of those can turn a routine restart into days of reconstruction.

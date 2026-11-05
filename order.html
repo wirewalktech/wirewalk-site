@@ -2,6 +2,7 @@
 layout: null
 permalink: /order/
 title: Order an engagement
+seo_title: Order HPC Consulting, Diagnostics & Assessments
 description: >-
   Order a Wirewalk engagement by purchase order, invoice, deposit or prepayment.
   Purchase orders are the primary route; prepayment earns a 5% discount.
@@ -12,9 +13,19 @@ description: >-
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/wirewalk/wirewalk-mark-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/wirewalk/wirewalk-mark-180.png">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Order an engagement — Wirewalk</title>
+<title>{{ page.seo_title | escape }} — Wirewalk</title>
 <meta name="description" content="{{ page.description }}">
 <link rel="canonical" href="{{ '/order/' | absolute_url }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ page.seo_title | escape }}">
+<meta property="og:description" content="{{ page.description | strip_newlines | strip | escape }}">
+<meta property="og:url" content="{{ '/order/' | absolute_url }}">
+<meta property="og:site_name" content="Wirewalk Advisory">
+<meta property="og:image" content="{{ '/assets/og.png' | absolute_url }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page.seo_title | escape }}">
+<meta name="twitter:description" content="{{ page.description | strip_newlines | strip | escape }}">
+<meta name="twitter:image" content="{{ '/assets/og.png' | absolute_url }}">
 <style>
 :root{
   --bg:#FAF9F5; --alt:#F3F1EA; --ln:#E4E0D5; --ln2:#CFC9B9;
@@ -131,6 +142,7 @@ footer.end a{color:var(--ac2)}
   answer is that you do not need outside help, I will say so before taking an order.</p>
 
   <h2>What can be ordered</h2>
+  <p class="sub">Read the <a href="{{ '/services/' | relative_url }}">service descriptions and technical scope</a> before choosing an engagement. Current prices load below from the ordering catalog.</p>
   <div id="catalog"><p class="sub">Loading current pricing&hellip;</p></div>
   <p class="sub" style="margin-top:14px">Prices exclude any applicable sales or use tax.
   Paying in full in advance earns <b>5%</b> and reserves the dates on receipt of funds;

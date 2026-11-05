@@ -8,6 +8,8 @@ summary: >-
   its failures presents as missing or broken software. This walks through nine
   mechanisms, the command that distinguishes each from the others, and a
   verification harness that loads every module in a clean shell and runs it.
+seo_title: "Environment Modules Troubleshooting: Nine Failure Modes"
+description: "Troubleshoot Environment Modules failures involving paths, compiler runtimes, dependencies and modulefile behavior before rebuilding working software."
 ---
 
 A user reports a tool is broken. You load the module, run the tool, and it works. The user runs

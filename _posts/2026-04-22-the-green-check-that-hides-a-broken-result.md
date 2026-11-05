@@ -8,6 +8,8 @@ summary: >-
   where exit status is zero, the log looks clean, the file exists and the
   contents are wrong. A taxonomy of how that happens, and the checking
   discipline that catches it.
+seo_title: "Automation Verification: Catching Failures Behind Exit Code 0"
+description: "Find automation failures hidden by successful exit codes, empty files and missing plugins. Check the result itself with explicit failure cases."
 ---
 
 A crash is a gift. It has a timestamp, a stack, a non-zero status and somebody's

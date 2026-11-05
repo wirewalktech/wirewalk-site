@@ -3,11 +3,12 @@ title: "Lustre striping for AI and HPC: match layouts to the workload"
 category: Parallel Storage
 tags: ["Lustre", "Parallel Storage", "AI Infrastructure", "Performance"]
 summary: "Choose and test Lustre stripe layouts for AI datasets, shared HPC files and checkpoints. Inspect actual file layouts and compare performance without global changes."
-description: "Choose and test Lustre stripe layouts for AI datasets, shared HPC files and checkpoints. Inspect actual file layouts and compare performance without global changes."
 date: "2026-07-11"
 featured: true
 last_reviewed: "2026-10-18"
 series: "AI and HPC storage engineering"
+seo_title: "Lustre Striping for AI Datasets, HPC Files and Checkpoints"
+description: "Choose Lustre stripe layouts for AI datasets, shared HPC files and checkpoints. Inspect actual layouts and compare workloads before broad changes."
 ---
 
 A shared checkpoint and a directory of tiny training samples ask different things of Lustre. Spreading every file over every target may help one access pattern and add overhead to another. Choose a stripe layout by testing the workload that will use it.

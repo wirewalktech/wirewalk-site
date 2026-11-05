@@ -1,4 +1,5 @@
 title: Wirewalk Advisory
+seo_brand: Wirewalk
 tagline: HPC and AI infrastructure
 description: >-
   AI and HPC infrastructure engineering: GPU and CPU compute, Linux, data pipelines,
@@ -42,6 +43,8 @@ exclude:
   - AGENTS.md
   - CLAUDE.md
   - README.md
+  - HANDOFF.md
+  - tools
   - Gemfile
   - Gemfile.lock
   - vendor

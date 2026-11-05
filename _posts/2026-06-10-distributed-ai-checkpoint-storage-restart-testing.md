@@ -3,11 +3,12 @@ title: "Distributed AI checkpoints: storage performance and restart testing"
 category: Parallel Storage
 tags: ["PyTorch", "Checkpointing", "AI Training", "HPC", "Recovery"]
 summary: "Measure distributed AI checkpoint stalls, storage contention, and restart time. Validate recoverable training state before tuning asynchronous saves."
-description: "Measure distributed AI checkpoint stalls, storage contention, and restart time. Validate recoverable training state before tuning asynchronous saves."
 date: "2026-06-10"
 featured: true
 last_reviewed: "2026-10-18"
 series: "HPC and AI infrastructure engineering"
+seo_title: "Distributed AI Checkpoints: Storage and Restart Testing"
+description: "Measure checkpoint stalls, storage contention and restart time in distributed AI training. Test recoverable state before tuning asynchronous saves."
 ---
 
 Try loading the checkpoint in a fresh allocation before relying on it. A directory of shards or a fast save call will not tell you whether training can resume, particularly after the original workers and their local state are gone.

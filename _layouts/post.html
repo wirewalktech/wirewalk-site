@@ -50,6 +50,25 @@ layout: base
   </section>
   {% endif %}
 
+  {% assign service_count = 0 %}
+  {% capture service_links %}
+    {% for service in site.data.services %}
+      {% assign relevant_service = false %}
+      {% if service.categories contains page.category %}{% assign relevant_service = true %}{% endif %}
+      {% for tag in page.tags %}{% if service.tags contains tag %}{% assign relevant_service = true %}{% endif %}{% endfor %}
+      {% if relevant_service and service_count < 2 %}
+        <li><a href="{{ service.url | relative_url }}">{{ service.name }}</a></li>
+        {% assign service_count = service_count | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+  {% endcapture %}
+  {% if service_count > 0 %}
+  <aside class="service-help" aria-label="Related engineering services">
+    <p>If you need help with a system like this, these services describe the work and how we can start.</p>
+    <ul>{{ service_links }}</ul>
+  </aside>
+  {% endif %}
+
   {%- if page.previous or page.next %}
   <nav class="pnav" aria-label="More articles">
     {%- if page.next %}

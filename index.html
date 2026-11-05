@@ -2,6 +2,7 @@
 layout: home
 is_home: true
 title: Research Computing, HPC & AI Infrastructure
+seo_title: Research Computing, HPC & NVIDIA GPU Consulting
 description: >-
   Computing systems that help researchers do more, faster. HPC, NVIDIA GPU and AI
   infrastructure, storage and networking, from design through daily operation.
@@ -26,14 +27,14 @@ description: >-
   <div class="scopes">
     <div class="hd"><span>How I can help</span><span class="muted">From planning to daily use</span></div>
     <div id="scopelist">
-      <a href="#hpc">Cluster architecture and build-out<span>01</span></a>
-      <a href="#hpc">InfiniBand and low latency fabric<span>02</span></a>
-      <a href="#hpc">Parallel and scale-out storage<span>03</span></a>
-      <a href="#hpc">GPU, CUDA and AI stacks<span>04</span></a>
-      <a href="#hpc">Schedulers and workload management<span>05</span></a>
-      <a href="#hpc">Cloud HPC and hybrid<span>06</span></a>
-      <a href="#expertise">Enterprise IT and infrastructure<span>07</span></a>
-      <a href="#expertise">Security, compliance and audit<span>08</span></a>
+      <a href="{{ '/services/hpc-cluster-design/' | relative_url }}">Cluster architecture and build-out<span>01</span></a>
+      <a href="{{ '/services/infiniband-roce-diagnostics/' | relative_url }}">InfiniBand and low latency fabric<span>02</span></a>
+      <a href="{{ '/services/parallel-storage/' | relative_url }}">Parallel and scale-out storage<span>03</span></a>
+      <a href="{{ '/services/nvidia-gpu-ai-infrastructure/' | relative_url }}">GPU, CUDA and AI stacks<span>04</span></a>
+      <a href="{{ '/services/slurm-workload-management/' | relative_url }}">Schedulers and workload management<span>05</span></a>
+      <a href="{{ '/services/hpc-cluster-design/' | relative_url }}">Cloud HPC and hybrid<span>06</span></a>
+      <a href="{{ '/services/linux-infrastructure-operations/' | relative_url }}">Enterprise IT and infrastructure<span>07</span></a>
+      <a href="{{ '/services/security-compliance-review/' | relative_url }}">Security, compliance and audit<span>08</span></a>
     </div>
   </div>
 </div></section>
@@ -54,12 +55,12 @@ description: >-
     <p>A useful system starts with understanding the work people need to do. I bring compute, storage, networks and scientific software together, and stay involved through the practical work of making them run well.</p>
   </div>
   <div class="g3" data-rv>
-    <div><span class="n">01</span><h4>Cluster architecture and build-out</h4><p>I help turn research needs into a working cluster: choosing hardware, planning capacity, installing systems and setting up the tools your team will use to manage them. My work includes Bright Cluster Manager, OpenHPC, HPCM and xCAT, across individual sites and larger environments.</p></div>
-    <div><span class="n">02</span><h4>InfiniBand and low latency fabric</h4><p>When an analysis spans many machines, the connections between them matter. I design and troubleshoot InfiniBand and Ethernet networks, including OpenSM, NVIDIA UFM, RoCE and RDMA, and trace performance problems through the switches, adapters and applications.</p></div>
-    <div><span class="n">03</span><h4>Parallel and scale-out storage</h4><p>Research data needs room to grow and a dependable path to the people and programs using it. I build and tune parallel storage, plan data movement and recovery, and test it with the actual workload. Systems I work with include IBM Storage Scale / GPFS, Lustre, WEKA, VAST, PowerScale / Isilon and DDN.</p></div>
-    <div><span class="n">04</span><h4>GPU, CUDA and AI stacks</h4><p>I build GPU environments for model training, inference and scientific computing, with particular experience in NVIDIA systems: A100, H100, DGX, CUDA, NVLink and NCCL. The work includes matching memory, storage and networking to the job, then making PyTorch, TensorFlow and container environments usable for the team.</p></div>
-    <div><span class="n">05</span><h4>Schedulers and workload management</h4><p>A shared cluster needs priorities that make sense to the people using it. I configure Slurm, PBS Pro and LSF, including queues, GPU allocations, fair share and usage accounting. I also help teams move to a new scheduler while keeping their research workflows in view.</p></div>
-    <div><span class="n">06</span><h4>Cloud and hybrid HPC</h4><p>I help you work out where cloud computing fits your research and budget, then build the environment and move the work. That includes AWS ParallelCluster, FSx for Lustre, EFA and Azure HPC, as well as systems that connect cloud resources with the equipment you already own.</p></div>
+    <div><span class="n">01</span><h4><a href="{{ '/services/hpc-cluster-design/' | relative_url }}">Cluster architecture and build-out</a></h4><p>I help turn research needs into a working cluster: choosing hardware, planning capacity, installing systems and setting up the tools your team will use to manage them. My work includes Bright Cluster Manager, OpenHPC, HPCM and xCAT, across individual sites and larger environments.</p></div>
+    <div><span class="n">02</span><h4><a href="{{ '/services/infiniband-roce-diagnostics/' | relative_url }}">InfiniBand and low latency fabric</a></h4><p>When an analysis spans many machines, the connections between them matter. I design and troubleshoot InfiniBand and Ethernet networks, including OpenSM, NVIDIA UFM, RoCE and RDMA, and trace performance problems through the switches, adapters and applications.</p></div>
+    <div><span class="n">03</span><h4><a href="{{ '/services/parallel-storage/' | relative_url }}">Parallel and scale-out storage</a></h4><p>Research data needs room to grow and a dependable path to the people and programs using it. I build and tune parallel storage, plan data movement and recovery, and test it with the actual workload. Systems I work with include IBM Storage Scale / GPFS, Lustre, WEKA, VAST, PowerScale / Isilon and DDN.</p></div>
+    <div><span class="n">04</span><h4><a href="{{ '/services/nvidia-gpu-ai-infrastructure/' | relative_url }}">GPU, CUDA and AI stacks</a></h4><p>I build GPU environments for model training, inference and scientific computing, with particular experience in NVIDIA systems: A100, H100, DGX, CUDA, NVLink and NCCL. The work includes matching memory, storage and networking to the job, then making PyTorch, TensorFlow and container environments usable for the team.</p></div>
+    <div><span class="n">05</span><h4><a href="{{ '/services/slurm-workload-management/' | relative_url }}">Schedulers and workload management</a></h4><p>A shared cluster needs priorities that make sense to the people using it. I configure Slurm, PBS Pro and LSF, including queues, GPU allocations, fair share and usage accounting. I also help teams move to a new scheduler while keeping their research workflows in view.</p></div>
+    <div><span class="n">06</span><h4><a href="{{ '/services/hpc-cluster-design/' | relative_url }}">Cloud and hybrid HPC</a></h4><p>I help you work out where cloud computing fits your research and budget, then build the environment and move the work. That includes AWS ParallelCluster, FSx for Lustre, EFA and Azure HPC, as well as systems that connect cloud resources with the equipment you already own.</p></div>
   </div>
 </div></section>
 
@@ -71,27 +72,27 @@ description: >-
   </div>
   <div class="rows" data-rv>
     <div class="row"><div>
-      <h4>Enterprise IT and infrastructure</h4>
+      <h4><a href="{{ '/services/linux-infrastructure-operations/' | relative_url }}">Enterprise IT and infrastructure</a></h4>
       <p>I look after Linux and UNIX systems, identity services, software environments and monitoring. I also help teams move from older platforms, taking care to understand the applications and working habits that depend on them. Tools include Ansible, Puppet, Prometheus and Grafana.</p>
     </div><div class="tag">Infrastructure</div></div>
 
     <div class="row"><div>
-      <h4>Low latency networking</h4>
+      <h4><a href="{{ '/services/linux-infrastructure-operations/' | relative_url }}#campus-and-inter-site-networking">Low latency networking</a></h4>
       <p>I design and troubleshoot the networks that connect researchers, instruments, compute and data. That includes campus networks and connections between sites, using Juniper, Arista, Cisco and Brocade platforms. I follow the path the research traffic actually takes to find where it slows down.</p>
     </div><div class="tag">Network</div></div>
 
     <div class="row"><div>
-      <h4>Security, compliance and audit</h4>
+      <h4><a href="{{ '/services/security-compliance-review/' | relative_url }}">Security, compliance and audit</a></h4>
       <p>I help teams build access controls, logging, patching and recovery into the way their systems are run. My experience includes research and clinical environments with specific data-handling and audit requirements. The detailed frameworks and responsibilities are described below.</p>
     </div><div class="tag">Compliance</div></div>
 
     <div class="row"><div>
-      <h4>Data management and movement</h4>
+      <h4><a href="{{ '/services/parallel-storage/' | relative_url }}">Data management and movement</a></h4>
       <p>I plan storage growth, migrations, backup and archive so people can keep working with their data as projects develop. That includes shared filesystems, snapshots, replication, tape and transfers between sites, with attention to access, retention and recovery.</p>
     </div><div class="tag">Storage</div></div>
 
     <div class="row"><div>
-      <h4>Teams, vendors and budgets</h4>
+      <h4><a href="{{ '/services/hpc-cluster-design/' | relative_url }}">Teams, vendors and budgets</a></h4>
       <p>I have worked as a group lead and IT director, hiring, mentoring, planning budgets and working with vendors. I help researchers, engineers and support staff make decisions together, and leave the team with the knowledge and documentation to carry the work forward.</p>
     </div><div class="tag">Leadership</div></div>
   </div>
@@ -153,8 +154,8 @@ description: >-
     <p>If you need a second opinion on a system, a planned purchase or a recurring problem, I can take a focused look. You will get findings you can check, an explanation of why they matter and a practical order for addressing them.</p>
   </div>
   <div class="g3" data-rv>
-    <div><span class="n">01</span><h4>Infrastructure and fabric review</h4><p>I measure how your compute, network and storage perform together, investigate the bottlenecks and set out the changes most likely to help your workload.</p></div>
-    <div><span class="n">02</span><h4>Security and compliance review</h4><p>I review access, data protection, logging and readiness for an incident against your requirements. Findings include the evidence and enough detail for your team to act on them.</p></div>
+    <div><span class="n">01</span><h4><a href="{{ '/services/infiniband-roce-diagnostics/' | relative_url }}">Infrastructure and fabric review</a></h4><p>I measure how your compute, network and storage perform together, investigate the bottlenecks and set out the changes most likely to help your workload.</p></div>
+    <div><span class="n">02</span><h4><a href="{{ '/services/security-compliance-review/' | relative_url }}">Security and compliance review</a></h4><p>I review access, data protection, logging and readiness for an incident against your requirements. Findings include the evidence and enough detail for your team to act on them.</p></div>
     <div><span class="n">03</span><h4>Operating review</h4><p>For questions about how your organization works, including where AI could help with everyday tasks, I offer operating reviews through <a href="https://ai.wirewalk.com/">Wirewalk AI</a>.</p></div>
   </div>
   <p class="muted" style="margin-top:22px;max-width:70ch"><b>Part of the same practice.</b> You can also find my work on operating reviews,
@@ -188,13 +189,13 @@ description: >-
   <div class="sh-split">
     <div><span class="eyebrow">Engagements</span>
       <h2>A clear scope and a price you can plan around.</h2></div>
-    <p>If you know what you need, you can browse the services and rates below and order directly.
+    <p>If you know what you need, you can <a href="{{ '/services/' | relative_url }}">explore the services</a>, see current rates and order directly.
     If you are still working out the problem, tell me what you are trying to do and we can find a sensible starting point.</p>
   </div>
   <div class="g3" data-rv>
-    <div><span class="n">From $2,200</span><h4>Focused engagements</h4><p>One problem, a day or a week, written up. A benchmark that disagrees with the datasheet, a mount that drops under load, a second opinion before a purchase order goes out.</p></div>
-    <div><span class="n">From $7,000</span><h4>Infrastructure setup and diagnostics</h4><p>InfiniBand, RoCE and Ethernet diagnostics with NCCL testing for GPU workloads, parallel filesystem setup and review, scheduler setup and workload review, or independent cluster acceptance testing.</p></div>
-    <div><span class="n">From $2,500</span><h4>Assessments and programs</h4><p>Compliance readiness and full assessment against the framework that applies, and the remediation program that follows if you want the controls implemented rather than just listed.</p></div>
+    <div><span class="n">From $2,200</span><h4><a href="{{ '/services/focused-hpc-troubleshooting/' | relative_url }}">Focused engagements</a></h4><p>One problem, a day or a week, written up. A benchmark that disagrees with the datasheet, a mount that drops under load, a second opinion before a purchase order goes out.</p></div>
+    <div><span class="n">From $7,000</span><h4><a href="{{ '/services/' | relative_url }}">Infrastructure setup and diagnostics</a></h4><p>InfiniBand, RoCE and Ethernet diagnostics with NCCL testing for GPU workloads, parallel filesystem setup and review, scheduler setup and workload review, or independent cluster acceptance testing.</p></div>
+    <div><span class="n">From $2,500</span><h4><a href="{{ '/services/security-compliance-review/' | relative_url }}">Assessments and programs</a></h4><p>Compliance readiness and full assessment against the framework that applies, and the remediation program that follows if you want the controls implemented rather than just listed.</p></div>
   </div>
   <div class="cta-row" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:30px">
     <a href="{{ '/order/' | relative_url }}" class="btn btn-p">See rates and order<svg viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>

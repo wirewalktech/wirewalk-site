@@ -6,6 +6,8 @@ summary: "A namespace is an organizational boundary. Verify the controls that ma
 date: "2026-06-02"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Kubernetes Security: Admission, Network and Storage Tests"
+description: "Test Kubernetes admission controls, network policy and storage access separately, using allowed and denied cases to check each security boundary."
 ---
 
 A namespace organizes Kubernetes workloads, but isolation depends on the controls around them. Check admission, network policy, identity and storage permissions separately: a workload can be restricted by one and still have excessive access through another.

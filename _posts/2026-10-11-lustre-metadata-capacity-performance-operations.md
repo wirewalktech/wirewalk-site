@@ -3,10 +3,11 @@ title: "Lustre operations: metadata, target imbalance and AI pipeline stalls"
 category: Parallel Storage
 tags: ["Lustre", "Parallel Storage", "Operations", "AI Training"]
 summary: "Investigate Lustre metadata latency, per-target capacity, slow clients and AI pipeline stalls with scoped checks, workload evidence, and an operations handoff."
-description: "Investigate Lustre metadata latency, per-target capacity, slow clients and AI pipeline stalls with scoped checks, workload evidence, and an operations handoff."
 date: "2026-10-11"
 last_reviewed: "2026-10-18"
 series: "AI and HPC storage engineering"
+seo_title: "Lustre Troubleshooting: Metadata, Capacity and AI Stalls"
+description: "Investigate Lustre metadata latency, per-target capacity and slow clients when AI pipelines stall, using scoped checks and workload evidence."
 ---
 
 If a Lustre job stalls despite available capacity, find out which operation is waiting. File creation, data transfer and a delayed training rank lead to different checks. A successful mount and a comfortable filesystem total leave all of those questions open.

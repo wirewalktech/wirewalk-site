@@ -4,7 +4,8 @@ date: "2026-10-23 10:00:00 -0400"
 category: "Research Infrastructure"
 tags: ["Slurm", "NVMe", "Storage", "Data Integrity", "Workflow Design"]
 summary: "Design a node-local staging workflow with capacity checks, immutable inputs, bounded transfers, transactional result publication and explicit recovery after interruption."
-description: "Use node-local NVMe with Slurm safely through verified staging, capacity budgets, atomic publication and interruption-aware result recovery."
+seo_title: "Slurm Node-Local Scratch: Staging Data and Saving Results"
+description: "Use node-local NVMe with Slurm through checked staging, capacity budgets and atomic result publication, with a recovery plan for interrupted jobs."
 ---
 
 Local NVMe is a good place to avoid repeated shared-filesystem reads and hold temporary work. It is a poor place for the only copy of a completed result. A reboot, reimage or cleanup can remove that result before anyone notices it was never published.

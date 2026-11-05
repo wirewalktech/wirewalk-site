@@ -8,6 +8,8 @@ summary: >-
   spending almost all of its time on records with nothing to annotate, how to
   remove that work in the right order so you do not silently lose sites, and how
   to prove the fast output is identical to the slow one.
+seo_title: "Annotation Pipeline Optimization: Avoiding Unnecessary Work"
+description: "Find unnecessary annotation work by checking data eligibility before expensive processing, then verify that the smaller workload preserves the result."
 ---
 
 A variant annotation pipeline takes per-sample genomic VCF files in and produces annotated

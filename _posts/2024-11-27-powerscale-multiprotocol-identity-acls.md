@@ -6,6 +6,8 @@ summary: "An SMB login and an NFS identity can reach the same files through diff
 date: "2024-11-27"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "PowerScale NFS and SMB: Identity Mapping and ACL Tests"
+description: "Trace PowerScale identity mapping across NFS and SMB. Test allowed and denied access before changing ACLs or migrating multiprotocol data."
 ---
 
 The same file can be properly restricted from Windows and unexpectedly accessible from Linux. Its contents have not changed; the server is interpreting a different identity and authorization path. Test both paths on a PowerScale system that serves SMB and NFS.

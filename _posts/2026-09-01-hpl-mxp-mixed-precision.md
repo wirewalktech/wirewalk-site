@@ -7,6 +7,8 @@ summary: >-
   HPL-MxP reports a much larger number than HPL on the same machine. Knowing
   exactly where that factor comes from is the difference between a useful
   measurement and a marketing slide.
+seo_title: "HPL-MxP Benchmarking: Mixed-Precision Results Explained"
+description: "Interpret HPL-MxP mixed-precision results with attention to numerical validation, hardware support and the limits of comparison with standard HPL."
 ---
 
 HPL-MxP, previously published as HPL-AI, solves the same problem as HPL using a different precision strategy. Its much larger score reflects how that strategy uses the hardware; it does not mean the machine became equally faster for every workload.

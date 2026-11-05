@@ -6,6 +6,8 @@ summary: "An MFA requirement and a phishing-resistant authentication requirement
 date: "2025-11-22"
 last_reviewed: "2026-09-09"
 series: "Enterprise infrastructure and security"
+seo_title: "Microsoft Entra Admin Access: Phishing-Resistant MFA Tests"
+description: "Test Microsoft Entra authentication strength, FIDO2 registration, recovery and policy exclusions for privileged access requiring phishing-resistant MFA."
 ---
 
 An administrator may pass an MFA check using a method the organization did not intend to allow. If phishing resistance is the requirement, specify the acceptable authentication strength and test that weaker fallback methods are rejected.

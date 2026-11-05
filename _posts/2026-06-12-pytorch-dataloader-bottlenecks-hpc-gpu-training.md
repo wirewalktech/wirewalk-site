@@ -3,11 +3,12 @@ title: "PyTorch DataLoader bottlenecks on HPC GPU clusters"
 category: AI Infrastructure
 tags: ["PyTorch", "DataLoader", "GPU Training", "Parallel Storage"]
 summary: "Diagnose slow PyTorch data loading on HPC clusters with per-rank timing, worker sweeps, storage checks, and reproducible GPU throughput measurements."
-description: "Diagnose slow PyTorch data loading on HPC clusters with per-rank timing, worker sweeps, storage checks, and reproducible GPU throughput measurements."
 date: "2026-06-12"
 featured: true
 last_reviewed: "2026-10-18"
 series: "HPC and AI infrastructure engineering"
+seo_title: "PyTorch DataLoader Bottlenecks on HPC GPU Clusters"
+description: "Diagnose slow PyTorch data loading with per-rank timing, worker sweeps and storage checks, then compare reproducible GPU training throughput."
 ---
 
 Before adding GPUs to a slow training job, measure how long each step waits for a batch. The delay may be in storage, CPU preprocessing or transfer to the device, while the model itself runs quickly.
