@@ -11,7 +11,7 @@ A simulation team wants multi-node batch allocations; a platform team needs note
 
 Decide who owns each allocation before connecting the schedulers. Slurm and Kubernetes must not independently promise the same GPU, including during cancellation, worker loss and upgrades.
 
-This article compares architectural patterns and proposes an acceptance process. It does not prescribe a particular operator release or promise that every Slurm feature works in every Kubernetes environment. Examples describe hypothetical infrastructure, without production topology or identities.
+The designs below are hypothetical. Check the limitations of the operator and software versions being considered; support for a Slurm feature can depend on the Kubernetes environment and integration release.
 
 ## Begin with the workloads rather than the tools
 

@@ -11,7 +11,7 @@ Before opening a new Slurm node to users, run two small jobs beside each other a
 
 Follow the running task into its cgroups and inspect the devices it can open. That connects the scheduler's allocation to what is enforced on the node, including cleanup when the job ends.
 
-The examples below describe a generic Linux cluster using a unified cgroup v2 hierarchy and whole NVIDIA GPUs. They are design and validation examples, not a complete cluster configuration. MIG, GPU sharing, SSH adoption and container runtimes require additional tests against the deployed release.
+The configuration fragments below assume Linux with cgroup v2 and whole NVIDIA GPUs. They need site-specific review before use. Test MIG, GPU sharing, SSH adoption and each container runtime separately against the deployed release.
 
 ## Separate selection, enforcement and accounting
 
