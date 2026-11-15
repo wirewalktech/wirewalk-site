@@ -1,189 +1,40 @@
 <script>
-const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-/* ── smooth scrolling ──────────────────────────────────────────────────
-   A damped virtual scroll position. Every frame the real position is eased
-   toward a target with frame-rate-independent exponential decay, so the
-   result is identical at 60Hz and 120Hz and never overshoots. Wheel, keys
-   and in-page anchors all feed the same target, which is what makes a click
-   on a nav link and a flick of the wheel feel like the same motion.
-   Native scrolling is left alone for touch, coarse pointers and anyone who
-   has asked for reduced motion. */
-const SMOOTH=(function(){
-  const RMQ=matchMedia('(prefers-reduced-motion: reduce)');
-  const FINE=matchMedia('(pointer:fine)');
-  const on=()=>FINE.matches&&!RMQ.matches;
-
-  /* document height is cached: reading scrollHeight per wheel event forces
-     a layout, and content-visibility makes that read expensive */
-  let maxY=0;
-  const measure=()=>{maxY=Math.max(0,document.documentElement.scrollHeight-innerHeight)};
-  measure();
-  addEventListener('resize',measure,{passive:true});
-  if(window.ResizeObserver)new ResizeObserver(measure).observe(document.documentElement);
-
-  const clamp=v=>Math.max(0,Math.min(v,maxY));
-  const headerH=()=>document.getElementById('hd').offsetHeight+20;
-
-  let cur=scrollY, tgt=cur, raf=null, last=0, lam=7.4, wrote=Math.round(scrollY), hash=null;
-  /* two modes share one loop. 'damp' eases toward a target that input keeps
-     moving — right for a wheel, because deltas add up and never overshoot.
-     'tween' runs a fixed curve between two points — right for an anchor,
-     because a long jump needs to start gently, not at full speed. */
-  let mode='damp', t0=0, dur=0, from=0, to_=0;
-  const easeInOut=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-
-  function frame(now){
-    if(mode==='tween'){
-      const k=Math.min((now-t0)/dur,1);
-      cur=from+(to_-from)*easeInOut(k);
-      write();
-      if(k>=1){cur=tgt=to_;settle();return;}
-    }else{
-      const dt=Math.min((now-last)/1000,.05); last=now;
-      const d=tgt-cur;
-      if(Math.abs(d)<.15){cur=tgt;write();settle();return;}
-      cur=tgt-d*Math.exp(-lam*dt);
-      write();
-    }
-    raf=requestAnimationFrame(frame);
+(function(){
+  const header=document.getElementById('hd');
+  const burger=document.getElementById('burger');
+  const menu=document.getElementById('lk');
+  function setMenu(open){
+    if(!burger||!menu)return;
+    menu.classList.toggle('open',open);
+    burger.classList.toggle('on',open);
+    burger.setAttribute('aria-expanded',String(open));
+    burger.setAttribute('aria-label',open?'Close navigation':'Open navigation');
+    if(open)requestAnimationFrame(()=>menu.querySelector('a').focus({preventScroll:true}));
   }
-  function write(){wrote=Math.round(cur);scrollTo(0,cur);}
-  function run(){if(raf)return;last=performance.now();raf=requestAnimationFrame(frame);}
-  function halt(){if(raf)cancelAnimationFrame(raf);raf=null;}
-  function settle(){halt();if(hash&&history.replaceState){history.replaceState(null,'',hash);hash=null;}}
-  /* hand control back to the damped mode wherever the tween had got to */
-  function takeover(){if(mode==='tween'){mode='damp';tgt=cur=scrollY;hash=null;}}
-
-  /* anything that moved the page without going through write() — scrollbar
-     drag, find-in-page, focus, a browser restore — takes over silently.
-     wrote is refreshed every time so the next external move is still caught. */
-  addEventListener('scroll',()=>{
-    const y=Math.round(scrollY);
-    if(Math.abs(y-wrote)>2){mode='damp';cur=tgt=scrollY;hash=null;halt();}
-    wrote=y;
-  },{passive:true});
-
-  /* a wheel over a pane with its own overflow scrolls that pane, not the page */
-  function nested(el){
-    for(let n=el;n&&n!==document.body;n=n.parentElement){
-      if(n.scrollHeight>n.clientHeight+1){
-        const o=getComputedStyle(n).overflowY;
-        if(o==='auto'||o==='scroll')return true;
-      }
-    }
-    return false;
+  if(burger&&menu){
+    burger.addEventListener('click',()=>setMenu(burger.getAttribute('aria-expanded')!=='true'));
+    header.addEventListener('focusout',event=>{if(event.relatedTarget&&!header.contains(event.relatedTarget))setMenu(false)});
+    menu.addEventListener('click',event=>{if(event.target.closest('a'))setMenu(false)});
+    document.addEventListener('click',event=>{if(!header.contains(event.target))setMenu(false)});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&burger.getAttribute('aria-expanded')==='true'){setMenu(false);burger.focus()}});
+    addEventListener('resize',()=>{if(innerWidth>1040)setMenu(false)},{passive:true});
   }
-
-  addEventListener('wheel',e=>{
-    if(!on()||e.ctrlKey||e.defaultPrevented)return;
-    if(nested(e.target))return;
-    e.preventDefault();
-    takeover();
-    let dy=e.deltaY;
-    if(e.deltaMode===1)dy*=16; else if(e.deltaMode===2)dy*=innerHeight;
-    /* one event never contributes more than a screen: a hard flick glides
-       instead of teleporting, which is most of what reads as smoothness */
-    const cap=innerHeight*.85;
-    dy=Math.max(-cap,Math.min(cap,dy));
-    tgt=clamp(tgt+dy); lam=7.4; hash=null; run();
-  },{passive:false});
-
-  const KEYS={PageDown:.9,PageUp:-.9,End:1e9,Home:-1e9,ArrowDown:.14,ArrowUp:-.14,' ':.9};
-  addEventListener('keydown',e=>{
-    if(!on()||e.metaKey||e.ctrlKey||e.altKey)return;
-    const t=e.target;
-    if(t.closest('input,textarea,select,[contenteditable],[role="textbox"]'))return;
-    let k=e.key; if(k===' '&&e.shiftKey)k='PageUp';
-    const f=KEYS[k]; if(f===undefined)return;
-    e.preventDefault();
-    takeover();
-    tgt=clamp(f>=1e9?maxY:f<=-1e9?0:tgt+f*innerHeight);
-    lam=6.5; hash=null; run();
-  });
-
-  function to(y,h){
-    measure();
-    const end=clamp(y-headerH());
-    if(!on()){halt();mode='damp';cur=tgt=end;scrollTo(0,end);
-      if(h&&history.replaceState)history.replaceState(null,'',h);return;}
-    if(Math.abs(end-scrollY)<2){cur=tgt=end;settle();
-      if(h&&history.replaceState)history.replaceState(null,'',h);return;}
-    from=cur=scrollY; to_=tgt=end;
-    dur=Math.min(1150,Math.max(520,Math.abs(end-from)*.34));
-    mode='tween'; t0=performance.now(); hash=h||null;
-    halt(); raf=requestAnimationFrame(frame);
+  function headerState(){if(header)header.classList.toggle('stuck',scrollY>4)}
+  addEventListener('scroll',headerState,{passive:true});headerState();
+  // Native scrolling and keyboard behavior are left to the browser.
+  function revealFragment(){
+    let id;try{id=decodeURIComponent(location.hash.slice(1))}catch{return}
+    const target=document.getElementById(id);
+    const group=target&&target.closest('details');
+    if(group)group.open=true;
   }
-
-  document.addEventListener('click',e=>{
-    const a=e.target.closest('a[href^="#"]');
-    if(!a||a.hasAttribute('data-noscroll'))return;
-    const id=a.getAttribute('href');
-    if(id==='#'||id.length<2)return;
-    const el=document.querySelector(id);
-    if(!el)return;
-    e.preventDefault();
-    to(el.getBoundingClientRect().top+scrollY,id);
-    const nv=document.getElementById('lk'); if(nv)nv.classList.remove('open');
-  });
-
-  return {to,measure,max:()=>maxY};
-})();
-
-/* motion: reveal + header state only */
-const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const io=new IntersectionObserver(es=>{for(const e of es){if(!e.isIntersecting)continue;
- e.target.classList.add('in');io.unobserve(e.target);}},{threshold:.08,rootMargin:'0px 0px -4% 0px'});
-$$('[data-rv]').forEach(el=>{const sib=el.parentElement.children;let k=0;
- for(let j=0;j<sib.length;j++){if(sib[j]===el)break;if(sib[j].hasAttribute('data-rv'))k++;}
- if(k>0&&!RM)el.style.transitionDelay=Math.min(k,6)*58+'ms';io.observe(el);});
-$$('.sh,.sh-split').forEach(el=>{const t=el.querySelector('h2');
- if(t&&!t.firstElementChild)t.innerHTML='<span>'+t.innerHTML+'</span>';
- new IntersectionObserver((e,o)=>{if(e[0].isIntersecting){el.classList.add('in');o.disconnect();}},{threshold:.2}).observe(el);});
-const hd=$('#hd'),prog=$('#prog');let tk=false;
-addEventListener('scroll',()=>{if(tk)return;tk=true;requestAnimationFrame(()=>{
- const y=scrollY;hd.classList.toggle('stuck',y>4);hd.classList.toggle('mini',y>140);
- const m=SMOOTH.max();
- if(prog)prog.style.transform='scaleX('+(m>0?Math.min(1,Math.max(0,y/m)):0)+')';
- tk=false;});},{passive:true});
-
-/* ── burger: panel slides down, bars fold into a close mark ── */
-const bg=$('#burger'),lk=$('#lk');
-function setMenu(open){
-  lk.classList.toggle('open',open);
-  bg.classList.toggle('on',open);
-  bg.setAttribute('aria-expanded',open?'true':'false');
-}
-bg.addEventListener('click',()=>setMenu(!lk.classList.contains('open')));
-lk.addEventListener('click',e=>{
-  const t=e.target.closest('a,button');
-  if(!t)return;
-  /* in the collapsed menu the dropdown triggers have no panel to open,
-     so send them to their own section instead of doing nothing */
-  if(t.tagName==='BUTTON'&&t.dataset.sec&&matchMedia('(max-width:1040px)').matches){
-    const el=document.getElementById(t.dataset.sec);
-    if(el)SMOOTH.to(el.getBoundingClientRect().top+scrollY,'#'+t.dataset.sec);
-  }
-  setMenu(false);
-});
-addEventListener('keydown',e=>{if(e.key==='Escape'&&lk.classList.contains('open'))setMenu(false);});
-
-/* ── contact form ──────────────────────────────────────────────────────
-   The form does a normal POST to FormSubmit and lands on /thanks/. That is
-   deliberate: FormSubmit's /ajax/ endpoint sits behind a Cloudflare bot
-   challenge which can 403 an XHR, and a contact form that silently fails is
-   worse than one that navigates. So there is NO fetch() here and nothing
-   calls preventDefault -- the browser submits the form itself.
-
-   Previously this block intercepted submit, saw an empty endpoint, waited
-   550ms and displayed "Thank you - we will be in touch" without sending
-   anything. Never reintroduce a success message that is not tied to a
-   confirmed delivery. */
-const frm=$('.frm');
-if(frm){
-  frm.addEventListener('submit',()=>{
+  revealFragment();addEventListener('hashchange',revealFragment);
+  // The contact form retains its normal FormSubmit POST and return URL.
+  const frm=document.querySelector('.frm');
+  if(frm){frm.addEventListener('submit',()=>{
     const btn=frm.querySelector('.btn');
-    if(btn){btn.textContent='Sending'; btn.disabled=true;}
+    if(btn){btn.textContent='Sending';btn.disabled=true;}
     frm.classList.add('sending');
-  });
-}
+  });}
+})();
 </script>

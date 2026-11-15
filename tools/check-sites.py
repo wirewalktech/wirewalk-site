@@ -41,7 +41,7 @@ import urllib.request
 # per-site rather than a single global expectation.
 SITES = {
     "www":    {"domain": "www.wirewalk.com",    "repo": "wirewalk-site",
-               "form": True, "phone": "917-217-7975",
+               "form": True, "phone": "917-217-7975", "contact_path": "/contact/",
                "posts_dir": os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                          "..", "_posts"),
                "post_url": "/writing/{slug}/"},
@@ -336,10 +336,17 @@ def check_site(key, cfg):
     # 8. contact form
     if cfg.get("form"):
         home = pages.get(root, (0, ""))[1]
-        forms = re.findall(r"<form\b.*?</form>", home, re.S)
+        contact_url = urllib.parse.urljoin(root, cfg.get("contact_path", "/"))
+        if contact_url in pages:
+            contact_status, contact_body = pages[contact_url]
+        else:
+            contact_status, contact_body, _ = fetch(contact_url)
+        if contact_status != 200:
+            bad(key, f"contact page returns {contact_status}: {contact_url}")
+        forms = re.findall(r"<form\b.*?</form>", contact_body, re.S)
         target = next((f for f in forms if "formsubmit.co" in f), None)
         if not target:
-            bad(key, "no FormSubmit form found on the homepage")
+            bad(key, f"no FormSubmit form found on {contact_url}")
         else:
             for label, cond in [
                 ("form action -> formsubmit.co", "formsubmit.co" in target),

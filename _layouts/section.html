@@ -1,0 +1,9 @@
+---
+layout: base
+---
+<nav class="wrap breadcrumb" aria-label="Breadcrumb"><a href="{{ '/' | relative_url }}">Home</a><span aria-hidden="true">/</span><span>{{ page.title }}</span></nav>
+{{ content }}
+<div class="wrap page-next"><a href="{{ '/services/' | relative_url }}">Explore services</a><a href="{{ '/contact/' | relative_url }}">Talk about your system</a></div>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":{{ '/' | absolute_url | jsonify }}},{"@type":"ListItem","position":2,"name":{{ page.title | jsonify }},"item":{{ page.url | absolute_url | jsonify }}}]}
+</script>

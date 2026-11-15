@@ -1,0 +1,15 @@
+- title: Services
+  url: /services/
+  section: services
+- title: Infrastructure
+  url: /infrastructure/
+  section: infrastructure
+- title: Experience
+  url: /experience/
+  section: experience
+- title: Articles
+  url: /writing/
+  section: writing
+- title: Rates
+  url: /order/
+  section: rates

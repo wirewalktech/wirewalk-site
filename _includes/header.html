@@ -1,36 +1,15 @@
-{%- assign home = '/' | relative_url -%}
-{%- assign writing = '/writing/' | relative_url -%}
+{%- assign active = page.nav_section -%}
+{%- if page.layout == 'post' or page.url contains '/writing/' -%}{%- assign active = 'writing' -%}{%- endif -%}
+{%- if page.url contains '/services/' -%}{%- assign active = 'services' -%}{%- endif -%}
+{%- if page.url contains '/about/' -%}{%- assign active = 'experience' -%}{%- endif -%}
 <header id="hd"><div class="wrap nav">
-  <div class="nav-l">
-    <a href="{% if page.is_home %}#top{% else %}{{ home }}{% endif %}" class="brand"><img class="brand-logo" src="{{ '/assets/brand/wirewalk/wirewalk.svg' | relative_url }}" alt="Wirewalk" width="2034" height="375"></a>
-  </div>
-  <div class="nav-c">
-    <nav class="lk" id="lk">
-    {%- if page.is_home %}
-      <span id="pill"></span>
-      <a href="#hpc" data-sec="hpc">HPC and AI</a>
-      <a href="{{ '/services/' | relative_url }}">Services</a>
-      <a href="#compliance" data-sec="compliance">Compliance</a>
-      <a href="#scale" data-sec="scale">Track record</a>
-      <a href="#audits" data-sec="audits">Audits</a>
-      <a href="#writing" data-sec="writing">Writing</a>
-      <a href="{{ '/order/' | relative_url }}">Rates</a>
-    {%- else %}
-      <a href="{{ home }}#hpc">HPC and AI</a>
-      <a href="{{ '/services/' | relative_url }}">Services</a>
-      <a href="{{ home }}#scale">Track record</a>
-      <a href="{{ home }}#audits">Audits</a>
-      <a href="{{ writing }}">Writing</a>
-      <a href="{{ '/order/' | relative_url }}">Rates</a>
-    {%- endif %}
-      <a class="m-cta" href="{% if page.is_home %}#contact{% else %}{{ home }}#contact{% endif %}">Get in touch</a>
-    </nav>
-  </div>
-  <div class="nav-r">
-    <a href="{{ writing }}" class="navlink">Articles</a>
-    <a href="{% if page.is_home %}#contact{% else %}{{ home }}#contact{% endif %}" class="btn btn-p btn-sm">Get in touch</a>
-  </div>
-  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="lk"><i></i><i></i><i></i></button>
+  <div class="nav-l"><a href="{{ '/' | relative_url }}" class="brand" aria-label="Wirewalk home"{% if page.is_home %} aria-current="page"{% endif %}><img class="brand-logo" src="{{ '/assets/brand/wirewalk/wirewalk.svg' | relative_url }}" alt="Wirewalk" width="2034" height="375"></a></div>
+  <div class="nav-c"><nav class="lk" id="lk" aria-label="Main navigation">
+    {% for item in site.data.navigation %}<a href="{{ item.url | relative_url }}"{% if active == item.section %} aria-current="page"{% endif %}>{{ item.title }}</a>{% endfor %}
+    <a class="m-cta" href="{{ '/contact/' | relative_url }}"{% if active == 'contact' %} aria-current="page"{% endif %}>Contact</a>
+  </nav></div>
+  <div class="nav-r"><a href="{{ '/contact/' | relative_url }}" class="btn btn-g btn-sm"{% if active == 'contact' %} aria-current="page"{% endif %}>Contact</a></div>
+  <button class="burger" id="burger" aria-label="Open navigation" aria-expanded="false" aria-controls="lk"><i></i><i></i><i></i></button>
 </div>
-  <span id="prog"></span>
+<noscript><style>#hd .nav-c,#hd .nav-r,#hd .burger{display:none}</style><nav class="wrap nojs-nav" aria-label="Site pages">{% for item in site.data.navigation %}<a href="{{ item.url | relative_url }}">{{ item.title }}</a>{% endfor %}<a href="{{ '/contact/' | relative_url }}">Contact</a></nav></noscript>
 </header>

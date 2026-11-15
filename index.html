@@ -7,224 +7,40 @@ description: >-
   Computing systems that help researchers do more, faster. HPC, NVIDIA GPU and AI
   infrastructure, storage and networking, from design through daily operation.
 ---
+{% include legacy-home-links.html %}
 <section class="hero" id="top"><div class="wrap hgd">
   <div>
-    <span class="eyebrow hro">Research computing · HPC · AI</span>
-    <h1 class="hro">Helping people do more research, faster.</h1>
-    <p class="lead hro">I design, build and look after the computing systems that help researchers run more experiments, work with larger datasets and get results sooner.</p>
-    <p class="lead hro">That might mean a single GPU server, a new research cluster, or making better use of the system you already have. I work with your researchers and IT team to understand what they need and build a system they can use with confidence.</p>
-    <div class="acts hro">
-      <a href="#contact" class="btn btn-p">Start a conversation<svg viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a href="{{ '/order/' | relative_url }}" class="btn btn-g">Rates and ordering</a>
-      <a href="#hpc" class="btn btn-g">See the work</a>
+    <span class="eyebrow">Research computing · HPC · AI</span>
+    <h1>Helping people do more research, faster.</h1>
+    <p class="lead">I design, build and look after the computing systems that help researchers run more experiments, work with larger datasets and get results sooner.</p>
+    <p>We can start with a single problem, improve a system you already have, or plan a new research cluster. I work with your researchers and IT team to make the system useful for the people who depend on it.</p>
+    <div class="acts" style="margin-top:24px">
+      <a href="{{ '/services/' | relative_url }}" class="btn btn-p">Explore services</a>
+      <a href="{{ '/contact/' | relative_url }}" class="btn btn-g">Start a conversation</a>
     </div>
-    <div class="proof hro">
-      <div><b>Two decades</b><span class="muted">Engineering and technical leadership</span></div>
+    <div class="proof">
       <div><b>100,000+ nodes</b><span class="muted">Deployed and managed across my career</span></div>
       <div><b>100,000+ GPUs</b><span class="muted">AI and scientific computing</span></div>
+      <div><b>Dozens of PB</b><span class="muted">Storage deployed and managed</span></div>
     </div>
   </div>
-  <div class="scopes">
-    <div class="hd"><span>How I can help</span><span class="muted">From planning to daily use</span></div>
-    <div id="scopelist">
-      <a href="{{ '/services/hpc-cluster-design/' | relative_url }}">Cluster architecture and build-out<span>01</span></a>
-      <a href="{{ '/services/infiniband-roce-diagnostics/' | relative_url }}">InfiniBand and low latency fabric<span>02</span></a>
-      <a href="{{ '/services/parallel-storage/' | relative_url }}">Parallel and scale-out storage<span>03</span></a>
-      <a href="{{ '/services/nvidia-gpu-ai-infrastructure/' | relative_url }}">GPU, CUDA and AI stacks<span>04</span></a>
-      <a href="{{ '/services/slurm-workload-management/' | relative_url }}">Schedulers and workload management<span>05</span></a>
-      <a href="{{ '/services/hpc-cluster-design/' | relative_url }}">Cloud HPC and hybrid<span>06</span></a>
-      <a href="{{ '/services/linux-infrastructure-operations/' | relative_url }}">Enterprise IT and infrastructure<span>07</span></a>
-      <a href="{{ '/services/security-compliance-review/' | relative_url }}">Security, compliance and audit<span>08</span></a>
-    </div>
+  <aside class="scopes" aria-label="Explore Wirewalk">
+    <div class="hd"><span>Find what you need</span></div>
+    <a href="{{ '/infrastructure/' | relative_url }}">HPC and AI infrastructure<span aria-hidden="true">→</span></a>
+    <a href="{{ '/experience/' | relative_url }}">Experience and background<span aria-hidden="true">→</span></a>
+    <a href="{{ '/working-together/' | relative_url }}">How engagements work<span aria-hidden="true">→</span></a>
+    <a href="{{ '/security-compliance/' | relative_url }}">Security and compliance<span aria-hidden="true">→</span></a>
+  </aside>
+</div></section>
+<section class="sec tint" id="start"><div class="wrap">
+  <div class="sh"><span class="eyebrow">A place to start</span><h2>What would help your team move forward?</h2></div>
+  <div class="g3">
+    <div><h3><a href="{{ '/services/hpc-cluster-design/' | relative_url }}">Build or improve a system</a></h3><p>Compute, GPUs, storage, fabric and software planned around the work your researchers need to do.</p></div>
+    <div><h3><a href="{{ '/audits/' | relative_url }}">Understand a problem</a></h3><p>A focused review of a slow job, unreliable system, performance question or planned purchase.</p></div>
+    <div><h3><a href="{{ '/working-together/' | relative_url }}">Find the right scope</a></h3><p>A practical starting point, clear deliverables and an engagement your team can plan around.</p></div>
   </div>
 </div></section>
-
-<div class="band"><div class="wrap">
-  <b>Tools I work with</b>
-  <ul>
-    <li>Slurm</li><li>PBS Pro</li><li>LSF</li><li>InfiniBand</li><li>RoCE</li><li>OpenSM</li><li>NVIDIA UFM</li>
-    <li>GPFS / Storage Scale</li><li>Lustre</li><li>WekaFS</li><li>VAST</li><li>CUDA</li><li>NCCL</li>
-    <li>Kubernetes</li><li>Apptainer</li><li>Ansible</li><li>AWS</li><li>Azure</li><li>RHEL</li>
-  </ul>
-</div></div>
-
-<section class="sec" id="hpc"><div class="wrap">
-  <div class="sh-split">
-    <div><span class="eyebrow">HPC and AI</span>
-      <h2>Systems shaped around the research.</h2></div>
-    <p>A useful system starts with understanding the work people need to do. I bring compute, storage, networks and scientific software together, and stay involved through the practical work of making them run well.</p>
-  </div>
-  <div class="g3" data-rv>
-    <div><span class="n">01</span><h4><a href="{{ '/services/hpc-cluster-design/' | relative_url }}">Cluster architecture and build-out</a></h4><p>I help turn research needs into a working cluster: choosing hardware, planning capacity, installing systems and setting up the tools your team will use to manage them. My work includes Bright Cluster Manager, OpenHPC, HPCM and xCAT, across individual sites and larger environments.</p></div>
-    <div><span class="n">02</span><h4><a href="{{ '/services/infiniband-roce-diagnostics/' | relative_url }}">InfiniBand and low latency fabric</a></h4><p>When an analysis spans many machines, the connections between them matter. My experience spans SDR and DDR InfiniBand through EDR and HDR, along with a wide range of RoCE interconnects. I design, upgrade and troubleshoot these networks, using OpenSM and NVIDIA UFM and tracing problems through the switches, adapters and applications.</p></div>
-    <div><span class="n">03</span><h4><a href="{{ '/services/parallel-storage/' | relative_url }}">Parallel and scale-out storage</a></h4><p>Research data needs room to grow and a dependable path to the people and programs using it. I build and tune parallel storage, plan data movement and recovery, and test it with the actual workload. Systems I work with include IBM Storage Scale / GPFS, Lustre, WEKA, VAST, PowerScale / Isilon and DDN.</p></div>
-    <div><span class="n">04</span><h4><a href="{{ '/services/nvidia-gpu-ai-infrastructure/' | relative_url }}">GPU, CUDA and AI stacks</a></h4><p>I build GPU environments for model training, inference and scientific computing, with particular experience in NVIDIA systems: A100, H100, DGX, CUDA, NVLink and NCCL. The work includes matching memory, storage and networking to the job, then making PyTorch, TensorFlow and container environments usable for the team.</p></div>
-    <div><span class="n">05</span><h4><a href="{{ '/services/slurm-workload-management/' | relative_url }}">Schedulers and workload management</a></h4><p>A shared cluster needs priorities that make sense to the people using it. I configure Slurm, PBS Pro and LSF, including queues, GPU allocations, fair share and usage accounting. I also help teams move to a new scheduler while keeping their research workflows in view.</p></div>
-    <div><span class="n">06</span><h4><a href="{{ '/services/hpc-cluster-design/' | relative_url }}">Cloud and hybrid HPC</a></h4><p>I help you work out where cloud computing fits your research and budget, then build the environment and move the work. That includes AWS ParallelCluster, FSx for Lustre, EFA and Azure HPC, as well as systems that connect cloud resources with the equipment you already own.</p></div>
-  </div>
+<section class="sec" id="recent-notes"><div class="wrap">
+  <div class="sh-split"><div><span class="eyebrow">Field notes</span><h2>Practical writing from across the system.</h2></div><p>Setup, troubleshooting and monitoring for the people running HPC and AI infrastructure. <a class="ilink" href="{{ '/writing/' | relative_url }}">Browse all {{ site.posts.size }} articles →</a></p></div>
+  <div class="plist">{% for post in site.posts limit: 2 %}<article class="pitem"><div><h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3><p>{{ post.summary | strip_html | truncate: 145 }}</p></div><div class="pm"><b>{{ post.category }}</b><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%-d %b %Y' }}</time></div></article>{% endfor %}</div>
 </div></section>
-
-<section class="sec tint" id="expertise"><div class="wrap">
-  <div class="sh-split">
-    <div><span class="eyebrow">Other areas</span>
-      <h2>The everyday work that keeps research moving.</h2></div>
-    <p>Researchers also need accounts that work, software they can use, data they can find and someone to turn to when a job fails. I work alongside the people supporting those needs, including the planning, maintenance and documentation that keep a system useful over time.</p>
-  </div>
-  <div class="rows" data-rv>
-    <div class="row"><div>
-      <h4><a href="{{ '/services/linux-infrastructure-operations/' | relative_url }}">Enterprise IT and infrastructure</a></h4>
-      <p>I look after Linux and UNIX systems, identity services, software environments and monitoring. I also help teams move from older platforms, taking care to understand the applications and working habits that depend on them. Tools include Ansible, Puppet, Prometheus and Grafana.</p>
-    </div><div class="tag">Infrastructure</div></div>
-
-    <div class="row"><div>
-      <h4><a href="{{ '/services/linux-infrastructure-operations/' | relative_url }}#campus-and-inter-site-networking">Low latency networking</a></h4>
-      <p>I design and troubleshoot the networks that connect researchers, instruments, compute and data. That includes campus networks and connections between sites, using Juniper, Arista, Cisco and Brocade platforms. I follow the path the research traffic actually takes to find where it slows down.</p>
-    </div><div class="tag">Network</div></div>
-
-    <div class="row"><div>
-      <h4><a href="{{ '/services/security-compliance-review/' | relative_url }}">Security, compliance and audit</a></h4>
-      <p>I help teams build access controls, logging, patching and recovery into the way their systems are run. My experience includes research and clinical environments with specific data-handling and audit requirements. The detailed frameworks and responsibilities are described below.</p>
-    </div><div class="tag">Compliance</div></div>
-
-    <div class="row"><div>
-      <h4><a href="{{ '/services/parallel-storage/' | relative_url }}">Data management and movement</a></h4>
-      <p>I plan storage growth, migrations, backup and archive so people can keep working with their data as projects develop. That includes shared filesystems, snapshots, replication, tape and transfers between sites, with attention to access, retention and recovery.</p>
-    </div><div class="tag">Storage</div></div>
-
-    <div class="row"><div>
-      <h4><a href="{{ '/services/hpc-cluster-design/' | relative_url }}">Teams, vendors and budgets</a></h4>
-      <p>I have worked as a group lead and IT director, hiring, mentoring, planning budgets and working with vendors. I help researchers, engineers and support staff make decisions together, and leave the team with the knowledge and documentation to carry the work forward.</p>
-    </div><div class="tag">Leadership</div></div>
-  </div>
-</div></section>
-
-<section class="sec tint" id="compliance"><div class="wrap">
-  <div class="sh-split">
-    <div><span class="eyebrow">Regulated environments</span>
-      <h2>Care with sensitive research data.</h2></div>
-    <p>When research comes with additional security or data-handling requirements, I help your team build them into the system and its daily operation. The examples below describe the environments and frameworks I have worked with.</p>
-  </div>
-  <div class="g3" data-rv>
-    <div><span class="n">CUI</span><h4>Federal and controlled unclassified information</h4><p>NIST SP 800-171 across storage, scheduler and identity, with the system security plan and POA&amp;M that go with it. NIST SP 800-53 on federal systems, FISMA responsibility as a named security officer, and CMMC readiness for defense subcontracts. DISA STIG and CIS Benchmark hardening on compute at scale. NIST SP 800-88 media sanitization on decommission. FIPS 140 validated cryptography where it is required, and the exemption argument where a validated module does not exist for the hardware.</p></div>
-    <div><span class="n">NIH</span><h4>Controlled-access research data</h4><p>The NIH Genomic Data Sharing Policy and the dbGaP security best practices as they actually apply to a shared cluster: where controlled-access data may live, who may reach it, how access is logged, and how it is destroyed at the end of the approved period. NIH Data Management and Sharing plans, data use agreements and honest broker arrangements, IRB-driven access boundaries, and the awkward part &mdash; enforcing per-study separation on a filesystem several hundred other users also mount.</p></div>
-    <div><span class="n">Export</span><h4>Import, export and sanctions</h4><p>EAR and ECCN classification of HPC hardware, GPUs and the software stack, and ITAR where it applies. <b>Deemed export</b> is the one that catches universities: giving a foreign national an account on a machine holding controlled technology is an export, and shared clusters are built to do exactly that. Technology control plans, restricted party and OFAC screening, Entity List constraints on accelerator procurement, and where the fundamental research exclusion genuinely applies rather than where people wish it did.</p></div>
-  </div>
-  <div class="g3" data-rv style="margin-top:1px">
-    <div><span class="n">Health</span><h4>Clinical and pharmaceutical</h4><p>HIPAA Security Rule on estates that are simultaneously research and clinical, GxP and 21 CFR Part 11 for electronic records and signatures, PCI DSS, and GDPR where a collaboration crosses into the EU. Audit evidence that can be produced on demand rather than reconstructed the week before an assessment.</p></div>
-    <div><span class="n">ISO</span><h4>Standards and control frameworks</h4><p>Systems designed and operated to ISO/IEC 27001 information security controls, ISO/IEC 27017 and 27018 for cloud and personal data in cloud, ISO/IEC 20000 service management practice, and SOC 2 control objectives. Where an organization is pursuing certification, the work is the control implementation and the evidence that survives the audit.</p></div>
-    <div><span class="n">In practice</span><h4>What this looks like on a cluster</h4><p>Compliance fails on shared HPC in predictable places: a scratch filesystem nobody scoped, an epilog that never deletes, a scheduler prolog that leaks a path, home directories mounted everywhere by default, node images drifting apart, and audit logging that stops at the login node. The useful work is closing those, then proving they are closed &mdash; not producing a policy document that describes a system nobody has actually configured.</p></div>
-  </div>
-</div></section>
-
-<section class="sec" id="scale"><div class="wrap">
-  <div class="sh"><span class="eyebrow">Track record</span>
-    <h2>Experience I bring to your project.</h2>
-    <p>Over two decades, I have worked as an HPC architect, engineer, group lead and IT director. Across that career, I have deployed and managed more than 100,000 compute nodes, more than 100,000 GPUs and dozens of petabytes of storage. I have also led HPC teams, supported user communities and built research pipelines across disciplines.</p></div>
-  <div class="stats" data-rv>
-    <div><div class="n">100,000+</div><p>Compute nodes deployed and managed across my career</p><div class="src">Cluster architecture, build-out and operations</div></div>
-    <div><div class="n">100,000+</div><p>GPUs deployed and managed for AI and scientific computing</p><div class="src">GPU fabric, scheduler and parallel storage integration</div></div>
-    <div><div class="n">Dozens of PB</div><p>Parallel and scale-out storage deployed and managed</p><div class="src">Capacity, performance, data movement and recovery</div></div>
-    <div><div class="n">SDR / DDR</div><p>InfiniBand experience from early generations through EDR and HDR, alongside many RoCE interconnects</p><div class="src">Fabric design, upgrades and troubleshooting</div></div>
-    <div><div class="n">Pipelines</div><p>Research workflows across weather modeling, engineering, biomedical research and AI</p><div class="src">Compute, storage, software and workflow integration</div></div>
-    <div><div class="n">People</div><p>HPC teams led and user communities supported across research and industry</p><div class="src">Leadership, collaboration and practical support</div></div>
-  </div>
-  <div class="sh" style="margin-top:34px"><span class="eyebrow">Right-sizing</span>
-    <h2>A single problem is a good place to start.</h2>
-    <p>A slow analysis, a troublesome storage connection, a GPU server that could be doing more, or a second opinion before a purchase can all be worthwhile places to start. We can agree on a focused piece of work that fits the problem, your budget and the time your team has available.</p></div>
-
-  <div class="sh" style="margin-top:34px"><span class="eyebrow">Worked with</span>
-    <h2>Organizations and environments.</h2>
-    <p>I have worked in these environments as an employee, contractor, or through partners and vendors. They reflect my experience; the list does not imply that each organization is a client of Wirewalk.</p></div>
-  <div class="g3" data-rv>
-    <div><span class="n">AI factories</span><h4>GPU cloud and AI infrastructure</h4><p>Alembic, IREN, Deutsche Telekom, Microsoft, Anthropic, NScale, CoreWeave, BoostRun and Novartis.</p></div>
-    <div><span class="n">Academic medicine</span><h4>Research and clinical HPC</h4><p>Atrium Health Wake Forest Baptist, Albert Einstein College of Medicine, Weill Cornell Medicine, Memorial Sloan Kettering and Mayo Clinic.</p></div>
-    <div><span class="n">Federal</span><h4>Agencies and national laboratory</h4><p>NOAA, NASA, Brookhaven National Laboratory and the Naval Postgraduate School.</p></div>
-  </div>
-  <div class="g3" data-rv style="margin-top:1px">
-    <div><span class="n">Sectors</span><h4>Regulated and demanding</h4><p>AI factory and GPU cloud build-outs, semiconductor equipment, aerospace and aviation, automotive engineering, federal weather modeling, pharmaceutical research, academic medicine, clinical research computing, clinical pathology, defense postgraduate education, and a national laboratory.</p></div>
-    <div><span class="n">Certifications</span><h4>Held and current</h4><p>Red Hat Certified Engineer across RHEL 3, 5 and 7. Sun Certified Systems Administrator. FreeBSD Certified Associate. Juniper JNCIS-SEC and JNCIS-ENT. Cisco CCNA. Microsoft MCSE and MCSA. NACI Public Trust clearance.</p></div>
-    <div><span class="n">Education</span><h4>Computer science</h4><p>Master's degree in computer science. Two decades of practice since, most of it hands on, across every layer from the cabling to the application stack.</p></div>
-  </div>
-</div></section>
-
-<section class="sec tint" id="audits"><div class="wrap">
-  <div class="sh-split">
-    <div><span class="eyebrow">Audits</span>
-      <h2>A clear picture of what needs attention.</h2></div>
-    <p>If you need a second opinion on a system, a planned purchase or a recurring problem, I can take a focused look. You will get findings you can check, an explanation of why they matter and a practical order for addressing them.</p>
-  </div>
-  <div class="g3" data-rv>
-    <div><span class="n">01</span><h4><a href="{{ '/services/infiniband-roce-diagnostics/' | relative_url }}">Infrastructure and fabric review</a></h4><p>I measure how your compute, network and storage perform together, investigate the bottlenecks and set out the changes most likely to help your workload.</p></div>
-    <div><span class="n">02</span><h4><a href="{{ '/services/security-compliance-review/' | relative_url }}">Security and compliance review</a></h4><p>I review access, data protection, logging and readiness for an incident against your requirements. Findings include the evidence and enough detail for your team to act on them.</p></div>
-    <div><span class="n">03</span><h4>Operating review</h4><p>For questions about how your organization works, including where AI could help with everyday tasks, I offer operating reviews through <a href="https://ai.wirewalk.com/">Wirewalk AI</a>.</p></div>
-  </div>
-  <p class="muted" style="margin-top:22px;max-width:70ch"><b>Part of the same practice.</b> You can also find my work on operating reviews,
-  AI policy and governance at <a class="ilink" href="https://ai.wirewalk.com/">Wirewalk AI</a>.</p>
-</div></section>
-
-<section class="sec" id="writing"><div class="wrap">
-  <div class="sh-split">
-    <div><span class="eyebrow">Writing</span>
-      <h2>Practical notes for the people running the systems.</h2></div>
-    <p>I share ways to investigate problems, check performance and make informed choices about research infrastructure. The articles cover GPU and CPU computing, AI training, Linux, storage and networking, with checks you can try on your own systems.</p>
-  </div>
-  <p style="margin:0 0 24px"><a href="{{ '/writing/#topic-ai-infrastructure' | relative_url }}">AI pipelines</a> · <a href="{{ '/writing/#topic-benchmarking' | relative_url }}">GPU and CPU benchmarks</a> · <a href="{{ '/writing/#topic-parallel-storage' | relative_url }}">Parallel storage</a> · <a href="{{ '/writing/mpi-troubleshooting-playbook/' | relative_url }}">Low-latency networking</a> · <a href="{{ '/writing/environment-modules-failure-modes/' | relative_url }}">Linux software</a></p>
-  <div class="plist" data-rv>
-    {%- assign featured_posts = site.posts | where: 'featured', true -%}
-    {%- for post in featured_posts limit: 4 %}
-    <article class="pitem">
-      <div>
-        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-        <p>{{ post.summary | default: post.excerpt | strip_html | truncate: 165 }}</p>
-      </div>
-      <div class="pm"><b>{{ post.category | default: 'Notes' }}</b>
-        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b %Y" }}</time></div>
-    </article>
-    {%- endfor %}
-  </div>
-  <p style="margin-top:28px"><a href="{{ '/writing/' | relative_url }}" class="btn btn-g">All articles</a></p>
-</div></section>
-
-<section class="sec" id="engage"><div class="wrap">
-  <div class="sh-split">
-    <div><span class="eyebrow">Engagements</span>
-      <h2>A clear scope and a price you can plan around.</h2></div>
-    <p>If you know what you need, you can <a href="{{ '/services/' | relative_url }}">explore the services</a>, see current rates and choose an engagement when you are ready.
-    If you are still working out the problem, tell me what you are trying to do and we can find a sensible starting point.</p>
-  </div>
-  <div class="g3" data-rv>
-    <div><span class="n">From $2,200</span><h4><a href="{{ '/services/focused-hpc-troubleshooting/' | relative_url }}">Focused engagements</a></h4><p>One problem, a day or a week, written up. A benchmark that disagrees with the datasheet, a mount that drops under load, a second opinion before a purchase order goes out.</p></div>
-    <div><span class="n">From $7,000</span><h4><a href="{{ '/services/' | relative_url }}">Infrastructure setup and diagnostics</a></h4><p>InfiniBand, RoCE and Ethernet diagnostics with NCCL testing for GPU workloads, parallel filesystem setup and review, scheduler setup and workload review, or independent cluster acceptance testing.</p></div>
-    <div><span class="n">From $2,500</span><h4><a href="{{ '/services/security-compliance-review/' | relative_url }}">Assessments and programs</a></h4><p>Compliance readiness and full assessment against the framework that applies, and the remediation program that follows if you want the controls implemented rather than just listed.</p></div>
-  </div>
-  <div class="cta-row" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:30px">
-    <a href="{{ '/order/' | relative_url }}" class="btn btn-g">View rates and options<svg viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    <a href="{{ '/order/' | relative_url }}#po" class="btn btn-g">Submit a purchase order</a>
-    <span class="small muted">Purchase orders and invoicing on net 30. Paying in advance takes 5% off.</span>
-  </div>
-</div></section>
-
-<section class="sec" id="contact" style="border-bottom:0"><div class="wrap"><div class="cta">
-  <div class="cta-in">
-   <div>
-    <span class="eyebrow">Get in touch</span>
-    <h2>Tell me about your research and what you need to do next.</h2>
-   </div>
-   <div class="cta-b">
-    <p>What are you trying to run? What is taking too long, or getting in the way? Whether you are planning a new system or improving one you already have, I would be glad to hear about it.</p>
-   </div>
-   <div class="cta-c">
-    <form class="frm" action="https://formsubmit.co/sales@wirewalk.com" method="POST" novalidate="false">
-      <input type="hidden" name="_subject" value="Wirewalk — scoping call request">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="{{ '/thanks/' | absolute_url }}">
-      <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-      <input type="text" name="name" placeholder="Name and organization" required>
-      <input type="email" name="email" placeholder="Work email" required>
-      <button class="btn btn-p" type="submit">Send</button>
-    </form>
-    <p class="small muted" style="margin-top:16px">Prefer to call? <a href="tel:+19172177975">917-217-7975</a>. Details are used to reply to your enquiry. No mailing list, and nothing shared with vendors or partners.</p>
-   </div>
-  </div>
-</div></div></section>
