@@ -1,6 +1,6 @@
 ---
 title: 'Slinky on Kubernetes: operate Slurm without losing track of state, nodes and jobs'
-date: 2026-10-05 10:00:00 -0400
+date: 2026-05-14 10:00:00 -0400
 category: HPC
 tags:
 - Slurm

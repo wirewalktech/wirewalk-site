@@ -1,6 +1,6 @@
 ---
 title: 'Kubernetes multi-rail RDMA: follow the path from GPU allocation to fabric traffic'
-date: 2026-09-18 10:00:00 -0400
+date: 2026-07-29 10:00:00 -0400
 category: Kubernetes
 tags:
 - Kubernetes

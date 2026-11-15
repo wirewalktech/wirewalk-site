@@ -1,6 +1,6 @@
 ---
 title: 'Spectrum-X ECN, firmware and SPC-X parameters: audit the complete applied profile'
-date: 2026-10-27 10:00:00 -0400
+date: 2026-11-04 10:00:00 -0500
 category: Fabric
 tags:
 - Spectrum-X

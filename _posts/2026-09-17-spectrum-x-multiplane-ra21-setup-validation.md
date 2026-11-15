@@ -1,6 +1,6 @@
 ---
 title: 'Spectrum-X multi-plane setup: make the physical fabric, NIC layout and workload agree'
-date: 2026-10-16 10:00:00 -0400
+date: 2026-09-17 10:00:00 -0400
 category: Fabric
 tags:
 - Spectrum-X

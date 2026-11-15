@@ -1,6 +1,6 @@
 ---
 title: 'Kueue for HPC and AI: debug admission, placement and distributed startup separately'
-date: 2026-11-10 10:00:00 -0500
+date: 2026-01-22 10:00:00 -0500
 category: Kubernetes
 tags:
 - Kueue

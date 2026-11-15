@@ -1,6 +1,6 @@
 ---
 title: 'NVIDIA Run:ai for research: qualify the GPU platform before measuring utilization'
-date: 2026-11-03 10:00:00 -0500
+date: 2026-03-12 10:00:00 -0400
 category: AI Infrastructure
 tags:
 - Run:ai
@@ -18,7 +18,7 @@ A shared GPU platform should help researchers reach a useful result sooner. A bu
 
 Run:ai adds resource and workload management to Kubernetes. Qualification therefore needs to cover the platform's policy decisions and the infrastructure that carries out those decisions. A workload can satisfy one layer and fail at the next.
 
-The documentation baseline here is **NVIDIA Run:ai self-hosted 2.22**. This is a deployment and acceptance method, not a universal installation command for every Run:ai edition. SaaS, self-hosted, Kubernetes and OpenShift arrangements have different prerequisites; retain the selected release's requirements with the installation record. The [vendor lifecycle table](https://run-ai-docs.nvidia.com/self-hosted/2.22/support-policy/product-version-life-cycle) places 2.22 in extended support at this article date. Use it as a reproducible reference, and choose the appropriate supported target for a new deployment.
+The documentation baseline here is **NVIDIA Run:ai self-hosted 2.22**. This is a deployment and acceptance method, not a universal installation command for every Run:ai edition. SaaS, self-hosted, Kubernetes and OpenShift arrangements have different prerequisites; retain the selected release's requirements with the installation record. The [vendor lifecycle table](https://run-ai-docs.nvidia.com/self-hosted/2.22/support-policy/product-version-life-cycle) places 2.22 within its full-support period at this article date. Use it as a reproducible reference, and choose the appropriate supported target for a new deployment.
 
 ## Draw the control-plane and worker boundaries
 
