@@ -8,8 +8,14 @@ description: Technical guides to GPU and CPU compute, AI training pipelines, Lin
   <div class="sh-split">
     <div><span class="eyebrow">Writing · {{ site.posts.size }} articles</span>
       <h1>AI and HPC infrastructure articles.</h1></div>
-    <p>GPU and CPU compute, Linux and scientific software, AI training and big-data pipelines, parallel storage and low-latency networking. Practical engineering for AI factories and research centers, from benchmark design to production operation. Security, identity and recovery remain part of running the whole system.</p>
+    <p>Setup, troubleshooting and monitoring for the people running HPC and AI systems.</p>
   </div>
+  <div class="article-tools" id="article-tools" hidden>
+    <label for="article-search">Search articles</label><input id="article-search" type="search" placeholder="Try Spectrum-X, Slurm, GPFS or GPU debugging" aria-describedby="article-results">
+    <div class="tools-row"><p class="small" id="article-results" role="status" aria-live="polite">{{ site.posts.size }} articles. Choose a category below.</p><button type="button" id="expand-articles">Expand categories</button><button type="button" id="collapse-articles">Collapse categories</button></div>
+  </div>
+  <p class="small muted">Choose a category to see its articles, or <a href="{{ '/writing/topics/' | relative_url }}">browse by topic</a>.</p>
+  <details class="popular-guides"><summary>Popular starting points</summary>
   <nav class="topic-nav" aria-label="Start with HPC and AI">
     <a href="{{ '/writing/slurm-pending-jobs-priority-backfill-qos/' | relative_url }}">Slurm troubleshooting</a>
     <a href="{{ '/writing/slurm-kubernetes-integration-resource-ownership/' | relative_url }}">Slurm and Kubernetes</a>
@@ -25,17 +31,15 @@ description: Technical guides to GPU and CPU compute, AI training pipelines, Lin
     <a href="{{ '/writing/mpi-troubleshooting-playbook/' | relative_url }}">Low-latency networking</a>
     <a href="{{ '/writing/environment-modules-failure-modes/' | relative_url }}">Linux software stacks</a>
   </nav>
+  </details>
   {% assign topics = site.posts | group_by: 'category' | sort: 'name' %}
-  <nav class="topic-nav" aria-label="Article topics">
-    {% for topic in topics %}<a href="#topic-{{ topic.name | slugify }}">{{ topic.name }} · {{ topic.items.size }}</a>{% endfor %}
-    <a href="{{ '/writing/topics/' | relative_url }}">By topic &rarr;</a>
-  </nav>
+
   {% for topic in topics %}
-  <section class="topic-group" id="topic-{{ topic.name | slugify }}" aria-labelledby="heading-{{ topic.name | slugify }}">
-    <h3 id="heading-{{ topic.name | slugify }}">{{ topic.name }}</h3>
+  <details class="topic-group" id="topic-{{ topic.name | slugify }}" aria-labelledby="heading-{{ topic.name | slugify }}">
+    <summary><h2 id="heading-{{ topic.name | slugify }}">{{ topic.name }} <span class="small muted">· {{ topic.items.size }} articles</span></h2></summary>
     <div class="plist">
       {% for post in topic.items %}
-      <article class="pitem">
+      <article class="pitem" data-search="{{ post.title | escape }} {{ post.summary | escape }} {{ topic.name | escape }} {{ post.tags | join: ' ' | escape }}">
         <div>
           <h4><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h4>
           <p>{{ post.summary | default: post.excerpt | strip_html | truncate: 190 }}</p>
@@ -47,7 +51,7 @@ description: Technical guides to GPU and CPU compute, AI training pipelines, Lin
       </article>
       {% endfor %}
     </div>
-  </section>
+  </details>
   {% endfor %}
   {% if site.posts.size == 0 %}<p class="muted" style="padding:28px 0">No articles yet.</p>{% endif %}
   <p style="margin-top:32px" class="small muted">Written by
@@ -56,3 +60,24 @@ description: Technical guides to GPU and CPU compute, AI training pipelines, Lin
     <a href="{{ '/services/' | relative_url }}">Research infrastructure services</a>.
     Subscribe by <a href="{{ '/feed.xml' | relative_url }}">RSS</a>.</p>
 </div></section>
+
+<script>
+(function(){
+  const tools=document.getElementById('article-tools');
+  const input=document.getElementById('article-search');
+  const status=document.getElementById('article-results');
+  const groups=[...document.querySelectorAll('details.topic-group')];
+  const cards=[...document.querySelectorAll('article[data-search]')];
+  tools.hidden=false;
+  input.addEventListener('input',()=>{
+    const words=input.value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
+    document.querySelector('.popular-guides').hidden=words.length>0;
+    let count=0;
+    cards.forEach(card=>{const match=words.every(word=>card.dataset.search.toLocaleLowerCase().includes(word));card.hidden=!match;if(match)count++});
+    groups.forEach(group=>{group.hidden=![...group.querySelectorAll('article')].some(card=>!card.hidden);group.open=words.length>0&&!group.hidden});
+    status.textContent=words.length?(count?count+' matching '+(count===1?'article':'articles')+'.':'No articles match. Try a different term or clear the search.'):cards.length+' articles. Choose a category below.';
+  });
+  document.getElementById('expand-articles').addEventListener('click',()=>groups.forEach(group=>{if(!group.hidden)group.open=true}));
+  document.getElementById('collapse-articles').addEventListener('click',()=>groups.forEach(group=>group.open=false));
+})();
+</script>

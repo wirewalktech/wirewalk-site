@@ -137,13 +137,14 @@
 {% include site-style.html %}
 {% include prose.html %}
 </head>
-<body{% unless page.is_home %} class="no-pill"{% endunless %}>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 {% include header.html %}
 
-{{ content }}
+<main id="main-content" tabindex="-1">{{ content }}</main>
 
 {% include footer.html %}
 {% include core-js.html %}
-{% if page.is_home %}{% include home-js.html %}{% endif %}
+
 </body></html>

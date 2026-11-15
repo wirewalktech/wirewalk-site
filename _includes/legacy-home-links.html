@@ -1,0 +1,15 @@
+<script>
+(function(){
+  const routes = {{ site.data.legacy_sections | jsonify }};
+  function forward(){
+    const target=routes[location.hash.slice(1)];
+    if(!target)return;
+    const next=new URL(target,location.origin);
+    next.search=location.search;
+    location.replace(next.href);
+  }
+  forward();
+  addEventListener('hashchange',forward);
+})();
+</script>
+<noscript><section class="sec"><div class="wrap prose"><h2>Looking for a section?</h2><p>The site now has separate pages. These links take you to the content.</p><ul>{% for entry in site.data.legacy_sections %}<li id="{{ entry[0] }}"><a href="{{ entry[1] | relative_url }}">{{ entry[0] | capitalize }}</a></li>{% endfor %}</ul></div></section></noscript>

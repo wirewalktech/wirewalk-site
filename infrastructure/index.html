@@ -1,0 +1,65 @@
+---
+layout: section
+title: HPC and AI infrastructure
+seo_title: "HPC & AI Infrastructure \u2014 Compute, Fabric and Storage"
+description: HPC and AI infrastructure across compute, NVIDIA GPUs, InfiniBand, RoCE, parallel storage, schedulers
+  and the operations that support research.
+nav_section: infrastructure
+---
+<div class="band"><div class="wrap">
+  <b>Tools I work with</b>
+  <ul>
+    <li>Slurm</li><li>PBS Pro</li><li>LSF</li><li>InfiniBand</li><li>RoCE</li><li>OpenSM</li><li>NVIDIA UFM</li>
+    <li>GPFS / Storage Scale</li><li>Lustre</li><li>WekaFS</li><li>VAST</li><li>CUDA</li><li>NCCL</li>
+    <li>Kubernetes</li><li>Apptainer</li><li>Ansible</li><li>AWS</li><li>Azure</li><li>RHEL</li>
+  </ul>
+</div></div>
+<section class="sec" id="hpc"><div class="wrap">
+  <div class="sh-split">
+    <div><span class="eyebrow">HPC and AI</span>
+      <h1>Systems shaped around the research.</h1></div>
+    <p>A useful system starts with understanding the work people need to do. I bring compute, storage, networks and scientific software together, and stay involved through the practical work of making them run well.</p>
+  </div>
+  <div class="g3" data-rv>
+    <div><span class="n">01</span><h4><a href="{{ '/services/hpc-cluster-design/' | relative_url }}">Cluster architecture and build-out</a></h4><p>I help turn research needs into a working cluster: choosing hardware, planning capacity, installing systems and setting up the tools your team will use to manage them. My work includes Bright Cluster Manager, OpenHPC, HPCM and xCAT, across individual sites and larger environments.</p></div>
+    <div><span class="n">02</span><h4><a href="{{ '/services/infiniband-roce-diagnostics/' | relative_url }}">InfiniBand and low latency fabric</a></h4><p>When an analysis spans many machines, the connections between them matter. My experience spans SDR and DDR InfiniBand through EDR and HDR, along with a wide range of RoCE interconnects. I design, upgrade and troubleshoot these networks, using OpenSM and NVIDIA UFM and tracing problems through the switches, adapters and applications.</p></div>
+    <div><span class="n">03</span><h4><a href="{{ '/services/parallel-storage/' | relative_url }}">Parallel and scale-out storage</a></h4><p>Research data needs room to grow and a dependable path to the people and programs using it. I build and tune parallel storage, plan data movement and recovery, and test it with the actual workload. Systems I work with include IBM Storage Scale / GPFS, Lustre, WEKA, VAST, PowerScale / Isilon and DDN.</p></div>
+    <div><span class="n">04</span><h4><a href="{{ '/services/nvidia-gpu-ai-infrastructure/' | relative_url }}">GPU, CUDA and AI stacks</a></h4><p>I build GPU environments for model training, inference and scientific computing, with particular experience in NVIDIA systems: A100, H100, DGX, CUDA, NVLink and NCCL. The work includes matching memory, storage and networking to the job, then making PyTorch, TensorFlow and container environments usable for the team.</p></div>
+    <div><span class="n">05</span><h4><a href="{{ '/services/slurm-workload-management/' | relative_url }}">Schedulers and workload management</a></h4><p>A shared cluster needs priorities that make sense to the people using it. I configure Slurm, PBS Pro and LSF, including queues, GPU allocations, fair share and usage accounting. I also help teams move to a new scheduler while keeping their research workflows in view.</p></div>
+    <div><span class="n">06</span><h4><a href="{{ '/services/hpc-cluster-design/' | relative_url }}">Cloud and hybrid HPC</a></h4><p>I help you work out where cloud computing fits your research and budget, then build the environment and move the work. That includes AWS ParallelCluster, FSx for Lustre, EFA and Azure HPC, as well as systems that connect cloud resources with the equipment you already own.</p></div>
+  </div>
+</div></section>
+
+<section class="sec tint" id="expertise"><div class="wrap">
+  <div class="sh-split">
+    <div><span class="eyebrow">Other areas</span>
+      <h2>The everyday work that keeps research moving.</h2></div>
+    <p>Researchers also need accounts that work, software they can use, data they can find and someone to turn to when a job fails. I work alongside the people supporting those needs, including the planning, maintenance and documentation that keep a system useful over time.</p>
+  </div>
+  <div class="rows" data-rv>
+    <div class="row"><div>
+      <h4><a href="{{ '/services/linux-infrastructure-operations/' | relative_url }}">Enterprise IT and infrastructure</a></h4>
+      <p>I look after Linux and UNIX systems, identity services, software environments and monitoring. I also help teams move from older platforms, taking care to understand the applications and working habits that depend on them. Tools include Ansible, Puppet, Prometheus and Grafana.</p>
+    </div><div class="tag">Infrastructure</div></div>
+
+    <div class="row"><div>
+      <h4><a href="{{ '/services/linux-infrastructure-operations/' | relative_url }}#campus-and-inter-site-networking">Low latency networking</a></h4>
+      <p>I design and troubleshoot the networks that connect researchers, instruments, compute and data. That includes campus networks and connections between sites, using Juniper, Arista, Cisco and Brocade platforms. I follow the path the research traffic actually takes to find where it slows down.</p>
+    </div><div class="tag">Network</div></div>
+
+    <div class="row"><div>
+      <h4><a href="{{ '/services/security-compliance-review/' | relative_url }}">Security, compliance and audit</a></h4>
+      <p>I help teams build access controls, logging, patching and recovery into the way their systems are run. My experience includes research and clinical environments with specific data-handling and audit requirements. The detailed frameworks and responsibilities are described below.</p>
+    </div><div class="tag">Compliance</div></div>
+
+    <div class="row"><div>
+      <h4><a href="{{ '/services/parallel-storage/' | relative_url }}">Data management and movement</a></h4>
+      <p>I plan storage growth, migrations, backup and archive so people can keep working with their data as projects develop. That includes shared filesystems, snapshots, replication, tape and transfers between sites, with attention to access, retention and recovery.</p>
+    </div><div class="tag">Storage</div></div>
+
+    <div class="row"><div>
+      <h4><a href="{{ '/services/hpc-cluster-design/' | relative_url }}">Teams, vendors and budgets</a></h4>
+      <p>I have worked as a group lead and IT director, hiring, mentoring, planning budgets and working with vendors. I help researchers, engineers and support staff make decisions together, and leave the team with the knowledge and documentation to carry the work forward.</p>
+    </div><div class="tag">Leadership</div></div>
+  </div>
+</div></section>
