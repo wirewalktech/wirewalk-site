@@ -28,10 +28,10 @@ export class HostedLab extends EventTarget {
    await this.postMessage({type:'play',value:false});
    try{sessionStorage.setItem('wirewalk-lab-return',location.pathname)}catch{}
    this.purchase=this.purchase||crypto.randomUUID();
-   const d=await this.request('/api/checkout',{purchase:this.purchase});
+   const d=await this.request('/api/checkout',{purchase:this.purchase,expectedPriceCents:2000});
    if(!/^https:\/\/checkout\.stripe\.com\//.test(d.url))throw Error('Unexpected checkout destination.');location.assign(d.url);
   }catch(e){this.note(e.message);button.disabled=false}}
  async reconcile(){const session=new URLSearchParams(location.search).get('checkout');if(!session)return;const b=$('lab-check-payment');b.disabled=true;try{const d=await this.request('/api/reconcile',{session});this.lastBalance={...d.balance,at:Date.now()};this.countdown();this.note(d.paid?'Payment confirmed. One prepaid hour is recorded for this purchase. Resume the lab when ready.':'Payment is not confirmed yet. Check again shortly; please do not pay again.');if(d.paid){const u=new URL(location.href);u.searchParams.delete('checkout');history.replaceState(null,'',u);b.hidden=true;this.purchase=null;this.returnToLab();}}catch(e){this.note(e.message)}finally{b.disabled=false}}
- returnToLab(){let path='';try{path=sessionStorage.getItem('wirewalk-lab-return')||'';sessionStorage.removeItem('wirewalk-lab-return')}catch{}if(['/lab/switching/cumulus/','/lab/switching/quantum/','/lab/switching/juniper/','/lab/switching/arista/'].includes(path)&&path!==location.pathname)location.replace(path)}
+ returnToLab(){let path='';try{path=sessionStorage.getItem('wirewalk-lab-return')||'';sessionStorage.removeItem('wirewalk-lab-return')}catch{}if(['/lab/kubernetes-runai/','/lab/switching/cumulus/','/lab/switching/quantum/','/lab/switching/juniper/','/lab/switching/arista/'].includes(path)&&path!==location.pathname)location.replace(path)}
  async logout(){this.pauseOnExit();const t=this.token;this.token='';this.active=false;try{sessionStorage.removeItem(KEY)}catch{}this.showAccount(false);this.note('Signed out. Your account progress and unused time are saved.');this.request('/api/logout',{token:t},false).catch(()=>{});location.reload();}
 }

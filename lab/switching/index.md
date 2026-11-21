@@ -21,7 +21,7 @@ Each lab has eight GPU/HCA rails, two leaf roles per rail and a choice of one, t
 
 ## Use the same prepaid balance
 
-All four switching labs and the cluster lab share your account's existing five-minute trial and $10 prepaid hours. Opening another lab does not create another trial. Saved models are separate; only one session uses time at once. Pause before moving between labs. Reading this guide is free. [Access details](/lab/access/).
+All four switching labs, the cluster lab and the [Kubernetes/Run:ai lab](/lab/kubernetes-runai/) share your account's existing five-minute trial and $20 prepaid hours. Opening another lab does not create another trial. Saved models are separate; only one session uses time at once. Pause before moving between labs. Reading this guide is free. [Access details](/lab/access/).
 
 ## Begin with a small investigation
 

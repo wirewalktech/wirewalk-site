@@ -121,7 +121,7 @@ Simulation state is stored in your hosted account and can also be exported. Relo
 
 ## Hosted access and saved progress
 
-The lab requires a verified Wirewalk account and an internet connection. Each account has one five-minute trial. Time begins when you launch or resume the lab; after the trial, a $10 USD purchase adds one hour. No recurring charge is created. The server keeps account time separately from model ticks and imported JSON. Changing the model clock, reloading, importing a session or opening another tab does not reset the balance.
+The lab requires a verified Wirewalk account and an internet connection. Each account has one five-minute trial. Time begins when you launch or resume the lab; after the trial, a $20 USD purchase adds one hour. No recurring charge is created. The server keeps account time separately from model ticks and imported JSON. Changing the model clock, reloading, importing a session or opening another tab does not reset the balance.
 
 Pause freezes controls and stops time. The model’s speed changes its logical ticks, not the hourly price. One active session is allowed per account. Closing the tab or losing connectivity stops usage within a four-second lease window; reopening restores the latest saved state in a paused view. Export and viewing saved state are available after time runs out.
 

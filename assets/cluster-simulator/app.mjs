@@ -1,4 +1,4 @@
-import {HostedLab} from './access.mjs?v=20261121-switching';
+import {HostedLab} from './access.mjs?v=20261121-k8s20';
 import {summary,nodeIssues,bondStatus,storageStatus} from './view.mjs';
 const $=id=>document.getElementById(id),E=(tag,text='',cls='')=>{const e=document.createElement(tag);if(text)e.textContent=text;if(cls)e.className=cls;return e};
 let state=null,selected='gpu001',playing=false,tab='overview',worker=null,lastCommand='',nodeButtons=new Map(),nodeRows=new Map(),jobCards=new Map(),railCards=[],imageKey='',eventKey=0,freshSession=false,announcedReady=false;

@@ -1,4 +1,4 @@
-import {HostedLab} from '../cluster-simulator/access.mjs?v=20261121-switching';
+import {HostedLab} from '../cluster-simulator/access.mjs?v=20261121-k8s20';
 const $=id=>document.getElementById(id),E=(tag,text='',cls='')=>{const e=document.createElement(tag);e.textContent=text;if(cls)e.className=cls;return e};
 const lab=$('fabric-simulator').dataset.lab,ib=lab==='quantum',host=new HostedLab();let state=null,summary=null,playing=false,selected='leaf-r1a',bridge=null,key='';
 const status=(text,bad=false)=>{$('fabric-status').textContent=text;$('fabric-status').dataset.kind=bad?'error':'info'};
