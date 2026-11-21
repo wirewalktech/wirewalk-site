@@ -136,6 +136,7 @@
 {%- endif %}
 {% include site-style.html %}
 {% include prose.html %}
+{% include resource-style.html %}
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -145,6 +146,7 @@
 <main id="main-content" tabindex="-1">{{ content }}</main>
 
 {% include footer.html %}
+<script src="{{ '/assets/js/enquiry-context.js' | relative_url }}" defer></script>
 {% include core-js.html %}
 
 </body></html>

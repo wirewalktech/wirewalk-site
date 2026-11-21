@@ -1,0 +1,5 @@
+timestamp_seconds,device,counter,value
+100,node-a/rail-a,port_xmit_data,9007199254740993
+160,node-a/rail-a,port_xmit_data,9007215360868353
+100,node-a/rail-b,port_xmit_data,9007199254740993
+160,node-a/rail-b,port_xmit_data,9007207307804673

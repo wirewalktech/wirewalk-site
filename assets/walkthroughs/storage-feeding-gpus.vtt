@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:16.891
+This is an illustrative training scenario. A healthy bulk storage benchmark does not reproduce every input pipeline. Follow the batch through file discovery, reads, decompression, transformations, host queues and transfer before deciding that the answer is more filesystem bandwidth.
+
+00:00:16.891 --> 00:00:32.386
+Record the dataset identity, file layout, readers, workers, cache procedure and checkpoint traffic. Change one variable in a bounded experiment. A warm prepared dataset and a cold original do not establish an equivalent before-and-after comparison.
+
+00:00:32.386 --> 00:00:47.452
+A candidate layout or preprocessing step should be versioned, reversible and checked against the intended sample set and quality requirement. Include recurring preparation cost in elapsed time. Do not turn a faster run that dropped difficult work into a performance claim.
+
+00:00:47.452 --> 00:01:03.207
+The result should explain useful step timing, total elapsed time and recoverable work, alongside correctness and resource use. This scenario reports no production gain. Read the full investigation, sample remediation plan and benchmark records in the Wirewalk lab.

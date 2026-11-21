@@ -1,0 +1,12 @@
+---
+layout: base
+---
+<article class="art resource-page"><div class="wrap">
+<nav class="small muted" aria-label="Breadcrumb"><a href="{{ '/' | relative_url }}">Home</a>{% if page.parent_url %} / <a href="{{ page.parent_url | relative_url }}">{{ page.parent_title }}</a>{% endif %} / {{ page.title }}</nav>
+<header class="art-hd" style="margin-top:24px"><span class="eyebrow">{{ page.eyebrow | default: 'Research infrastructure' }}</span><h1>{{ page.title }}</h1><p class="lead">{{ page.summary | default: page.description }}</p></header>
+{% if page.example %}<aside class="example-banner"><strong>Illustrative lab scenario.</strong> {{ page.example_note | default: 'This is a constructed teaching example. Devices, observations and decisions do not describe a customer engagement or a measured production result.' }}</aside>{% endif %}
+<div class="prose resource-prose">{{ content }}</div>
+{% unless page.no_contact %}<aside class="resource-next"><p>If this resembles a problem in your system, we can start with the evidence you already have.</p><a href="{{ '/contact/' | relative_url }}">Discuss your system</a> · <a href="{{ '/services/' | relative_url }}">Explore services</a></aside>{% endunless %}
+</div></article>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":{{ '/' | absolute_url | jsonify }}},{"@type":"ListItem","position":2,"name":{{ page.title | jsonify }},"item":{{ page.url | absolute_url | jsonify }}}]}</script>
+{% include terminal-tools.html %}

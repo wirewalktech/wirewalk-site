@@ -1,9 +1,12 @@
 - title: Services
   url: /services/
   section: services
-- title: Infrastructure
-  url: /infrastructure/
-  section: infrastructure
+- title: Guides
+  url: /guides/
+  section: guides
+- title: Lab
+  url: /lab/
+  section: lab
 - title: Experience
   url: /experience/
   section: experience

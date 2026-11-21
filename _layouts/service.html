@@ -15,6 +15,7 @@ layout: base
   </header>
   <div class="art-body">
     <div class="prose">{{ content }}
+      <aside class="procurement-help" aria-labelledby="sample-deliverables"><h2 id="sample-deliverables">See the work before deciding</h2><p><a href="{{ '/samples/' | relative_url }}">Read sample reports and handover documents</a>, or explore <a href="{{ '/investigations/' | relative_url }}">illustrative investigations</a>. The written scope determines the deliverables for your system.</p><p>A qualification conversation establishes the workload, access, test window and expected result. <a href="{{ '/procurement/' | relative_url }}">The procurement guide</a> explains scope, purchase orders, invoicing and handover. <a href="{{ '/capabilities/' | relative_url }}">Print the capabilities overview</a> for your team.</p></aside>
       <h2 id="engagement-options">Engagement options</h2>
       <p>Choose a format below to see current rates and the ordering options for that engagement. If you are unsure which fits, we can work through the scope together.</p>
       <ul class="engagement-list">{% for sku in service.skus %}{% assign engagement = site.data.engagements | where: 'sku', sku | first %}<li><a href="{{ '/order/' | relative_url }}?sku={{ sku }}">{{ engagement.name }}</a><span>{{ engagement.description }}</span></li>{% endfor %}</ul>

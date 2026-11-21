@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:16.206
+This is a constructed two-node example. Both servers expose two RDMA devices, but their enumeration differs. Matching device zero across the nodes is not enough to establish a matching physical rail. Begin with the actual GPU, adapter, port and switch map.
+
+00:00:16.206 --> 00:00:32.444
+Record where ranks run and which devices the communication library selected. Compare that evidence with physical locality and cabling. NCCL rail policies depend on the network design and installed release. A value copied from another cluster is not a qualification plan.
+
+00:00:32.444 --> 00:00:49.885
+Sample the intended ports around the same controlled workload. Verify units and timestamps. The public counter tool uses synthetic fixtures to demonstrate the arithmetic. Its one gibibyte per second and half a gibibyte per second example rates are not adapter benchmarks or a promise about a real system.
+
+00:00:49.885 --> 00:01:05.149
+A completed investigation connects the effective map to repeatable application behavior. It also names the configuration owner and the events that require rediscovery. Find the full scenario, downloadable calculator and sample topology in the Wirewalk lab.
