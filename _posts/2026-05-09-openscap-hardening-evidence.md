@@ -22,10 +22,17 @@ OpenSCAP documents configuration evaluation with XCCDF and OVAL and the use of p
 
 On a lab host with OpenSCAP and the relevant content installed:
 
+{% include terminal-figure.html key="openscap-hardening-evidence" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 oscap -V
 oscap info /usr/share/xml/scap/ssg/content/ssg-rhel9-ds.xml
 ```
+
+</details>
 
 The content path is an example for an installed RHEL 9 SCAP Security Guide package. Use the actual available data stream and read its listed profiles. Do not paste a profile identifier from a different release and assume it selected the intended controls.
 

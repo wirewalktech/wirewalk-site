@@ -18,12 +18,19 @@ The commands here use an illustrative job ID. They do not assume that a particul
 
 Retrieve the parent job and child steps together:
 
+{% include terminal-figure.html key="slurm-job-failure-memory-exit-code-debugging" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 job=123456
 sacct -j "$job" --units=M --parsable2 \
   --format=JobID,JobName,State,ExitCode,DerivedExitCode,Elapsed,NodeList,ReqMem,MaxRSS,MaxRSSNode,MaxRSSTask
 scontrol show job -dd "$job"
 ```
+
+</details>
 
 The controller may no longer retain an old job, while accounting still does. Record when each query was made. Avoid using `sacct -X` for the first diagnosis because hiding step records removes evidence about where the failure occurred.
 

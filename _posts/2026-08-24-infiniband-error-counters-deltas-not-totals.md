@@ -25,12 +25,19 @@ uninterpretable on its own.
 
 Take two samples with a known interval between them and subtract.
 
+{% include terminal-figure.html key="infiniband-error-counters-deltas-not-totals" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 # sample, wait, sample again
 ibqueryerrors --counters > /tmp/err.t0
 sleep 900
 ibqueryerrors --counters > /tmp/err.t1
 ```
+
+</details>
 
 Or reset deliberately and come back:
 

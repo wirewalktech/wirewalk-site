@@ -16,12 +16,19 @@ When an application fails under SELinux, capture the denial before changing enfo
 
 On a RHEL-family host with SELinux and audit tools installed, begin with read-only inspection:
 
+{% include terminal-figure.html key="selinux-denials-without-disabling" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 getenforce
 sestatus
 sudo ausearch -m AVC,USER_AVC -ts recent
 ls -Zd /srv /srv/example-app
 ```
+
+</details>
 
 The paths are examples. Use the real application path, and preserve timestamps so the denial can be connected to the failed transaction. Absence of an AVC does not prove SELinux is unrelated; inspect the logging state and relevant troubleshooting guidance.
 

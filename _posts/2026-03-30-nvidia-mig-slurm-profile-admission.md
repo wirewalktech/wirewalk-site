@@ -40,11 +40,18 @@ Maintain explicit node classes if the service offers different layouts. A whole-
 
 Read the device inventory on the node:
 
+{% include terminal-figure.html key="nvidia-mig-slurm-profile-admission" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 nvidia-smi -L
 nvidia-smi --query-gpu=name,uuid,driver_version --format=csv
 slurmd -G
 ```
+
+</details>
 
 Run `slurmd -G` in the configured node environment with the permissions appropriate to the site; it tests and prints GRES information rather than proving an allocation can use it. Review its diagnostics, including ignored devices and mismatches.
 

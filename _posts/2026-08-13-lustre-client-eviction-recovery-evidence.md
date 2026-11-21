@@ -34,12 +34,19 @@ Retain client kernel messages and relevant service logs, with time zone and boot
 
 Read-only client observations can include:
 
+{% include terminal-figure.html key="lustre-client-eviction-recovery-evidence" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 uname -r
 findmnt -t lustre -o TARGET,SOURCE,FSTYPE,OPTIONS
 journalctl -k --since '-30 minutes' --no-pager
 ps -eo pid,ppid,stat,wchan:32,comm
 ```
+
+</details>
 
 Permissions and log availability vary. Process names and paths can contain sensitive information, so store evidence in the appropriate private incident location. A public report should use generic roles and remove user data.
 

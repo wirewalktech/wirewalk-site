@@ -44,12 +44,19 @@ Use Slurm's [MPI launch guidance](https://slurm.schedmd.com/mpi_guide.html) and 
 
 Start with a non-MPI step, then the MPI test. For a site that explicitly supports direct launch through PMIx:
 
+{% include terminal-figure.html key="apptainer-mpi-rdma-host-container-compatibility" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 # Run within a small allocation; confirm pmix support first.
 srun --mpi=list
 srun --mpi=pmix --ntasks=2 \
   apptainer exec mpi-validated.sif /opt/tests/mpi_hello
 ```
+
+</details>
 
 The binary and image are placeholders. This pattern assumes the site has validated that launch model. Do not treat `--mpi=pmix` as a universal repair for MPI startup failures.
 

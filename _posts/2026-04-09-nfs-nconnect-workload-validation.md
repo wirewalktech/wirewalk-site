@@ -42,11 +42,18 @@ Do not unmount a filesystem under active research processes merely to reset a be
 
 Useful read-only observations include:
 
+{% include terminal-figure.html key="nfs-nconnect-workload-validation" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 findmnt -t nfs,nfs4 -o TARGET,SOURCE,FSTYPE,OPTIONS
 nfsstat -m
 cat /proc/self/mountstats
 ```
+
+</details>
 
 Save the outputs with timestamps and use interval differences for cumulative statistics. The [nfsstat reference](https://man7.org/linux/man-pages/man8/nfsstat.8.html) explains the available client and mount views. These commands describe observed state; none proves that an application has enough concurrency to benefit.
 

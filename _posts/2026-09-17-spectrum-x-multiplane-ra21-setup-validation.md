@@ -84,6 +84,11 @@ Do not use a broad network-policy assumption to infer isolation on secondary net
 
 Begin with read-only observations in the configured management context:
 
+{% include terminal-figure.html key="spectrum-x-multiplane-ra21-setup-validation" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 kubectl get crd | grep -i nicconfiguration
 kubectl -n nvidia-network-operator get nicconfigurationtemplates -o yaml
@@ -91,6 +96,8 @@ ip -br link
 ip -br address
 rdma link show
 ```
+
+</details>
 
 Inspect the per-device reconciliation objects and events discovered through the installed API. A desired template is not a readback of effective firmware or runtime state. Check the running driver, actual link configuration and the state after any required activation event.
 

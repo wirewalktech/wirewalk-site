@@ -24,6 +24,11 @@ The reference stack here is **UCX 1.18.0**, released in January 2025, with **Ope
 
 Collect tool, MPI and UCX identities in the environment used by the job:
 
+{% include terminal-figure.html key="ucx-transport-gpu-memory-debugging" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 command -v mpirun
 command -v ompi_info
@@ -33,6 +38,8 @@ ucx_info -v
 ucx_info -d
 ucx_info -cf
 ```
+
+</details>
 
 The [UCX 1.18 tool source](https://raw.githubusercontent.com/openucx/ucx/v1.18.0/src/tools/info/ucx_info.c) documents these information modes. Keep the build and configuration output rather than relying only on the package label.
 

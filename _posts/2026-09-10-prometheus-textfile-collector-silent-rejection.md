@@ -50,9 +50,16 @@ emit "their own" block and the order they are called in changed.
 
 node_exporter exposes its own verdict. Scrape it:
 
+{% include terminal-figure.html key="prometheus-textfile-collector-silent-rejection" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 curl -s localhost:9100/metrics | grep node_textfile
 ```
+
+</details>
 
 ```
 node_textfile_scrape_error 1

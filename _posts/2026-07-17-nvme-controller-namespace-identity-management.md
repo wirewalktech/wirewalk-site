@@ -32,6 +32,11 @@ Record the subsystem identity, controller, namespace identifier and supported pe
 
 A read-only starting point is:
 
+{% include terminal-figure.html key="nvme-controller-namespace-identity-management" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 nvme version
 nvme list -o json
@@ -39,6 +44,8 @@ nvme list-subsys -o json
 lsblk -o NAME,TYPE,SIZE,FSTYPE,MOUNTPOINTS,MODEL,SERIAL
 findmnt -rn -o TARGET,SOURCE,FSTYPE
 ```
+
+</details>
 
 Some fields depend on tool and distribution versions. Administrative permissions may be required for NVMe identify and log commands. Run only the observations allowed by the site's operating policy.
 

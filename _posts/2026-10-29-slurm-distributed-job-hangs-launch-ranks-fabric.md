@@ -26,10 +26,17 @@ If only one process writes progress, a silent log cannot distinguish a healthy l
 
 Within a small allocation, run a hostname step using the intended task layout:
 
+{% include terminal-figure.html key="slurm-distributed-job-hangs-launch-ranks-fabric" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 srun --ntasks=4 --label hostname
 srun --mpi=list
 ```
+
+</details>
 
 The first command tests basic task placement and launch. It does not test MPI. The second reports available Slurm MPI plugins; it does not prove compatibility with the application image.
 

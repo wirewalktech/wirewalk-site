@@ -38,9 +38,16 @@ The number you want is allocated blocks versus logical bytes, and only the files
 accounting knows both. On GPFS, quota reporting is the cheapest source, because it is
 maintained continuously rather than computed by walking the tree:
 
+{% include terminal-figure.html key="measuring-compression-parallel-filesystem" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 mmrepquota -j --block-size 1K gpfs0
 ```
+
+</details>
 
 The block column is allocation. Compare it against the logical total for the same fileset to
 get a ratio. For per-file detail:

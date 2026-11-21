@@ -35,10 +35,17 @@ free to check before anything is measured. You want, across every node in the
 allocation: the same OFED or DOCA-OFED release, the same adapter firmware, the
 same MPI build, and PCIe slots that trained to their rated speed and width.
 
+{% include terminal-figure.html key="mpi-layered-test-methodology" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 pdsh -w node[01-64] 'ofed_info -s; ibv_devinfo -d mlx5_0 | grep -E "fw_ver|board_id"' \
   | dshbak -c
 ```
+
+</details>
 
 `board_id` is the PSID, and it identifies the adapter model and OEM variant.
 Two adapters with the same marketing name and different PSIDs are different

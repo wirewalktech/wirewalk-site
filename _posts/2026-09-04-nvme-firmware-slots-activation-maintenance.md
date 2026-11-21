@@ -32,12 +32,19 @@ Use the [controller and namespace inventory process](/writing/nvme-controller-na
 
 Read-only observations can include:
 
+{% include terminal-figure.html key="nvme-firmware-slots-activation-maintenance" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 nvme id-ctrl /dev/nvme0 -o json
 nvme fw-log /dev/nvme0 -o json
 nvme smart-log /dev/nvme0 -o json
 nvme list-subsys -o json
 ```
+
+</details>
 
 The path is illustrative. Save output with identity and timestamps, using the installed tool's supported fields. The [firmware-slot log reference](https://github.com/linux-nvme/nvme-cli/blob/v2.11/Documentation/nvme-fw-log.txt) describes the retrieval interface; interpret the returned capabilities using the controller and vendor documentation.
 

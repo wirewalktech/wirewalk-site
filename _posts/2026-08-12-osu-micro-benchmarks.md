@@ -22,6 +22,11 @@ time. `osu_bw` streams a window of messages in one direction and reports
 sustained bandwidth. Everything else in the suite is a variation on those two
 ideas.
 
+{% include terminal-figure.html key="osu-micro-benchmarks" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 # two ranks, one per node, pinned
 mpirun -np 2 -map-by ppr:1:node --bind-to core \
@@ -29,6 +34,8 @@ mpirun -np 2 -map-by ppr:1:node --bind-to core \
 mpirun -np 2 -map-by ppr:1:node --bind-to core \
   ./osu_bw
 ```
+
+</details>
 
 Both sweep message sizes and print a table. Read them as two different regimes.
 Small messages measure the fixed cost of getting a message onto the wire and

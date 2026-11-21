@@ -23,10 +23,17 @@ status handling, no retry, no alert — output or nothing.
 
 So a script whose first act is to redirect its own output has turned the notifier off:
 
+{% include terminal-figure.html key="the-scheduled-job-that-stopped-reporting" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 #!/bin/bash
 exec >> /var/log/replication.log 2>&1      # cron will now never have anything to mail
 ```
+
+</details>
 
 This is a sensible thing to want — you do want a log — and it is usually added long after the
 cron entry, by someone who is not thinking about cron. The job then fails every night for

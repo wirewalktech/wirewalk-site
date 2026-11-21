@@ -30,6 +30,11 @@ The [Linux userspace-verbs documentation](https://docs.kernel.org/6.4/infiniband
 
 In a diagnostic job, collect:
 
+{% include terminal-figure.html key="rdma-memory-registration-memlock-context" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 ulimit -S -l
 ulimit -H -l
@@ -37,6 +42,8 @@ cat /proc/self/limits
 id
 ls -l /dev/infiniband
 ```
+
+</details>
 
 The shell reports its inherited context. For a long-running application, inspect the application's own limits and identity as well, subject to access permissions. A launcher or service can alter the values between the login shell and worker process.
 

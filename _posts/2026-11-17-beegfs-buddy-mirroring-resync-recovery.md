@@ -36,12 +36,19 @@ Keep metadata and storage protection explicit. Configuring one does not establis
 
 Begin with a small, approved canary that has known eligible buddy groups and enough capacity for both copies. Record the group layout before creating test data:
 
+{% include terminal-figure.html key="beegfs-buddy-mirroring-resync-recovery" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 beegfs-ctl --listmirrorgroups --nodetype=storage
 beegfs-ctl --listmirrorgroups --nodetype=meta
 beegfs-ctl --listtargets --nodetype=storage --state
 beegfs-ctl --listtargets --nodetype=meta --state
 ```
+
+</details>
 
 For a new test directory whose placement has been deliberately scoped, a pattern example is:
 

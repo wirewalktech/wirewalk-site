@@ -38,11 +38,18 @@ reproduce it at all. Treat a hyphen in an ETag as "this field is not a content h
 Modern S3 supports additional checksum algorithms that are stored as object metadata, and the
 one that matters here is whether the stored value covers the **whole object** or only parts.
 
+{% include terminal-figure.html key="verifying-multi-terabyte-transfer-checksums" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 aws s3api head-object --bucket "$B" --key "$K" \
   --checksum-mode ENABLED \
   --query '{Algo:ChecksumType,CRC64:ChecksumCRC64NVME,SHA256:ChecksumSHA256,ETag:ETag}'
 ```
+
+</details>
 
 ```json
 { "Algo": "FULL_OBJECT", "CRC64": "k3Nf0pQ2vLs=", "SHA256": null,

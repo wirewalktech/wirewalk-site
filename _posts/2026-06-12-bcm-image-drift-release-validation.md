@@ -26,12 +26,19 @@ For each release, retain a package manifest, a short list of critical configurat
 
 A small read-only inventory on an RPM-based node might begin with:
 
+{% include terminal-figure.html key="bcm-image-drift-release-validation" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 uname -r
 rpm -qa --qf '%{NAME} %{VERSION}-%{RELEASE}.%{ARCH}\n' | sort
 findmnt -rn -o TARGET,FSTYPE,SOURCE
 systemctl --failed --no-pager
 ```
+
+</details>
 
 These observations describe the node where they run. Collect the image manifest inside the image using the package manager's supported root or chroot workflow. A successful package transaction there does not establish that a kernel module will load on the next boot.
 

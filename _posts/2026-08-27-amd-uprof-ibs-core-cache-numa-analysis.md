@@ -25,6 +25,11 @@ Record the CPU family and model, core and SMT layout, NUMA domains, relevant fir
 
 Inspect the cache-sharing information the kernel exposes. A small read-only inventory can include:
 
+{% include terminal-figure.html key="amd-uprof-ibs-core-cache-numa-analysis" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 lscpu -e=CPU,CORE,SOCKET,NODE
 numactl --hardware
@@ -34,6 +39,8 @@ for cache_dir in /sys/devices/system/cpu/cpu0/cache/index*; do
       "$cache_dir/shared_cpu_list"
 done
 ```
+
+</details>
 
 The cache view here begins with CPU 0. Inspect representative CPUs from other relevant groups before drawing a system-wide map. A cache domain and a NUMA node describe different relationships and should not be assumed to have identical membership.
 

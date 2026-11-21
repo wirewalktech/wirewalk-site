@@ -26,6 +26,11 @@ For a modest manifest, a line-number lookup can be enough. For a very large one,
 
 [Schematic array submission](https://slurm.schedmd.com/job_array.html) can use a concurrency limit:
 
+{% include terminal-figure.html key="slurm-job-arrays-metadata-concurrency" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 #!/bin/bash
 #SBATCH --array=0-999%24
@@ -36,6 +41,8 @@ For a modest manifest, a line-number lookup can be enough. For a very large one,
 set -euo pipefail
 python worker.py --manifest inputs.jsonl --index "$SLURM_ARRAY_TASK_ID"
 ```
+
+</details>
 
 Here, 1,000 tasks and a limit of 24 are illustrative choices, not recommended defaults. The `logs` directory must exist before the job starts. The worker must validate that its index resolves to one intended record and write an output associated with that record.
 

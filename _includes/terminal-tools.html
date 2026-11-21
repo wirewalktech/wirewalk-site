@@ -1,0 +1,21 @@
+<script>
+/* Progressive enhancement only: figures and native text disclosures work without JS. */
+(function(){
+  document.querySelectorAll('.art-body .prose pre').forEach(function(pre){
+    if(pre.closest('.code-frame'))return;
+    const frame=document.createElement('div');frame.className='code-frame';
+    const bar=document.createElement('div');bar.className='code-frame-bar';
+    const label=document.createElement('span');
+    label.textContent=pre.closest('.lab-session-text')?'Session transcript':'Example listing';
+    const button=document.createElement('button');button.type='button';button.textContent='Copy';
+    button.setAttribute('aria-label','Copy this example as text');
+    const status=document.createElement('span');status.className='copy-status';status.setAttribute('aria-live','polite');
+    button.addEventListener('click',async function(){
+      try{await navigator.clipboard.writeText(pre.textContent);status.textContent='Copied';}
+      catch(e){const range=document.createRange();range.selectNodeContents(pre);const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);status.textContent='Text selected; use your copy shortcut';}
+      window.setTimeout(function(){status.textContent='';},3500);
+    });
+    bar.append(label,status,button);pre.parentNode.insertBefore(frame,pre);frame.append(bar,pre);
+  });
+})();
+</script>

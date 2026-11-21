@@ -35,12 +35,19 @@ This is an example policy, not a default OneFS behavior. Adapt it to the applica
 
 On a Linux client with the relevant utilities installed, these are read-only starting points:
 
+{% include terminal-figure.html key="powerscale-multiprotocol-identity-acls" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 id
 findmnt -t nfs,nfs4
 ls -ln /mnt/security-lab
 getfacl /mnt/security-lab/example.txt
 ```
+
+</details>
 
 `getfacl` is a client-side view; it does not necessarily expose every server-side Windows ACL semantic. Pair it with OneFS effective-identity and ACL inspection for the installed release. On Windows, inspect the actual connected identity and both share and file permissions.
 

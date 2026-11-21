@@ -26,10 +26,17 @@ Compare affected and unaffected jobs with similar access patterns. A read-heavy 
 
 A bounded read-only starting point is:
 
+{% include terminal-figure.html key="lustre-metadata-capacity-performance-operations" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 lfs df -h /path/to/lustre
 lfs df -i /path/to/lustre
 ```
+
+</details>
 
 Interpret output with the installed release's documentation and the storage team. Capacity in bytes and inode availability answer different questions. Per-target state matters; a reassuring total does not prove that a specific allocation or layout has usable headroom.
 

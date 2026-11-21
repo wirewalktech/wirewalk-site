@@ -25,11 +25,18 @@ and no framework in the way.
 Build against MPI if you intend to run across more than one node, which is the
 only interesting case:
 
+{% include terminal-figure.html key="nccl-tests-collective-bandwidth" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 git clone https://github.com/NVIDIA/nccl-tests
 cd nccl-tests
 make MPI=1 MPI_HOME=/opt/openmpi CUDA_HOME=/usr/local/cuda
 ```
+
+</details>
 
 That produces one binary per collective: `all_reduce_perf`,
 `all_gather_perf`, `reduce_scatter_perf`, `broadcast_perf`, `alltoall_perf`,

@@ -26,12 +26,19 @@ Capture model, serial number, firmware, subsystem and namespace context with eac
 
 Useful read-only snapshots include:
 
+{% include terminal-figure.html key="nvme-health-error-log-endurance-analysis" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 nvme id-ctrl /dev/nvme0 -o json
 nvme smart-log /dev/nvme0 -o json
 nvme error-log /dev/nvme0 -o json
 journalctl -k --since '-30 minutes' --no-pager
 ```
+
+</details>
 
 Resolve the illustrative controller path before use. Log access requires appropriate permissions. Store kernel records privately where they contain workload paths or other infrastructure details.
 

@@ -22,9 +22,16 @@ Use an inventory of required sensors and log producers. Include ownership, expec
 
 Prometheus documents `absent_over_time` and time functions in its [query reference](https://prometheus.io/docs/prometheus/latest/querying/functions/). For an exporter that you implement to publish the most recent event time, illustrative expressions are:
 
+{% include terminal-figure.html key="missing-security-telemetry-prometheus" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```promql
 (time() - security_last_event_timestamp_seconds{source="storage-audit"}) > 900
 ```
+
+</details>
 
 ```promql
 absent_over_time(security_last_event_timestamp_seconds{source="storage-audit"}[15m])

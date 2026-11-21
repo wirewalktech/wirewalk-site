@@ -31,11 +31,18 @@ Reduce the input while preserving the failing or slow behavior. Keep an output c
 
 Use the supported [AMD SMI telemetry interface](https://rocm.docs.amd.com/projects/amdsmi/en/docs-6.4.0/how-to/amdsmi-cli-tool.html) to retain device identity and operating context before and during the experiment. Basic read-only snapshots can start with:
 
+{% include terminal-figure.html key="amd-rocm-rocgdb-rocprofv3-gpu-analysis" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 amd-smi version
 amd-smi list
 amd-smi metric
 ```
+
+</details>
 
 Available fields depend on the platform. Align clock, power, temperature and activity observations with the application interval. These readings can expose an operating constraint, but do not identify which kernel instruction or cache access caused a stall. Avoid mixing a whole-device activity percentage with a per-kernel counter as though they had the same scope.
 

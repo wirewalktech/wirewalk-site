@@ -30,10 +30,17 @@ Check CUDA API return values and kernel-launch errors in the application. Establ
 
 [NVIDIA's CUDA-GDB 12.8 guide](https://docs.nvidia.com/cuda/archive/12.8.0/cuda-gdb/index.html) describes debugging information and device execution controls. A small illustrative build pair is:
 
+{% include terminal-figure.html key="cuda-gdb-compute-sanitizer-correctness" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 nvcc -g -G -o solver-debug solver.cu
 nvcc -O3 -lineinfo -o solver-profile solver.cu
 ```
+
+</details>
 
 The source and executable names are placeholders. Preserve the real program's required architecture, include and link options. `-G` enables device debugging and can substantially change generated code and optimization behavior. Line information in an optimized build helps attribution but does not provide the same variable visibility as a device-debug build.
 

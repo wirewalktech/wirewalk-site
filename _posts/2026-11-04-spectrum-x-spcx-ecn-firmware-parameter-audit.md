@@ -44,6 +44,11 @@ The [26.1.2 configuration rules](https://docs.nvidia.com/networking/display/kube
 
 On the verified canary host, read-only observations might include:
 
+{% include terminal-figure.html key="spectrum-x-spcx-ecn-firmware-parameter-audit" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 pci_bdf=0000:81:00.0
 netdev=example0
@@ -52,6 +57,8 @@ ethtool -i "$netdev"
 mlnx_qos -i "$netdev"
 ethtool -S "$netdev"
 ```
+
+</details>
 
 The PCI address and interface are placeholders, not discovery instructions. Keep the complete `mlxconfig` result rather than retaining only lines containing ROCE. Fields affecting parser layout, virtualization or PCI resources can explain why an apparently correct congestion setting is ineffective.
 

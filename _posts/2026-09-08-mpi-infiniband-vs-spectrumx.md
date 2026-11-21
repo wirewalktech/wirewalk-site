@@ -93,9 +93,16 @@ is fine, and the alltoall is half what it should be.
 
 On the NIC:
 
+{% include terminal-figure.html key="mpi-infiniband-vs-spectrumx" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 mlnx_qos -i enp1s0f0
 ```
+
+</details>
 
 ```
 DCBX mode: OS controlled

@@ -33,9 +33,16 @@ what you have to do to make it durable.
 The practical test is a single command. If the path is a mount from shared storage, the change
 is global and already durable:
 
+{% include terminal-figure.html key="node-local-state-and-the-reimage-that-erases-it" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 findmnt --target /the/path -o SOURCE,FSTYPE,TARGET
 ```
+
+</details>
 
 This matters more than it sounds, because adjacent paths frequently differ. A software tree can
 be a shared mount while its **parent directory is local disk** — so an edit one level up is

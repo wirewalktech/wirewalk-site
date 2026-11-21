@@ -20,6 +20,11 @@ Begin at the service root and follow returned resource links. Do not assume that
 
 A read-only request can use a protected, site-provided curl configuration:
 
+{% include terminal-figure.html key="redfish-automation-state-machines-tasks-etags" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 # The config contains site-managed authentication/TLS settings.
 # It must not enable verbose credential logging or insecure TLS bypass.
@@ -27,6 +32,8 @@ curl --config "$REDFISH_READ_CONFIG" \
   --connect-timeout 5 --max-time 20 --fail-with-body \
   'https://bmc.example.invalid/redfish/v1/'
 ```
+
+</details>
 
 The `.invalid` address is intentionally non-operational. Validate the management certificate against the site's trust configuration. Do not make `-k` the permanent answer to certificate deployment problems.
 

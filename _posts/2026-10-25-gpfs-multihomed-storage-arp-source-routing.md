@@ -66,10 +66,17 @@ The policies must agree with the routing design. Relaxing them may hide an incor
 
 On the client, first establish how the additional storage address would be reached:
 
+{% include terminal-figure.html key="gpfs-multihomed-storage-arp-source-routing" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 ip -4 route get 192.0.2.209
 ip -4 neigh show to 192.0.2.209 dev ib0
 ```
+
+</details>
 
 For this example, the client should regard the address as on-link through its IPoIB interface. If a gateway or another interface appears instead, investigate that route before attributing the failure to the storage server.
 

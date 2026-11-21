@@ -24,10 +24,17 @@ the tensor cores were used, or whether the kernel spent its time waiting on memo
 A single-threaded kernel that reads one float per clock will report 100% utilization while
 delivering a rounding error of the device's capability.
 
+{% include terminal-figure.html key="reading-gpu-utilization-mfu-honestly" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 nvidia-smi --query-gpu=utilization.gpu,utilization.memory,power.draw,clocks.sm \
            --format=csv -l 5
 ```
+
+</details>
 
 Two cross-checks available right there, and both are more informative than the utilization
 field:

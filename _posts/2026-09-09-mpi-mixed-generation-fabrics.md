@@ -77,9 +77,16 @@ split that has a straight cable in it.
 
 The scan to run across the whole fabric, on a schedule:
 
+{% include terminal-figure.html key="mpi-mixed-generation-fabrics" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 iblinkinfo -l | awk '$0 !~ /4X/ && /Active/ {print}'
 ```
+
+</details>
 
 And the more useful version, which catches both narrow links and links that
 negotiated a lower generation than they should have:

@@ -23,10 +23,17 @@ The project's [file striping guide](https://wiki.lustre.org/Configuring_Lustre_F
 
 Start with read-only inspection of a representative file and its parent:
 
+{% include terminal-figure.html key="lustre-striping-ai-hpc-workloads" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 lfs getstripe /path/to/lustre/dataset/example-file
 lfs getstripe -d /path/to/lustre/dataset
 ```
+
+</details>
 
 Do not infer an existing file's layout from the current parent default. Record both, together with client/server versions and the targets available to the test.
 

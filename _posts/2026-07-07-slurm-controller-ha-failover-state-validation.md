@@ -54,12 +54,19 @@ The [25.05 configuration reference](https://raw.githubusercontent.com/SchedMD/sl
 
 Read-only observations include:
 
+{% include terminal-figure.html key="slurm-controller-ha-failover-state-validation" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 findmnt -T /srv/slurm/state
 namei -l /srv/slurm/state
 scontrol ping
 scontrol show config
 ```
+
+</details>
 
 A directory existing at that pathname is weak evidence. If the remote mount is absent, an ordinary local directory can remain underneath it. Qualify service startup dependencies so the controller cannot silently initialize against the wrong backing store.
 

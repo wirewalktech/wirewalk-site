@@ -48,11 +48,18 @@ exist, or misses ports that now do.
 
 Regenerate the topology from the fabric rather than editing your records by hand:
 
+{% include terminal-figure.html key="quantum-switch-port-splitting" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 ibnetdiscover > topology-$(date +%F).txt
 iblinkinfo
 ibdiagnet -o /var/tmp/ibdiag-$(date +%F)
 ```
+
+</details>
 
 Do that before the change as well as after. The diff is what you hand to whoever
 maintains the monitoring.

@@ -44,6 +44,11 @@ if ($corewalltime != 0) {
 
 So for a single job you can just run `seff` and stop reading:
 
+{% include terminal-figure.html key="slurm-efficiency-accounting-traps" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```
 $ seff 918442
 Job ID: 918442
@@ -58,6 +63,8 @@ Job Wall-clock time: 04:13:05
 Memory Utilized: 5.47 GB
 Memory Efficiency: 8.55% of 64.00 GB
 ```
+
+</details>
 
 `seff` does not scale. It is one job per invocation and it goes through the Slurm Perl API each
 time. For a fleet report over a month of jobs you need `sacct`, and that is where the trouble

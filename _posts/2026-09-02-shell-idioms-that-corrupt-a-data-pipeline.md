@@ -23,10 +23,17 @@ The six cases below show where a valid shell command can quietly corrupt the nex
 
 The intent is to split a TSV on tabs. The result splits on nothing.
 
+{% include terminal-figure.html key="shell-idioms-that-corrupt-a-data-pipeline" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 IFS=$(printf '\t')      # IFS is now the EMPTY STRING
 while read -r key value; do ...; done < data.tsv
 ```
+
+</details>
 
 Command substitution strips **trailing whitespace**, and a tab is whitespace. `$(printf '\t')`
 is therefore `""`. With an empty `IFS`, `read` performs no field splitting at all: the entire

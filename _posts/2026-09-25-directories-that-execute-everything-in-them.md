@@ -35,11 +35,18 @@ edited is correct. The thing users see is not.
 The same contract, different consumer, with worse consequences: environment modules treats every
 regular file under `MODULEPATH` as a loadable module.
 
+{% include terminal-figure.html key="directories-that-execute-everything-in-them" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```
 $ module avail
 matlab/2025a
 matlab/2025a.bak-lnhint       <-- loads the PRE-EDIT modulefile
 ```
+
+</details>
 
 That entry is offered to users by tab completion and by `module avail`, and loading it applies
 the old configuration. It is not a cosmetic blemish; it is a shadow copy of software

@@ -16,11 +16,18 @@ An alert rarely explains the whole connection. An analyst also needs to know wha
 
 On a host with Zeek installed, process an approved synthetic PCAP from a clean output directory:
 
+{% include terminal-figure.html key="zeek-network-investigation-context" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 mkdir -p ./zeek-lab-output
 cd ./zeek-lab-output
 zeek -r ../approved-test.pcap LogAscii::use_json=T
 ```
+
+</details>
 
 This writes local logs. It does not send traffic or validate the location of a production sensor. Zeek documents the workflow in its [quick start](https://docs.zeek.org/en/v8.2.1/quickstart.html).
 

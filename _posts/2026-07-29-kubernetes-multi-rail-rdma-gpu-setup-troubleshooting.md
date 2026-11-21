@@ -30,6 +30,11 @@ Build an inventory linking node name, physical NIC, PCI function, net device, RD
 
 Read-only host checks include:
 
+{% include terminal-figure.html key="kubernetes-multi-rail-rdma-gpu-setup-troubleshooting" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 ip -br link
 ip -br address
@@ -37,6 +42,8 @@ rdma link show
 nvidia-smi -L
 nvidia-smi topo -m
 ```
+
+</details>
 
 Run these in the appropriate host context. A restricted application container may intentionally lack these utilities or expose a different view.
 

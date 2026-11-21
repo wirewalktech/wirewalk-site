@@ -68,6 +68,30 @@
 .highlight .gd{color:#E8836A}
 .highlight .gi{color:#B9C99A}
 
+/* Terminal figures are rendered examples, with searchable text alongside. */
+.prose .lab-figure{margin:32px 0 14px;max-width:100%}
+.lab-figure-label{display:flex;align-items:center;gap:8px;margin-bottom:10px;font:600 11px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--tx2)}
+.lab-signal{width:7px;height:7px;border-radius:50%;background:#49866c}
+.lab-image-scroll{overflow-x:auto;border:1px solid #34424d;border-radius:12px;background:#141c23;-webkit-overflow-scrolling:touch;scrollbar-color:#627984 #141c23}
+.prose .lab-image-scroll a{display:block;min-width:680px;border:0}
+.prose .lab-image-scroll img{width:100%;height:auto;border:0;border-radius:0}
+.prose .lab-figure figcaption{font-size:13.5px;line-height:1.6;margin-top:12px;color:var(--tx2)}
+.lab-figure figcaption strong{display:block;font-weight:600}
+.lab-example-note{display:block;color:var(--tx2);margin:4px 0}
+.lab-scroll-hint{display:none}
+.prose .terminal-source{margin:12px 0 24px;border:1px solid var(--ln);border-radius:9px;padding:0 16px;background:var(--alt)}
+.terminal-source summary{cursor:pointer;padding:12px 0;font-size:14px;font-weight:500;color:var(--tx)}
+.terminal-source[open]{padding-bottom:16px}
+.terminal-source summary:focus-visible,.lab-image-scroll:focus-visible{outline:2px solid var(--ac2);outline-offset:4px}
+.prose .code-frame{min-width:0;border:1px solid #34424d;border-radius:10px;overflow:hidden;background:#1f1e1d;margin:1em 0}
+.code-frame-bar{display:flex;align-items:center;gap:12px;background:#292e30;padding:8px 12px;color:#d0d8dc;font:500 11.5px/1.5 var(--mono)}
+.code-frame-bar button{margin-left:auto;border:1px solid #66747b;border-radius:5px;padding:4px 10px;background:transparent;color:#e5ecef;font:inherit;cursor:pointer;min-height:30px}
+.code-frame-bar button:hover{background:#3b474d}.code-frame-bar button:focus-visible{outline:2px solid #a9dec8;outline-offset:2px}
+.copy-status{font-size:11px;color:#b1dfcb;min-width:0}
+.prose .code-frame pre{border:0;border-radius:0;margin:0}
+@media(max-width:760px){.lab-scroll-hint{display:inline}.prose .lab-figure{margin-top:26px}.lab-image-scroll{border-radius:9px}.prose .terminal-source{padding-left:12px;padding-right:12px}}
+@media print{.code-frame-bar button,.copy-status{display:none}.lab-image-scroll{overflow:visible}.prose .lab-image-scroll a{min-width:0}}
+
 /* tables */
 .prose table{width:100%;border-collapse:collapse;font-size:15.5px;display:block;overflow-x:auto}
 .prose thead th{text-align:left;font:600 12.5px/1 var(--mono);letter-spacing:.05em;
