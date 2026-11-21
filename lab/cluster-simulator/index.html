@@ -6,20 +6,13 @@ description: Build a virtual GPU cluster with Spectrum-X or InfiniBand, eight GP
 nav_section: lab
 ---
 <link rel="stylesheet" href="{{ '/assets/cluster-simulator/style.css' | relative_url }}">
-<section class="sim-intro wrap"><span class="eyebrow">Wirewalk interactive lab</span><h1>Build a cluster. Follow the work. Find the fault.</h1><p>Explore BCM 11 provisioning workflows, eight-rail GPU networking and shared storage in an independent educational simulator. Practice in a hosted session with saved progress, a five-minute trial and optional prepaid hours.</p><p class="small"><a href="{{ '/lab/cluster-simulator/model/' | relative_url }}">Model, assumptions and supported commands</a> · <a href="{{ '/lab/' | relative_url }}">Back to the lab</a></p></section>
+<section class="sim-intro wrap"><span class="eyebrow">Wirewalk interactive lab</span><h1>Build a cluster. Follow the work. Find the fault.</h1><p>Explore BCM 11 provisioning workflows, eight-rail GPU networking and shared storage in an independent educational simulator. Practice in a hosted session with saved progress, a five-minute trial and optional prepaid hours.</p><p class="small"><a href="{{ '/lab/cluster-simulator/model/' | relative_url }}">Model, assumptions and supported commands</a> · <a href="/lab/switching/">Switching labs</a> · <a href="{{ '/lab/' | relative_url }}">Back to the lab</a></p></section>
 <noscript><style>#cluster-simulator{display:none}</style><div class="wrap example-banner">This interactive model needs JavaScript, an internet connection and a verified Wirewalk account. You can still <a href="/lab/cluster-simulator/model/">read the model and scenario guide</a>. No real cluster is started.</div></noscript>
 <section id="cluster-simulator" class="cluster-sim" aria-label="Interactive virtual cluster lab">
   <div class="sim-top"><div><span class="sim-mark">W / CLUSTER LAB</span><span class="sim-badge">SIMULATION</span></div><div class="sim-clock"><span id="clock">No virtual cluster yet</span><button id="pause" type="button" disabled>Pause</button><button id="step" type="button" disabled>+30 ticks</button><label for="speed" class="sr-only">Simulation speed</label><select id="speed" aria-label="Simulation speed"><option value="1">1×</option><option value="5">5×</option><option value="10">10×</option></select></div></div>
+  <p class="sim-status" id="cluster-bridge-status" hidden></p>
   <div id="sim-status" class="sim-status" role="status" aria-live="polite">Choose a fabric and filesystem, then spin up your virtual cluster.</div>
-    <section class="sim-panel sim-access" aria-labelledby="lab-access-title">
-    <h2 id="lab-access-title">Five minutes to explore. More time when you need it.</h2>
-    <p>Try the hosted cluster lab free for five minutes per verified account. After that, buy an hour for <strong>$10 USD</strong>. No subscription or automatic renewal.</p>
-    <form id="lab-login" class="sim-actions"><div><label for="lab-email">Wirewalk account email</label><input id="lab-email" type="email" autocomplete="username" required maxlength="200"></div><div><label for="lab-password">Password</label><input id="lab-password" type="password" autocomplete="current-password" required maxlength="200"></div><button type="submit">Sign in to the lab</button></form>
-    <p id="lab-account-help">Use your Wirewalk Institute account. <a href="https://institute.wirewalk.com/learn/" target="_blank" rel="noopener">Create an account, confirm your email or reset your password</a>, then return here to sign in. No course purchase is required.</p>
-    <p id="lab-access-status" role="status" aria-live="polite">Sign in before launching a cluster. Your free time starts only when you launch or resume the lab.</p>
-    <div class="sim-actions"><strong id="lab-balance">5 free minutes per verified account</strong><button id="lab-buy" type="button" disabled>Buy one hour — $10</button><button id="lab-check-payment" type="button" hidden>Check payment status</button><button id="lab-logout" type="button" hidden>Sign out</button></div>
-    <p class="sim-muted">Pause stops time and freezes lab controls. Closing or losing the connection stops time within four seconds. One active lab per account. Progress is saved automatically; viewing it and exporting a session use no time. <a href="{{ '/lab/access/' | relative_url }}">Access and prepaid-hour details</a>.</p>
-  </section>
+    {% include lab-access.html %}
 <details id="builder" class="sim-builder" open><summary>Cluster configuration <span id="config-summary">Choose your architecture</span></summary>
   <form id="cluster-form">
     <div class="sim-form-grid">
