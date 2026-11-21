@@ -5,3 +5,5 @@
 @media(prefers-reduced-motion:reduce){.cluster-sim *{scroll-behavior:auto!important;transition:none!important}}
 @media(max-width:420px){.sim-metric:last-child{grid-column:1/-1}}
 @media(min-width:761px) and (max-width:1000px){.sim-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+.sim-access{margin:0 22px 20px}.sim-access #lab-balance{font-size:15px}.sim-access form>div{min-width:0}.sim-access input{width:100%}@media(max-width:760px){.sim-access{margin:0 16px 18px}}

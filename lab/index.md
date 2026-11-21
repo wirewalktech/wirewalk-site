@@ -8,7 +8,7 @@ eyebrow: Wirewalk lab
 ---
 
 <div class="resource-grid">
-<section class="resource-card"><h2><a href="/lab/cluster-simulator/">Build a virtual BCM-workflow cluster</a></h2><p>Choose Spectrum-X or InfiniBand, eight GPU rails, a bonded access network and Lustre or GPFS. Provision nodes, run jobs and investigate faults.</p></section>
+<section class="resource-card"><h2><a href="/lab/cluster-simulator/">Build a virtual BCM-workflow cluster</a></h2><p>Choose Spectrum-X or InfiniBand, eight GPU rails, a bonded access network and Lustre or GPFS. Provision nodes, run jobs and investigate faults. Five-minute trial per verified account; optional prepaid access is $10 per hour. <a href="/lab/access/">Access details</a>.</p></section>
 <section class="resource-card"><h2><a href="/lab/walkthroughs/">Watch a narrated investigation</a></h2><p>Captioned scenario overviews of GPU peer paths, rail matching and storage feeding useful GPU work.</p></section>
 
 <section class="resource-card"><h2><a href="/lab/inventory/">Local baseline collector</a></h2><p>Collect a small, read-only Linux, network, RDMA and GPU inventory. No automatic upload.</p></section>
