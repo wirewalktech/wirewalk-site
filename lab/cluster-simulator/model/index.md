@@ -15,7 +15,7 @@ eyebrow: Model and operating guide
 
 Choose Spectrum-X/RoCE or InfiniBand for east–west traffic, LACP or active–backup for the two-member north–south bond, and Lustre or GPFS/IBM Storage Scale. Select 2–128 compute nodes, with eight virtual GPUs and eight rail ports per node. A seed makes the same actions and clock ticks reproducible.
 
-This is an independent educational model of selected BCM 11 workflows. It runs a JavaScript state engine in a browser Web Worker. It does not install NVIDIA software, start virtual machines, contact a cluster, request credentials or implement the complete BCM command/API surface. No BCM license is supplied or exercised. The interface is Wirewalk’s own design.
+This is an independent educational model of selected BCM 11 workflows. It runs a JavaScript state engine in an isolated hosted account session. The browser displays the server state. It does not install NVIDIA software, start virtual machines, contact a cluster, connect to production infrastructure or implement the complete BCM command/API surface. No BCM license is supplied or exercised. The interface is Wirewalk’s own design.
 
 ## Separate the three network roles
 
@@ -109,12 +109,20 @@ sim repair
 sim requeue 1001
 ```
 
-Unsupported commands are not executed or evaluated. There is no OS shell, SSH endpoint, cloud account, host command bridge or network-discovery function.
+Unsupported commands are not executed or evaluated. There is no OS shell, SSH endpoint, production-cloud control, host command bridge or network-discovery function.
 
 ## Save, restore and reproduce
 
 Export downloads a JSON snapshot containing configuration, nodes, images, counters, jobs, checkpoints, seed state, events and recent metric history. Open a saved session to restore it with the clock paused. Imports are size-bounded and validate identities, eight rails, numeric ranges, allocations and known state values. Do not put real credentials or customer data into a job name or saved file.
 
-Simulation state stays in the page/worker until you export it. It is not uploaded or stored in a server-side account. Reloading begins a fresh session. The site’s existing optional enquiry-source handling is described separately in [Privacy](/privacy/).
+Simulation state is stored in your hosted account and can also be exported. Reloading restores the saved session view; resume explicitly to use lab time. The site’s existing optional enquiry-source handling is described separately in [Privacy](/privacy/).
 
 [Start a virtual cluster](/lab/cluster-simulator/) · [Read the eight-rail investigation](/investigations/gpu-rail-matching/) · [Use the other lab tools](/lab/).
+
+## Hosted access and saved progress
+
+The lab requires a verified Wirewalk account and an internet connection. Each account has one five-minute trial. Time begins when you launch or resume the lab; after the trial, a $10 USD purchase adds one hour. No recurring charge is created. The server keeps account time separately from model ticks and imported JSON. Changing the model clock, reloading, importing a session or opening another tab does not reset the balance.
+
+Pause freezes controls and stops time. The model’s speed changes its logical ticks, not the hourly price. One active session is allowed per account. Closing the tab or losing connectivity stops usage within a four-second lease window; reopening restores the latest saved state in a paused view. Export and viewing saved state are available after time runs out.
+
+Only synthetic lab state should be entered. State and usage are now stored on Wirewalk’s Cloudflare service; this replaces the original browser-only model. Earlier published copies of the browser engine cannot be recalled. Paid access covers the current hosted service, not exclusive access to the educational concepts or previously public code. See [access details](/lab/access/) and [privacy](/privacy/).
