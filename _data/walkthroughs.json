@@ -1,0 +1,20 @@
+{
+  "gpu-acs-peer-traffic": {
+    "title": "GPU peer traffic and ACS",
+    "description": "This is an illustrative lab scenario, not a customer result. A slow GPU communication test can have several causes. Start by identifying the exact pair, installed software and workload. A fast host-buffer network test does not establish that the GPU peer path is healthy.",
+    "duration": "PT70.5S",
+    "upload_date": "2026-11-21T03:09:42+00:00"
+  },
+  "gpu-rail-matching": {
+    "title": "Match GPUs to physical rails",
+    "description": "This is a constructed two-node example. Both servers expose two RDMA devices, but their enumeration differs. Matching device zero across the nodes is not enough to establish a matching physical rail. Begin with the actual GPU, adapter, port and switch map.",
+    "duration": "PT71.333333S",
+    "upload_date": "2026-11-21T03:09:42+00:00"
+  },
+  "storage-feeding-gpus": {
+    "title": "Keep useful work reaching GPUs",
+    "description": "This is an illustrative training scenario. A healthy bulk storage benchmark does not reproduce every input pipeline. Follow the batch through file discovery, reads, decompression, transformations, host queues and transfer before deciding that the answer is more filesystem bandwidth.",
+    "duration": "PT68.666667S",
+    "upload_date": "2026-11-21T03:09:42+00:00"
+  }
+}

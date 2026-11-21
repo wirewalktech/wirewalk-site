@@ -1,7 +1,7 @@
 <script>
 /* Progressive enhancement only: figures and native text disclosures work without JS. */
 (function(){
-  document.querySelectorAll('.art-body .prose pre').forEach(function(pre){
+  document.querySelectorAll('.art-body .prose pre, .resource-prose pre').forEach(function(pre){
     if(pre.closest('.code-frame'))return;
     const frame=document.createElement('div');frame.className='code-frame';
     const bar=document.createElement('div');bar.className='code-frame-bar';

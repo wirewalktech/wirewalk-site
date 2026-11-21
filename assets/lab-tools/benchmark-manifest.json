@@ -1,0 +1,13 @@
+{
+  "run_id": "illustrative-qualification-001",
+  "purpose": "Example run record; replace all illustrative values before use",
+  "workload": {"name": "example-collective", "command": "site-approved test command goes here", "input_identity": "sha256:replace-with-actual-input-hash"},
+  "hardware": {"node_count": 2, "gpu_count": 4, "topology_reference": "example-topology.svg"},
+  "software": {"os": "record exact OS and kernel", "driver": "record exact GPU driver", "communication_library": "record exact NCCL/UCX/MPI builds", "container_digest": "record immutable digest or explicitly state native execution"},
+  "placement": {"ranks": 4, "cpu_binding": "record effective binding", "gpu_nic_map": "record UUID/BDF-to-physical-rail map"},
+  "data": {"size_bytes": 1073741824, "cache_policy": "record actual warm/cold-cache procedure"},
+  "measurement": {"warmup_seconds": 30, "duration_seconds": 120, "repetitions": 3, "metric": "application throughput", "unit": "samples/s"},
+  "acceptance": {"criterion": "agree workload-specific target before testing", "approved_by": "replace with the accountable approver"},
+  "evidence": ["example-only-no-run.log"],
+  "result": {"status": "not_run", "value": "not_measured"}
+}

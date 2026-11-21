@@ -6,3 +6,7 @@ Gemfile.lock
 vendor/
 .DS_Store
 .bundle/
+
+# Python fixture imports must not ship compiled local paths.
+__pycache__/
+*.pyc

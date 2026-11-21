@@ -16,17 +16,24 @@ nav_section: contact
     <p>What are you trying to run? What is taking too long, or getting in the way? Whether you are planning a new system or improving one you already have, I would be glad to hear about it.</p>
    </div>
    <div class="cta-c">
-    <form class="frm" action="https://formsubmit.co/sales@wirewalk.com" method="POST" novalidate="false">
+    <form id="enquiry-form" class="frm" action="https://formsubmit.co/sales@wirewalk.com" method="POST">
       <input type="hidden" name="_subject" value="Wirewalk — scoping call request">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_next" value="{{ '/thanks/' | absolute_url }}">
       <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-      <input type="text" name="name" placeholder="Name and organization" required>
-      <input type="email" name="email" placeholder="Work email" required>
+      <label for="contact-name">Name and organization</label><input id="contact-name" type="text" name="name" autocomplete="name" placeholder="Name and organization" required>
+      <label for="contact-email">Work email</label><input id="contact-email" type="email" name="email" autocomplete="email" placeholder="Work email" required>
+      <label for="contact-interest">What would you like help with? <span class="muted">Optional</span></label>
+      <select id="contact-interest" name="interest"><option value="">Choose if useful</option><option value="gpu">GPU and AI infrastructure</option><option value="fabric">InfiniBand, RoCE or Ethernet</option><option value="storage">Parallel storage</option><option value="slurm">Slurm and workload management</option><option value="acceptance">Cluster acceptance</option><option value="scope">Planning or scope</option><option value="partner">Partner collaboration</option></select>
+      <label for="contact-message">What are you trying to do? <span class="muted">Optional</span></label>
+      <textarea id="contact-message" name="message" maxlength="4000" placeholder="A short description of the workload, symptom or planned system. Please omit credentials and sensitive data."></textarea>
+      <label for="contact-discovery">How did you find Wirewalk? <span class="muted">Optional</span></label>
+      <select id="contact-discovery" name="discovery_source"><option value="">Prefer not to say</option><option>Technical article or search</option><option>LinkedIn</option><option>Professional introduction</option><option>Integrator or partner</option><option>Other</option></select>
+      <label class="context-choice" style="display:flex;gap:10px;align-items:start"><input style="width:auto;min-height:20px;margin-top:3px" type="checkbox" id="contact-context" name="include_visit_context" value="yes" checked><span>Include this visit's starting page and campaign source to help me understand what brought you here. <a href="/privacy/">Privacy details</a>.</span></label>
       <button class="btn btn-p" type="submit">Send</button>
     </form>
-    <p class="small muted" style="margin-top:16px">Prefer to call? <a href="tel:+19172177975">917-217-7975</a>. Details are used to reply to your enquiry. No mailing list, and nothing shared with vendors or partners.</p>
+    <p class="small muted" style="margin-top:16px">Prefer to call? <a href="tel:+19172177975">917-217-7975</a>. Your details are used to reply to your enquiry. No mailing list. <a href="/privacy/">Privacy details</a>.</p>
    </div>
   </div>
 </div></div></section>

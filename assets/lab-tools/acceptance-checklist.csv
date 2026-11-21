@@ -1,0 +1,9 @@
+check_id,area,question,evidence_reference,status,owner
+A01,Identity,Are hardware and exact software builds recorded?,,not_run,
+A02,Topology,Does the GPU NIC and physical rail map match placement?,,not_run,
+A03,Correctness,Does the workload retain agreed correctness or quality?,,not_run,
+A04,Concurrency,Was representative simultaneous demand tested?,,not_run,
+A05,Storage,Are cache state metadata and dataset size recorded?,,not_run,
+A06,Restart,Was checkpoint recovery tested against the recovery objective?,,not_run,
+A07,Persistence,Did the supported configuration survive its lifecycle test?,,not_run,
+A08,Handover,Are unresolved findings rollback and ownership documented?,,not_run,

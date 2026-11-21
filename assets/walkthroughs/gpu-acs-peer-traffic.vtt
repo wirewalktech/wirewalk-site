@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:16.833
+This is an illustrative lab scenario, not a customer result. A slow GPU communication test can have several causes. Start by identifying the exact pair, installed software and workload. A fast host-buffer network test does not establish that the GPU peer path is healthy.
+
+00:00:16.833 --> 00:00:33.802
+Read the PCIe tree, GPU topology and the relevant bridge controls. Access Control Services can redirect peer transactions upstream. That observation needs platform context. It does not by itself prove why a workload is slow, or authorize disabling isolation controls.
+
+00:00:33.802 --> 00:00:50.215
+If the platform supports an alternative setting and its owner approves the isolation model, test one controlled change on qualification nodes. Preserve the original state. Compare the same peer test, communication workload and representative application, with correctness checks.
+
+00:00:50.215 --> 00:01:04.029
+Keep the change only when the evidence supports the operating decision. Record limits, ownership, persistence and rollback. This walkthrough claims no speedup. The full scenario and sample findings report are available in the Wirewalk lab.
