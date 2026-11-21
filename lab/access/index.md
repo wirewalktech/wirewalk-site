@@ -1,8 +1,8 @@
 ---
 layout: resource
 title: Lab access and prepaid hours
-seo_title: HPC and AI Lab Access — Five-Minute Trial and $10 Prepaid Hours
-description: Explore Wirewalk’s hosted HPC and AI cluster lab with a five-minute trial. Buy one prepaid hour for $10 USD, pause when needed, and keep your progress.
+seo_title: HPC and AI Lab Access — Five-Minute Trial and $20 Prepaid Hours
+description: Explore Wirewalk’s hosted HPC and AI cluster lab with a five-minute trial. Buy one prepaid hour for $20 USD, pause when needed, and keep your progress.
 parent_url: /lab/
 parent_title: Lab
 nav_section: lab
@@ -15,9 +15,9 @@ Use the [cluster simulator](/lab/cluster-simulator/) to practice provisioning, G
 
 Sign in with a verified Wirewalk Institute account. Creating an account does not require buying a course. Each account receives one five-minute trial, starting when a cluster is launched or resumed. Reading guides and choosing a configuration do not start the clock.
 
-## Add an hour for $10 USD
+## Add an hour for $20 USD
 
-One purchase adds 60 minutes of hosted lab access. The checkout charges $10 USD once. There is no recurring subscription, automatic renewal or automatic top-up. Unused purchased time carries over between sessions and has no scheduled expiry. The cluster lab and the Cumulus, Quantum, Juniper and Arista switching labs share the same account balance; future products may have separate pricing disclosed before purchase.
+One purchase adds 60 minutes of hosted lab access. The checkout charges $20 USD once. There is no recurring subscription, automatic renewal or automatic top-up. Unused purchased time carries over between sessions and has no scheduled expiry. The cluster, Kubernetes/Run:ai and Cumulus, Quantum, Juniper and Arista switching labs share the same account balance; future products may have separate pricing disclosed before purchase.
 
 Stripe handles card payment. Credit appears only after payment is verified by the server. Returning from checkout or seeing a success URL alone does not grant time. If confirmation is delayed, choose “Check payment status” rather than paying again. You can leave and return; payment notifications can credit the account without an open browser. A card payment can be declined without affecting existing credit.
 
@@ -34,3 +34,5 @@ For a duplicate purchase, an incorrect balance, an access problem or a refund re
 Accounts use the existing Wirewalk Institute sign-in, email confirmation and password recovery. The lab uses Cloudflare for account-session state and Stripe for payment. Read [privacy information](/privacy/) before entering data. Use synthetic examples, not credentials, customer inventories or sensitive research data.
 
 [Open the cluster lab](/lab/cluster-simulator/) · [Read its model assumptions](/lab/cluster-simulator/model/).
+
+Existing purchased minutes are preserved when the posted hourly price changes. Checkouts already started at the previous rate retain their recorded purchase terms; new hours use the current $20 USD price. A stale browser client must reload and review the new rate before starting a checkout.

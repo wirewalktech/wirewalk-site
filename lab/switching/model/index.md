@@ -129,7 +129,7 @@ A bound fabric and cluster advance together while either linked lab is active. O
 
 ## Account time and session files
 
-The same five-minute account trial and $10 prepaid hours cover the cluster and four switching labs. There is no new trial per platform. Pause freezes mutation controls and stops account usage; disconnect detection can use up to four seconds. Saved states are separate per platform, while the time balance is server-owned and shared. [Access details](/lab/access/).
+The same five-minute account trial and $20 prepaid hours cover the cluster, Kubernetes/Run:ai and four switching labs. There is no new trial per platform. Pause freezes mutation controls and stops account usage; disconnect detection can use up to four seconds. Saved states are separate per platform, while the time balance is server-owned and shared. [Access details](/lab/access/).
 
 Export contains topology, configuration and counters, not credentials or credit. Import validates platform, topology, link flags, membership, numeric bounds and configuration. It resets exercise/probe progress, CLI modes and live confirmed-commit deadlines, then pauses. A session from another vendor profile must be opened in that profile. Neither import nor a model-clock change adds account time.
 

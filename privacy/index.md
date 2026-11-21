@@ -34,7 +34,7 @@ The lab tools run locally. They do not upload results or contact Wirewalk. Revie
 
 ## Hosted cluster labs and prepaid access
 
-The interactive cluster and switching labs use a hosted service, separately from the local downloads above. It uses your verified Wirewalk Institute account identifier and email for sign-in and purchases. The browser keeps its lab sign-in token in session storage for the current tab; signing out clears it. Account verification, sign-in and password recovery use the existing Institute account service.
+The interactive cluster, Kubernetes/Run:ai and switching labs use a hosted service, separately from the local downloads above. It uses your verified Wirewalk Institute account identifier and email for sign-in and purchases. The browser keeps its lab sign-in token in session storage for the current tab; signing out clears it. Account verification, sign-in and password recovery use the existing Institute account service.
 
 Cloudflare stores the synthetic cluster and fabric state you submit or import, your time balance, recent session activity and purchase references so you can resume across visits. Stripe processes card details and supplies payment/refund status; the lab does not receive your full card number. No lab data is sent to an AI model. Keep passwords, credentials, identifiable inventories and sensitive research data out of lab inputs and exported session files.
 
