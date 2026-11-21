@@ -1,0 +1,34 @@
+{
+  "cumulus": {
+    "name": "Cumulus / Spectrum-X",
+    "title": "Cumulus and Spectrum-X switching lab",
+    "description": "Practice eight-rail RoCE fabric setup, staged NVUE-style changes, BGP path faults, MTU, ECN, PFC and monitoring in a hosted educational lab.",
+    "hardware": "Spectrum Ethernet architecture; Cumulus Linux 5.14-inspired finite command subset. No Spectrum ASIC or end-to-end Spectrum-X software is executed.",
+    "diag": "nv show interface",
+    "config": "nv config diff"
+  },
+  "quantum": {
+    "name": "Quantum InfiniBand",
+    "title": "Quantum InfiniBand fabric lab",
+    "description": "Investigate eight-rail InfiniBand fabrics, subnet-manager failover, full and limited P_Key membership, shared planes, link faults and synthetic counters.",
+    "hardware": "Quantum-2/Quantum-X800 architecture references. Modeled SM administration and finite diagnostic summaries; no MLNX-OS, OpenSM, UFM or SHARP binary runs.",
+    "diag": "ibdiagnet",
+    "config": "sminfo"
+  },
+  "juniper": {
+    "name": "Juniper QFX",
+    "title": "Juniper QFX AI fabric lab",
+    "description": "Practice QFX-inspired AI fabric troubleshooting with candidate configuration, Junos-style commit and rollback, BGP, MTU and RoCE monitoring.",
+    "hardware": "QFX5240 reference architecture, with a finite Junos OS Evolved-inspired command subset. No vJunos VM or QFX ASIC is executed.",
+    "diag": "show bgp summary",
+    "config": "show | compare"
+  },
+  "arista": {
+    "name": "Arista EOS",
+    "title": "Arista EOS AI fabric lab",
+    "description": "Practice EOS-inspired AI fabric operations, running versus startup configuration, eight-rail paths, MTU faults and synthetic RoCE congestion monitoring.",
+    "hardware": "7060X6 leaf / 7800R4 spine reference architecture. Finite EOS-inspired commands; no cEOS/vEOS image or switch ASIC is executed.",
+    "diag": "show ip bgp summary",
+    "config": "show running-config"
+  }
+}
