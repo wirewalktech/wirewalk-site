@@ -41,6 +41,11 @@ postprocess "$OUT"                                          ; stamp "postprocess
 If the work runs under Slurm, take the per-step figures from the accounting database rather than
 from the job script, and take them from the job steps, not the allocation:
 
+{% include terminal-figure.html key="ninety-seven-percent-of-the-work-was-unnecessary" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```
 $ sacct -j 4182377 --units=G \
     --format=JobID,JobName%18,Elapsed,TotalCPU,MaxRSS,State
@@ -50,6 +55,8 @@ JobID          JobName      Elapsed   TotalCPU     MaxRSS      State
 4182377.0      vep          04:53:02  19:41:08         9.8G   COMPLETED
 4182377.1      post         00:08:57  00:12:44      1.20G     COMPLETED
 ```
+
+</details>
 
 Read the `TotalCPU` column carefully: it is `[DD-]HH:MM:SS`, so a leading day field changes the
 value by a factor of twenty-four and is easy to skim past. Here `19:41:08` of CPU against `04:53:02`

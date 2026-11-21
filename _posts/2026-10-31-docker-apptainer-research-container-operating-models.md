@@ -36,12 +36,19 @@ A program can succeed on a workstation because its home directory contains undec
 
 Review Apptainer's [bind-path defaults](https://apptainer.org/docs/user/1.3/bind_paths_and_mounts.html) and the site's configured additions. Explicitly declare input, output and temporary storage for the supported workflow. For a previously built image:
 
+{% include terminal-figure.html key="docker-apptainer-research-container-operating-models" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 apptainer exec --cleanenv \
   --bind /project/example/input:/input:ro \
   --bind /project/example/output:/output \
   analysis.sif /opt/application/bin/analyze /input/manifest.json /output
 ```
+
+</details>
 
 These paths are illustrative and must exist with appropriate permissions. `--cleanenv` changes environment propagation; it does not by itself remove default filesystem mounts. If the workflow requires stronger containment, select and test the relevant options separately.
 

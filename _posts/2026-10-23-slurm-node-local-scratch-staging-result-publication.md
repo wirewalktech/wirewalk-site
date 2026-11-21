@@ -34,6 +34,11 @@ Test at the intended number of concurrent jobs per node. Free space observed bef
 
 A generic path such as `/local/scratch/work` invites collisions and cleanup mistakes. Allocate a directory tied to the job and, where necessary, array task and node identity. Verify that it belongs to the invoking user before writing.
 
+{% include terminal-figure.html key="slurm-node-local-scratch-staging-result-publication" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 # Illustrative setup inside a scheduled job.
 : "${SLURM_JOB_ID:?Run within a Slurm allocation}"
@@ -41,6 +46,8 @@ A generic path such as `/local/scratch/work` invites collisions and cleanup mist
 work=$(mktemp -d "${LOCAL_SCRATCH%/}/job-${SLURM_JOB_ID}.XXXXXX")
 printf 'Working directory: %s\n' "$work"
 ```
+
+</details>
 
 The scratch root is supplied by site policy, not guessed by the script. Do not replace a failed allocation with an automatic fallback to the home directory. That converts a local-capacity issue into unplanned load on shared storage.
 

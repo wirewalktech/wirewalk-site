@@ -55,7 +55,16 @@ def main():
         sources.update(re.findall(r'\]\((https://[^)]+)\)',body))
         posts.append((path,m,body))
     if len({p for p,_,_ in posts})!=len(posts): failures.append('Duplicate post URL')
-    cache={}
+    cache={}; assets={}
+    def asset(path):
+        if path in assets:return
+        if args.live:
+            r=subprocess.run(['curl','-sS','-L','--head','--connect-timeout','10','--max-time','30','-o','/dev/null','-w','%{http_code}',args.live.rstrip('/')+path],capture_output=True,text=True)
+            assets[path]=r.returncode==0 and r.stdout=='200'
+        else:
+            f=Path(args.build)/path.lstrip('/')
+            assets[path]=f.is_file() and f.stat().st_size>0
+        if not assets[path]:failures.append(f'Missing or unreachable asset: {path}')
     def get(path):
         if path not in cache:
             if args.live:
@@ -83,6 +92,9 @@ def main():
         for link in page.links:
             u=urlsplit(urljoin('https://www.wirewalk.com'+path,link))
             if u.netloc=='www.wirewalk.com':
+                if Path(u.path).suffix.lower() in ('.png','.jpg','.jpeg','.gif','.webp','.pdf','.zip'):
+                    asset(u.path)
+                    continue
                 target=Page(get(u.path or '/'))
                 if u.fragment and unquote(u.fragment) not in target.ids:failures.append(f'Missing fragment {link} on {path}')
         evidence.append({'path':path,'title':m['title'],'html_sha256':hashlib.sha256(rendered.encode()).hexdigest()})
@@ -108,9 +120,10 @@ def main():
                 external.append(row)
                 if r['status'] in (401,403,405,429):unverifiable.append(f'External HTTP {r["status"]}: {url}')
                 elif r['status']!=200:failures.append(f'External HTTP {r["status"]}: {url}')
-    result={'posts':len(posts),'source_urls':len(sources),'checked_pages':len(cache),'external':external,'unverifiable':unverifiable,'failures':sorted(set(failures)),'evidence':evidence}
+    result={'posts':len(posts),'source_urls':len(sources),'checked_pages':len(cache),'checked_assets':len(assets),'external':external,'unverifiable':unverifiable,'failures':sorted(set(failures)),'evidence':evidence}
     if args.report:Path(args.report).write_text(json.dumps(result,indent=2))
     print(f'{len(posts)} source posts; {len(cache)} pages checked; {len(sources)} source URLs')
+    if assets:print(f'{len(assets)} linked assets checked')
     for item in unverifiable:print('UNVERIFIABLE:',item)
     for fail in result['failures']:print('FAIL:',fail)
     print(f'{len(result["failures"])} failure(s)')

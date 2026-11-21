@@ -18,12 +18,19 @@ All identifiers in these examples are illustrative. Commands inspect state; admi
 
 Start with a job ID and a timestamp. Ask for the exact script, submission command and any wrapper that generated them. The script alone can differ from the effective request because command-line options and environment variables may alter submission behavior.
 
+{% include terminal-figure.html key="slurm-pending-jobs-priority-backfill-qos" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 job=123456
 scontrol show job -dd "$job"
 squeue -j "$job" -o '%.18i %.9P %.20j %.8u %.2t %.10M %.6D %R'
 sinfo -N -l
 ```
+
+</details>
 
 Record requested nodes, tasks, CPUs per task, memory, GPUs, features, partition, account, QOS, time limit, dependencies and reservations. A job asking for four GPUs on one node has a different feasible set from a job asking for four GPUs across four nodes.
 

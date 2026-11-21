@@ -24,12 +24,19 @@ Record the running kernel, installed kernel packages, GPU driver, firmware inven
 
 Read-only observations on a candidate node can begin with:
 
+{% include terminal-figure.html key="nvidia-driver-kernel-upgrade-release-unit" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 uname -r
 nvidia-smi --query-gpu=name,uuid,driver_version --format=csv
 modinfo nvidia
 cat /proc/driver/nvidia/version
 ```
+
+</details>
 
 `modinfo` reports the module found through its lookup path; `/proc` provides information about the loaded driver when available. A difference between installed and loaded state deserves explanation before the upgrade proceeds.
 

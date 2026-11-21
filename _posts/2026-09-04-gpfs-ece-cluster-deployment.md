@@ -136,10 +136,17 @@ Install `gpfs.base`, `gpfs.gpl`, `gpfs.ece` and the license packages, then build
 portability layer with `mmbuildgpl`. Do this on every node before creating the
 cluster, not as part of it.
 
+{% include terminal-figure.html key="gpfs-ece-cluster-deployment" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 mmcrcluster -N nodefile -r /usr/bin/ssh -R /usr/bin/scp -C ece-cluster
 mmchlicense server --accept -N all
 ```
+
+</details>
 
 Quorum design is worth a moment. Use an odd number — three for most clusters, five
 for large ones. Quorum nodes should be spread across failure domains: racks, power

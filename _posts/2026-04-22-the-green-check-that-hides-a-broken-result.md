@@ -48,12 +48,19 @@ a diagnostic and return success, either by design or by oversight.
 `jq` is the honest case. A missing key is not an error in its data model — it is
 `null`:
 
+{% include terminal-figure.html key="the-green-check-that-hides-a-broken-result" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```
 $ echo '{"a":1}' | jq -r '.b'
 null
 $ echo $?
 0
 ```
+
+</details>
 
 A probe written as "run it, check the status, check that stdout is non-empty"
 scores that as a pass. The string `null` is four bytes of non-empty output.

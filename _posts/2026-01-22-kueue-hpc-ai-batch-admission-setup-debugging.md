@@ -129,6 +129,11 @@ Submit the approved manifest in the test namespace, then inspect its associated 
 
 Initial read-only checks are:
 
+{% include terminal-figure.html key="kueue-hpc-ai-batch-admission-setup-debugging" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 kubectl -n research get localqueues
 kubectl get clusterqueues
@@ -136,6 +141,8 @@ kubectl -n research get workloads
 kubectl -n research get jobs,pods
 kubectl -n research get events --sort-by=.metadata.creationTimestamp
 ```
+
+</details>
 
 Use the discovered Workload name for a detailed inspection. The [tagged troubleshooting guide](https://github.com/kubernetes-sigs/kueue/blob/v0.10.2/site/content/en/docs/tasks/troubleshooting/troubleshooting_jobs.md) explains following workload state and conditions. Do not assume the Workload name is identical to the Job name.
 

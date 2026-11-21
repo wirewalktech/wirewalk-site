@@ -39,12 +39,19 @@ units sit idle.
 The input is small. `hpcg.dat` takes a local problem size per rank and a run
 time:
 
+{% include terminal-figure.html key="hpcg-benchmarking" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```
 HPCG benchmark input file
 Sandia National Laboratories; University of Tennessee, Knoxville
 104 104 104
 1800
 ```
+
+</details>
 
 The three numbers are the local subdomain dimensions `nx ny nz`, and they must
 each be a multiple of eight. The fourth is the target run time in seconds.

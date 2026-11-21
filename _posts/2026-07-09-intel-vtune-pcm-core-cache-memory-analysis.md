@@ -25,11 +25,18 @@ Record processor model, stepping, topology, firmware settings relevant to the ex
 
 Start with read-only topology observations:
 
+{% include terminal-figure.html key="intel-vtune-pcm-core-cache-memory-analysis" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 lscpu
 lscpu -e=CPU,CORE,SOCKET,NODE
 numactl --hardware
 ```
+
+</details>
 
 Map threads to physical cores, SMT siblings and NUMA domains. Do not infer memory locality from socket count alone. A processor platform can expose several locality domains within a socket, and firmware policy affects the topology presented to the operating system.
 

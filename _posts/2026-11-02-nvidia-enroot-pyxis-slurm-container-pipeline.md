@@ -50,6 +50,11 @@ Measure cold and warm startup independently. Test concurrent launches at the int
 
 For a site that has staged an approved SquashFS artifact, the basic shape is:
 
+{% include terminal-figure.html key="nvidia-enroot-pyxis-slurm-container-pipeline" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 # Within an allocation that explicitly includes a GPU.
 srun --ntasks=1 \
@@ -57,6 +62,8 @@ srun --ntasks=1 \
   --container-mounts=/project/example/input:/input:ro,/project/example/output:/output \
   python -c 'import torch; print(torch.cuda.is_available()); print(torch.ones(8, device="cuda").sum().item())'
 ```
+
+</details>
 
 The paths and image name are illustrative. The installed Pyxis version must support the selected options and artifact format. The allocation must already request the intended GPU; a container option is not a resource request.
 

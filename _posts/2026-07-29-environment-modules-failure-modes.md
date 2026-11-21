@@ -31,12 +31,19 @@ Everything here follows from one fact. `module` is not a program. It is a shell 
 a program, captures the shell code it prints, and evaluates that in your current shell. Lmod
 defines it around `$LMOD_CMD`, Tcl Environment Modules around `modulecmd`. Watch it work:
 
+{% include terminal-figure.html key="environment-modules-failure-modes" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```
 $ $LMOD_CMD bash load gcc/12.3.0 2>/dev/null
 PATH=/opt/apps/gcc/12.3.0/bin:/usr/local/bin:/usr/bin:/bin; export PATH;
 LD_LIBRARY_PATH=/opt/apps/gcc/12.3.0/lib64; export LD_LIBRARY_PATH;
 LOADEDMODULES=gcc/12.3.0; export LOADEDMODULES;
 ```
+
+</details>
 
 That is the shape of it, abridged: a real Lmod run also emits `_LMFILES_`, reference counts and
 its serialized module table, which is noise for this purpose but worth seeing once.

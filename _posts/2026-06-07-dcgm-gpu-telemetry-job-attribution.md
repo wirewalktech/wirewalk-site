@@ -58,11 +58,18 @@ Inspect the raw exporter output and stored series before debugging the graph. A 
 
 Read-only inventory commands help establish the reference:
 
+{% include terminal-figure.html key="dcgm-gpu-telemetry-job-attribution" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 nvidia-smi -L
 dcgmi discovery -l
 dcgmi --version
 ```
+
+</details>
 
 These do not authorize active diagnostics on a busy node. Keep potentially intrusive tests in a maintenance allocation and use the installed DCGM documentation to understand their scope.
 

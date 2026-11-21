@@ -1,0 +1,18 @@
+{% assign terminal = site.data.terminal_figures[include.key] %}
+{% if terminal %}
+<figure class="lab-figure">
+  <div class="lab-figure-label"><span class="lab-signal" aria-hidden="true"></span>{{ terminal.kind | escape }}</div>
+  <div class="lab-image-scroll" role="region" aria-label="Terminal figure: {{ terminal.title | escape }}" tabindex="0">
+    <a href="{{ terminal.image | relative_url }}" aria-label="Open full-size terminal figure: {{ terminal.title | escape }}">
+      <img src="{{ terminal.image | relative_url }}" width="{{ terminal.width }}" height="{{ terminal.height }}" alt="{{ terminal.kind | escape }}: {{ terminal.title | escape }}. Text transcript follows." loading="lazy" decoding="async">
+    </a>
+  </div>
+  <figcaption><strong>{{ terminal.title | escape }}</strong> {{ terminal.caption | escape }} <span class="lab-example-note">Illustrative example; not a captured production run.</span> <a href="{{ terminal.image | relative_url }}">Open full size</a><span class="lab-scroll-hint"> · Scroll sideways to inspect the terminal.</span></figcaption>
+</figure>
+{% if terminal.example_transcript %}
+<details class="terminal-source lab-session-text">
+  <summary>Read the illustrated session as text</summary>
+  <pre><code>{{ terminal.example_transcript | escape }}</code></pre>
+</details>
+{% endif %}
+{% endif %}

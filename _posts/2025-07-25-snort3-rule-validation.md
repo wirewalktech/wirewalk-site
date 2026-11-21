@@ -22,11 +22,18 @@ The official guide separates [configuration](https://docs.snort.org/start/config
 
 For a lab installation with configuration at the example path:
 
+{% include terminal-figure.html key="snort3-rule-validation" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 snort -T -c /etc/snort/snort.lua
 snort -c /etc/snort/snort.lua -r ./approved-match.pcap -A alert_fast
 snort -c /etc/snort/snort.lua -r ./approved-nonmatch.pcap -A alert_fast
 ```
+
+</details>
 
 Supply your own approved synthetic fixtures and confirm that the relevant rule file is included by the configuration. The commands do not create the fixtures. Output location and available logging modules should be verified against the installation.
 

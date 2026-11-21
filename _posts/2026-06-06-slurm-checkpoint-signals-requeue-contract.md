@@ -32,6 +32,11 @@ The [sbatch signal reference](https://slurm.schedmd.com/sbatch.html) distinguish
 
 An illustrative batch header for an application launched as a Slurm step is:
 
+{% include terminal-figure.html key="slurm-checkpoint-signals-requeue-contract" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 #!/bin/bash
 #SBATCH --job-name=restart-test
@@ -41,6 +46,8 @@ An illustrative batch header for an application launched as a Slurm step is:
 set -euo pipefail
 srun python train.py --run-directory /shared/experiments/example-run
 ```
+
+</details>
 
 The path and program are placeholders. This script does not implement checkpointing. Test that the real process receives the signal under the site's launcher, container and process-management configuration. The warning can arrive earlier than the requested offset because of Slurm event resolution; it is not an exact timer.
 

@@ -22,9 +22,16 @@ A small, authorized request can help establish the required behavior before the 
 
 Requester Pays is a bucket-level setting, and there is an API for reading it:
 
+{% include terminal-figure.html key="who-pays-for-egress-establish-it-behaviourally" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 aws s3api get-bucket-request-payment --bucket "$B"
 ```
+
+</details>
 
 ```
 An error occurred (AccessDenied) when calling the GetBucketRequestPayment operation

@@ -18,11 +18,18 @@ The WEKA 4.2 documentation describes an external KMS for encrypted filesystems a
 
 On an authorized management host with the matching WEKA CLI, inspect:
 
+{% include terminal-figure.html key="weka-encryption-kms-recovery" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 weka version
 weka fs
 weka security kms
 ```
+
+</details>
 
 These are inventory commands, not a recovery test. Treat their output as sensitive configuration information and store it accordingly.
 

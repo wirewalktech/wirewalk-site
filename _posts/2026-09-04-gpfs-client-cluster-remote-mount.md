@@ -43,10 +43,17 @@ maintain. It is worth it.
 Install the same GPFS packages, build the portability layer, then create a cluster
 containing only the clients:
 
+{% include terminal-figure.html key="gpfs-client-cluster-remote-mount" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 mmcrcluster -N clientnodes -r /usr/bin/ssh -R /usr/bin/scp -C compute-cluster
 mmchlicense client --accept -N all
 ```
+
+</details>
 
 Note the license designation. Nodes that only mount a filesystem take a **client**
 license; nodes that serve NSDs take a server license. Getting this wrong is a

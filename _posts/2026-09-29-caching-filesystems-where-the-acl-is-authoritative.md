@@ -25,12 +25,19 @@ when the two disagree about metadata, **home wins**.
 
 Permissions and ACLs are metadata. So:
 
+{% include terminal-figure.html key="caching-filesystems-where-the-acl-is-authoritative" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 nfs4_setfacl -a 'A::collaborator@domain:rxtncy' /gpfs/cache/dataset/
 # correct output immediately afterwards
 nfs4_getfacl /gpfs/cache/dataset/
 # ... and the grant is gone some tens of seconds later
 ```
+
+</details>
 
 Nothing failed. The revalidation interval elapsed, the cache asked home what the metadata
 should be, and home said something different. The grant you applied was overwritten by the

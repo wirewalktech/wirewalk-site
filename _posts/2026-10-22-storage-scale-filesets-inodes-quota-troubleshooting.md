@@ -24,6 +24,11 @@ Use a small site-approved scratch location for a reproduction. Do not repeatedly
 
 Run the observation inside the affected job environment where possible:
 
+{% include terminal-figure.html key="storage-scale-filesets-inodes-quota-troubleshooting" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 id
 findmnt -T /project/example/results
@@ -31,6 +36,8 @@ stat -f /project/example/results
 df -h /project/example/results
 df -i /project/example/results
 ```
+
+</details>
 
 The path is illustrative. Compare the resolved mount with the expected filesystem and fileset junction. A missing mount can leave a writable local directory underneath it. A container bind can expose a different path from the one the user sees on the login node.
 

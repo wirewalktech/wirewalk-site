@@ -24,6 +24,11 @@ Suricata and Snort have documented configuration tests and offline capture modes
 
 The test record should contain:
 
+{% include terminal-figure.html key="detection-rules-regression-tests" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```text
 rule_id: locally assigned identifier
 engine_version: exact installed version
@@ -32,6 +37,8 @@ fixture_hash: recorded SHA-256
 expected: alert present or alert absent
 observed: matching identifiers and count
 ```
+
+</details>
 
 This is a schema example, not measured output. Record the actual values from the run.
 

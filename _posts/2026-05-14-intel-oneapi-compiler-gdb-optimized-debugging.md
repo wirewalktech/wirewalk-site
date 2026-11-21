@@ -32,12 +32,19 @@ Separate a crash, a hang and a numerical mismatch. They need different evidence.
 
 An illustrative CPU build pair is:
 
+{% include terminal-figure.html key="intel-oneapi-compiler-gdb-optimized-debugging" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 icpx -O0 -g -o solver-cpp-debug solver.cpp
 icpx -O2 -g -o solver-cpp-opt solver.cpp
 ifx -O0 -g -o solver-fortran-debug solver.f90
 ifx -O2 -g -o solver-fortran-opt solver.f90
 ```
+
+</details>
 
 These commands omit the application's required build and link options. Preserve MPI, OpenMP, include paths and library choices in the real build. Use separate output paths so a later command cannot silently replace the executable associated with the evidence.
 

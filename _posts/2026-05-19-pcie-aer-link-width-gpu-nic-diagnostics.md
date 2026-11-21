@@ -30,11 +30,18 @@ Keep both expected and observed states. A link narrower than the device's maximu
 
 A first host inventory can include:
 
+{% include terminal-figure.html key="pcie-aer-link-width-gpu-nic-diagnostics" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 lspci -D -t
 lspci -D -nn
 nvidia-smi topo -m
 ```
+
+</details>
 
 These commands describe different layers. Join the physical devices by PCI address and platform inventory; do not infer that similarly named Linux interfaces share a particular switch or CPU path.
 

@@ -22,12 +22,19 @@ Root squashing does not turn client-supplied AUTH_SYS user IDs into independentl
 
 On a Linux NFS client:
 
+{% include terminal-figure.html key="nfs-auth-sys-kerberos-boundaries" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 findmnt -t nfs,nfs4
 nfsstat -m
 id
 klist
 ```
+
+</details>
 
 The last command requires Kerberos client tools and reports the current ticket context. Its absence does not diagnose the server. Compare negotiated mount options with server export settings and the application's actual execution identity.
 

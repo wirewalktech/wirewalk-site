@@ -23,6 +23,11 @@ bandwidth figure that reflects memory speed rather than storage.
 
 Three flags matter:
 
+{% include terminal-figure.html key="ior-mdtest-parallel-storage" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 mpirun -np 128 ./ior \
   -a POSIX -w -r \
@@ -30,6 +35,8 @@ mpirun -np 128 ./ior \
   -F -e -C -i 3 \
   -o /gpfs/scratch/iortest/file
 ```
+
+</details>
 
 - `-e` calls `fsync` before the write phase timer stops, so the write is on
   stable storage rather than in the client's cache.

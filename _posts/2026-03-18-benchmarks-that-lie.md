@@ -58,12 +58,19 @@ documents as being for use under service direction; `dump config` is read-only,
 but treat the rest of the command surface as off-limits on a production
 daemon:
 
+{% include terminal-figure.html key="benchmarks-that-lie" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 mmlsconfig pagepool
 mmlsconfig nsdRAIDBufferPoolSizePct
 # and on one storage server, what is genuinely live:
 mmfsadm dump config | grep -iE 'pagepool|nsdRAIDBufferPoolSizePct'
 ```
+
+</details>
 
 Take a tier of eight storage servers with a 37.7 GiB page pool each and the
 buffer pool at 80 percent. That is 30.2 GiB per server and 241 GiB across the

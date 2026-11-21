@@ -24,9 +24,16 @@ Measure the application without profiling first. Record input, iteration count, 
 
 [Nsight Systems](https://docs.nvidia.com/nsight-systems/UserGuide/index.html) provides the execution timeline needed to locate host gaps, CUDA activity, transfers and supported annotations. A bounded example is:
 
+{% include terminal-figure.html key="nsight-systems-compute-cache-core-analysis" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 nsys profile --trace=cuda,nvtx --sample=none --output=solver-timeline ./solver
 ```
+
+</details>
 
 This example omits CPU sampling to keep the initial collection focused. Adapt the trace configuration and duration to the installed release. A full production run can produce excessive data and substantial overhead; a selected reproducing interval is usually more useful.
 

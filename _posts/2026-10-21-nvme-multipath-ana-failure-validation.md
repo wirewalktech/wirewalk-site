@@ -26,6 +26,11 @@ Start with subsystem and namespace identity, then map the controllers that provi
 
 Useful observations include:
 
+{% include terminal-figure.html key="nvme-multipath-ana-failure-validation" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 nvme version
 nvme list -o json
@@ -33,6 +38,8 @@ nvme list-subsys -o json
 lsblk -o NAME,TYPE,SIZE,FSTYPE,MOUNTPOINTS
 findmnt -rn -o TARGET,SOURCE,FSTYPE
 ```
+
+</details>
 
 Retain persistent namespace identifiers and their support context. The [list-subsystems manual](https://github.com/linux-nvme/nvme-cli/blob/v2.11/Documentation/nvme-list-subsys.txt) describes the tool view; the storage service's inventory should establish the identity and ownership behind that view.
 

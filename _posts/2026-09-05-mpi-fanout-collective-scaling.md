@@ -48,12 +48,19 @@ makes the first `N` senders and the second `N` receivers, pairs them up, and
 runs all pairs concurrently. It reports aggregate bandwidth and aggregate
 message rate for each message size.
 
+{% include terminal-figure.html key="mpi-fanout-collective-scaling" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 # 16 ranks per node, one node sending, one node receiving
 mpirun -np 32 -map-by ppr:16:node --bind-to core \
   -x UCX_NET_DEVICES=mlx5_0:1 \
   ./osu_mbw_mr
 ```
+
+</details>
 
 Two things make it worth running that a pair test is not.
 

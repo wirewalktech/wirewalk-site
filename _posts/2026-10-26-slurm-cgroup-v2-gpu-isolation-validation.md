@@ -46,6 +46,11 @@ Read the installed [cgroup.conf reference](https://slurm.schedmd.com/cgroup.conf
 
 Start with a drained canary and record its kernel, systemd, Slurm, driver and image identifiers. An image inventory is incomplete if the booted kernel differs from the one used to build the software stack.
 
+{% include terminal-figure.html key="slurm-cgroup-v2-gpu-isolation-validation" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 uname -r
 slurmd -V
@@ -55,6 +60,8 @@ systemctl show slurmd -p Delegate -p ControlGroup
 slurmd -C
 slurmd -G
 ```
+
+</details>
 
 The last commands inspect discovered hardware and GPU configuration; they are not substitutes for running jobs. Compare their output with the controller's node definition. Watch for CPU topology changes caused by firmware settings, missing GPU libraries and a driver that has not loaded.
 

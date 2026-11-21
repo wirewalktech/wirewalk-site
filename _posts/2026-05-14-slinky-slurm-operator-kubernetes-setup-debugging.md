@@ -34,11 +34,18 @@ The [v1.0.3 installation guide](https://slinky.schedmd.com/slurm-operator/v1.0.3
 
 Before installing, inspect the selected chart values and rendered resources. Set the namespace, storage choices and resource requests deliberately. The following commands inspect the pinned chart without deploying it:
 
+{% include terminal-figure.html key="slinky-slurm-operator-kubernetes-setup-debugging" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 helm show chart oci://ghcr.io/slinkyproject/charts/slurm-operator --version 1.0.3
 helm show values oci://ghcr.io/slinkyproject/charts/slurm-operator --version 1.0.3
 helm show values oci://ghcr.io/slinkyproject/charts/slurm --version 1.0.3
 ```
+
+</details>
 
 The [tagged Slurm chart](https://github.com/SlinkyProject/slurm-operator/blob/v1.0.3/helm/slurm/Chart.yaml) identifies chart 1.0.3 and Slurm app version 25.11, with a Kubernetes minimum constraint of 1.29. These are chart metadata, not a complete platform support matrix. Confirm that these chart versions are available in your registry mirror. Installation requires the selected certificate-management approach and RBAC review. The baseline documents cert-manager and an alternative chart setting; choose one tested approach rather than mixing certificate ownership.
 

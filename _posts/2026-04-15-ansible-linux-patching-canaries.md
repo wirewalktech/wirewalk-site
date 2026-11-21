@@ -22,6 +22,11 @@ Start with read-only inventory of installed packages, running kernels, and servi
 
 Ansible documents `serial` for batched execution in its [strategy guide](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_strategies.html). A skeleton for a reviewed playbook is:
 
+{% include terminal-figure.html key="ansible-linux-patching-canaries" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```yaml
 - name: Validate a small Linux maintenance batch
   hosts: maintenance_canary
@@ -32,6 +37,8 @@ Ansible documents `serial` for batched execution in its [strategy guide](https:/
       ansible.builtin.command: uname -r
       changed_when: false
 ```
+
+</details>
 
 This example only records a kernel version; it deliberately does not install packages or reboot. Add application-specific prechecks, the approved update operation, restart handling, and postchecks through the normal change process.
 

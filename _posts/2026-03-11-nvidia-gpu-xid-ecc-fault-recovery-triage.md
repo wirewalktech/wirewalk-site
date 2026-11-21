@@ -28,12 +28,19 @@ A process seeing CUDA device zero may be using a different physical GPU after a 
 
 Read-only host observations include:
 
+{% include terminal-figure.html key="nvidia-gpu-xid-ecc-fault-recovery-triage" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 nvidia-smi -L
 nvidia-smi --query-gpu=uuid,pci.bus_id,name,driver_version --format=csv
 nvidia-smi -q
 journalctl -k --since '30 minutes ago' --no-pager
 ```
+
+</details>
 
 Run these in the host context with appropriate privileges. Retain complete output before reducing it to selected fields. An unsupported field or failed query is missing evidence, not a healthy zero.
 

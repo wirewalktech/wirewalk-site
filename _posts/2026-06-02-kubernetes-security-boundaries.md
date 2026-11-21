@@ -22,6 +22,11 @@ Kubernetes documents the Privileged, Baseline, and Restricted [Pod Security Stan
 
 Using an authorized read-only Kubernetes context:
 
+{% include terminal-figure.html key="kubernetes-security-boundaries" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 kubectl config current-context
 kubectl get namespace example-app --show-labels
@@ -29,6 +34,8 @@ kubectl get networkpolicy -n example-app
 kubectl get serviceaccount -n example-app
 kubectl get rolebinding -n example-app
 ```
+
+</details>
 
 `example-app` is a placeholder namespace. Confirm the context before every administrative operation. These commands reveal configuration; they do not prove enforcement or effective authorization across all bindings.
 

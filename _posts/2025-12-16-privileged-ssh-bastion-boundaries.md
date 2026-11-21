@@ -22,10 +22,17 @@ The boundary includes network policy and host authentication. Neither one substi
 
 OpenSSH documents configuration processing, `Match` rules, forwarding controls, and authorized principals in [sshd_config](https://man.openbsd.org/sshd_config). On a Linux lab server with an installed OpenSSH daemon:
 
+{% include terminal-figure.html key="privileged-ssh-bastion-boundaries" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 sudo sshd -t
 sudo sshd -T
 ```
+
+</details>
 
 The first checks configuration validity; the second displays effective settings for the default context. Where `Match` blocks are used, test the intended connection context with the version-supported `-C` options as well. Keep the output restricted because it reveals security configuration.
 

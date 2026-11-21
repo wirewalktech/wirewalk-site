@@ -70,7 +70,7 @@
     "url": {{ '/' | absolute_url | jsonify }},
     "logo": { "@type": "ImageObject", "url": {{ '/assets/brand/wirewalk/wirewalk-mark-180.png' | absolute_url | jsonify }} }
   },
-  "image": {{ '/assets/og.png' | absolute_url | jsonify }}
+  {% assign terminal_image = site.data.terminal_figures[page.slug] %}"image": {{ terminal_image.image | default: '/assets/og.png' | absolute_url | jsonify }}
   {%- if page.category %},
   "articleSection": {{ page.category | jsonify }}
   {%- endif %}

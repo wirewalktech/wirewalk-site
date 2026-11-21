@@ -20,11 +20,18 @@ and fabric monitoring shows aggregate utilization in the twenties. Every compone
 reports headroom and the aggregate refuses to move. On the storage servers,
 during the read phase that is supposedly the problem:
 
+{% include terminal-figure.html key="when-storage-is-actually-the-fabric" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```
 $ iostat -x 5 | grep -E 'Device|nvme0n1'   # write-side columns trimmed
 Device   r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz  aqu-sz  %util
 nvme0n1  812.4  830617.6    0.0   0.00    0.41   1022.6    0.33  31.20
 ```
+
+</details>
 
 Thirty-one percent device utilization and sub-millisecond read latency, with a
 queue that never gets deeper than a third of one outstanding request. The disks

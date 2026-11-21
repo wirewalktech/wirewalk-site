@@ -24,6 +24,11 @@ production are running every byte over one rail, and nothing reports it.
 
 The direct method is the port counters. Clear, run, read:
 
+{% include terminal-figure.html key="mpi-multirail-multileg" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 for d in mlx5_0 mlx5_1; do
   echo -n "$d before: "
@@ -37,6 +42,8 @@ for d in mlx5_0 mlx5_1; do
   cat /sys/class/infiniband/$d/ports/1/counters/port_xmit_data
 done
 ```
+
+</details>
 
 If `mlx5_1` did not move, you have a single-rail cluster with a spare adapter in
 it. That is a two-minute check and it settles the question that the rest of the

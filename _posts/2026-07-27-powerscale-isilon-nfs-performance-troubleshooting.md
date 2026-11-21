@@ -26,11 +26,18 @@ For AI training, correlate batch wait and step duration with storage behavior. F
 
 On an affected Linux compute node, inspect the mount and NFS statistics:
 
+{% include terminal-figure.html key="powerscale-isilon-nfs-performance-troubleshooting" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 findmnt -t nfs,nfs4
 nfsstat -m
 cat /proc/self/mountstats
 ```
+
+</details>
 
 Tool availability and output vary by distribution. Preserve the mount version, server address, options and the relevant statistics. Use interval deltas for cumulative counters; a total collected since boot does not locate today's incident.
 

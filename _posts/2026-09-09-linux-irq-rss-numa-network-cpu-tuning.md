@@ -37,6 +37,11 @@ Record the NIC's PCI address, NUMA association, driver and firmware, queue confi
 
 Illustrative read-only checks are:
 
+{% include terminal-figure.html key="linux-irq-rss-numa-network-cpu-tuning" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 netdev=example0
 ethtool -i "$netdev"
@@ -47,6 +52,8 @@ lscpu -e=CPU,NODE,SOCKET,CORE
 cat /proc/interrupts
 cat /proc/softirqs
 ```
+
+</details>
 
 Replace `example0` with the verified interface. A driver may not implement every query. Preserve that result and its version context instead of substituting a guessed default.
 

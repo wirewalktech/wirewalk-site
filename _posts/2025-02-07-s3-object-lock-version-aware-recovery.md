@@ -22,6 +22,11 @@ These are Amazon S3 semantics. An S3-compatible product needs its own compatibil
 
 With AWS CLI installed and a read-only role authorized for a dedicated lab bucket, replace the example names and version identifier:
 
+{% include terminal-figure.html key="s3-object-lock-version-aware-recovery" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 aws s3api get-object-lock-configuration --bucket example-recovery-lab
 aws s3api list-object-versions --bucket example-recovery-lab --prefix test.txt
@@ -30,6 +35,8 @@ aws s3api get-object-retention --bucket example-recovery-lab \
 aws s3api get-object-legal-hold --bucket example-recovery-lab \
   --key test.txt --version-id EXAMPLE_VERSION_ID
 ```
+
+</details>
 
 Capture the exact version ID. An access-denied response means the inspection is incomplete; it does not mean retention is absent. Likewise, a bucket default is not a substitute for examining the version you intend to recover.
 

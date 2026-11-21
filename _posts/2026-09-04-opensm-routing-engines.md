@@ -85,9 +85,16 @@ records what you asked for.
 
 The subnet manager log is the primary source:
 
+{% include terminal-figure.html key="opensm-routing-engines" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 grep -iE 'routing engine|ftree|fallback|topology' /var/log/opensm.log | tail -40
 ```
+
+</details>
 
 You are looking for a line naming the engine that was used, and — if `ftree`
 declined — a line explaining why. That explanation is usually specific enough to

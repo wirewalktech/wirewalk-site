@@ -72,11 +72,18 @@ oldest switch.
 Check the capacity your switches actually report rather than assuming from the
 model number:
 
+{% include terminal-figure.html key="infiniband-lid-budget-lmc" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 ibdiagnet -o /var/tmp/ibdiag
 smpquery SI <lid>          # switch info, including linear FDB capacity
 saquery SI
 ```
+
+</details>
 
 ## Counting before you change anything
 

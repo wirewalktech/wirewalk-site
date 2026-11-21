@@ -48,11 +48,18 @@ Retain chart version, image digests, approved values and the nonsecret record of
 
 After deployment, inspect the real namespace and component state. For the conventional namespace, initial read-only checks are:
 
+{% include terminal-figure.html key="runai-hpc-ai-gpu-platform-setup-troubleshooting" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the original commands</summary>
+
 ```bash
 kubectl -n runai get pods
 kubectl -n runai get events --sort-by=.metadata.creationTimestamp
 kubectl get nodes
 ```
+
+</details>
 
 Use the actual namespace if it differs. Select logs from the failing component and time window rather than dumping every configuration object. Configuration can contain operational details or secrets that do not belong in a general troubleshooting report.
 

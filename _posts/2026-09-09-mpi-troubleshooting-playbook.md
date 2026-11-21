@@ -36,9 +36,16 @@ Everything below expands one row.
 A job that never reaches the application is a launcher problem, not a fabric
 problem, and the fabric tooling will waste your time here.
 
+{% include terminal-figure.html key="mpi-troubleshooting-playbook" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 mpirun --mca plm_base_verbose 10 --mca rmaps_base_verbose 5 -np 4 hostname
 ```
+
+</details>
 
 That prints the launch sequence as it happens, and the point at which it stops is
 the diagnosis. Common stopping points:

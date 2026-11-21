@@ -16,12 +16,19 @@ Before trusting a mail-authentication check, inspect the returned DNS record. A 
 
 For a domain you administer, replace `example.com` and the known DKIM selector:
 
+{% include terminal-figure.html key="dns-mail-authentication-audit" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 dig +short TXT example.com
 dig +short TXT _dmarc.example.com
 dig +short TXT selector1._domainkey.example.com
 dig +short TXT deliberately-unused-label.example.com
 ```
+
+</details>
 
 The last query helps identify a wildcard response. An answer identical to the apex TXT content at an unrelated name deserves investigation. Confirm against authoritative nameservers and parse the actual policy rather than accepting any nonempty answer.
 

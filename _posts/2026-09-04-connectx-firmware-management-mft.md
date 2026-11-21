@@ -18,10 +18,17 @@ After a ConnectX update, compare the image in flash, stored device configuration
 Nothing in the MFT toolset works until the MST kernel module is loaded and the
 device nodes exist.
 
+{% include terminal-figure.html key="connectx-firmware-management-mft" %}
+
+<details class="terminal-source" markdown="1">
+<summary>Read and copy the example as text</summary>
+
 ```bash
 sudo mst start
 sudo mst status -v
 ```
+
+</details>
 
 That prints paths under `/dev/mst/` of the form `mt4123_pciconf0` for a
 ConnectX-6 or `mt4125_pciconf0` for a ConnectX-7, alongside the PCI address, the
