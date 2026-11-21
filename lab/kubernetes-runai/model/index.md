@@ -28,6 +28,8 @@ This is a hosted behavior model. It does not start a Kubernetes control plane, l
 
 A registered Node can retain capacity 8 while an unhealthy device reduces allocatable to 7. Allocatable is not the same as free: running workers consume it. If the advertisement component is unavailable, this model reports zero advertised GPUs while preserving existing worker assignments. That immediate reporting rule is a teaching assumption; real kubelet/device-plugin failure timing varies.
 
+A stopped GPU Operator management component does not automatically remove functioning device-plugin advertisements or stop existing operands. A runtime/toolkit fault can leave GPUs advertised while a newly assigned container waits to start. These are different repair paths from a stopped device plugin.
+
 A healthy physical host is not sufficient proof of Kubernetes readiness. Registration, kubelet availability and GPU advertisement are separate. Conversely, a lost kubelet heartbeat does not necessarily stop containers that are already executing. The model lets existing application work continue when its physical resources and data paths remain usable.
 
 ## Build a reference stack
